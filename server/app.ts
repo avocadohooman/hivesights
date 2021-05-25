@@ -11,7 +11,9 @@ app.use(cors());
 app.use(express.json({limit: '20kb'}));
 
 // when client is ready, activate this line
-// app.use(express.static('build'));
+if (process.env.NODE_ENV !== "server") {
+    app.use(express.static('build'));
+}
 
 // this middleware needs to be used before routes are defined
 app.use(middleware.requestLogger);
