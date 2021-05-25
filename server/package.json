@@ -4,8 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "build-client": "rm -rf build && cd client && npm run build --prod && cp -r build ../",
+    "start-dev": "NODE_ENV=developemtn ts-node-dev index.ts",
+    "start": "ts-node index.ts",
+    "start-prod": "NODE_ENV=production ts-node index.ts",
+    "elint": "eslint --ext .ts .",
+    "deploy": "git add . && git commit -m deploying && git push",
+    "deploy-full": "npm run build-client && git add . && git commit -m uibuild_deploy && npm run deploy",
+    "cypress:open": "npx cypress open",
+    "test:e2e": "NODE_ENV=test cypress run",
+    "test:int": "NODE_ENV=test jest --verbose --runInBand --detectOpenHandles"
   },
   "keywords": [],
   "author": "",
