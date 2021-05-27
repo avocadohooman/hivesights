@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import middleware from './utils/middleware';
+import authRouter from './controllers/authRoute';
 
 const app = express();
 
@@ -22,6 +23,8 @@ app.use(middleware.requestLogger);
 app.get('/health', async (req, res) => {
     res.send('ok');
 })
+
+app.use('/api/auth', authRouter);
 
 // this needs to be after the routes are defined
 app.use(middleware.unknownEndpoint);
