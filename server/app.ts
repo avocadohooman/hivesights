@@ -1,7 +1,8 @@
 import express from 'express';
 import cors from 'cors';
-import middleware from './utils/middleware';
+import middleware from './middleware/middleware';
 import authRouter from './controllers/authRoute';
+import companyRouter from './controllers/companyRoute';
 
 const app = express();
 
@@ -9,7 +10,10 @@ const app = express();
 app.use(cors());
 
 //protecting from DOS Attack 
-app.use(express.json({limit: '20kb'}));
+// app.use(express.json({limit: '20kb'}));
+
+app.use(express.json());
+
 
 // when client is ready, activate this line
 if (process.env.NODE_ENV !== "server") {
@@ -24,7 +28,10 @@ app.get('/health', async (req, res) => {
     res.send('ok');
 })
 
+// API Router for 42 Authentication
 app.use('/api/auth', authRouter);
+// API Router for companies
+app.use('/api/company', companyRouter);
 
 // this needs to be after the routes are defined
 app.use(middleware.unknownEndpoint);

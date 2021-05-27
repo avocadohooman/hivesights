@@ -35,6 +35,7 @@
     "typescript": "^4.2.4"
   },
   "dependencies": {
+    "@types/express-rate-limit": "^5.1.1",
     "@types/jsonwebtoken": "^8.5.1",
     "@types/pg": "^8.6.0",
     "@types/supertest": "^2.0.11",
@@ -43,6 +44,7 @@
     "cors": "^2.8.5",
     "dotenv": "^9.0.2",
     "express": "^4.17.1",
+    "express-rate-limit": "^5.2.6",
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.6.0",
     "uuid": "^8.3.2"

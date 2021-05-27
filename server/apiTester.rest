@@ -1,25 +1,29 @@
 ###
-# POST http://localhost:3000/todo/
-# Content-Type: application/json
+POST http://localhost:3000/api/company/
+Content-Type: application/json
 
-# {
-#     "description": "Peter Five"
-# }
+{
+    "companyName": "Wunderdog",
+    "companyDescription": "Software development agency",
+    "logoURL": "https://www.itewiki.fi/thumb.php?src=https://www.itewiki.fi/write/logos/wunderdog.png&size=x100",
+    "companyURL": "https://wunderdog.fi/",
+    "companyLocation": "Helsinki, Finland"
+}
+
+# ###
+PUT http://localhost:3000/api/company/
+Content-Type: application/json
+
+{
+    "description": "Peter One"
+}
 
 ###
 GET http://localhost:3000/health
 
-# ###
-# GET http://localhost:3000/todo/1
+###
+GET http://localhost:3000/api/company/
 
-# ###
-# PUT http://localhost:3000/todo/1
-# Content-Type: application/json
-
-# {
-#     "description": "Peter One"
-# }
-
-# ###
-# DELETE http://localhost:3000/todo/3
+###
+DELETE http://localhost:3000/api/company/
 
