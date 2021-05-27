@@ -3,7 +3,9 @@
 -- Work in progress
 CREATE TABLE review (
     id SERIAL PRIMARY KEY,
-    company_id int NOT NULL,
+    companyId int NOT NULL,
+    userName VARCHAR (256) NOT NULL,
+    userPictureURL VARCHAR (256) NOT NULL,
     pros TEXT [],
     cons TEXT [],
     overall VARCHAR NOT NULL,
@@ -20,7 +22,7 @@ CREATE TABLE review (
     coverLetter VARCHAR (256),
     cv VARCHAR (256),
     published_date timestamp DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (company_id) REFERENCES company(id) ON DELETE CASCADE
+    FOREIGN KEY (companyId) REFERENCES company(id) ON DELETE CASCADE
 );
 
 -- Work in progress
