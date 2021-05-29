@@ -10,6 +10,7 @@
     "start:server-dev": "NODE_ENV=server ts-node-dev index.ts",
     "start:dev": "NODE_ENV=development ts-node-dev index.ts",
     "start:prod": "NODE_ENV=production ts-node index.ts",
+    "start:db": "heroku pg:psql -a hivesights",
     "elint": "eslint --ext .ts .",
     "deploy": "git add . && git commit -m deploying && git push",
     "deploy:full": "npm run build-client && git add . && git commit -m uibuild_deploy && npm run deploy",

@@ -2,6 +2,7 @@ import express from 'express';
 import { Company } from '../types/company';
 import pool from '../db';
 import rateLimit from 'express-rate-limit';
+import middleware from '../middleware/middleware';
 
 const companyRouter = express.Router();
 
@@ -22,13 +23,12 @@ companyRouter.get('/', async (req, res) => {
 })
 
 // Get one particular company
-companyRouter.get('/:id', async (req, res) => {
+companyRouter.get('/:id', middleware.requestParamsId,  async (req, res) => {
     const {id} = req.params;
     try {
-        let company: Company;
-        company = await pool.query(`SELECT * FROM ${companyTable} WHERE id = ($1)`, [id]);
-        console.log(`Company ${company.companyName} fetched`);;
-        return res.status(200).json(company);
+        const  company = await pool.query(`SELECT * FROM ${companyTable} WHERE id = ($1)`, [id]);
+        console.log(`Company ${company.rows[0].companyname} fetched`);;
+        return res.status(200).json(company.rows[0]);
     } catch (error) {
         console.log(error.message);
         return res.status(400).json({error: error.message});
@@ -36,29 +36,30 @@ companyRouter.get('/:id', async (req, res) => {
 })
 
 // Update company in DB
-companyRouter.put('/:id', async (req, res) => {
-    let updatedCompanyBody: Company = req.body;
-    let updatedCompanyId = req.params;
+companyRouter.put('/:id', middleware.requestParamsId, async (req, res) => {
+    const updatedCompanyBody = req.body;
+    const updatedCompanyId = req.params.id;
+    console.log("REG PARAMS", updatedCompanyId, typeof updatedCompanyId);
     try {
-        let updatedCompany: Company;
-        updatedCompany = await pool.query(`UDPATE ${companyTable} 
+        const updatedCompany = await pool.query(`UPDATE ${companyTable} 
         SET
-        (companyName) = ($1),
-        (companyDescription) = ($2),
-        (logoURL) = ($3),
-        (companyURL) = ($4),
-        (companyLocation) = ($5)
+        companyName = ($1),
+        companyDescription = ($2),
+        logoURL = ($3),
+        companyURL = ($4),
+        companyLocation = ($5)
         WHERE
-        (id) = ($6)`,
+        id = ($6)`,
         [
             updatedCompanyBody.companyName,
+            updatedCompanyBody.companyDescription,
             updatedCompanyBody.logoURL,
             updatedCompanyBody.companyURL,
             updatedCompanyBody.companyLocation,
             updatedCompanyId
         ]);
-        console.log(`Company ${updatedCompany.companyName} updated`);;
-        return res.status(200).json(updatedCompany);
+        console.log(`Company ${updatedCompany.rows[0]} updated`);;
+        return res.status(200).json(updatedCompany.rows);
     } catch (error) {
         console.log(error.message);
         return res.status(400).json({error: error.message});
@@ -73,22 +74,14 @@ const postApiLimiter = rateLimit({
 });
 
 // Create new company
-companyRouter.post('/', postApiLimiter, async (req, res) => {
-    let newCompany: Company = req.body;
+companyRouter.post('/', async (req, res) => {
+    const newCompany = req.body;
     console.log(`New company: ${newCompany}`);
     try {
-        newCompany = await pool.query(`INSERT INTO ${companyTable} 
-        (companyName),
-        (companyDescription),
-        (logoURL),
-        (companyURL),
-        (companyLocation)
-        VALUES 
-        ($1),
-        ($2),
-        ($3),
-        ($4),
-        ($5)
+        const addedCompany = await pool.query(`INSERT INTO ${companyTable} 
+        (companyName, companyDescription, logoURL, companyURL, companyLocation)
+        VALUES
+        ($1, $2, $3, $4, $5)
         RETURNING *`, 
         [
             newCompany.companyName,
@@ -97,7 +90,7 @@ companyRouter.post('/', postApiLimiter, async (req, res) => {
             newCompany.companyURL,
             newCompany.companyLocation,
         ]);
-        console.log("New company created", newCompany);
+        console.log("New company created", addedCompany);
         return res.status(200).json(newCompany);
     } catch (error) {
         console.log(error.message);
@@ -106,8 +99,8 @@ companyRouter.post('/', postApiLimiter, async (req, res) => {
 })
 
 // Delete company
-companyRouter.delete(':id', async (req, res) => {
-    const {id} = req.params;
+companyRouter.delete(':id', middleware.requestParamsId, async (req, res) => {
+    const id: number = Number(req.params);
     try {
         await pool.query(`DELETE FROM ${companyTable} WHERE id = ($1)`, [id]);
         console.log(`company deleted`);

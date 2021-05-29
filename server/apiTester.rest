@@ -1,4 +1,7 @@
 ###
+GET http://localhost:3000/api/company
+
+###
 POST http://localhost:3000/api/company/
 Content-Type: application/json
 
@@ -10,20 +13,24 @@ Content-Type: application/json
     "companyLocation": "Helsinki, Finland"
 }
 
-# ###
-PUT http://localhost:3000/api/company/
+###
+PUT http://localhost:3000/api/company/1
 Content-Type: application/json
 
 {
-    "description": "Peter One"
+    "companyName": "Wundercat",
+    "companyDescription": "Software Development Agency",
+    "logoURL": "https://www.itewiki.fi/thumb.php?src=https://www.itewiki.fi/write/logos/wunderdog.png&size=x100",
+    "companyURL": "https://wunderdog.fi/",
+    "companyLocation": "Helsinki, Finland"
 }
 
 ###
 GET http://localhost:3000/health
 
 ###
-GET http://localhost:3000/api/company/
+GET http://localhost:3000/api/company/1
 
 ###
-DELETE http://localhost:3000/api/company/
+DELETE http://localhost:3000/api/company/1
 

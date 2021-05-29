@@ -33,8 +33,19 @@ const errorHandler = (error: any, request: any, response: any, next: any) => {
     next(error)
 }
 
+const requestParamsId = (req: any, res: any, next: any) => {
+  if (req.params && req.params.id && typeof req.params.id === "string") {
+    let num = Number(req.params.id);
+    if (!isNaN(num)) {
+      req.params.id = Number(req.params.id);
+    }
+  }
+  next();
+}
+
 export default {
     requestLogger,
     unknownEndpoint,
-    errorHandler
+    errorHandler,
+    requestParamsId
 }
