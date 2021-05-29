@@ -39,7 +39,6 @@ companyRouter.get('/:id', middleware.requestParamsId,  async (req, res) => {
 companyRouter.put('/:id', middleware.requestParamsId, async (req, res) => {
     const updatedCompanyBody = req.body;
     const updatedCompanyId = req.params.id;
-    console.log("REG PARAMS", updatedCompanyId, typeof updatedCompanyId);
     try {
         const updatedCompany = await pool.query(`UPDATE ${companyTable} 
         SET
@@ -99,8 +98,8 @@ companyRouter.post('/', async (req, res) => {
 })
 
 // Delete company
-companyRouter.delete(':id', middleware.requestParamsId, async (req, res) => {
-    const id: number = Number(req.params);
+companyRouter.delete('/:id', middleware.requestParamsId, async (req, res) => {
+    const id = req.params.id;
     try {
         await pool.query(`DELETE FROM ${companyTable} WHERE id = ($1)`, [id]);
         console.log(`company deleted`);
