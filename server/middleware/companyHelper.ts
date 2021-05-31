@@ -10,6 +10,15 @@ const checkDuplicate = async () => {
     return 1;
 }
 
+const checkIfExists = async (id: string) => {
+  const duplicate = await pool.query('SELECT companyname FROM company_test WHERE id = ($1)', [id]);
+  if (!duplicate.rows[0]) {
+    console.log("Company doesn't exist", duplicate.rows[0]);
+    return 0;
+  }
+  return 1;
+}
+
 const requestParamsId = (req: any, res: any, next: any) => {
     if (req.params && req.params.id && typeof req.params.id === "string") {
       let num = Number(req.params.id);
@@ -21,5 +30,6 @@ const requestParamsId = (req: any, res: any, next: any) => {
 
 export default {
     checkDuplicate,
-    requestParamsId
+    requestParamsId,
+    checkIfExists
 }

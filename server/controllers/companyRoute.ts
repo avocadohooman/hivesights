@@ -25,7 +25,11 @@ companyRouter.get('/', async (req: any, res: any) => {
 
 // Get one particular company
 companyRouter.get('/:id', async (req: any, res: any) => {
-    const {id} = req.params;
+    const id: string = req.params.id;
+    if (!await companyHelper.checkIfExists(id)) {
+        console.log("Company doesn't exist ERROR");
+        return res.status(400).json({error: "Company doesn't exist."});
+    }
     try {
         const  company = await pool.query(`SELECT * FROM ${companyTable} WHERE id = ($1)`, [id]);
         console.log(`Company ${company.rows[0].companyname} fetched`);;
@@ -38,8 +42,12 @@ companyRouter.get('/:id', async (req: any, res: any) => {
 
 // Update company in DB
 companyRouter.put('/:id', async (req: any, res: any) => {
-    const updatedCompanyBody = companyParsing.parsingCompany(req.body);
-    const updatedCompanyId = req.params.id;
+    if (!await companyHelper.checkIfExists(req.params.id)) {
+        console.log("Company doesn't exist ERROR");
+        return res.status(400).json({error: "Company doesn't exist."});
+    }
+    const updatedCompanyBody: NewCompany = companyParsing.parsingCompany(req.body);
+    const updatedCompanyId: string = req.params.id;
     try {
         const updatedCompany = await pool.query(`UPDATE ${companyTable} 
         SET
@@ -75,7 +83,7 @@ const postApiLimiter = rateLimit({
 
 // Create new company
 companyRouter.post('/', async (req: any, res: any) => {
-    const newCompany = companyParsing.parsingCompany(req.body);
+    const newCompany: NewCompany = companyParsing.parsingCompany(req.body);
     try {
         if (await companyHelper.checkDuplicate()) {
             console.log("Duplicate ERROR");
@@ -102,7 +110,11 @@ companyRouter.post('/', async (req: any, res: any) => {
 
 // Delete company
 companyRouter.delete('/:id', async (req: any, res: any) => {
-    const id = req.params.id;
+    const id: string = req.params.id;
+    if (!await companyHelper.checkIfExists(id)) {
+        console.log("Company doesn't exist ERROR");
+        return res.status(400).json({error: "Company doesn't exist."});
+    }
     try {
         await pool.query(`DELETE FROM ${companyTable} WHERE id = ($1)`, [id]);
         console.log(`company deleted`);
