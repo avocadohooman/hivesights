@@ -40,6 +40,10 @@ jobs:
         env:
           DATABASE_URL: ${{secrets.DATABASE_URL}} 
   Bump version:
+    needs: [modules]
+    name: Bump version and push tag
+    runs-on: ubuntu-18.04
+    steps:
       - uses: actions/checkout@v2
       - name: Bump version and push tag
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
