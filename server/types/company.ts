@@ -5,9 +5,10 @@ export type Company = {
     logoURL: string,
     companyURL: string,
     companyLocation: string,
-    totalReviews?: number,
+    averageReviews?: number,
     averageSalaries?: number,
     interviews?: number
-}
+};
 
 export type NewCompany = Omit<Company, 'id'>;
+export type CompanyRating = Pick<Company, 'averageReviews'>;

@@ -32,4 +32,4 @@ GET http://localhost:3000/health
 GET http://localhost:3000/api/company/d606f37e-c637-48db-8544-2ad290533c79
 
 ###
-DELETE http://localhost:3000/api/company/3
+DELETE http://localhost:3000/api/company/d606f37e-c637-48db-8544-2ad290533c79
