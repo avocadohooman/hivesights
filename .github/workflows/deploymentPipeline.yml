@@ -21,4 +21,21 @@ jobs:
           node-version: '12.x'
       - name: npm install
         working-directory: ./server
-        run: npm install 
+        run: npm install
+  integration_test:
+    needs: [modules]
+    name: Backend Integration Testing
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: Install Modules
+        working-directory: ./server
+        run: npm install
+      - name: Run Jest
+        working-directory: ./server
+        run: npm run test:int
+        env:
+          DATABASE_URL: ${{secrets.DATABASE_URL}} 
