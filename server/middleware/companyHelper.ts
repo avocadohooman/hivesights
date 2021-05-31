@@ -10,10 +10,17 @@ const checkDuplicate = async () => {
     return 1;
 }
 
-const checkIfExists = async (id: string) => {
-  const duplicate = await pool.query('SELECT companyname FROM company_test WHERE id = ($1)', [id]);
-  if (!duplicate.rows[0]) {
-    console.log("Company doesn't exist", duplicate.rows[0]);
+const checkIfExists = async (id: any) => {
+  console.log("checkIfExists");
+  const duplicate = 
+    await pool.query('SELECT companyname FROM company_test WHERE id = ($1)', [id])
+    .catch((e:any) => {
+      if (e) {
+        console.log("ERROR");
+        return 0;
+      }
+    })
+  if (!duplicate) {
     return 0;
   }
   return 1;

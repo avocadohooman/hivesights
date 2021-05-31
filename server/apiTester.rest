@@ -29,7 +29,7 @@ Content-Type: application/json
 GET http://localhost:3000/health
 
 ###
-GET http://localhost:3000/api/company/cdf7677c-6db0-419c-ba52-4d3e6d6018a0
+GET http://localhost:3000/api/company/1
 
 ###
-DELETE http://localhost:3000/api/company/9187996b-51a0-4e50-a839-4f71d623d684
+DELETE http://localhost:3000/api/company/1
