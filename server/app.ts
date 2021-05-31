@@ -24,9 +24,9 @@ if (process.env.NODE_ENV !== "server") {
 app.use(middleware.requestLogger);
 
 // health check for Heroku deployment
-app.get('/health', async (req, res) => {
+app.get('/health', (req, res) => {
     res.send('ok');
-})
+});
 
 // API Router for 42 Authentication
 app.use('/api/auth', authRouter);

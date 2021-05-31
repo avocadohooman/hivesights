@@ -1,5 +1,5 @@
 import express from 'express';
-import { Company, NewCompany } from '../types/company';
+import { NewCompany } from '../types/company';
 import pool from '../db';
 import rateLimit from 'express-rate-limit';
 import companyHelper from '../middleware/companyHelper';
@@ -12,7 +12,7 @@ const companyTable = process.env.NODE_ENV === 'production' ? 'company' : 'compan
 console.log(`Using table: ${companyTable}`);
 
 // Get all companies in DB
-companyRouter.get('/', async (req: any, res: any) => {
+companyRouter.get('/', async (_req, res) => {
     try {
         const allCompanies = await pool.query(`SELECT * FROM ${companyTable}`);
         return res.status(200).json(allCompanies.rows);
@@ -23,7 +23,7 @@ companyRouter.get('/', async (req: any, res: any) => {
 })
 
 // Get one particular company
-companyRouter.get('/:id', async (req: any, res: any) => {
+companyRouter.get('/:id', async (req, res) => {
     const id: string = req.params.id;
     if (!await companyHelper.checkIfExists(id)) {
         console.log("Company doesn't exist ERROR");
@@ -37,10 +37,10 @@ companyRouter.get('/:id', async (req: any, res: any) => {
         console.log(error.message);
         return res.status(400).json({error: error.message});
     }
-})
+});
 
 // Update company in DB
-companyRouter.put('/:id', async (req: any, res: any) => {
+companyRouter.put('/:id', async (req, res) => {
     if (!await companyHelper.checkIfExists(req.params.id)) {
         console.log("Company doesn't exist ERROR");
         return res.status(400).json({error: "Company doesn't exist."});
@@ -71,7 +71,7 @@ companyRouter.put('/:id', async (req: any, res: any) => {
         console.log(error.message);
         return res.status(400).json({error: error.message});
     }
-})
+});
 
 //setting limit for post requests
 const postApiLimiter = rateLimit({
@@ -81,7 +81,7 @@ const postApiLimiter = rateLimit({
 });
 
 // Create new company
-companyRouter.post('/', async (req: any, res: any) => {
+companyRouter.post('/', async (req, res) => {
     try {
         const newCompany: NewCompany = companyParsing.parsingCompany(req.body);
         if (!await companyHelper.checkDuplicate(newCompany)) {
@@ -105,10 +105,10 @@ companyRouter.post('/', async (req: any, res: any) => {
         console.log(error.message);
         return res.status(400).json({error: error.message});
     }
-})
+});
 
 // Delete company
-companyRouter.delete('/:id', async (req: any, res: any) => {
+companyRouter.delete('/:id', async (req, res) => {
     const id: string = req.params.id;
     if (!await companyHelper.checkIfExists(id)) {
         console.log("Company doesn't exist ERROR");
@@ -122,6 +122,6 @@ companyRouter.delete('/:id', async (req: any, res: any) => {
         console.log(error.message);
         return res.status(400).json({error: error.message});
     }
-})
+});
 
 export default companyRouter;
