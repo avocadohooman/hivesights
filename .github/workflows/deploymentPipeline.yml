@@ -20,5 +20,5 @@ jobs:
         with:
           node-version: '12.x'
       - name: npm install
-        run: cd server
+        working-directory: ./server
         run: npm install 
