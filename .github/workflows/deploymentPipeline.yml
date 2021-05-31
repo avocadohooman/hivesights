@@ -39,7 +39,7 @@ jobs:
         run: npm run test:int
         env:
           DATABASE_URL: ${{secrets.DATABASE_URL}} 
-  Bump version:
+  bump_version:
     needs: [integration_test]
     name: Bump version and push tag
     runs-on: ubuntu-18.04
