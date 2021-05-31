@@ -4,11 +4,35 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - '**/README.md'
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize]
 
 jobs:
-  hello_world_job:
+  modules:
+    name: Installing modules
     runs-on: ubuntu-18.04
     steps:
-      - name: Say hello
-        run: |
-          echo "Hello World!"
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: npm install
+        run: cd server | npm install 
+  integration_test:
+    needs: [modules]
+    name: Backend Integration Testing
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: Install Modules
+        run: cd server | npm install
+      - name: Run Jest
+        run: cd server | npm run test:inj
+        env:
+          DATABASE_URL: ${{secrets.DATABASE_URL}}

@@ -307,6 +307,7 @@ describe("PUT / ", () => {
         expect(getUpdatedCompany.statusCode).toBe(200);
     })
 });
+
 //Testing PUT API methods error management
 describe("PUT ERROR/ ", () => {
     test("Updating a non-existing company doesn't work", async () => {
@@ -511,8 +512,31 @@ describe("PUT ERROR/ ", () => {
     })
 });
 
+// Testing DELETE API methods
 describe("DELETE / ", () => {
+    test("a company can be deleted", async () => {
+        let allCompanies = await api.get(`${apiBaseUrl}`);
+        const id = allCompanies.body[0].id;
 
+        await api
+            .delete(`${apiBaseUrl}/${id}`)
+            .expect(200)
+        allCompanies = await api.get(`${apiBaseUrl}`);
+        expect(allCompanies.body).toHaveLength(2);
+        expect(allCompanies.statusCode).toBe(200);
+    });
+});
+
+// Testing DELETE API methods error management
+describe("DELETE ERROR / ", () => {
+    test("a non-existing company cannot be deleted", async () => {
+        await api
+            .delete(`${apiBaseUrl}/45345435435`)
+            .expect(400)
+        const allCompanies = await api.get(`${apiBaseUrl}`);
+        expect(allCompanies.body).toHaveLength(3);
+        expect(allCompanies.statusCode).toBe(200);
+    });
 });
 
 afterAll(async () => {
