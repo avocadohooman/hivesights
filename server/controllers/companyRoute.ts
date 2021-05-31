@@ -45,9 +45,9 @@ companyRouter.put('/:id', async (req: any, res: any) => {
         console.log("Company doesn't exist ERROR");
         return res.status(400).json({error: "Company doesn't exist."});
     }
-    const updatedCompanyBody: NewCompany = companyParsing.parsingCompany(req.body);
     const updatedCompanyId: string = req.params.id;
     try {
+        const updatedCompanyBody: NewCompany = companyParsing.parsingCompany(req.body);
         const updatedCompany = await pool.query(`UPDATE ${companyTable} 
         SET
         companyName = ($1),

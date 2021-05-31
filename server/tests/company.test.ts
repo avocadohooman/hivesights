@@ -47,7 +47,7 @@ beforeEach(async () => {
     }
 });
 
-// Testing GET API including error cases
+// Testing GET API methods including error cases
 describe("GET / ", () => {
     test("Getting an array with all companies", async () => {
         const allCompanies = await api.get(`${apiBaseUrl}`);
@@ -70,7 +70,7 @@ describe("GET / ", () => {
     })
 });
 
-//Testing POST API 
+//Testing POST API methods
 describe("POST / ", () => {
     test("A new company can be created", async () => {
         const newCompany: NewCompany = {
@@ -92,7 +92,7 @@ describe("POST / ", () => {
     });
 });
 
-//Testing POST API error management
+//Testing POST API methods error management
 describe("POST ERROR /", () => {
     test("A an existing company cannot be created", async () => {
         const newCompany: NewCompany = {
@@ -284,8 +284,231 @@ describe("POST ERROR /", () => {
     })
 });
 
+//Testing PUT API methods
 describe("PUT / ", () => {
+    test("Updating a company works", async () => {
+        const allCompanies = await api.get(`${apiBaseUrl}`);
+        const id = allCompanies.body[0].id;
+        const updateBody = {
+            companyName: "Wundercat",
+            companyDescription: "Software Development Agency",
+            logoURL: "https://www.itewiki.fi/thumb.php?src=https://www.itewiki.fi/write/logos/wunderdog.png&size=x100",
+            companyURL: "https://wunderdog.fi/",
+            companyLocation: "Helsinki, Finland"
+        };
+        const updatedCompany = await api
+                                        .put(`${apiBaseUrl}/${id}`)
+                                        .send(updateBody)
+                                        .expect(200)
+        const getUpdatedCompany = await api
+                                        .get(`${apiBaseUrl}/${id}`)
+                                        .expect(200)
+        expect(getUpdatedCompany.body.companyname).toContain("Wundercat");
+        expect(getUpdatedCompany.statusCode).toBe(200);
+    })
+});
+//Testing PUT API methods error management
+describe("PUT ERROR/ ", () => {
+    test("Updating a non-existing company doesn't work", async () => {
+        const id = "2323523";
+        const updateBody = {
+            companyName: "Wundercat",
+            companyDescription: "Software Development Agency",
+            logoURL: "https://www.itewiki.fi/thumb.php?src=https://www.itewiki.fi/write/logos/wunderdog.png&size=x100",
+            companyURL: "https://wunderdog.fi/",
+            companyLocation: "Helsinki, Finland"
+        };
+        const updatedCompany = await api
+                                        .put(`${apiBaseUrl}/${id}`)
+                                        .send(updateBody)
+                                        .expect(400)
+        expect(updatedCompany.statusCode).toBe(400);
+    });
 
+    test("A company with wrong company description type cannot be updated", async () => {
+        let allCompanies = await api.get(`${apiBaseUrl}`);
+        const id = allCompanies.body[0].id;
+        const newCompany = {
+            companyName: "Unicorn01",
+            companyDescription: 0,
+            logoURL: "https://www.google.com",
+            companyURL: "https://gerhardmolin.com/",
+            companyLocation: "Helsinki, Finland"
+        };
+        await api
+            .put(`${apiBaseUrl}/${id}`)
+            .send(newCompany)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        allCompanies = await api.get(`${apiBaseUrl}`);
+        expect(allCompanies.body).toHaveLength(3);
+    })
+
+    test("A company with wrong company name type cannot be updated", async () => {
+        let allCompanies = await api.get(`${apiBaseUrl}`);
+        const id = allCompanies.body[0].id;
+        const newCompany = {
+            companyName: 0,
+            companyDescription: "Software Development Agency",
+            logoURL: "https://www.google.com",
+            companyURL: "https://gerhardmolin.com/",
+            companyLocation: "Helsinki, Finland"
+        };
+        await api
+            .put(`${apiBaseUrl}/${id}`)
+            .send(newCompany)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        allCompanies = await api.get(`${apiBaseUrl}`);
+        expect(allCompanies.body).toHaveLength(3);
+    })
+
+    test("A company with wrong logo type cannot be updated", async () => {
+        let allCompanies = await api.get(`${apiBaseUrl}`);
+        const id = allCompanies.body[0].id;
+        const newCompany = {
+            companyName: "Unicorn01",
+            companyDescription: "Software Development Agency",
+            logoURL: 0,
+            companyURL: "https://gerhardmolin.com/",
+            companyLocation: "Helsinki, Finland"
+        };
+        await api
+            .put(`${apiBaseUrl}/${id}`)
+            .send(newCompany)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        allCompanies = await api.get(`${apiBaseUrl}`);
+        expect(allCompanies.body).toHaveLength(3);
+    })
+
+    test("A company with wrong company url type cannot be updated", async () => {
+        let allCompanies = await api.get(`${apiBaseUrl}`);
+        const id = allCompanies.body[0].id;
+        const newCompany = {
+            companyName: "Unicorn01",
+            companyDescription: "Software Development Agency",
+            logoURL: "https://www.google.com",
+            companyURL: 22,
+            companyLocation: "Helsinki, Finland"
+        };
+        await api
+            .put(`${apiBaseUrl}/${id}`)
+            .send(newCompany)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        allCompanies = await api.get(`${apiBaseUrl}`);
+        expect(allCompanies.body).toHaveLength(3);
+    })
+
+    test("A company with wrong companyLocation type cannot be updated", async () => {
+        let allCompanies = await api.get(`${apiBaseUrl}`);
+        const id = allCompanies.body[0].id;
+        const newCompany = {
+            companyName: "Unicorn01",
+            companyDescription: "Software Development Agency",
+            logoURL: "https://www.google.com",
+            companyURL: "https://gerhardmolin.com/",
+            companyLocation: false
+        };
+        await api
+            .put(`${apiBaseUrl}/${id}`)
+            .send(newCompany)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        allCompanies = await api.get(`${apiBaseUrl}`);
+        expect(allCompanies.body).toHaveLength(3);
+    })
+
+    test("A company with missing name cannot be updated", async () => {
+        let allCompanies = await api.get(`${apiBaseUrl}`);
+        const id = allCompanies.body[0].id;
+        const newCompany = {
+            companyDescription: "Software Development Agency",
+            logoURL: "https://www.google.com",
+            companyURL: "https://gerhardmolin.com/",
+            companyLocation: "Helsinki, Finland"
+        };
+        await api
+            .put(`${apiBaseUrl}/${id}`)
+            .send(newCompany)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        allCompanies = await api.get(`${apiBaseUrl}`);
+        expect(allCompanies.body).toHaveLength(3);
+    })
+
+    test("A company with missing description cannot be updated", async () => {
+        let allCompanies = await api.get(`${apiBaseUrl}`);
+        const id = allCompanies.body[0].id;
+        const newCompany = {
+            companyName: "Unicorn01",
+            logoURL: "https://www.google.com",
+            companyURL: "https://gerhardmolin.com/",
+            companyLocation: "Helsinki, Finland"
+        };
+        await api
+            .put(`${apiBaseUrl}/${id}`)
+            .send(newCompany)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        allCompanies = await api.get(`${apiBaseUrl}`);
+        expect(allCompanies.body).toHaveLength(3);
+    })
+
+    test("A company with missing logo cannot be updated", async () => {
+        let allCompanies = await api.get(`${apiBaseUrl}`);
+        const id = allCompanies.body[0].id;
+        const newCompany = {
+            companyName: "Unicorn01",
+            companyDescription: "Software Development Agency",
+            companyURL: "https://gerhardmolin.com/",
+            companyLocation: "Helsinki, Finland"
+        };
+        await api
+            .put(`${apiBaseUrl}/${id}`)
+            .send(newCompany)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        allCompanies = await api.get(`${apiBaseUrl}`);
+        expect(allCompanies.body).toHaveLength(3);
+    })
+
+    test("A company with missing company URL cannot be updated", async () => {
+        let allCompanies = await api.get(`${apiBaseUrl}`);
+        const id = allCompanies.body[0].id;
+        const newCompany = {
+            companyName: "Unicorn01",
+            companyDescription: "Software Development Agency",
+            logoURL: "https://www.google.com",
+            companyLocation: "Helsinki, Finland"
+        };
+        await api
+            .put(`${apiBaseUrl}/${id}`)
+            .send(newCompany)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        allCompanies = await api.get(`${apiBaseUrl}`);
+        expect(allCompanies.body).toHaveLength(3);
+    })
+
+    test("A company with missing location cannot be updated", async () => {
+        let allCompanies = await api.get(`${apiBaseUrl}`);
+        const id = allCompanies.body[0].id;
+        const newCompany = {
+            companyName: "Unicorn01",
+            companyDescription: "Software Development Agency",
+            logoURL: "https://www.google.com",
+            companyURL: "https://gerhardmolin.com/"
+        };
+        await api
+            .put(`${apiBaseUrl}/${id}`)
+            .send(newCompany)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        allCompanies = await api.get(`${apiBaseUrl}`);
+        expect(allCompanies.body).toHaveLength(3);
+    })
 });
 
 describe("DELETE / ", () => {
