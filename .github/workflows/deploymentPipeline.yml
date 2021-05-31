@@ -40,7 +40,7 @@ jobs:
         env:
           DATABASE_URL: ${{secrets.DATABASE_URL}} 
   Bump version:
-    needs: [modules]
+    needs: [integration_test]
     name: Bump version and push tag
     runs-on: ubuntu-18.04
     steps:
