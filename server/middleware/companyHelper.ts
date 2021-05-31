@@ -1,10 +1,11 @@
 import { NewCompany } from '../types/company';
 import pool from '../db';
 
-const checkDuplicate = async () => {
-    const duplicate = await pool.query('SELECT companyname,count(*) FROM company_test GROUP BY companyname HAVING count(*) > 1');
-    if (duplicate.rows[0] && duplicate.rows[0].count > 1) {
-      console.log("Duplicate", duplicate.rows[0].count > 1);
+const checkDuplicate = async (newCompany: NewCompany) => {
+    const name = newCompany.companyName;
+    const duplicate = await pool.query('SELECT companyname FROM company_test WHERE companyname = ($1)', [name]);
+    if (duplicate.rowCount > 0) {
+      console.log("Duplicate", duplicate.rowCount > 0);
       return 0;
     }
     return 1;

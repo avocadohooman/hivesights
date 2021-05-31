@@ -82,9 +82,9 @@ const postApiLimiter = rateLimit({
 
 // Create new company
 companyRouter.post('/', async (req: any, res: any) => {
-    const newCompany: NewCompany = companyParsing.parsingCompany(req.body);
     try {
-        if (await companyHelper.checkDuplicate()) {
+        const newCompany: NewCompany = companyParsing.parsingCompany(req.body);
+        if (!await companyHelper.checkDuplicate(newCompany)) {
             console.log("Duplicate ERROR");
             return res.status(400).json({error: 'Company already exists.'});
         }
