@@ -6,7 +6,7 @@ POST http://localhost:3000/api/company/
 Content-Type: application/json
 
 {
-    "companyName": "Futurice",
+    "companyName": "Wunderdog",
     "companyDescription": "Software development agency",
     "logoURL": "https://www.itewiki.fi/thumb.php?src=https://www.itewiki.fi/write/logos/wunderdog.png&size=x100",
     "companyURL": "https://wunderdog.fi/",
@@ -14,7 +14,7 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:3000/api/company/1
+PUT http://localhost:3000/api/company/d606f37e-c637-48db-8544-2ad290533c79
 Content-Type: application/json
 
 {
@@ -29,7 +29,7 @@ Content-Type: application/json
 GET http://localhost:3000/health
 
 ###
-GET http://localhost:3000/api/company/1
+GET http://localhost:3000/api/company/d606f37e-c637-48db-8544-2ad290533c79
 
 ###
-DELETE http://localhost:3000/api/company/2
+DELETE http://localhost:3000/api/company/3

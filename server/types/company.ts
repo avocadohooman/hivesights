@@ -9,3 +9,5 @@ export type Company = {
     averageSalaries?: number,
     interviews?: number
 }
+
+export type NewCompany = Omit<Company, 'id'>;

@@ -1,8 +1,9 @@
 import express from 'express';
-import { Company } from '../types/company';
+import { Company, NewCompany } from '../types/company';
 import pool from '../db';
 import rateLimit from 'express-rate-limit';
 import middleware from '../middleware/middleware';
+import companyParsing from '../services/companyParsing';
 
 const companyRouter = express.Router();
 
@@ -36,8 +37,8 @@ companyRouter.get('/:id', middleware.requestParamsId,  async (req, res) => {
 })
 
 // Update company in DB
-companyRouter.put('/:id', middleware.requestParamsId, async (req, res) => {
-    const updatedCompanyBody = req.body;
+companyRouter.put('/:id', async (req, res) => {
+    const updatedCompanyBody = companyParsing.parsingCompany(req.body);
     const updatedCompanyId = req.params.id;
     try {
         const updatedCompany = await pool.query(`UPDATE ${companyTable} 
@@ -74,7 +75,7 @@ const postApiLimiter = rateLimit({
 
 // Create new company
 companyRouter.post('/', async (req, res) => {
-    const newCompany = req.body;
+    const newCompany = companyParsing.parsingCompany(req.body);
     console.log(`New company: ${newCompany}`);
     try {
         const addedCompany = await pool.query(`INSERT INTO ${companyTable} 
@@ -87,7 +88,7 @@ companyRouter.post('/', async (req, res) => {
             newCompany.companyDescription,
             newCompany.logoURL,
             newCompany.companyURL,
-            newCompany.companyLocation,
+            newCompany.companyLocation
         ]);
         console.log("New company created", addedCompany);
         return res.status(200).json(newCompany);
