@@ -1,8 +1,8 @@
-import express from 'express';
+import express, { response } from 'express';
 import { Company, NewCompany } from '../types/company';
 import pool from '../db';
 import rateLimit from 'express-rate-limit';
-import middleware from '../middleware/middleware';
+import companyHelper from '../middleware/companyHelper';
 import companyParsing from '../services/companyParsing';
 
 const companyRouter = express.Router();
@@ -12,7 +12,7 @@ const companyTable = process.env.NODE_ENV === 'production' ? 'company' : 'compan
 console.log(`Using table: ${companyTable}`);
 
 // Get all companies in DB
-companyRouter.get('/', async (req, res) => {
+companyRouter.get('/', async (req: any, res: any) => {
     try {
         const allCompanies = await pool.query(`SELECT * FROM ${companyTable}`);
         console.log("Getting all companies", allCompanies.rows);
@@ -24,7 +24,7 @@ companyRouter.get('/', async (req, res) => {
 })
 
 // Get one particular company
-companyRouter.get('/:id', middleware.requestParamsId,  async (req, res) => {
+companyRouter.get('/:id', async (req: any, res: any) => {
     const {id} = req.params;
     try {
         const  company = await pool.query(`SELECT * FROM ${companyTable} WHERE id = ($1)`, [id]);
@@ -37,7 +37,7 @@ companyRouter.get('/:id', middleware.requestParamsId,  async (req, res) => {
 })
 
 // Update company in DB
-companyRouter.put('/:id', async (req, res) => {
+companyRouter.put('/:id', async (req: any, res: any) => {
     const updatedCompanyBody = companyParsing.parsingCompany(req.body);
     const updatedCompanyId = req.params.id;
     try {
@@ -70,14 +70,17 @@ companyRouter.put('/:id', async (req, res) => {
 const postApiLimiter = rateLimit({
     max: 50,// max requests
     windowMs: 60 * 60 * 1000, // 1 Hour
-    message: 'Too many accounts created from this IP, please try again after an hour' // message to send
+    message: 'Too many companies created from this IP, please try again after an hour' // message to send
 });
 
 // Create new company
-companyRouter.post('/', async (req, res) => {
+companyRouter.post('/', async (req: any, res: any) => {
     const newCompany = companyParsing.parsingCompany(req.body);
-    console.log(`New company: ${newCompany}`);
     try {
+        if (await companyHelper.checkDuplicate()) {
+            console.log("Duplicate ERROR");
+            return res.status(400).json({error: 'Company already exists.'});
+        }
         const addedCompany = await pool.query(`INSERT INTO ${companyTable} 
         (companyName, companyDescription, logoURL, companyURL, companyLocation)
         VALUES
@@ -90,8 +93,7 @@ companyRouter.post('/', async (req, res) => {
             newCompany.companyURL,
             newCompany.companyLocation
         ]);
-        console.log("New company created", addedCompany);
-        return res.status(200).json(newCompany);
+        return res.status(200).json(addedCompany.rows[0]);
     } catch (error) {
         console.log(error.message);
         return res.status(400).json({error: error.message});
@@ -99,7 +101,7 @@ companyRouter.post('/', async (req, res) => {
 })
 
 // Delete company
-companyRouter.delete('/:id', middleware.requestParamsId, async (req, res) => {
+companyRouter.delete('/:id', async (req: any, res: any) => {
     const id = req.params.id;
     try {
         await pool.query(`DELETE FROM ${companyTable} WHERE id = ($1)`, [id]);
