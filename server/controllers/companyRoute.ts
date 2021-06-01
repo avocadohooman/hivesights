@@ -1,8 +1,8 @@
 import express from 'express';
-import { NewCompany } from '../types/company';
+import { CompanyRating, NewCompany } from '../types/company';
 import pool from '../db';
 import rateLimit from 'express-rate-limit';
-import companyHelper from '../middleware/companyHelper';
+import companyHelper from '../services/companyServices';
 import companyParsing from '../services/companyParsing';
 
 const companyRouter = express.Router();
@@ -67,6 +67,33 @@ companyRouter.put('/:id', async (req, res) => {
         ]);
         console.log(`Company ${updatedCompany.rows[0]} updated`);;
         return res.status(200).json(updatedCompany.rows);
+    } catch (error) {
+        console.log(error.message);
+        return res.status(400).json({error: error.message});
+    }
+});
+
+// Update company rating, salary and duration in DB
+companyRouter.put('/updateRating/:id', async (req, res) => {
+    if (!await companyHelper.checkIfExists(req.params.id)) {
+        console.log("Company doesn't exist ERROR");
+        return res.status(400).json({error: "Company doesn't exist."});
+    }
+    const updatedCompanyId: string = req.params.id;
+    try {
+        console.log('New Average', typeof(req.body.averageReviews));
+        const updatedCompanyRating: CompanyRating = companyParsing.parsingCompanyRating(req.body);
+        const updatedRating = await pool.query(`UPDATE ${companyTable} 
+        SET
+        averagereviews = ($1) 
+        WHERE
+        id = ($2)`,
+        [
+            updatedCompanyRating.averageReviews,
+            updatedCompanyId
+        ]);
+        console.log(`Company ${updatedRating.rows[0]} updated`);;
+        return res.status(200).json(updatedRating.rows);
     } catch (error) {
         console.log(error.message);
         return res.status(400).json({error: error.message});

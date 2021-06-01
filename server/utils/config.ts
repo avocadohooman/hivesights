@@ -6,5 +6,6 @@ let DATABASE = process.env.DATABASE_URL;
 
 export default {
     PORT,
-    DATABASE
+    DATABASE,
+
 };

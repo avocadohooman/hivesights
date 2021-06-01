@@ -2,15 +2,28 @@
 GET http://localhost:3000/api/reviews/
 
 ###
-POST http://localhost:3000/api/reviews/
+POST http://localhost:3000/api/reviews/c69a303f-f6be-48bf-b7a2-cd328e56371b
 Content-Type: application/json
 
 {
-    "companyName": "Wunderdog",
-    "companyDescription": "Software development agency",
-    "logoURL": "https://www.itewiki.fi/thumb.php?src=https://www.itewiki.fi/write/logos/wunderdog.png&size=x100",
-    "companyURL": "https://wunderdog.fi/",
-    "companyLocation": "Helsinki, Finland"
+    "companyId": "",
+    "userName": "gmolin",
+    "userPicture": "gmolin",
+    "pros": ["Nice"],
+    "cons": ["Ok"],
+    "overall": "Very nice",
+    "totalRating": 5,
+    "ratingCriteriaInterview": 4,
+    "ratingCriteriaOnboarding": 4,
+    "ratingCriteriaSupervision": 5,
+    "ratingCriteriaLearning": 3,
+    "ratingCriteriaCodingPractices": 5,
+    "ratingCriteriaPerks": 5,
+    "ratingCriteriaCulture": 4,
+    "salary": 2500,
+    "duration": 6,
+    "coverLetter": "none",
+    "cv": "none"
 }
 
 ###

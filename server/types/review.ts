@@ -1,6 +1,8 @@
 export type Review = {
     id: string,
-    company_id: string,
+    companyId: string,
+    userName: string,
+    userPicture: string,
     pros?: string[],
     cons?: string[],
     overall: string,
@@ -19,4 +21,5 @@ export type Review = {
     published_date: Date
 }
 
-export type NewReview = Omit<Review, 'id'|'company_id' | 'published_date'>;
+export type NewReview = Omit<Review, 'id' | 'published_date'>;
+export type CompanyTotalRating = Pick<Review, 'totalRating'>;

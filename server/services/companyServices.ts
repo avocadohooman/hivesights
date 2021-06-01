@@ -13,7 +13,7 @@ const checkDuplicate = async (newCompany: NewCompany) => {
 
 const checkIfExists = async (id: any) => {
   console.log("checkIfExists");
-  const duplicate = 
+  const company = 
     await pool.query('SELECT companyname FROM company_test WHERE id = ($1)', [id])
     .catch((e:any) => {
       if (e) {
@@ -21,7 +21,7 @@ const checkIfExists = async (id: any) => {
         return 0;
       }
     })
-  if (!duplicate) {
+  if (!company) {
     return 0;
   }
   return 1;

@@ -1,8 +1,11 @@
 import { NewReview } from '../types/review';
 import parsingHelper from './parsingHelpers';
 
-const parsingReview = (object: any) : NewReview => {
+const parsingReview = (object: any, companyId: string) : NewReview => {
     const newReview: NewReview = {
+        companyId: parseCompanyId(companyId),
+        userName: parseUserName(object.userName),
+        userPicture: parseUserPictureUrl(object.userPicture),
         pros: (object.pros) ? parseProsCons(object.pros) : undefined,
         cons: (object.cons) ? parseProsCons(object.cons) : undefined,
         overall: parseOverall(object.overall),
@@ -20,6 +23,27 @@ const parsingReview = (object: any) : NewReview => {
         cv: (object.coverLetter) ? parseResume(object.coverLetter) : ""
     };
     return newReview;
+}
+
+const parseCompanyId = (companyId: unknown) : string => {
+    if (!companyId || !parsingHelper.isString(companyId)) {
+        throw new Error('Incorrect or missing companyId' + companyId);
+    }
+    return companyId;
+}
+
+const parseUserName= (userName: unknown) : string => {
+    if (!userName || !parsingHelper.isString(userName)) {
+        throw new Error('Incorrect or missing userName' + userName);
+    }
+    return userName;
+}
+
+const parseUserPictureUrl = (userPictureUrl: unknown) : string => {
+    if (!userPictureUrl || !parsingHelper.isString(userPictureUrl)) {
+        throw new Error('Incorrect or missing userPictureUrl' + userPictureUrl);
+    }
+    return userPictureUrl;
 }
 
 const parseProsCons = (pros: unknown[]) : string[] => {

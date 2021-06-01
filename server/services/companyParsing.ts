@@ -1,4 +1,4 @@
-import { NewCompany } from '../types/company';
+import { CompanyRating, NewCompany } from '../types/company';
 import parsingHelper from './parsingHelpers';
 
 export const parsingCompany = (object: any) : NewCompany => {
@@ -11,6 +11,14 @@ export const parsingCompany = (object: any) : NewCompany => {
         companyLocation: parseCompanyLocation(object.companyLocation),
     };
     return newCompany;
+}
+
+export const parsingCompanyRating = (object: any) : CompanyRating => {
+
+    const companyRating: CompanyRating = {
+        averageReviews: parseCompanyRating(parseInt(object.averageReviews))
+    };
+    return companyRating;
 }
 
 const parseCompanyName = (name: unknown) : string => {
@@ -48,6 +56,14 @@ const parseCompanyLocation = (location: unknown) : string => {
     return location;
 }
 
+const parseCompanyRating = (rating: unknown) : number => {
+    if (!rating || !parsingHelper.isNumber(rating)) {
+        throw new Error('Incorrect or missing rating' + rating);
+    };
+    return rating;
+}
+
 export default {
-    parsingCompany
+    parsingCompany,
+    parsingCompanyRating
 };
