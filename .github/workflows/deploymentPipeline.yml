@@ -36,7 +36,7 @@ jobs:
         run: npm install
       - name: Run Jest
         working-directory: ./server
-        run: npm run test:int
+        run: npm run test:inj
         env:
           DATABASE_URL: ${{secrets.DATABASE_URL}} 
   bump_version:
