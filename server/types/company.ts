@@ -1,5 +1,5 @@
 export type Company = {
-    id: number,
+    id: string,
     companyName: string,
     companyDescription: string,
     logoURL: string,

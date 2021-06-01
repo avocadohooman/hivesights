@@ -1,6 +1,6 @@
 export type Review = {
-    id: number,
-    company_id: number,
+    id: string,
+    company_id: string,
     pros?: string[],
     cons?: string[],
     overall: string,
@@ -18,3 +18,5 @@ export type Review = {
     cv?: string,
     published_date: Date
 }
+
+export type NewReview = Omit<Review, 'id'|'company_id' | 'published_date'>;

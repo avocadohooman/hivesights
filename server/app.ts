@@ -3,6 +3,7 @@ import cors from 'cors';
 import middleware from './middleware/middleware';
 import authRouter from './controllers/authRoute';
 import companyRouter from './controllers/companyRoute';
+import reviewRouter from './controllers/reviewRoute';
 
 const app = express();
 
@@ -24,7 +25,7 @@ if (process.env.NODE_ENV !== "server") {
 app.use(middleware.requestLogger);
 
 // health check for Heroku deployment
-app.get('/health', (req, res) => {
+app.get('/health', (_req, res) => {
     res.send('ok');
 });
 
@@ -32,6 +33,8 @@ app.get('/health', (req, res) => {
 app.use('/api/auth', authRouter);
 // API Router for companies
 app.use('/api/company', companyRouter);
+// API Router for reviews
+app.use('/api/reviews', reviewRouter);
 
 // this needs to be after the routes are defined
 app.use(middleware.unknownEndpoint);

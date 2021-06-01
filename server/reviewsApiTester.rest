@@ -1,0 +1,35 @@
+###
+GET http://localhost:3000/api/reviews/
+
+###
+POST http://localhost:3000/api/reviews/
+Content-Type: application/json
+
+{
+    "companyName": "Wunderdog",
+    "companyDescription": "Software development agency",
+    "logoURL": "https://www.itewiki.fi/thumb.php?src=https://www.itewiki.fi/write/logos/wunderdog.png&size=x100",
+    "companyURL": "https://wunderdog.fi/",
+    "companyLocation": "Helsinki, Finland"
+}
+
+###
+PUT http://localhost:3000/api/reviews/d606f37e-c637-48db-8544-2ad290533c79
+Content-Type: application/json
+
+{
+    "companyName": "Wunderdog",
+    "companyDescription": "Software Development Agency",
+    "logoURL": "https://www.itewiki.fi/thumb.php?src=https://www.itewiki.fi/write/logos/wunderdog.png&size=x100",
+    "companyURL": "https://wunderdog.fi/",
+    "companyLocation": "Helsinki, Finland"
+}
+
+###
+GET http://localhost:3000/health
+
+###
+GET http://localhost:3000/api/reviews/1
+
+###
+DELETE http://localhost:3000/api/reviews/c569ddff-430a-463e-be86-7082a04ed2d2
