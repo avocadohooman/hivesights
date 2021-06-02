@@ -2,25 +2,25 @@
 GET http://localhost:3000/api/reviews/
 
 ###
-POST http://localhost:3000/api/reviews/2d49c670-4663-4594-b2f9-a637973abd33
+POST http://localhost:3000/api/reviews/3aea9ca1-72a4-49ab-9d56-fbf8a66962a6
 Content-Type: application/json
 
 {
     "companyId": "",
-    "userName": "gmolin",
-    "userPicture": "gmolin",
+    "userName": "hphoam",
+    "userPicture": "hphoam",
     "pros": ["Nice"],
     "cons": ["Ok"],
     "overall": "Very nice",
-    "totalRating": 3,
+    "totalRating": 2,
     "ratingCriteriaInterview": 2,
-    "ratingCriteriaOnboarding": 4,
-    "ratingCriteriaSupervision": 5,
-    "ratingCriteriaLearning": 3,
-    "ratingCriteriaCodingPractices": 4,
+    "ratingCriteriaOnboarding": 3,
+    "ratingCriteriaSupervision": 2,
+    "ratingCriteriaLearning": 1,
+    "ratingCriteriaCodingPractices": 3,
     "ratingCriteriaPerks": 2,
-    "ratingCriteriaCulture": 3,
-    "salary": 2300,
+    "ratingCriteriaCulture": 2,
+    "salary": 1500,
     "duration": 6,
     "coverLetter": "none",
     "cv": "none"

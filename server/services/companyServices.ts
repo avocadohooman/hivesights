@@ -1,9 +1,9 @@
 import { NewCompany } from '../types/company';
 import pool from '../db';
 
-const checkDuplicate = async (newCompany: NewCompany) => {
+const checkDuplicate = async (newCompany: NewCompany, companyTable: string) => {
     const name = newCompany.companyName;
-    const duplicate = await pool.query('SELECT companyname FROM company_test WHERE companyname = ($1)', [name]);
+    const duplicate = await pool.query(`SELECT companyname FROM ${companyTable} WHERE companyname = ($1)`, [name]);
     if (duplicate.rowCount > 0) {
       console.log("Duplicate", duplicate.rowCount > 0);
       return 0;
@@ -11,10 +11,10 @@ const checkDuplicate = async (newCompany: NewCompany) => {
     return 1;
 }
 
-const checkIfExists = async (id: any) => {
+const checkIfExists = async (id: any, companyTable: string) => {
   console.log("checkIfExists");
   const company = 
-    await pool.query('SELECT companyname FROM company_test WHERE id = ($1)', [id])
+    await pool.query(`SELECT companyname FROM company_test WHERE id = ($1)`, [id])
     .catch((e:any) => {
       if (e) {
         console.log("ERROR");

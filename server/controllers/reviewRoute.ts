@@ -4,20 +4,31 @@ import { NewReview } from '../types/review';
 import parsingService from '../services/reviewParsing';
 import companyServices from '../services/companyServices';
 import reviewServices from '../services/reviewServices';
-import axios from 'axios';
-import CONFIG from '../utils/config';
-import { CompanyRating } from '../types/company';
-
-
 
 const reviewRouter = express.Router();
 // Setting up table depending on NODE_ENV
 const reviewTable = process.env.NODE_END === 'production' ? 'review' : 'review_test';
 const companyTable = process.env.NODE_END === 'production' ? 'company' : 'company_test';
 console.log(`Using table: ${reviewTable}`);
-const reviewColumns = '(companyid, username, userpictureurl, pros, cons, overall, totalrating, ratingcriteriainterview, ratingcriteriaonboarding, ratingcriteriasupervision, ratingcriterialearning, ratingcriteriacodingpractices, ratingcriteriaperks, ratingcriteriaculture, salary, duration, coverletter, cv)';
-const baseUrl = 'http://localhost:' + CONFIG.PORT;
-console.log(`Review router ${baseUrl}`);
+
+const reviewColumns = `(companyid, 
+                        username, 
+                        userpictureurl, 
+                        pros, 
+                        cons, 
+                        overall, 
+                        totalrating, 
+                        ratingcriteriainterview, 
+                        ratingcriteriaonboarding, 
+                        ratingcriteriasupervision, 
+                        ratingcriterialearning, 
+                        ratingcriteriacodingpractices, 
+                        ratingcriteriaperks, 
+                        ratingcriteriaculture, 
+                        salary, 
+                        duration, 
+                        coverletter, 
+                        cv)`;
 
 // Get all reviews in DB
 reviewRouter.get('/', async (req, res) => {
@@ -36,12 +47,14 @@ reviewRouter.post('/:id', async (req, res) => {
         const newReview: NewReview = parsingService.parsingReview(req.body, req.params.id);
         if (newReview) {
             const companyId: string = req.params.id;
-            console.log("Company ID", companyId);
-            if (!await companyServices.checkIfExists(companyId)) {
+            if (!await companyServices.checkIfExists(companyId, companyTable)) {
                 console.log("Company doesn't exist ERROR");
                 return res.status(400).json({error: "Company doesn't exist."});    
+            } 
+            if (!await reviewServices.checkDuplicate(newReview, reviewTable)) {
+                console.log("Review for this company exists already");
+                return res.status(400).json({error: `Review for this company by ${newReview.userName} already exists`}); 
             }
-            console.log("Company Exists");
             const addedReview = await pool.query(`INSERT INTO ${reviewTable} 
             ${reviewColumns}
             VALUES
@@ -79,6 +92,7 @@ reviewRouter.post('/:id', async (req, res) => {
         }
     } catch (error) {
         console.log(`Error: ${error.message}`);
+        return res.status(400).json({error: error.message});
     }
 })
 

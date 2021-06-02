@@ -1,4 +1,18 @@
 import pool from '../db';
+import { NewReview } from '../types/review';
+
+const checkDuplicate = async (newReview: NewReview, reviewTable: string) => {
+    console.log('Check for duplicates');
+    const userName = newReview.userName;
+    const companyId = newReview.companyId;
+    const duplicate = await pool.query(`SELECT companyid FROM ${reviewTable} WHERE username = ($1) AND companyid = ($2)`, [userName, companyId]);
+    if (duplicate.rowCount > 0) {
+        console.log("Duplicate found: ", duplicate.rowCount > 0);
+        return 0;  
+    }
+    console.log("Duplicate found: ", duplicate.rowCount > 0);
+    return 1;
+}
 
 const updateTotalScore = async (companyId: string, reviewTable: string, companyTable: string) => {
     const newTotalScore = await pool.query(`SELECT AVG (totalrating)::NUMERIC(10,2) FROM ${reviewTable} WHERE companyid = ($1)`, [companyId]);
@@ -83,5 +97,6 @@ const updateAverageSalary = async (companyId: string, reviewTable: string, compa
 export default {
     updateTotalScore,
     updateScores,
-    updateAverageSalary
+    updateAverageSalary,
+    checkDuplicate
 }
