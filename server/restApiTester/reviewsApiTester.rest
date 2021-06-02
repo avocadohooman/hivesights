@@ -2,7 +2,7 @@
 GET http://localhost:3000/api/reviews/
 
 ###
-POST http://localhost:3000/api/reviews/2be6bb53-4de8-457d-80d8-a9e0d9a92349
+POST http://localhost:3000/api/reviews/d33044ec-8f36-4631-ad8c-2d349eb745b8
 Content-Type: application/json
 
 {
@@ -12,15 +12,15 @@ Content-Type: application/json
     "pros": ["Nice"],
     "cons": ["Ok"],
     "overall": "Very nice",
-    "totalRating": 3.9,
-    "ratingCriteriaInterview": 4,
-    "ratingCriteriaOnboarding": 4,
-    "ratingCriteriaSupervision": 5,
-    "ratingCriteriaLearning": 3,
-    "ratingCriteriaCodingPractices": 5,
+    "totalRating": 3.4,
+    "ratingCriteriaInterview": 1.3,
+    "ratingCriteriaOnboarding": 33.2,
+    "ratingCriteriaSupervision": 2.3,
+    "ratingCriteriaLearning": 1,
+    "ratingCriteriaCodingPractices": 3,
     "ratingCriteriaPerks": 5,
-    "ratingCriteriaCulture": 4,
-    "salary": 3000,
+    "ratingCriteriaCulture": 5,
+    "salary": 2750,
     "duration": 6,
     "coverLetter": "none",
     "cv": "none"

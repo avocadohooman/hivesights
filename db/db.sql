@@ -8,7 +8,14 @@ CREATE TABLE company (
     logoURL VARCHAR NOT NULL,
     companyURL VARCHAR (256) NOT NULL,
     companyLocation VARCHAR (256) NOT NULL,
-    averageReviews FLOAT,
+    averageTotalScore FLOAT,
+    averageInterviewScore FLOAT,
+    averageOnboardingScore FLOAT,
+    averageSupervisionScore FLOAT,
+    averageLearningScore FLOAT,
+    averageCodingPracticesScore FLOAT,
+    averagePerksScore FLOAT,
+    averageCultureScore FLOAT,
     averageSalaries FLOAT,
     interviews INT
 );
@@ -21,7 +28,14 @@ CREATE TABLE company_test (
     logoURL VARCHAR NOT NULL,
     companyURL VARCHAR (256) NOT NULL,
     companyLocation VARCHAR (256) NOT NULL,
-    averageReviews FLOAT,
+    averageTotalScore FLOAT,
+    averageInterviewScore FLOAT,
+    averageOnboardingScore FLOAT,
+    averageSupervisionScore FLOAT,
+    averageLearningScore FLOAT,
+    averageCodingPracticesScore FLOAT,
+    averagePerksScore FLOAT,
+    averageCultureScore FLOAT,
     averageSalaries FLOAT,
     interviews INT
 );
@@ -75,3 +89,17 @@ CREATE TABLE review_test (
     published_date timestamp DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (companyId) REFERENCES company_test(id) ON DELETE CASCADE
 );
+
+SELECT (totalrating, ratingCriteriaInterview, ratingCriteriaOnboarding, ratingCriteriaSupervision),
+ AVG (totalrating)::NUMERIC(10,2), 
+ AVG (ratingCriteriaInterview)::NUMERIC(10,2), 
+ AVG (ratingCriteriaOnboarding)::NUMERIC(10,2), 
+ AVG (ratingCriteriaSupervision)::NUMERIC(10,2), 
+ AVG (ratingCriteriaCulture)::NUMERIC(10,2) 
+ FROM review_test 
+ WHERE companyid = 'd33044ec-8f36-4631-ad8c-2d349eb745b8'
+ GROUP BY review_test.totalrating, review_test.ratingcriteriainterview, review_test.ratingCriteriaOnboarding, review_test.ratingCriteriaSupervision;
+
+SELECT 
+AVG (totalrating)::NUMERIC(10,2)
+FROM review_test WHERE companyid = 'd33044ec-8f36-4631-ad8c-2d349eb745b8' GROUP BY;

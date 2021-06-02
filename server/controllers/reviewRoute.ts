@@ -73,8 +73,9 @@ reviewRouter.post('/:id', async (req, res) => {
                   return res.status(400).json({e: e.message});
                 }
             });
-            await reviewServices.updateTotalScore(companyId, reviewTable, companyTable);
+            // await reviewServices.updateTotalScore(companyId, reviewTable, companyTable);
             await reviewServices.updateAverageSalary(companyId, reviewTable, companyTable);
+            await reviewServices.updateScores(companyId, reviewTable, companyTable);
             return res.status(200).json(addedReview.rows[0]); 
         }
     } catch (error) {

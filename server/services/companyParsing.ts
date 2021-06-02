@@ -16,7 +16,7 @@ export const parsingCompany = (object: any) : NewCompany => {
 export const parsingCompanyRating = (object: any) : CompanyRating => {
 
     const companyRating: CompanyRating = {
-        averageReviews: parseCompanyRating(parseInt(object.averageReviews))
+        averageTotalScore: parseCompanyRating(parseInt(object.averageTotalScore))
     };
     return companyRating;
 }

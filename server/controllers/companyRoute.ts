@@ -30,7 +30,7 @@ companyRouter.get('/:id', async (req, res) => {
         return res.status(400).json({error: "Company doesn't exist."});
     }
     try {
-        const  company = await pool.query(`SELECT * FROM ${companyTable} WHERE id = ($1)`, [id]);
+        const company = await pool.query(`SELECT * FROM ${companyTable} WHERE id = ($1)`, [id]);
         console.log(`Company ${company.rows[0].companyname} fetched`);;
         return res.status(200).json(company.rows[0]);
     } catch (error) {
@@ -81,15 +81,15 @@ companyRouter.put('/updateRating/:id', async (req, res) => {
     }
     const updatedCompanyId: string = req.params.id;
     try {
-        console.log('New Average', typeof(req.body.averageReviews));
+        console.log('New Average', typeof(req.body.averageTotalScore));
         const updatedCompanyRating: CompanyRating = companyParsing.parsingCompanyRating(req.body);
         const updatedRating = await pool.query(`UPDATE ${companyTable} 
         SET
-        averagereviews = ($1) 
+        averageTotalScore = ($1) 
         WHERE
         id = ($2)`,
         [
-            updatedCompanyRating.averageReviews,
+            updatedCompanyRating.averageTotalScore,
             updatedCompanyId
         ]);
         console.log(`Company ${updatedRating.rows[0]} updated`);
