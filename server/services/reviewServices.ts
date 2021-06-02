@@ -14,6 +14,23 @@ const checkDuplicate = async (newReview: NewReview, reviewTable: string) => {
     return 1;
 }
 
+
+const checkIfExists = async (id: any, reviewTable: string) => {
+    console.log("checkIfExists");
+    const review = 
+      await pool.query(`SELECT id FROM ${reviewTable} WHERE id = ($1)`, [id])
+      .catch((e:any) => {
+        if (e) {
+          console.log("ERROR");
+          return 0;
+        }
+      })
+    if (!review) {
+      return 0;
+    }
+    return 1;
+}
+
 const updateTotalScore = async (companyId: string, reviewTable: string, companyTable: string) => {
     const newTotalScore = await pool.query(`SELECT AVG (totalrating)::NUMERIC(10,2) FROM ${reviewTable} WHERE companyid = ($1)`, [companyId]);
     console.log('New Total Score', newTotalScore.rows[0].avg);
@@ -93,10 +110,10 @@ const updateAverageSalary = async (companyId: string, reviewTable: string, compa
 
 }
 
-
 export default {
     updateTotalScore,
     updateScores,
     updateAverageSalary,
-    checkDuplicate
+    checkDuplicate,
+    checkIfExists
 }

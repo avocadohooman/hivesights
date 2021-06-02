@@ -14,7 +14,7 @@ const checkDuplicate = async (newCompany: NewCompany, companyTable: string) => {
 const checkIfExists = async (id: any, companyTable: string) => {
   console.log("checkIfExists");
   const company = 
-    await pool.query(`SELECT companyname FROM company_test WHERE id = ($1)`, [id])
+    await pool.query(`SELECT companyname FROM ${companyTable} WHERE id = ($1)`, [id])
     .catch((e:any) => {
       if (e) {
         console.log("ERROR");

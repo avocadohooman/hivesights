@@ -88,16 +88,5 @@ CREATE TABLE review_test (
     FOREIGN KEY (companyId) REFERENCES company_test(id) ON DELETE CASCADE
 );
 
-SELECT (totalrating, ratingCriteriaInterview, ratingCriteriaOnboarding, ratingCriteriaSupervision),
- AVG (totalrating)::NUMERIC(10,2), 
- AVG (ratingCriteriaInterview)::NUMERIC(10,2), 
- AVG (ratingCriteriaOnboarding)::NUMERIC(10,2), 
- AVG (ratingCriteriaSupervision)::NUMERIC(10,2), 
- AVG (ratingCriteriaCulture)::NUMERIC(10,2) 
- FROM review_test 
- WHERE companyid = 'd33044ec-8f36-4631-ad8c-2d349eb745b8'
- GROUP BY review_test.totalrating, review_test.ratingcriteriainterview, review_test.ratingCriteriaOnboarding, review_test.ratingCriteriaSupervision;
 
-SELECT 
-AVG (totalrating)::NUMERIC(10,2)
-FROM review_test WHERE companyid = 'd33044ec-8f36-4631-ad8c-2d349eb745b8' GROUP BY;
+SELECT * FROM review_test WHERE companyid = 'e3f9f26a-cd04-419a-b367-84e704adb419';

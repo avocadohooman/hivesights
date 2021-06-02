@@ -41,6 +41,41 @@ reviewRouter.get('/', async (req, res) => {
     }
 });
 
+// Get one particular review
+reviewRouter.get('/:id', async (req, res) => {
+    const id: string = req.params.id;
+    try {
+        if (!await reviewServices.checkIfExists(id, reviewTable)) {
+            console.log("Review doesn't exist ERROR");
+            return res.status(400).json({error: "Review doesn't exist."});
+        }
+        const review = await pool.query(`SELECT * FROM ${reviewTable} WHERE id = ($1)`, [id]);
+        console.log(`Review ${review.rows[0]} fetched`);;
+        return res.status(200).json(review.rows[0]);
+    } catch (error) {
+        console.log(`Error: ${error.message}`);
+        return res.status(400).json({error: error.message});
+    }
+})
+
+// Get all reviews for a company
+reviewRouter.get('/company/:id', async (req, res) => {
+    const id: string = req.params.id;
+    console.log("ID", id);
+    try {
+        if (!await companyServices.checkIfExists(id, companyTable)) {
+            console.log("Company doesn't exist ERROR");
+            return res.status(400).json({error: "Company doesn't exist."});
+        }
+        const reviews = await pool.query(`SELECT * FROM ${reviewTable} WHERE companyid = ($1)`, [id]);
+        console.log('Reviews fetched', reviews.rows);
+        return res.status(200).json(reviews.rows);
+    } catch (error) {
+        console.log(`Error: ${error.message}`);
+        return res.status(400).json({error: error.message});
+    }
+})
+
 // Create a new review for a company
 reviewRouter.post('/:id', async (req, res) => {
     try {
@@ -95,12 +130,6 @@ reviewRouter.post('/:id', async (req, res) => {
         return res.status(400).json({error: error.message});
     }
 })
-
-// Get one particular review
-
-
-// Get reviews for one company
-
 
 // Update a review
 

@@ -2,23 +2,29 @@
 GET http://localhost:3000/api/reviews/
 
 ###
-POST http://localhost:3000/api/reviews/3aea9ca1-72a4-49ab-9d56-fbf8a66962a6
+GET http://localhost:3000/api/reviews/525cfccb-dd76-4101-b971-2a18bd0ace62
+
+###
+GET http://localhost:3000/api/reviews/company/e3f9f26a-cd04-419a-b367-84e704adb419
+
+###
+POST http://localhost:3000/api/reviews/6bc84c99-9020-4d0b-86f7-e3e3469ab8a1
 Content-Type: application/json
 
 {
     "companyId": "",
-    "userName": "hphoam",
-    "userPicture": "hphoam",
+    "userName": "gmolin",
+    "userPicture": "gmolin",
     "pros": ["Nice"],
     "cons": ["Ok"],
     "overall": "Very nice",
-    "totalRating": 2,
-    "ratingCriteriaInterview": 2,
+    "totalRating": 3,
+    "ratingCriteriaInterview": 4,
     "ratingCriteriaOnboarding": 3,
     "ratingCriteriaSupervision": 2,
-    "ratingCriteriaLearning": 1,
+    "ratingCriteriaLearning": 2,
     "ratingCriteriaCodingPractices": 3,
-    "ratingCriteriaPerks": 2,
+    "ratingCriteriaPerks": 4,
     "ratingCriteriaCulture": 2,
     "salary": 1500,
     "duration": 6,
@@ -38,11 +44,7 @@ Content-Type: application/json
     "companyLocation": "Helsinki, Finland"
 }
 
-###
-GET http://localhost:3000/health
 
-###
-GET http://localhost:3000/api/reviews/1
 
 ###
 DELETE http://localhost:3000/api/reviews/c569ddff-430a-463e-be86-7082a04ed2d2
