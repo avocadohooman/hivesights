@@ -16,14 +16,28 @@ const updateTotalScore = async (companyId: string, reviewTable: string, companyT
 }
 
 const updateScores = async (companyId: string, reviewTable: string, companyTable: string) => {
-    const newTotalScore = await pool.query(`SELECT AVG (totalrating)::NUMERIC(10,2) FROM ${reviewTable} WHERE companyid = ($1)`, [companyId]);
-    const averageInterviewScore = await pool.query(`SELECT AVG (ratingCriteriaInterview)::NUMERIC(10,2) FROM ${reviewTable} WHERE companyid = ($1)`, [companyId]);
-    const averageOnboardingScore = await pool.query(`SELECT AVG (ratingCriteriaOnboarding)::NUMERIC(10,2) FROM ${reviewTable} WHERE companyid = ($1)`, [companyId]);
-    const averageSupervisionScore = await pool.query(`SELECT AVG (ratingCriteriaSupervision)::NUMERIC(10,2) FROM ${reviewTable} WHERE companyid = ($1)`, [companyId]);
-    const averageLearningScore = await pool.query(`SELECT AVG (ratingCriteriaLearning)::NUMERIC(10,2) FROM ${reviewTable} WHERE companyid = ($1)`, [companyId]);
-    const averageCodingPracticesScore = await pool.query(`SELECT AVG (ratingCriteriaCodingPractices)::NUMERIC(10,2) FROM ${reviewTable} WHERE companyid = ($1)`, [companyId]);
-    const averagePerksScore = await pool.query(`SELECT AVG (ratingCriteriaPerks)::NUMERIC(10,2) FROM ${reviewTable} WHERE companyid = ($1)`, [companyId]);
-    const averageCultureScore = await pool.query(`SELECT AVG (ratingCriteriaCulture)::NUMERIC(10,2) FROM ${reviewTable} WHERE companyid = ($1)`, [companyId]);
+    const newTotalQuery = 'AVG (totalrating)::NUMERIC(10,2)';
+    const averageInterviewQuery = 'AVG (ratingCriteriaInterview)::NUMERIC(10,2)';
+    const averageOnboardingQuery = 'AVG (ratingCriteriaOnboarding)::NUMERIC(10,2)';
+    const averageSupervisionQuery = 'AVG (ratingCriteriaSupervision)::NUMERIC(10,2)';
+    const averageLearningQuery = 'AVG (ratingCriteriaLearning)::NUMERIC(10,2)';
+    const averageCodingPracticesQuery = 'AVG (ratingCriteriaCodingPractices)::NUMERIC(10,2)';
+    const averagePerksQuery = 'AVG (ratingCriteriaPerks)::NUMERIC(10,2)';
+    const averageCultureQuery = 'AVG (ratingCriteriaCulture)::NUMERIC(10,2)';
+    
+    const newScores = await pool.query(`SELECT 
+    ${newTotalQuery} as totalrating, 
+    ${averageInterviewQuery} as interview,
+    ${averageOnboardingQuery} as onboarding,
+    ${averageSupervisionQuery} as supervision,
+    ${averageLearningQuery} as learning,
+    ${averageCodingPracticesQuery} as codingpractice,
+    ${averagePerksQuery} as perks,
+    ${averageCultureQuery} as culture
+    FROM review_test 
+    WHERE companyid = ($1)`, [companyId]);
+    console.log("New score", newScores.rows[0]);
+    
     const updatedRating = await pool.query(`UPDATE ${companyTable} 
     SET
         averageTotalScore = ($1),
@@ -37,17 +51,16 @@ const updateScores = async (companyId: string, reviewTable: string, companyTable
     WHERE
         id = ($9)`,
     [
-        newTotalScore.rows[0].avg,
-        averageInterviewScore.rows[0].avg,
-        averageOnboardingScore.rows[0].avg,
-        averageSupervisionScore.rows[0].avg,
-        averageLearningScore.rows[0].avg,
-        averageCodingPracticesScore.rows[0].avg,
-        averagePerksScore.rows[0].avg,
-        averageCultureScore.rows[0].avg,
+        newScores.rows[0].totalrating,
+        newScores.rows[0].interview,
+        newScores.rows[0].onboarding,
+        newScores.rows[0].supervision,
+        newScores.rows[0].learning,
+        newScores.rows[0].codingpractice,
+        newScores.rows[0].perks,
+        newScores.rows[0].culture,
         companyId
     ]);
-    console.log(`Updated ratings: ${updatedRating.rows[0]}`);
 }
 
 const updateAverageSalary = async (companyId: string, reviewTable: string, companyTable: string) => {

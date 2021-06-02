@@ -1,5 +1,3 @@
--- CREATE DATABASE perntodo;
-
 -- Work in progress
 CREATE TABLE company (
     id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
