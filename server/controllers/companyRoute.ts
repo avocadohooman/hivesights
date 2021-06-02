@@ -92,7 +92,7 @@ companyRouter.put('/updateRating/:id', async (req, res) => {
             updatedCompanyRating.averageReviews,
             updatedCompanyId
         ]);
-        console.log(`Company ${updatedRating.rows[0]} updated`);;
+        console.log(`Company ${updatedRating.rows[0]} updated`);
         return res.status(200).json(updatedRating.rows);
     } catch (error) {
         console.log(error.message);

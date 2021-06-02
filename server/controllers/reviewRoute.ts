@@ -3,12 +3,17 @@ import pool from '../db';
 import { NewReview } from '../types/review';
 import parsingService from '../services/reviewParsing';
 import companyServices from '../services/companyServices';
+import reviewServices from '../services/reviewServices';
 import axios from 'axios';
 import CONFIG from '../utils/config';
 import { CompanyRating } from '../types/company';
+
+
+
 const reviewRouter = express.Router();
 // Setting up table depending on NODE_ENV
 const reviewTable = process.env.NODE_END === 'production' ? 'review' : 'review_test';
+const companyTable = process.env.NODE_END === 'production' ? 'company' : 'company_test';
 console.log(`Using table: ${reviewTable}`);
 const reviewColumns = '(companyid, username, userpictureurl, pros, cons, overall, totalrating, ratingcriteriainterview, ratingcriteriaonboarding, ratingcriteriasupervision, ratingcriterialearning, ratingcriteriacodingpractices, ratingcriteriaperks, ratingcriteriaculture, salary, duration, coverletter, cv)';
 const baseUrl = 'http://localhost:' + CONFIG.PORT;
@@ -68,9 +73,8 @@ reviewRouter.post('/:id', async (req, res) => {
                   return res.status(400).json({e: e.message});
                 }
             });
-            const newTotalScore = await pool.query(`SELECT AVG (totalrating)::NUMERIC(10,2) FROM ${reviewTable} WHERE companyid = ($1)`, [companyId]);
-            console.log('New Total Score', newTotalScore.rows[0].avg);
-            await axios.put(`${baseUrl}/api/company/updateRating/${companyId}`, {averageReviews: newTotalScore.rows[0].avg});
+            await reviewServices.updateTotalScore(companyId, reviewTable, companyTable);
+            await reviewServices.updateAverageSalary(companyId, reviewTable, companyTable);
             return res.status(200).json(addedReview.rows[0]); 
         }
     } catch (error) {
