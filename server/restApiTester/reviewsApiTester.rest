@@ -8,17 +8,17 @@ GET http://localhost:3000/api/reviews/525cfccb-dd76-4101-b971-2a18bd0ace62
 GET http://localhost:3000/api/reviews/company/e3f9f26a-cd04-419a-b367-84e704adb419
 
 ###
-POST http://localhost:3000/api/reviews/6bc84c99-9020-4d0b-86f7-e3e3469ab8a1
+POST http://localhost:3000/api/reviews/6c4bb5ed-1fd0-4013-8d02-8c14b9694a05
 Content-Type: application/json
 
 {
     "companyId": "",
-    "userName": "gmolin",
+    "userName": "hoang",
     "userPicture": "gmolin",
     "pros": ["Nice"],
     "cons": ["Ok"],
     "overall": "Very nice",
-    "totalRating": 3,
+    "totalRating": 5,
     "ratingCriteriaInterview": 4,
     "ratingCriteriaOnboarding": 3,
     "ratingCriteriaSupervision": 2,
@@ -33,18 +33,30 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:3000/api/reviews/d606f37e-c637-48db-8544-2ad290533c79
+PUT http://localhost:3000/api/reviews/9f274917-8b14-4fab-954d-a936b67aa2ac
 Content-Type: application/json
 
 {
-    "companyName": "Wunderdog",
-    "companyDescription": "Software Development Agency",
-    "logoURL": "https://www.itewiki.fi/thumb.php?src=https://www.itewiki.fi/write/logos/wunderdog.png&size=x100",
-    "companyURL": "https://wunderdog.fi/",
-    "companyLocation": "Helsinki, Finland"
+    "companyId": "6c4bb5ed-1fd0-4013-8d02-8c14b9694a05",
+    "userName": "gmolin",
+    "userPicture": "gmolin",
+    "pros": ["Nice"],
+    "cons": ["Ok"],
+    "overall": "Very nice",
+    "totalRating": 1,
+    "ratingCriteriaInterview": 4,
+    "ratingCriteriaOnboarding": 3,
+    "ratingCriteriaSupervision": 2,
+    "ratingCriteriaLearning": 2,
+    "ratingCriteriaCodingPractices": 3,
+    "ratingCriteriaPerks": 4,
+    "ratingCriteriaCulture": 2,
+    "salary": 3000,
+    "duration": 8,
+    "coverLetter": "none",
+    "cv": "none"
 }
-
-
 
 ###
 DELETE http://localhost:3000/api/reviews/c569ddff-430a-463e-be86-7082a04ed2d2
+

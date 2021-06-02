@@ -1,5 +1,6 @@
 import pool from '../db';
 import { NewReview } from '../types/review';
+import reviewQueries from '../utils/reviewDBQueries';
 
 const checkDuplicate = async (newReview: NewReview, reviewTable: string) => {
     console.log('Check for duplicates');
@@ -71,14 +72,7 @@ const updateScores = async (companyId: string, reviewTable: string, companyTable
     
     const updatedRating = await pool.query(`UPDATE ${companyTable} 
     SET
-        averageTotalScore = ($1),
-        averageinterviewscore = ($2),
-        averageonboardingscore = ($3),
-        averagesupervisionscore = ($4),
-        averagelearningscore = ($5),
-        averagecodingpracticesscore = ($6),
-        averageperksscore = ($7),
-        averageculturescore = ($8)
+        ${reviewQueries.updateScoreColumns}
     WHERE
         id = ($9)`,
     [
@@ -91,13 +85,20 @@ const updateScores = async (companyId: string, reviewTable: string, companyTable
         newScores.rows[0].perks,
         newScores.rows[0].culture,
         companyId
-    ]);
+    ]).catch((e:any) => {
+        if (e) {
+          console.log("ERROR", e);
+          throw new Error("ERROR: " + e.message);
+        }
+    });
+    console.log(`Salary ${updatedRating.rows[0]} updated`);
+
 }
 
 const updateAverageSalary = async (companyId: string, reviewTable: string, companyTable: string) => {
     const newAverageSalary = await pool.query(`SELECT AVG (salary)::NUMERIC(10,2) FROM ${reviewTable} WHERE companyid = ($1)`, [companyId]);
     console.log('New Average Salary', newAverageSalary.rows[0].avg);
-    const updatedRating = await pool.query(`UPDATE ${companyTable} 
+    const updatedSalary = await pool.query(`UPDATE ${companyTable} 
     SET
     averagesalaries = ($1) 
     WHERE
@@ -105,9 +106,13 @@ const updateAverageSalary = async (companyId: string, reviewTable: string, compa
     [
         newAverageSalary.rows[0].avg,
         companyId
-    ]);
-    console.log(`Company ${updatedRating.rows[0]} updated`);
-
+    ]).catch((e:any) => {
+        if (e) {
+          console.log("ERROR", e);
+          throw new Error("ERROR: " + e.message);
+        }
+    });
+    console.log(`Salary ${updatedSalary.rows[0]} updated`);
 }
 
 export default {

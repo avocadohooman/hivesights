@@ -25,11 +25,11 @@ companyRouter.get('/', async (_req, res) => {
 // Get one particular company
 companyRouter.get('/:id', async (req, res) => {
     const id: string = req.params.id;
-    if (!await companyHelper.checkIfExists(id, companyTable)) {
-        console.log("Company doesn't exist ERROR");
-        return res.status(400).json({error: "Company doesn't exist."});
-    }
     try {
+        if (!await companyHelper.checkIfExists(id, companyTable)) {
+            console.log("Company doesn't exist ERROR");
+            return res.status(400).json({error: "Company doesn't exist."});
+        }
         const company = await pool.query(`SELECT * FROM ${companyTable} WHERE id = ($1)`, [id]);
         console.log(`Company ${company.rows[0].companyname} fetched`);;
         return res.status(200).json(company.rows[0]);
@@ -41,12 +41,12 @@ companyRouter.get('/:id', async (req, res) => {
 
 // Update company in DB
 companyRouter.put('/:id', async (req, res) => {
-    if (!await companyHelper.checkIfExists(req.params.id, companyTable)) {
-        console.log("Company doesn't exist ERROR");
-        return res.status(400).json({error: "Company doesn't exist."});
-    }
     const updatedCompanyId: string = req.params.id;
     try {
+        if (!await companyHelper.checkIfExists(req.params.id, companyTable)) {
+            console.log("Company doesn't exist ERROR");
+            return res.status(400).json({error: "Company doesn't exist."});
+        }
         const updatedCompanyBody: NewCompany = companyParsing.parsingCompany(req.body);
         const updatedCompany = await pool.query(`UPDATE ${companyTable} 
         SET
@@ -75,12 +75,12 @@ companyRouter.put('/:id', async (req, res) => {
 
 // Update company rating, salary and duration in DB
 companyRouter.put('/updateRating/:id', async (req, res) => {
-    if (!await companyHelper.checkIfExists(req.params.id, companyTable)) {
-        console.log("Company doesn't exist ERROR");
-        return res.status(400).json({error: "Company doesn't exist."});
-    }
     const updatedCompanyId: string = req.params.id;
     try {
+        if (!await companyHelper.checkIfExists(req.params.id, companyTable)) {
+            console.log("Company doesn't exist ERROR");
+            return res.status(400).json({error: "Company doesn't exist."});
+        }
         console.log('New Average', typeof(req.body.averageTotalScore));
         const updatedCompanyRating: CompanyRating = companyParsing.parsingCompanyRating(req.body);
         const updatedRating = await pool.query(`UPDATE ${companyTable} 

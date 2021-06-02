@@ -4,6 +4,7 @@ import { NewReview } from '../types/review';
 import parsingService from '../services/reviewParsing';
 import companyServices from '../services/companyServices';
 import reviewServices from '../services/reviewServices';
+import reviewQueries from '../utils/reviewDBQueries';
 
 const reviewRouter = express.Router();
 // Setting up table depending on NODE_ENV
@@ -11,24 +12,7 @@ const reviewTable = process.env.NODE_END === 'production' ? 'review' : 'review_t
 const companyTable = process.env.NODE_END === 'production' ? 'company' : 'company_test';
 console.log(`Using table: ${reviewTable}`);
 
-const reviewColumns = `(companyid, 
-                        username, 
-                        userpictureurl, 
-                        pros, 
-                        cons, 
-                        overall, 
-                        totalrating, 
-                        ratingcriteriainterview, 
-                        ratingcriteriaonboarding, 
-                        ratingcriteriasupervision, 
-                        ratingcriterialearning, 
-                        ratingcriteriacodingpractices, 
-                        ratingcriteriaperks, 
-                        ratingcriteriaculture, 
-                        salary, 
-                        duration, 
-                        coverletter, 
-                        cv)`;
+const reviewColumns = reviewQueries.reviewColumns;
 
 // Get all reviews in DB
 reviewRouter.get('/', async (req, res) => {
@@ -61,7 +45,6 @@ reviewRouter.get('/:id', async (req, res) => {
 // Get all reviews for a company
 reviewRouter.get('/company/:id', async (req, res) => {
     const id: string = req.params.id;
-    console.log("ID", id);
     try {
         if (!await companyServices.checkIfExists(id, companyTable)) {
             console.log("Company doesn't exist ERROR");
@@ -132,7 +115,53 @@ reviewRouter.post('/:id', async (req, res) => {
 })
 
 // Update a review
-
+reviewRouter.put('/:id', async (req, res) => {
+    const reviewId: string = req.params.id;
+    const companyId: string = req.body.companyId;
+    try {
+        if (!await reviewServices.checkIfExists(reviewId, reviewTable)) {
+            console.log("Review doesn't exist ERROR");
+            return res.status(400).json({error: "Review doesn't exist."});
+        }
+        if (!await companyServices.checkIfExists(companyId, companyTable)) {
+            console.log("Company doesn't exist ERROR");
+            return res.status(400).json({error: "Company doesn't exist."});
+        }
+        const updatedReviewBody: NewReview = parsingService.parsingReview(req.body, companyId);
+        console.log('ID?')
+        const updatedReview = await pool.query(`UPDATE ${reviewTable} 
+        SET
+        ${reviewQueries.updateReviewColumns}
+        WHERE id = ($18)`, 
+        [
+            updatedReviewBody.userName,
+            updatedReviewBody.userPicture,
+            updatedReviewBody.pros,
+            updatedReviewBody.cons,
+            updatedReviewBody.overall,
+            updatedReviewBody.totalRating,
+            updatedReviewBody.ratingCriteriaInterview,
+            updatedReviewBody.ratingCriteriaOnboarding,
+            updatedReviewBody.ratingCriteriaSupervision,
+            updatedReviewBody.ratingCriteriaLearning,
+            updatedReviewBody.ratingCriteriaCodingPractices,
+            updatedReviewBody.ratingCriteriaPerks,
+            updatedReviewBody.ratingCriteriaCulture,
+            updatedReviewBody.salary,
+            updatedReviewBody.duration,
+            updatedReviewBody.coverLetter,
+            updatedReviewBody.cv,
+            reviewId
+        ]);
+        console.log(`Review ${updatedReview.rows[0]} udpated`);;
+        await reviewServices.updateAverageSalary(companyId, reviewTable, companyTable);
+        await reviewServices.updateScores(companyId, reviewTable, companyTable);
+        return res.status(200).json(updatedReview.rows[0]);
+    } catch (error) {
+        console.log(`Error: ${error.message}`);
+        return res.status(400).json({error: error.message});
+    }
+})
 
 // Delete a review
 
