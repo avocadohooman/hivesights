@@ -65,15 +65,22 @@ const parseOverall = (overall: unknown) : string => {
 }
 
 const parseTotalRating = (totalRating: unknown) : number => {
+
     if (!totalRating || !parsingHelper.isNumber(totalRating)) {
         throw new Error('Incorrect or missing totalRating' + totalRating);
+    }
+    if (totalRating < 0 || totalRating > 5) {
+        throw new Error('Score must be between 0 - 5: ' + totalRating);
     }
     return totalRating;
 }
 
 const parseCriteriaRating = (criteriaRating: unknown) : number => {
-    if (!criteriaRating || !parsingHelper.isNumber(criteriaRating)) {
+    if (!criteriaRating || !parsingHelper.isNumber(criteriaRating) || criteriaRating < 0 && criteriaRating > 5) {
         throw new Error('Incorrect or missing criteriaRating' + criteriaRating);
+    }
+    if (criteriaRating < 0 || criteriaRating > 5) {
+        throw new Error('Score must be between 0 - 5: ' + criteriaRating);
     }
     return criteriaRating;
 }
