@@ -18,12 +18,12 @@ Content-Type: application/json
     "pros": ["Nice"],
     "cons": ["Ok"],
     "overall": "Very nice",
-    "ratingCriteriaInterview": 4,
+    "ratingCriteriaInterview": 2,
     "ratingCriteriaOnboarding": 3,
     "ratingCriteriaSupervision": 2,
     "ratingCriteriaLearning": 2,
     "ratingCriteriaCodingPractices": 3,
-    "ratingCriteriaPerks": 4,
+    "ratingCriteriaPerks": 3,
     "ratingCriteriaCulture": 2,
     "salary": 1500,
     "duration": 6,
@@ -56,5 +56,4 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/api/reviews/c569ddff-430a-463e-be86-7082a04ed2d2
-
+DELETE http://localhost:3000/api/reviews/f7a89357-3f22-4c45-9ebd-5cf43fa31941

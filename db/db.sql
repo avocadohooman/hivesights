@@ -90,3 +90,5 @@ CREATE TABLE review_test (
 
 
 SELECT * FROM review_test WHERE companyid = 'e3f9f26a-cd04-419a-b367-84e704adb419';
+
+SELECT id FROM company_test WHERE companyname = 'Wunderdog';

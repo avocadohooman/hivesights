@@ -35,7 +35,7 @@ const checkIfExists = async (id: any, reviewTable: string) => {
 
 const updateTotalScore = async (companyId: string, reviewTable: string, companyTable: string) => {
     const newTotalScore = await pool.query(`SELECT AVG (totalrating)::NUMERIC(10,2) FROM ${reviewTable} WHERE companyid = ($1)`, [companyId]);
-    console.log('New Total Score', newTotalScore.rows[0].avg);
+    // console.log('New Total Score', newTotalScore.rows[0].avg);
     const updatedRating = await pool.query(`UPDATE ${companyTable} 
     SET
     averageTotalScore = ($1) 
@@ -45,7 +45,7 @@ const updateTotalScore = async (companyId: string, reviewTable: string, companyT
         newTotalScore.rows[0].avg,
         companyId
     ]);
-    console.log(`Company ${updatedRating.rows[0]} updated`);
+    // console.log(`Company ${updatedRating.rows[0]} updated`);
 }
 
 const updateScores = async (companyId: string, reviewTable: string, companyTable: string) => {
@@ -92,13 +92,13 @@ const updateScores = async (companyId: string, reviewTable: string, companyTable
           throw new Error("ERROR: " + e.message);
         }
     });
-    console.log(`Salary ${updatedRating.rows[0]} updated`);
+    // console.log(`Salary ${updatedRating.rows[0]} updated`);
 
 }
 
 const updateAverageSalary = async (companyId: string, reviewTable: string, companyTable: string) => {
     const newAverageSalary = await pool.query(`SELECT AVG (salary)::NUMERIC(10,2) FROM ${reviewTable} WHERE companyid = ($1)`, [companyId]);
-    console.log('New Average Salary', newAverageSalary.rows[0].avg);
+    // console.log('New Average Salary', newAverageSalary.rows[0].avg);
     const updatedSalary = await pool.query(`UPDATE ${companyTable} 
     SET
     averagesalaries = ($1) 
@@ -113,7 +113,7 @@ const updateAverageSalary = async (companyId: string, reviewTable: string, compa
           throw new Error("ERROR: " + e.message);
         }
     });
-    console.log(`Salary ${updatedSalary.rows[0]} updated`);
+    // console.log(`Salary ${updatedSalary.rows[0]} updated`);
 }
 
 const calculateTotalScore = (newReview: NewReview) : number => {
