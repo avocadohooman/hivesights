@@ -63,7 +63,6 @@ reviewRouter.get('/company/:id', async (req, res) => {
 reviewRouter.post('/:id', async (req, res) => {
     try {
         const newReview: NewReview = parsingService.parsingReview(req.body, req.params.id);
-        newReview.totalRating = reviewServices.calculateTotalScore(newReview);
         console.log("Total Score: ", newReview.totalRating);
         if (newReview) {
             const companyId: string = req.params.id;
@@ -75,40 +74,8 @@ reviewRouter.post('/:id', async (req, res) => {
                 console.log("Review for this company exists already");
                 return res.status(400).json({error: `Review for this company by ${newReview.userName} already exists`}); 
             }
-            const addedReview = await pool.query(`INSERT INTO ${reviewTable} 
-            ${reviewColumns}
-            VALUES
-            ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18)
-            RETURNING *`, 
-            [
-                companyId,
-                newReview.userName,
-                newReview.userPicture,
-                newReview.pros,
-                newReview.cons,
-                newReview.overall,
-                newReview.totalRating,
-                newReview.ratingCriteriaInterview,
-                newReview.ratingCriteriaOnboarding,
-                newReview.ratingCriteriaSupervision,
-                newReview.ratingCriteriaLearning,
-                newReview.ratingCriteriaCodingPractices,
-                newReview.ratingCriteriaPerks,
-                newReview.ratingCriteriaCulture,
-                newReview.salary,
-                newReview.duration,
-                newReview.coverLetter,
-                newReview.cv
-            ])
-            .catch((e:any) => {
-                if (e) {
-                  console.log("ERROR", e);
-                  return res.status(400).json({e: e.message});
-                }
-            });
-            await reviewServices.updateAverageSalary(companyId, reviewTable, companyTable);
-            await reviewServices.updateScores(companyId, reviewTable, companyTable);
-            return res.status(200).json(addedReview.rows[0]); 
+            await reviewServices.addReview(newReview, reviewTable, companyTable);
+            return res.status(200).json(newReview); 
         }
     } catch (error) {
         console.log(`Error: ${error.message}`);

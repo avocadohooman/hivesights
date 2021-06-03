@@ -36,7 +36,7 @@ jobs:
         run: npm install
       - name: Run Jest
         working-directory: ./server
-        run: npm run test:inj company.test.ts
+        run: npm run test:int company.test.ts
         env:
           DATABASE_URL: ${{secrets.DATABASE_URL}}
   integration_test_review_methods:
@@ -53,7 +53,7 @@ jobs:
         run: npm install
       - name: Run Jest
         working-directory: ./server
-        run: npm run test:inj review.test.ts
+        run: npm run test:int review.test.ts
         env:
           DATABASE_URL: ${{secrets.DATABASE_URL}}  
   bump_version:

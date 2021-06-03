@@ -27,21 +27,21 @@ const parsingReview = (object: any, companyId: string) : NewReview => {
 
 const parseCompanyId = (companyId: unknown) : string => {
     if (!companyId || !parsingHelper.isString(companyId)) {
-        throw new Error('Incorrect or missing companyId' + companyId);
+        throw new Error('Incorrect or missing companyId ' + companyId);
     }
     return companyId;
 }
 
-const parseUserName= (userName: unknown) : string => {
+const parseUserName = (userName: unknown) : string => {
     if (!userName || !parsingHelper.isString(userName)) {
-        throw new Error('Incorrect or missing userName' + userName);
+        throw new Error('Incorrect or missing userName ' + userName);
     }
     return userName;
 }
 
 const parseUserPictureUrl = (userPictureUrl: unknown) : string => {
     if (!userPictureUrl || !parsingHelper.isString(userPictureUrl)) {
-        throw new Error('Incorrect or missing userPictureUrl' + userPictureUrl);
+        throw new Error('Incorrect or missing userPictureUrl ' + userPictureUrl);
     }
     return userPictureUrl;
 }
@@ -50,7 +50,7 @@ const parseProsCons = (pros: unknown[]) : string[] => {
     let _pros: string[] = [];
     _pros = pros.map(pro => {
         if (!parsingHelper.isString(pro)) {
-            throw new Error('Incorrect data type for pro' + pro);
+            throw new Error('Incorrect data type for pro ' + pro);
         }
         return pro;
     })
@@ -59,7 +59,7 @@ const parseProsCons = (pros: unknown[]) : string[] => {
 
 const parseOverall = (overall: unknown) : string => {
     if (!overall || !parsingHelper.isString(overall)) {
-        throw new Error('Incorrect or missing overall' + overall);
+        throw new Error('Incorrect or missing overall ' + overall);
     }
     return overall;
 }
@@ -67,48 +67,48 @@ const parseOverall = (overall: unknown) : string => {
 const parseTotalRating = (totalRating: unknown) : number => {
 
     if (!totalRating || !parsingHelper.isNumber(totalRating)) {
-        throw new Error('Incorrect or missing totalRating' + totalRating);
+        throw new Error('Incorrect or missing totalRating ' + totalRating);
     }
     if (totalRating < 0 || totalRating > 5) {
-        throw new Error('Score must be between 0 - 5: ' + totalRating);
+        throw new Error('Score must be between 0 - 5:  ' + totalRating);
     }
     return totalRating;
 }
 
 const parseCriteriaRating = (criteriaRating: unknown) : number => {
-    if (!criteriaRating || !parsingHelper.isNumber(criteriaRating) || criteriaRating < 0 && criteriaRating > 5) {
-        throw new Error('Incorrect or missing criteriaRating' + criteriaRating);
+    if (criteriaRating === undefined || !parsingHelper.isNumber(criteriaRating)) {
+        throw new Error('Incorrect or missing criteriaRating ' + criteriaRating);
     }
     if (criteriaRating < 0 || criteriaRating > 5) {
-        throw new Error('Score must be between 0 - 5: ' + criteriaRating);
+        throw new Error('Score must be between 0 - 5:  ' + criteriaRating);
     }
     return criteriaRating;
 }
 
 const parseSalary = (salary: unknown) : number => {
     if (!salary || !parsingHelper.isNumber(salary)) {
-        throw new Error('Incorrect or missing salary' + salary);
+        throw new Error('Incorrect or missing salary ' + salary);
     }
     return salary;
 }
 
 const parseDuration = (duration: unknown) : number => {
     if (!duration || !parsingHelper.isNumber(duration)) {
-        throw new Error('Incorrect or missing duration' + duration);
+        throw new Error('Incorrect or missing duration ' + duration);
     }
     return duration;
 }
 
 const parseCoverLetter = (coverLetter: unknown) : string => {
     if (!parsingHelper.isString(coverLetter)) {
-         throw new Error('Incorrect or missing coverLetter' + coverLetter);
+         throw new Error('Incorrect or missing coverLetter ' + coverLetter);
     }
     return coverLetter;
 }
 
 const parseResume = (resume: unknown) : string => {
     if (!parsingHelper.isString(resume)) {
-         throw new Error('Incorrect or missing resume' + resume);
+         throw new Error('Incorrect or missing resume ' + resume);
     }
     return resume;
 }

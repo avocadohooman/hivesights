@@ -1,6 +1,9 @@
 import pool from '../db';
 import { NewReview } from '../types/review';
-import reviewQueries from '../utils/reviewDBQueries';
+import reviewDBQueries from '../utils/reviewDBQueries';
+
+const reviewColumns = reviewDBQueries.reviewColumns;
+const updateScoreColumns = reviewDBQueries.updateScoreColumns;
 
 const checkDuplicate = async (newReview: NewReview, reviewTable: string) => {
     console.log('Check for duplicates');
@@ -14,7 +17,6 @@ const checkDuplicate = async (newReview: NewReview, reviewTable: string) => {
     console.log("Duplicate found: ", duplicate.rowCount > 0);
     return 1;
 }
-
 
 const checkIfExists = async (id: any, reviewTable: string) => {
     console.log("checkIfExists");
@@ -32,9 +34,39 @@ const checkIfExists = async (id: any, reviewTable: string) => {
     return 1;
 }
 
+const addReview = async (newReview: NewReview, reviewTable: string, companyTable: string) => {
+    newReview.totalRating = calculateTotalScore(newReview);
+    await pool.query(`INSERT INTO ${reviewTable} 
+    ${reviewColumns}
+    VALUES
+    ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18)
+    RETURNING *`, 
+    [
+        newReview.companyId,
+        newReview.userName,
+        newReview.userPicture,
+        newReview.pros,
+        newReview.cons,
+        newReview.overall,
+        newReview.totalRating,
+        newReview.ratingCriteriaInterview,
+        newReview.ratingCriteriaOnboarding,
+        newReview.ratingCriteriaSupervision,
+        newReview.ratingCriteriaLearning,
+        newReview.ratingCriteriaCodingPractices,
+        newReview.ratingCriteriaPerks,
+        newReview.ratingCriteriaCulture,
+        newReview.salary,
+        newReview.duration,
+        newReview.coverLetter,
+        newReview.cv
+    ])
+    await updateAverageSalary(newReview.companyId, reviewTable, companyTable);
+    await updateScores(newReview.companyId, reviewTable, companyTable);
+}
+
 const updateTotalScore = async (companyId: string, reviewTable: string, companyTable: string) => {
     const newTotalScore = await pool.query(`SELECT AVG (totalrating)::NUMERIC(10,2) FROM ${reviewTable} WHERE companyid = ($1)`, [companyId]);
-    // console.log('New Total Score', newTotalScore.rows[0].avg);
     const updatedRating = await pool.query(`UPDATE ${companyTable} 
     SET
     averageTotalScore = ($1) 
@@ -44,7 +76,6 @@ const updateTotalScore = async (companyId: string, reviewTable: string, companyT
         newTotalScore.rows[0].avg,
         companyId
     ]);
-    // console.log(`Company ${updatedRating.rows[0]} updated`);
 }
 
 const updateScores = async (companyId: string, reviewTable: string, companyTable: string) => {
@@ -66,13 +97,12 @@ const updateScores = async (companyId: string, reviewTable: string, companyTable
     ${averageCodingPracticesQuery} as codingpractice,
     ${averagePerksQuery} as perks,
     ${averageCultureQuery} as culture
-    FROM review_test 
+    FROM ${reviewTable} 
     WHERE companyid = ($1)`, [companyId]);
-    // console.log("New score", newScores.rows[0]);
     
     const updatedRating = await pool.query(`UPDATE ${companyTable} 
     SET
-        ${reviewQueries.updateScoreColumns}
+        ${updateScoreColumns}
     WHERE
         id = ($9)`,
     [
@@ -91,13 +121,12 @@ const updateScores = async (companyId: string, reviewTable: string, companyTable
           throw new Error("ERROR: " + e.message);
         }
     });
-    // console.log(`Salary ${updatedRating.rows[0]} updated`);
+    console.log(`Salary ${updatedRating.rows[0]} updated`);
 
 }
 
 const updateAverageSalary = async (companyId: string, reviewTable: string, companyTable: string) => {
     const newAverageSalary = await pool.query(`SELECT AVG (salary)::NUMERIC(10,2) FROM ${reviewTable} WHERE companyid = ($1)`, [companyId]);
-    // console.log('New Average Salary', newAverageSalary.rows[0].avg);
     const updatedSalary = await pool.query(`UPDATE ${companyTable} 
     SET
     averagesalaries = ($1) 
@@ -112,7 +141,6 @@ const updateAverageSalary = async (companyId: string, reviewTable: string, compa
           throw new Error("ERROR: " + e.message);
         }
     });
-    // console.log(`Salary ${updatedSalary.rows[0]} updated`);
 }
 
 const calculateTotalScore = (newReview: NewReview) : number => {
@@ -134,5 +162,6 @@ export default {
     updateAverageSalary,
     checkDuplicate,
     checkIfExists,
-    calculateTotalScore
+    calculateTotalScore,
+    addReview
 }
