@@ -26,7 +26,6 @@ const checkIfExists = async (id: any, reviewTable: string) => {
           return 0;
         }
       })
-    console.log("Review?", review);
     if (review.rowCount === 0) {
       return 0;
     }
@@ -69,7 +68,7 @@ const updateScores = async (companyId: string, reviewTable: string, companyTable
     ${averageCultureQuery} as culture
     FROM review_test 
     WHERE companyid = ($1)`, [companyId]);
-    console.log("New score", newScores.rows[0]);
+    // console.log("New score", newScores.rows[0]);
     
     const updatedRating = await pool.query(`UPDATE ${companyTable} 
     SET

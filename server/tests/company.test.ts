@@ -48,7 +48,7 @@ beforeEach(async () => {
 });
 
 // Testing GET API methods including error cases
-describe("GET / ", () => {
+describe("Company GET / ", () => {
     test("Getting an array with all companies", async () => {
         const allCompanies = await api.get(`${apiBaseUrl}`);
         const id = allCompanies.body[0].id;
@@ -60,7 +60,7 @@ describe("GET / ", () => {
         const allCompanies = await api.get(`${apiBaseUrl}`);
         const id = allCompanies.body[0].id;
         const companyWithId = await api.get(`${apiBaseUrl}${id}`);
-        expect(allCompanies.statusCode).toBe(200);
+        expect(companyWithId.statusCode).toBe(200);
         expect(companyWithId.body.id).toBe(id);
     });
 
@@ -71,7 +71,7 @@ describe("GET / ", () => {
 });
 
 //Testing POST API methods
-describe("POST / ", () => {
+describe("Company POST / ", () => {
     test("A new company can be created", async () => {
         const newCompany: NewCompany = {
             companyName: "Unicorn01",
@@ -93,7 +93,7 @@ describe("POST / ", () => {
 });
 
 //Testing POST API methods error management
-describe("POST ERROR /", () => {
+describe("Company POST ERROR /", () => {
     test("A an existing company cannot be created", async () => {
         const newCompany: NewCompany = {
             companyName: "Unicorn01",
@@ -285,7 +285,7 @@ describe("POST ERROR /", () => {
 });
 
 //Testing PUT API methods
-describe("PUT / ", () => {
+describe("Company PUT / ", () => {
     test("Updating a company works", async () => {
         const allCompanies = await api.get(`${apiBaseUrl}`);
         const id = allCompanies.body[0].id;
@@ -309,7 +309,7 @@ describe("PUT / ", () => {
 });
 
 //Testing PUT API methods error management
-describe("PUT ERROR/ ", () => {
+describe("Company PUT ERROR/ ", () => {
     test("Updating a non-existing company doesn't work", async () => {
         const id = "2323523";
         const updateBody = {
@@ -513,7 +513,7 @@ describe("PUT ERROR/ ", () => {
 });
 
 // Testing DELETE API methods
-describe("DELETE / ", () => {
+describe("Company DELETE / ", () => {
     test("a company can be deleted", async () => {
         let allCompanies = await api.get(`${apiBaseUrl}`);
         const id = allCompanies.body[0].id;
@@ -528,7 +528,7 @@ describe("DELETE / ", () => {
 });
 
 // Testing DELETE API methods error management
-describe("DELETE ERROR / ", () => {
+describe("Company DELETE ERROR / ", () => {
     test("a non-existing company cannot be deleted", async () => {
         await api
             .delete(`${apiBaseUrl}/45345435435`)
