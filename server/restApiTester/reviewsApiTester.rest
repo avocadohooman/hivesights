@@ -2,13 +2,13 @@
 GET http://localhost:3000/api/reviews/
 
 ###
-GET http://localhost:3000/api/reviews/525cfccb-dd76-4101-b971-2a18bd0ace62
+GET http://localhost:3000/api/reviews/41072326-7a4f-4edf-bda1-a9c75c0426fb
 
 ###
 GET http://localhost:3000/api/reviews/company/e3f9f26a-cd04-419a-b367-84e704adb419
 
 ###
-POST http://localhost:3000/api/reviews/6c4bb5ed-1fd0-4013-8d02-8c14b9694a05
+POST http://localhost:3000/api/reviews/6f13b12a-2fde-47ba-b626-945bc4fdcc69
 Content-Type: application/json
 
 {
@@ -18,7 +18,6 @@ Content-Type: application/json
     "pros": ["Nice"],
     "cons": ["Ok"],
     "overall": "Very nice",
-    "totalRating": 5,
     "ratingCriteriaInterview": 4,
     "ratingCriteriaOnboarding": 3,
     "ratingCriteriaSupervision": 2,
@@ -33,22 +32,21 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:3000/api/reviews/9f274917-8b14-4fab-954d-a936b67aa2ac
+PUT http://localhost:3000/api/reviews/41072326-7a4f-4edf-bda1-a9c75c0426fa
 Content-Type: application/json
 
 {
-    "companyId": "6c4bb5ed-1fd0-4013-8d02-8c14b9694a05",
+    "companyId": "6f13b12a-2fde-47ba-b626-945bc4fdcc69",
     "userName": "gmolin",
     "userPicture": "gmolin",
     "pros": ["Nice"],
     "cons": ["Ok"],
     "overall": "Very nice",
-    "totalRating": 1,
     "ratingCriteriaInterview": 4,
     "ratingCriteriaOnboarding": 3,
     "ratingCriteriaSupervision": 2,
-    "ratingCriteriaLearning": 2,
-    "ratingCriteriaCodingPractices": 3,
+    "ratingCriteriaLearning": 3,
+    "ratingCriteriaCodingPractices": 1,
     "ratingCriteriaPerks": 4,
     "ratingCriteriaCulture": 2,
     "salary": 3000,

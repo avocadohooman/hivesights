@@ -63,6 +63,8 @@ reviewRouter.get('/company/:id', async (req, res) => {
 reviewRouter.post('/:id', async (req, res) => {
     try {
         const newReview: NewReview = parsingService.parsingReview(req.body, req.params.id);
+        newReview.totalRating = reviewServices.calculateTotalScore(newReview);
+        console.log("Total Score: ", newReview.totalRating);
         if (newReview) {
             const companyId: string = req.params.id;
             if (!await companyServices.checkIfExists(companyId, companyTable)) {
@@ -128,7 +130,8 @@ reviewRouter.put('/:id', async (req, res) => {
             return res.status(400).json({error: "Company doesn't exist."});
         }
         const updatedReviewBody: NewReview = parsingService.parsingReview(req.body, companyId);
-        console.log('ID?')
+        updatedReviewBody.totalRating = reviewServices.calculateTotalScore(updatedReviewBody);
+        console.log("Total Score: ", updatedReviewBody.totalRating);
         const updatedReview = await pool.query(`UPDATE ${reviewTable} 
         SET
         ${reviewQueries.updateReviewColumns}
@@ -164,6 +167,20 @@ reviewRouter.put('/:id', async (req, res) => {
 })
 
 // Delete a review
-
+reviewRouter.delete('/:id', async (req, res) => {
+    const reviewId: string = req.params.id;
+    try {
+        if (!await reviewServices.checkIfExists(reviewId, reviewTable)) {
+            console.log("Review doesn't exist ERROR");
+            return res.status(400).json({error: "Review doesn't exist."});
+        }
+        await pool.query(`DELETE FROM ${reviewTable} WHERE id = ($1)`, [reviewId]);
+        console.log('review deleted');
+        return res.status(200).json({message: 'Review deleted'});
+    } catch (error) {
+        console.log(error.message);
+        return res.status(400).json({error: error.message});
+    }
+})
 
 export default reviewRouter;

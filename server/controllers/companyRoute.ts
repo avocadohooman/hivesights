@@ -137,11 +137,11 @@ companyRouter.post('/', async (req, res) => {
 // Delete company
 companyRouter.delete('/:id', async (req, res) => {
     const id: string = req.params.id;
-    if (!await companyHelper.checkIfExists(id, companyTable)) {
-        console.log("Company doesn't exist ERROR");
-        return res.status(400).json({error: "Company doesn't exist."});
-    }
     try {
+        if (!await companyHelper.checkIfExists(id, companyTable)) {
+            console.log("Company doesn't exist ERROR");
+            return res.status(400).json({error: "Company doesn't exist."});
+        }
         await pool.query(`DELETE FROM ${companyTable} WHERE id = ($1)`, [id]);
         console.log(`company deleted`);
         return res.status(200).json({message: "Company deleted"});

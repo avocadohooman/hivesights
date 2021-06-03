@@ -26,7 +26,8 @@ const checkIfExists = async (id: any, reviewTable: string) => {
           return 0;
         }
       })
-    if (!review) {
+    console.log("Review?", review);
+    if (review.rowCount === 0) {
       return 0;
     }
     return 1;
@@ -115,10 +116,24 @@ const updateAverageSalary = async (companyId: string, reviewTable: string, compa
     console.log(`Salary ${updatedSalary.rows[0]} updated`);
 }
 
+const calculateTotalScore = (newReview: NewReview) : number => {
+    const interview : number = newReview.ratingCriteriaInterview * 1;
+    const onboarding : number = newReview.ratingCriteriaOnboarding * 1.2;
+    const supervision : number = newReview.ratingCriteriaSupervision * 1.2;
+    const learning : number = newReview.ratingCriteriaLearning * 1;
+    const codingPractices : number = newReview.ratingCriteriaCodingPractices * 1;
+    const perks : number = newReview.ratingCriteriaPerks * 0.8;
+    const culture : number = newReview.ratingCriteriaPerks * 1;
+
+    let totalScore = (interview + onboarding + supervision + learning + codingPractices + perks + culture) / 7;
+    return totalScore;
+}
+
 export default {
     updateTotalScore,
     updateScores,
     updateAverageSalary,
     checkDuplicate,
-    checkIfExists
+    checkIfExists,
+    calculateTotalScore
 }

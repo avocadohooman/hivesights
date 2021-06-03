@@ -9,7 +9,7 @@ const parsingReview = (object: any, companyId: string) : NewReview => {
         pros: (object.pros) ? parseProsCons(object.pros) : undefined,
         cons: (object.cons) ? parseProsCons(object.cons) : undefined,
         overall: parseOverall(object.overall),
-        totalRating: parseTotalRating(object.totalRating),
+        totalRating: -1,
         ratingCriteriaInterview: parseCriteriaRating(object.ratingCriteriaInterview),
         ratingCriteriaOnboarding: parseCriteriaRating(object.ratingCriteriaOnboarding),
         ratingCriteriaSupervision: parseCriteriaRating(object.ratingCriteriaSupervision),

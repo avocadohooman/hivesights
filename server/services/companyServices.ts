@@ -21,7 +21,7 @@ const checkIfExists = async (id: any, companyTable: string) => {
         return 0;
       }
     })
-  if (!company) {
+  if (company.rowCount === 0) {
     return 0;
   }
   return 1;
