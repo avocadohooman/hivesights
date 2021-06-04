@@ -22,9 +22,9 @@ jobs:
       - name: npm install
         working-directory: ./server
         run: npm install
-  integration_test_company_methods:
+  integration_test:
     needs: [modules]
-    name: Company API Integration Testing
+    name: Backend Integration Testing
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -36,28 +36,11 @@ jobs:
         run: npm install
       - name: Run Jest
         working-directory: ./server
-        run: npm run test:int company.test.ts
+        run: npm run test:int
         env:
           DATABASE_URL: ${{secrets.DATABASE_URL}}
-  integration_test_review_methods:
-    needs: [integration_test_company_methods]
-    name: Review API Integration Testing
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '12.x'
-      - name: Install Modules
-        working-directory: ./server
-        run: npm install
-      - name: Run Jest
-        working-directory: ./server
-        run: npm run test:int review.test.ts
-        env:
-          DATABASE_URL: ${{secrets.DATABASE_URL}}  
   bump_version:
-    needs: [integration_test_company_methods, integration_test_review_methods]
+    needs: [integration_test]
     name: Bump version and push tag
     runs-on: ubuntu-18.04
     steps:
