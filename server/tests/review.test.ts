@@ -269,6 +269,10 @@ describe('Review ERROR POST /', () => {
         const allReview = await api.get(`${apiBaseUrl}`);
         expect(allReview.body).toHaveLength(5);
     });
+});
+
+// Testing parsing service error management using the POST method
+describe('Testing parsing error managment', () => {
     test('Adding review with wrong userName datatype cannot be added', async () => {
         const wrongTypeReview = {
             companyId: "",
@@ -1322,12 +1326,143 @@ describe('Review ERROR POST /', () => {
     });
 });
 
-// //Testing review PUT api method
-// describe('Review PUT / ', async () => {
-//     test('Updating review works', async () => {
+//Testing review PUT api method
+describe('Review PUT / ', () => {
+    test("Updating a review works", async () => {
+        const updatedReviewBody = {
+            companyId: "",
+            userName: "UNICORN0101010101",
+            userPicture: "gmolin",
+            pros: ["Great culture", "Nice perks", "Amazing office"],
+            cons: ["Some projects are quite boring"],
+            overall: "A great place to grow as software developer",
+            totalRating: 3,
+            ratingCriteriaInterview: 4,
+            ratingCriteriaOnboarding: 2,
+            ratingCriteriaSupervision: 4,
+            ratingCriteriaLearning: 4,
+            ratingCriteriaCodingPractices: 4,
+            ratingCriteriaPerks: 5,
+            ratingCriteriaCulture: 4,
+            salary: 3800,
+            duration: 6,
+            coverLetter: "none",
+            cv: "none" 
+        };
+        const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Wunderdog"]);
+        updatedReviewBody.companyId = company.rows[0].id;
+        const existingReview = await pool.query(`SELECT id FROM ${reviewTable} WHERE username = ($1)`, ["gmolin"]);
+        await api
+            .put(`${apiBaseUrl}/${existingReview.rows[0].id}`)
+            .send(updatedReviewBody)
+            .expect(200)
+            .expect('Content-Type', /application\/json/);
+        const allReview = await api.get(`${apiBaseUrl}`);
+        
+        expect(allReview.statusCode).toBe(200);
+        expect(allReview.body).toHaveLength(4);
+        expect(allReview.body[3].username).toBe('UNICORN0101010101');
+        expect(allReview.body[3].totalrating).toBe(3);
+    });
+});
 
-//     })
-// })
+//Testing review PUT api method error managment
+describe('Review PUT ERROR/ ', () => {
+    test("Updating a review with wrong review ID doesnt work", async () => {
+        const updatedReviewBody = {
+            companyId: "",
+            userName: "UNICORN0101010101",
+            userPicture: "gmolin",
+            pros: ["Great culture", "Nice perks", "Amazing office"],
+            cons: ["Some projects are quite boring"],
+            overall: "A great place to grow as software developer",
+            totalRating: 3,
+            ratingCriteriaInterview: 4,
+            ratingCriteriaOnboarding: 2,
+            ratingCriteriaSupervision: 4,
+            ratingCriteriaLearning: 4,
+            ratingCriteriaCodingPractices: 4,
+            ratingCriteriaPerks: 5,
+            ratingCriteriaCulture: 4,
+            salary: 3800,
+            duration: 6,
+            coverLetter: "none",
+            cv: "none" 
+        };
+        const existingReview = await pool.query(`SELECT id FROM ${reviewTable} WHERE username = ($1)`, ["gmolin"]);
+        await api
+            .put(`${apiBaseUrl}/2`)
+            .send(updatedReviewBody)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        const allReview = await api.get(`${apiBaseUrl}`);
+        expect(allReview.statusCode).toBe(200);
+        expect(allReview.body).toHaveLength(4);
+        expect(allReview.body).not.toContain('UNICORN0101010101');
+    });
+    test("Updating a review with non-existing company ID doesnt work", async () => {
+        const updatedReviewBody = {
+            companyId: "!!!!!e23dadsasdasdasda ddsadasd",
+            userName: "UNICORN0101010101",
+            userPicture: "gmolin",
+            pros: ["Great culture", "Nice perks", "Amazing office"],
+            cons: ["Some projects are quite boring"],
+            overall: "A great place to grow as software developer",
+            totalRating: 3,
+            ratingCriteriaInterview: 4,
+            ratingCriteriaOnboarding: 2,
+            ratingCriteriaSupervision: 4,
+            ratingCriteriaLearning: 4,
+            ratingCriteriaCodingPractices: 4,
+            ratingCriteriaPerks: 5,
+            ratingCriteriaCulture: 4,
+            salary: 3800,
+            duration: 6,
+            coverLetter: "none",
+            cv: "none" 
+        };
+        const existingReview = await pool.query(`SELECT id FROM ${reviewTable} WHERE username = ($1)`, ["gmolin"]);
+        await api
+            .put(`${apiBaseUrl}/${existingReview.rows[0].id}`)
+            .send(updatedReviewBody)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        const allReview = await api.get(`${apiBaseUrl}`);
+        expect(allReview.statusCode).toBe(200);
+        expect(allReview.body).toHaveLength(4);
+        expect(allReview.body).not.toContain('UNICORN0101010101');
+    });
+});
+
+// Testing review DELETE api methods
+describe('Review DELETE /', () => {
+    test('a review can be deleted', async () => {
+        let allReview = await api.get(`${apiBaseUrl}`);
+        const reviewId = allReview.body[0].id;
+
+        await api
+            .delete(`${apiBaseUrl}/${reviewId}`)
+            .expect(200)
+        allReview = await api.get(`${apiBaseUrl}`);
+        expect(allReview.body).toHaveLength(3);
+        expect(allReview.statusCode).toBe(200);
+        expect(allReview.body).not.toContain(reviewId);
+    })
+});
+
+// Testing review DELETE api methods error management
+describe('Review DELETE /', () => {
+    test('a non-existing review cannot be deleted', async () => {
+
+        await api
+            .delete(`${apiBaseUrl}/2323232323`)
+            .expect(400)
+        let allReview = await api.get(`${apiBaseUrl}`);
+        expect(allReview.body).toHaveLength(4);
+        expect(allReview.statusCode).toBe(200);
+    })
+});
+
 
 afterAll(async () => {
 	await pool.end();
