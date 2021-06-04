@@ -97,7 +97,7 @@ reviewRouter.put('/:id', async (req, res) => {
             return res.status(400).json({error: "Company doesn't exist."});
         }
         const updatedReviewBody: NewReview = parsingService.parsingReview(req.body, companyId);
-        updatedReviewBody.totalRating = reviewServices.calculateTotalScore(updatedReviewBody);
+        // updatedReviewBody.totalRating = reviewServices.calculateTotalScore(updatedReviewBody);
         console.log("Total Score: ", updatedReviewBody.totalRating);
         const updatedReview = await pool.query(`UPDATE ${reviewTable} 
         SET

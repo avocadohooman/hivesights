@@ -35,7 +35,7 @@ const checkIfExists = async (id: any, reviewTable: string) => {
 }
 
 const addReview = async (newReview: NewReview, reviewTable: string, companyTable: string) => {
-    newReview.totalRating = calculateTotalScore(newReview);
+    // newReview.totalRating = calculateTotalScore(newReview);
     await pool.query(`INSERT INTO ${reviewTable} 
     ${reviewColumns}
     VALUES

@@ -68,7 +68,7 @@ describe('Review POST /', () => {
             pros: ["Great culture", "Nice perks", "Amazing office"],
             cons: ["Some projects are quite boring"],
             overall: "A great place to grow as software developer",
-            totalRating: -1,
+            totalRating: 3,
             ratingCriteriaInterview: 4,
             ratingCriteriaOnboarding: 2,
             ratingCriteriaSupervision: 4,
@@ -96,7 +96,7 @@ describe('Review POST /', () => {
         expect(allReview.statusCode).toBe(200);
         expect(allReview.body).toHaveLength(5);
         expect(allReview.body[4].username).toBe('Unicorn01');
-        expect(allReview.body[4].totalrating).not.toBe(-1);
+        expect(allReview.body[4].totalrating).toBe(3);
         expect(companyScoreTwoDec).toBe(allReview.body[4].totalrating.toFixed(2));
         expect(allReview.body[4].salary).toBe(companyAverageSalary.rows[0].averagesalaries);
     });
@@ -108,7 +108,7 @@ describe('Review POST /', () => {
             pros: [],
             cons: ["Some projects are quite boring"],
             overall: "A great place to grow as software developer",
-            totalRating: -1,
+            totalRating: 4,
             ratingCriteriaInterview: 4,
             ratingCriteriaOnboarding: 2,
             ratingCriteriaSupervision: 4,
@@ -136,7 +136,7 @@ describe('Review POST /', () => {
         expect(allReview.statusCode).toBe(200);
         expect(allReview.body).toHaveLength(5);
         expect(allReview.body[4].username).toBe('Unicorn01');
-        expect(allReview.body[4].totalrating).not.toBe(-1);
+        expect(allReview.body[4].totalrating).toBe(4);
         expect(companyScoreTwoDec).toBe(allReview.body[4].totalrating.toFixed(2));
         expect(allReview.body[4].salary).toBe(companyAverageSalary.rows[0].averagesalaries);
     });
@@ -148,7 +148,7 @@ describe('Review POST /', () => {
             pros: [],
             cons: ["Some projects are quite boring"],
             overall: "A great place to grow as software developer",
-            totalRating: -1,
+            totalRating: 4,
             ratingCriteriaInterview: 4,
             ratingCriteriaOnboarding: 2,
             ratingCriteriaSupervision: 4,
@@ -176,7 +176,47 @@ describe('Review POST /', () => {
         expect(allReview.statusCode).toBe(200);
         expect(allReview.body).toHaveLength(5);
         expect(allReview.body[4].username).toBe('Unicorn01');
-        expect(allReview.body[4].totalrating).not.toBe(-1);
+        expect(allReview.body[4].totalrating).toBe(4);
+        expect(companyScoreTwoDec).toBe(allReview.body[4].totalrating.toFixed(2));
+        expect(allReview.body[4].salary).toBe(companyAverageSalary.rows[0].averagesalaries);
+    });
+    test("Adding a review with total score 0 works", async () => {
+        const newReview = {
+            companyId: "",
+            userName: "Unicorn01",
+            userPicture: "gmolin",
+            pros: ["Great culture", "Nice perks", "Amazing office"],
+            cons: ["Some projects are quite boring"],
+            overall: "A great place to grow as software developer",
+            totalRating: 0,
+            ratingCriteriaInterview: 4,
+            ratingCriteriaOnboarding: 2,
+            ratingCriteriaSupervision: 4,
+            ratingCriteriaLearning: 4,
+            ratingCriteriaCodingPractices: 4,
+            ratingCriteriaPerks: 5,
+            ratingCriteriaCulture: 4,
+            salary: 3800,
+            duration: 6,
+            coverLetter: "none",
+            cv: "none" 
+        };
+        const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Reaktor"]);
+        newReview.companyId = company.rows[0].id;
+        await api
+            .post(`${apiBaseUrl}/${newReview.companyId}`)
+            .send(newReview)
+            .expect(200)
+            .expect('Content-Type', /application\/json/);
+        const allReview = await api.get(`${apiBaseUrl}`);
+        const companyTotalScore = await pool.query(`SELECT averagetotalscore FROM ${companyTable} WHERE companyname = ($1)`, ["Reaktor"]);
+        const companyAverageSalary = await pool.query(`SELECT averagesalaries FROM ${companyTable} WHERE companyname = ($1)`, ["Reaktor"]);
+        const companyScoreTwoDec: string = companyTotalScore.rows[0].averagetotalscore.toFixed(2);
+        
+        expect(allReview.statusCode).toBe(200);
+        expect(allReview.body).toHaveLength(5);
+        expect(allReview.body[4].username).toBe('Unicorn01');
+        expect(allReview.body[4].totalrating).toBe(0);
         expect(companyScoreTwoDec).toBe(allReview.body[4].totalrating.toFixed(2));
         expect(allReview.body[4].salary).toBe(companyAverageSalary.rows[0].averagesalaries);
     });
@@ -191,7 +231,7 @@ describe('Review ERROR POST /', () => {
         pros: ["Great culture", "Nice perks", "Amazing office"],
         cons: ["Some projects are quite boring"],
         overall: "A great place to grow as software developer",
-        totalRating: -1,
+        totalRating: 4,
         ratingCriteriaInterview: 4,
         ratingCriteriaOnboarding: 2,
         ratingCriteriaSupervision: 4,
@@ -237,7 +277,7 @@ describe('Review ERROR POST /', () => {
             pros: ["Great culture", "Nice perks", "Amazing office"],
             cons: ["Some projects are quite boring"],
             overall: "A great place to grow as software developer",
-            totalRating: -1,
+            totalRating: 4,
             ratingCriteriaInterview: 4,
             ratingCriteriaOnboarding: 2,
             ratingCriteriaSupervision: 4,
@@ -267,7 +307,7 @@ describe('Review ERROR POST /', () => {
             pros: ["Great culture", "Nice perks", "Amazing office"],
             cons: ["Some projects are quite boring"],
             overall: "A great place to grow as software developer",
-            totalRating: -1,
+            totalRating: 4,
             ratingCriteriaInterview: 4,
             ratingCriteriaOnboarding: 2,
             ratingCriteriaSupervision: 4,
@@ -297,7 +337,7 @@ describe('Review ERROR POST /', () => {
             pros: [1, 2],
             cons: ["Some projects are quite boring"],
             overall: "A great place to grow as software developer",
-            totalRating: -1,
+            totalRating: 4,
             ratingCriteriaInterview: 4,
             ratingCriteriaOnboarding: 2,
             ratingCriteriaSupervision: 4,
@@ -327,7 +367,7 @@ describe('Review ERROR POST /', () => {
             pros: ["Great culture", "Nice perks", "Amazing office"],
             cons: [1, 2],
             overall: "A great place to grow as software developer",
-            totalRating: -1,
+            totalRating: 4,
             ratingCriteriaInterview: 4,
             ratingCriteriaOnboarding: 2,
             ratingCriteriaSupervision: 4,
@@ -357,8 +397,98 @@ describe('Review ERROR POST /', () => {
             pros: ["Great culture", "Nice perks", "Amazing office"],
             cons: [],
             overall: false,
-            totalRating: -1,
+            totalRating: 4,
             ratingCriteriaInterview: 4,
+            ratingCriteriaOnboarding: 2,
+            ratingCriteriaSupervision: 4,
+            ratingCriteriaLearning: 4,
+            ratingCriteriaCodingPractices: 4,
+            ratingCriteriaPerks: 5,
+            ratingCriteriaCulture: 4,
+            salary: 3800,
+            duration: 6,
+            coverLetter: "none",
+            cv: "none" 
+        };
+        const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Reaktor"]);
+        await api
+            .post(`${apiBaseUrl}/${company.rows[0].id}`)
+            .send(wrongTypeReview)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        const allReview = await api.get(`${apiBaseUrl}`);
+        expect(allReview.body).toHaveLength(4);
+    });
+    test('Adding review with wrong totalRating datatype cannot be added', async () => {
+        const wrongTypeReview = {
+            companyId: "",
+            userName: "1",
+            userPicture: "1",
+            pros: ["Great culture", "Nice perks", "Amazing office"],
+            cons: [],
+            overall: "d",
+            totalRating: "4",
+            ratingCriteriaInterview: "4",
+            ratingCriteriaOnboarding: 2,
+            ratingCriteriaSupervision: 4,
+            ratingCriteriaLearning: 4,
+            ratingCriteriaCodingPractices: 4,
+            ratingCriteriaPerks: 5,
+            ratingCriteriaCulture: 4,
+            salary: 3800,
+            duration: 6,
+            coverLetter: "none",
+            cv: "none" 
+        };
+        const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Reaktor"]);
+        await api
+            .post(`${apiBaseUrl}/${company.rows[0].id}`)
+            .send(wrongTypeReview)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        const allReview = await api.get(`${apiBaseUrl}`);
+        expect(allReview.body).toHaveLength(4);
+    });
+    test('Adding review with totalRating score range > 5 cannot be added', async () => {
+        const wrongTypeReview = {
+            companyId: "",
+            userName: "1",
+            userPicture: "1",
+            pros: ["Great culture", "Nice perks", "Amazing office"],
+            cons: [],
+            overall: "1",
+            totalRating: -2323,
+            ratingCriteriaInterview: 6,
+            ratingCriteriaOnboarding: 2,
+            ratingCriteriaSupervision: 4,
+            ratingCriteriaLearning: 4,
+            ratingCriteriaCodingPractices: 4,
+            ratingCriteriaPerks: 5,
+            ratingCriteriaCulture: 4,
+            salary: 3800,
+            duration: 6,
+            coverLetter: "none",
+            cv: "none" 
+        };
+        const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Reaktor"]);
+        await api
+            .post(`${apiBaseUrl}/${company.rows[0].id}`)
+            .send(wrongTypeReview)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        const allReview = await api.get(`${apiBaseUrl}`);
+        expect(allReview.body).toHaveLength(4);
+    });
+    test('Adding review with totalRating score range < 0  cannot be added', async () => {
+        const wrongTypeReview = {
+            companyId: "",
+            userName: "1",
+            userPicture: "1",
+            pros: ["Great culture", "Nice perks", "Amazing office"],
+            cons: [],
+            overall: "1",
+            totalRating: 666,
+            ratingCriteriaInterview: -1,
             ratingCriteriaOnboarding: 2,
             ratingCriteriaSupervision: 4,
             ratingCriteriaLearning: 4,
@@ -387,7 +517,7 @@ describe('Review ERROR POST /', () => {
             pros: ["Great culture", "Nice perks", "Amazing office"],
             cons: [],
             overall: "d",
-            totalRating: -1,
+            totalRating: 4,
             ratingCriteriaInterview: "4",
             ratingCriteriaOnboarding: 2,
             ratingCriteriaSupervision: 4,
@@ -417,7 +547,7 @@ describe('Review ERROR POST /', () => {
             pros: ["Great culture", "Nice perks", "Amazing office"],
             cons: [],
             overall: "1",
-            totalRating: -1,
+            totalRating: 4,
             ratingCriteriaInterview: 6,
             ratingCriteriaOnboarding: 2,
             ratingCriteriaSupervision: 4,
@@ -447,7 +577,7 @@ describe('Review ERROR POST /', () => {
             pros: ["Great culture", "Nice perks", "Amazing office"],
             cons: [],
             overall: "1",
-            totalRating: -1,
+            totalRating: 4,
             ratingCriteriaInterview: -1,
             ratingCriteriaOnboarding: 2,
             ratingCriteriaSupervision: 4,
@@ -477,7 +607,7 @@ describe('Review ERROR POST /', () => {
             pros: ["Great culture", "Nice perks", "Amazing office"],
             cons: [],
             overall: "d",
-            totalRating: -1,
+            totalRating: 4,
             ratingCriteriaInterview: 4,
             ratingCriteriaOnboarding: "2",
             ratingCriteriaSupervision: 4,
@@ -507,7 +637,7 @@ describe('Review ERROR POST /', () => {
             pros: ["Great culture", "Nice perks", "Amazing office"],
             cons: [],
             overall: "1",
-            totalRating: -1,
+            totalRating: 4,
             ratingCriteriaInterview: 5,
             ratingCriteriaOnboarding: 89,
             ratingCriteriaSupervision: 4,
@@ -529,7 +659,7 @@ describe('Review ERROR POST /', () => {
         const allReview = await api.get(`${apiBaseUrl}`);
         expect(allReview.body).toHaveLength(4);
     });
-    test.only('Adding review with ratingCriteriaOnboarding score range < 0  cannot be added', async () => {
+    test('Adding review with ratingCriteriaOnboarding score range < 0  cannot be added', async () => {
         const wrongTypeReview = {
             companyId: "",
             userName: "1",
@@ -537,7 +667,7 @@ describe('Review ERROR POST /', () => {
             pros: ["Great culture", "Nice perks", "Amazing office"],
             cons: [],
             overall: "1",
-            totalRating: -1,
+            totalRating: 4,
             ratingCriteriaInterview: 0,
             ratingCriteriaOnboarding: -389,
             ratingCriteriaSupervision: 4,
@@ -559,7 +689,645 @@ describe('Review ERROR POST /', () => {
         const allReview = await api.get(`${apiBaseUrl}`);
         expect(allReview.body).toHaveLength(4);
     });
+    test('Adding review with wrong ratingCriteriaSupervision datatype cannot be added', async () => {
+        const wrongTypeReview = {
+            companyId: "",
+            userName: "1",
+            userPicture: "1",
+            pros: ["Great culture", "Nice perks", "Amazing office"],
+            cons: [],
+            overall: "d",
+            totalRating: 4,
+            ratingCriteriaInterview: 4,
+            ratingCriteriaOnboarding: 2,
+            ratingCriteriaSupervision: "4",
+            ratingCriteriaLearning: 4,
+            ratingCriteriaCodingPractices: 4,
+            ratingCriteriaPerks: 5,
+            ratingCriteriaCulture: 4,
+            salary: 3800,
+            duration: 6,
+            coverLetter: "none",
+            cv: "none" 
+        };
+        const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Reaktor"]);
+        await api
+            .post(`${apiBaseUrl}/${company.rows[0].id}`)
+            .send(wrongTypeReview)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        const allReview = await api.get(`${apiBaseUrl}`);
+        expect(allReview.body).toHaveLength(4);
+    });
+    test('Adding review with ratingCriteriaSupervision score range > 5 cannot be added', async () => {
+        const wrongTypeReview = {
+            companyId: "",
+            userName: "1",
+            userPicture: "1",
+            pros: ["Great culture", "Nice perks", "Amazing office"],
+            cons: [],
+            overall: "1",
+            totalRating: 4,
+            ratingCriteriaInterview: 5,
+            ratingCriteriaOnboarding: 2,
+            ratingCriteriaSupervision: 4444,
+            ratingCriteriaLearning: 4,
+            ratingCriteriaCodingPractices: 4,
+            ratingCriteriaPerks: 5,
+            ratingCriteriaCulture: 4,
+            salary: 3800,
+            duration: 6,
+            coverLetter: "none",
+            cv: "none" 
+        };
+        const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Reaktor"]);
+        await api
+            .post(`${apiBaseUrl}/${company.rows[0].id}`)
+            .send(wrongTypeReview)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        const allReview = await api.get(`${apiBaseUrl}`);
+        expect(allReview.body).toHaveLength(4);
+    });
+    test('Adding review with ratingCriteriaSupervision score range < 0  cannot be added', async () => {
+        const wrongTypeReview = {
+            companyId: "",
+            userName: "1",
+            userPicture: "1",
+            pros: ["Great culture", "Nice perks", "Amazing office"],
+            cons: [],
+            overall: "1",
+            totalRating: 4,
+            ratingCriteriaInterview: 0,
+            ratingCriteriaOnboarding: 4,
+            ratingCriteriaSupervision: -389,
+            ratingCriteriaLearning: 4,
+            ratingCriteriaCodingPractices: 4,
+            ratingCriteriaPerks: 5,
+            ratingCriteriaCulture: 4,
+            salary: 3800,
+            duration: 6,
+            coverLetter: "none",
+            cv: "none" 
+        };
+        const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Reaktor"]);
+        await api
+            .post(`${apiBaseUrl}/${company.rows[0].id}`)
+            .send(wrongTypeReview)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        const allReview = await api.get(`${apiBaseUrl}`);
+        expect(allReview.body).toHaveLength(4);
+    });
+    test('Adding review with wrong ratingCriteriaLearning datatype cannot be added', async () => {
+        const wrongTypeReview = {
+            companyId: "",
+            userName: "1",
+            userPicture: "1",
+            pros: ["Great culture", "Nice perks", "Amazing office"],
+            cons: [],
+            overall: "d",
+            totalRating: 4,
+            ratingCriteriaInterview: 4,
+            ratingCriteriaOnboarding: 2,
+            ratingCriteriaSupervision: 4,
+            ratingCriteriaLearning: "4",
+            ratingCriteriaCodingPractices: 4,
+            ratingCriteriaPerks: 5,
+            ratingCriteriaCulture: 4,
+            salary: 3800,
+            duration: 6,
+            coverLetter: "none",
+            cv: "none" 
+        };
+        const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Reaktor"]);
+        await api
+            .post(`${apiBaseUrl}/${company.rows[0].id}`)
+            .send(wrongTypeReview)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        const allReview = await api.get(`${apiBaseUrl}`);
+        expect(allReview.body).toHaveLength(4);
+    });
+    test('Adding review with ratingCriteriaLearning score range > 5 cannot be added', async () => {
+        const wrongTypeReview = {
+            companyId: "",
+            userName: "1",
+            userPicture: "1",
+            pros: ["Great culture", "Nice perks", "Amazing office"],
+            cons: [],
+            overall: "1",
+            totalRating: 4,
+            ratingCriteriaInterview: 5,
+            ratingCriteriaOnboarding: 2,
+            ratingCriteriaSupervision: 0,
+            ratingCriteriaLearning: 4444,
+            ratingCriteriaCodingPractices: 4,
+            ratingCriteriaPerks: 5,
+            ratingCriteriaCulture: 4,
+            salary: 3800,
+            duration: 6,
+            coverLetter: "none",
+            cv: "none" 
+        };
+        const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Reaktor"]);
+        await api
+            .post(`${apiBaseUrl}/${company.rows[0].id}`)
+            .send(wrongTypeReview)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        const allReview = await api.get(`${apiBaseUrl}`);
+        expect(allReview.body).toHaveLength(4);
+    });
+    test('Adding review with ratingCriteriaLearning score range < 0  cannot be added', async () => {
+        const wrongTypeReview = {
+            companyId: "",
+            userName: "1",
+            userPicture: "1",
+            pros: ["Great culture", "Nice perks", "Amazing office"],
+            cons: [],
+            overall: "1",
+            totalRating: 4,
+            ratingCriteriaInterview: 0,
+            ratingCriteriaOnboarding: 4,
+            ratingCriteriaSupervision: 0,
+            ratingCriteriaLearning: -389,
+            ratingCriteriaCodingPractices: 4,
+            ratingCriteriaPerks: 5,
+            ratingCriteriaCulture: 4,
+            salary: 3800,
+            duration: 6,
+            coverLetter: "none",
+            cv: "none" 
+        };
+        const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Reaktor"]);
+        await api
+            .post(`${apiBaseUrl}/${company.rows[0].id}`)
+            .send(wrongTypeReview)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        const allReview = await api.get(`${apiBaseUrl}`);
+        expect(allReview.body).toHaveLength(4);
+    });
+    test('Adding review with wrong ratingCriteriaCodingPractices datatype cannot be added', async () => {
+        const wrongTypeReview = {
+            companyId: "",
+            userName: "1",
+            userPicture: "1",
+            pros: ["Great culture", "Nice perks", "Amazing office"],
+            cons: [],
+            overall: "d",
+            totalRating: 4,
+            ratingCriteriaInterview: 4,
+            ratingCriteriaOnboarding: 2,
+            ratingCriteriaSupervision: 4,
+            ratingCriteriaLearning: 2,
+            ratingCriteriaCodingPractices: "s",
+            ratingCriteriaPerks: 5,
+            ratingCriteriaCulture: 4,
+            salary: 3800,
+            duration: 6,
+            coverLetter: "none",
+            cv: "none" 
+        };
+        const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Reaktor"]);
+        await api
+            .post(`${apiBaseUrl}/${company.rows[0].id}`)
+            .send(wrongTypeReview)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        const allReview = await api.get(`${apiBaseUrl}`);
+        expect(allReview.body).toHaveLength(4);
+    });
+    test('Adding review with ratingCriteriaCodingPractices score range > 5 cannot be added', async () => {
+        const wrongTypeReview = {
+            companyId: "",
+            userName: "1",
+            userPicture: "1",
+            pros: ["Great culture", "Nice perks", "Amazing office"],
+            cons: [],
+            overall: "1",
+            totalRating: 4,
+            ratingCriteriaInterview: 5,
+            ratingCriteriaOnboarding: 2,
+            ratingCriteriaSupervision: 0,
+            ratingCriteriaLearning: 3,
+            ratingCriteriaCodingPractices: 4444,
+            ratingCriteriaPerks: 5,
+            ratingCriteriaCulture: 4,
+            salary: 3800,
+            duration: 6,
+            coverLetter: "none",
+            cv: "none" 
+        };
+        const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Reaktor"]);
+        await api
+            .post(`${apiBaseUrl}/${company.rows[0].id}`)
+            .send(wrongTypeReview)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        const allReview = await api.get(`${apiBaseUrl}`);
+        expect(allReview.body).toHaveLength(4);
+    });
+    test('Adding review with ratingCriteriaCodingPractices score range < 0  cannot be added', async () => {
+        const wrongTypeReview = {
+            companyId: "",
+            userName: "1",
+            userPicture: "1",
+            pros: ["Great culture", "Nice perks", "Amazing office"],
+            cons: [],
+            overall: "1",
+            totalRating: 4,
+            ratingCriteriaInterview: 0,
+            ratingCriteriaOnboarding: 4,
+            ratingCriteriaSupervision: 0,
+            ratingCriteriaLearning: 2,
+            ratingCriteriaCodingPractices: -389,
+            ratingCriteriaPerks: 5,
+            ratingCriteriaCulture: 4,
+            salary: 3800,
+            duration: 6,
+            coverLetter: "none",
+            cv: "none" 
+        };
+        const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Reaktor"]);
+        await api
+            .post(`${apiBaseUrl}/${company.rows[0].id}`)
+            .send(wrongTypeReview)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        const allReview = await api.get(`${apiBaseUrl}`);
+        expect(allReview.body).toHaveLength(4);
+    });
+    test('Adding review with wrong ratingCriteriaPerks datatype cannot be added', async () => {
+        const wrongTypeReview = {
+            companyId: "",
+            userName: "1",
+            userPicture: "1",
+            pros: ["Great culture", "Nice perks", "Amazing office"],
+            cons: [],
+            overall: "d",
+            totalRating: 4,
+            ratingCriteriaInterview: 4,
+            ratingCriteriaOnboarding: 2,
+            ratingCriteriaSupervision: 4,
+            ratingCriteriaLearning: 2,
+            ratingCriteriaCodingPractices: 2,
+            ratingCriteriaPerks: "2",
+            ratingCriteriaCulture: 4,
+            salary: 3800,
+            duration: 6,
+            coverLetter: "none",
+            cv: "none" 
+        };
+        const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Reaktor"]);
+        await api
+            .post(`${apiBaseUrl}/${company.rows[0].id}`)
+            .send(wrongTypeReview)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        const allReview = await api.get(`${apiBaseUrl}`);
+        expect(allReview.body).toHaveLength(4);
+    });
+    test('Adding review with ratingCriteriaPerks score range > 5 cannot be added', async () => {
+        const wrongTypeReview = {
+            companyId: "",
+            userName: "1",
+            userPicture: "1",
+            pros: ["Great culture", "Nice perks", "Amazing office"],
+            cons: [],
+            overall: "1",
+            totalRating: 4,
+            ratingCriteriaInterview: 5,
+            ratingCriteriaOnboarding: 2,
+            ratingCriteriaSupervision: 0,
+            ratingCriteriaLearning: 3,
+            ratingCriteriaCodingPractices: 1,
+            ratingCriteriaPerks: 4444,
+            ratingCriteriaCulture: 4,
+            salary: 3800,
+            duration: 6,
+            coverLetter: "none",
+            cv: "none" 
+        };
+        const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Reaktor"]);
+        await api
+            .post(`${apiBaseUrl}/${company.rows[0].id}`)
+            .send(wrongTypeReview)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        const allReview = await api.get(`${apiBaseUrl}`);
+        expect(allReview.body).toHaveLength(4);
+    });
+    test('Adding review with ratingCriteriaPerks score range < 0  cannot be added', async () => {
+        const wrongTypeReview = {
+            companyId: "",
+            userName: "1",
+            userPicture: "1",
+            pros: ["Great culture", "Nice perks", "Amazing office"],
+            cons: [],
+            overall: "1",
+            totalRating: 4,
+            ratingCriteriaInterview: 0,
+            ratingCriteriaOnboarding: 4,
+            ratingCriteriaSupervision: 0,
+            ratingCriteriaLearning: 2,
+            ratingCriteriaCodingPractices: 1,
+            ratingCriteriaPerks: -389,
+            ratingCriteriaCulture: 4,
+            salary: 3800,
+            duration: 6,
+            coverLetter: "none",
+            cv: "none" 
+        };
+        const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Reaktor"]);
+        await api
+            .post(`${apiBaseUrl}/${company.rows[0].id}`)
+            .send(wrongTypeReview)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        const allReview = await api.get(`${apiBaseUrl}`);
+        expect(allReview.body).toHaveLength(4);
+    });
+
+    test('Adding review with wrong ratingCriteriaCulture datatype cannot be added', async () => {
+        const wrongTypeReview = {
+            companyId: "",
+            userName: "1",
+            userPicture: "1",
+            pros: ["Great culture", "Nice perks", "Amazing office"],
+            cons: [],
+            overall: "d",
+            totalRating: 4,
+            ratingCriteriaInterview: 4,
+            ratingCriteriaOnboarding: 2,
+            ratingCriteriaSupervision: 4,
+            ratingCriteriaLearning: 2,
+            ratingCriteriaCodingPractices: 2,
+            ratingCriteriaPerks: 2,
+            ratingCriteriaCulture: "",
+            salary: 3800,
+            duration: 6,
+            coverLetter: "none",
+            cv: "none" 
+        };
+        const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Reaktor"]);
+        await api
+            .post(`${apiBaseUrl}/${company.rows[0].id}`)
+            .send(wrongTypeReview)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        const allReview = await api.get(`${apiBaseUrl}`);
+        expect(allReview.body).toHaveLength(4);
+    });
+    test('Adding review with ratingCriteriaCulture score range > 5 cannot be added', async () => {
+        const wrongTypeReview = {
+            companyId: "",
+            userName: "1",
+            userPicture: "1",
+            pros: ["Great culture", "Nice perks", "Amazing office"],
+            cons: [],
+            overall: "1",
+            totalRating: 4,
+            ratingCriteriaInterview: 5,
+            ratingCriteriaOnboarding: 2,
+            ratingCriteriaSupervision: 0,
+            ratingCriteriaLearning: 3,
+            ratingCriteriaCodingPractices: 1,
+            ratingCriteriaPerks: 2,
+            ratingCriteriaCulture: 4444,
+            salary: 3800,
+            duration: 6,
+            coverLetter: "none",
+            cv: "none" 
+        };
+        const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Reaktor"]);
+        await api
+            .post(`${apiBaseUrl}/${company.rows[0].id}`)
+            .send(wrongTypeReview)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        const allReview = await api.get(`${apiBaseUrl}`);
+        expect(allReview.body).toHaveLength(4);
+    });
+    test('Adding review with ratingCriteriaCulture score range < 0  cannot be added', async () => {
+        const wrongTypeReview = {
+            companyId: "",
+            userName: "1",
+            userPicture: "1",
+            pros: ["Great culture", "Nice perks", "Amazing office"],
+            cons: [],
+            overall: "1",
+            totalRating: 4,
+            ratingCriteriaInterview: 0,
+            ratingCriteriaOnboarding: 4,
+            ratingCriteriaSupervision: 0,
+            ratingCriteriaLearning: 2,
+            ratingCriteriaCodingPractices: 1,
+            ratingCriteriaPerks: 1,
+            ratingCriteriaCulture:  -389,
+            salary: 3800,
+            duration: 6,
+            coverLetter: "none",
+            cv: "none" 
+        };
+        const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Reaktor"]);
+        await api
+            .post(`${apiBaseUrl}/${company.rows[0].id}`)
+            .send(wrongTypeReview)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        const allReview = await api.get(`${apiBaseUrl}`);
+        expect(allReview.body).toHaveLength(4);
+    });
+    test('Adding review with wrong ratingCriteriaCulture datatype cannot be added', async () => {
+        const wrongTypeReview = {
+            companyId: "",
+            userName: "1",
+            userPicture: "1",
+            pros: ["Great culture", "Nice perks", "Amazing office"],
+            cons: [],
+            overall: "d",
+            totalRating: 4,
+            ratingCriteriaInterview: 4,
+            ratingCriteriaOnboarding: 2,
+            ratingCriteriaSupervision: 4,
+            ratingCriteriaLearning: 2,
+            ratingCriteriaCodingPractices: 2,
+            ratingCriteriaPerks: 2,
+            ratingCriteriaCulture: 2,
+            salary: "2332",
+            duration: 6,
+            coverLetter: "none",
+            cv: "none" 
+        };
+        const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Reaktor"]);
+        await api
+            .post(`${apiBaseUrl}/${company.rows[0].id}`)
+            .send(wrongTypeReview)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        const allReview = await api.get(`${apiBaseUrl}`);
+        expect(allReview.body).toHaveLength(4);
+    });
+    test('Adding review with salary range < 0 cannot be added', async () => {
+        const wrongTypeReview = {
+            companyId: "",
+            userName: "1",
+            userPicture: "1",
+            pros: ["Great culture", "Nice perks", "Amazing office"],
+            cons: [],
+            overall: "1",
+            totalRating: 4,
+            ratingCriteriaInterview: 5,
+            ratingCriteriaOnboarding: 2,
+            ratingCriteriaSupervision: 0,
+            ratingCriteriaLearning: 3,
+            ratingCriteriaCodingPractices: 1,
+            ratingCriteriaPerks: 2,
+            ratingCriteriaCulture: 2,
+            salary: -232323,
+            duration: 6,
+            coverLetter: "none",
+            cv: "none" 
+        };
+        const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Reaktor"]);
+        await api
+            .post(`${apiBaseUrl}/${company.rows[0].id}`)
+            .send(wrongTypeReview)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        const allReview = await api.get(`${apiBaseUrl}`);
+        expect(allReview.body).toHaveLength(4);
+    });
+    test('Adding review with wrong duration datatype cannot be added', async () => {
+        const wrongTypeReview = {
+            companyId: "",
+            userName: "1",
+            userPicture: "1",
+            pros: ["Great culture", "Nice perks", "Amazing office"],
+            cons: [],
+            overall: "d",
+            totalRating: 4,
+            ratingCriteriaInterview: 4,
+            ratingCriteriaOnboarding: 2,
+            ratingCriteriaSupervision: 4,
+            ratingCriteriaLearning: 2,
+            ratingCriteriaCodingPractices: 2,
+            ratingCriteriaPerks: 2,
+            ratingCriteriaCulture: 2,
+            salary: 23234234234,
+            duration: false,
+            coverLetter: "none",
+            cv: "none" 
+        };
+        const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Reaktor"]);
+        await api
+            .post(`${apiBaseUrl}/${company.rows[0].id}`)
+            .send(wrongTypeReview)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        const allReview = await api.get(`${apiBaseUrl}`);
+        expect(allReview.body).toHaveLength(4);
+    });
+    test('Adding review with duration range < 0 cannot be added', async () => {
+        const wrongTypeReview = {
+            companyId: "",
+            userName: "1",
+            userPicture: "1",
+            pros: ["Great culture", "Nice perks", "Amazing office"],
+            cons: [],
+            overall: "1",
+            totalRating: 4,
+            ratingCriteriaInterview: 5,
+            ratingCriteriaOnboarding: 2,
+            ratingCriteriaSupervision: 0,
+            ratingCriteriaLearning: 3,
+            ratingCriteriaCodingPractices: 1,
+            ratingCriteriaPerks: 2,
+            ratingCriteriaCulture: 2,
+            salary: 223,
+            duration: -2323,
+            coverLetter: "none",
+            cv: "none" 
+        };
+        const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Reaktor"]);
+        await api
+            .post(`${apiBaseUrl}/${company.rows[0].id}`)
+            .send(wrongTypeReview)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        const allReview = await api.get(`${apiBaseUrl}`);
+        expect(allReview.body).toHaveLength(4);
+    });
+    test('Adding review with wrong coverLetter datatype cannot be added', async () => {
+        const wrongTypeReview = {
+            companyId: "",
+            userName: "1",
+            userPicture: "1",
+            pros: ["Great culture", "Nice perks", "Amazing office"],
+            cons: [],
+            overall: "d",
+            totalRating: 4,
+            ratingCriteriaInterview: 4,
+            ratingCriteriaOnboarding: 2,
+            ratingCriteriaSupervision: 4,
+            ratingCriteriaLearning: 2,
+            ratingCriteriaCodingPractices: 2,
+            ratingCriteriaPerks: 2,
+            ratingCriteriaCulture: 2,
+            salary: 23234234234,
+            duration: 223,
+            coverLetter: 2323,
+            cv: "none" 
+        };
+        const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Reaktor"]);
+        await api
+            .post(`${apiBaseUrl}/${company.rows[0].id}`)
+            .send(wrongTypeReview)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        const allReview = await api.get(`${apiBaseUrl}`);
+        expect(allReview.body).toHaveLength(4);
+    });
+    test('Adding review with wrong cv datatype cannot be added', async () => {
+        const wrongTypeReview = {
+            companyId: "",
+            userName: "1",
+            userPicture: "1",
+            pros: ["Great culture", "Nice perks", "Amazing office"],
+            cons: [],
+            overall: "1",
+            totalRating: 4,
+            ratingCriteriaInterview: 5,
+            ratingCriteriaOnboarding: 2,
+            ratingCriteriaSupervision: 0,
+            ratingCriteriaLearning: 3,
+            ratingCriteriaCodingPractices: 1,
+            ratingCriteriaPerks: 2,
+            ratingCriteriaCulture: 2,
+            salary: 223,
+            duration: -2323,
+            coverLetter: "none",
+            cv: true 
+        };
+        const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Reaktor"]);
+        await api
+            .post(`${apiBaseUrl}/${company.rows[0].id}`)
+            .send(wrongTypeReview)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        const allReview = await api.get(`${apiBaseUrl}`);
+        expect(allReview.body).toHaveLength(4);
+    });
 });
+
+// //Testing review PUT api method
+// describe('Review PUT / ', async () => {
+//     test('Updating review works', async () => {
+
+//     })
+// })
 
 afterAll(async () => {
 	await pool.end();

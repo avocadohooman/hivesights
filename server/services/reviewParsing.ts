@@ -9,7 +9,7 @@ const parsingReview = (object: any, companyId: string) : NewReview => {
         pros: (object.pros) ? parseProsCons(object.pros) : undefined,
         cons: (object.cons) ? parseProsCons(object.cons) : undefined,
         overall: parseOverall(object.overall),
-        totalRating: -1,
+        totalRating: parseTotalRating(object.totalRating),
         ratingCriteriaInterview: parseCriteriaRating(object.ratingCriteriaInterview),
         ratingCriteriaOnboarding: parseCriteriaRating(object.ratingCriteriaOnboarding),
         ratingCriteriaSupervision: parseCriteriaRating(object.ratingCriteriaSupervision),
@@ -66,7 +66,7 @@ const parseOverall = (overall: unknown) : string => {
 
 const parseTotalRating = (totalRating: unknown) : number => {
 
-    if (!totalRating || !parsingHelper.isNumber(totalRating)) {
+    if (totalRating === undefined || !parsingHelper.isNumber(totalRating)) {
         throw new Error('Incorrect or missing totalRating ' + totalRating);
     }
     if (totalRating < 0 || totalRating > 5) {
@@ -86,15 +86,21 @@ const parseCriteriaRating = (criteriaRating: unknown) : number => {
 }
 
 const parseSalary = (salary: unknown) : number => {
-    if (!salary || !parsingHelper.isNumber(salary)) {
+    if (salary === undefined || !parsingHelper.isNumber(salary)) {
         throw new Error('Incorrect or missing salary ' + salary);
+    }
+    if (salary < 0) {
+        throw new Error('Salary cannot be below 0 ' + salary);
     }
     return salary;
 }
 
 const parseDuration = (duration: unknown) : number => {
-    if (!duration || !parsingHelper.isNumber(duration)) {
+    if (duration === undefined || !parsingHelper.isNumber(duration)) {
         throw new Error('Incorrect or missing duration ' + duration);
+    }
+    if (duration < 0) {
+        throw new Error('duration cannot be below 0 ' + duration);
     }
     return duration;
 }

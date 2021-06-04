@@ -6,7 +6,7 @@ export type Review = {
     pros?: string[],
     cons?: string[],
     overall: string,
-    totalRating?: number,
+    totalRating: number,
     ratingCriteriaInterview: number,
     ratingCriteriaOnboarding: number,
     ratingCriteriaSupervision: number,
