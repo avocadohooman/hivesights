@@ -40,7 +40,7 @@ jobs:
         env:
           DATABASE_URL: ${{secrets.DATABASE_URL}}
   integration_test_review_methods:
-    needs: [integration_test_company_methods]
+    needs: [modules]
     name: Review API Integration Testing
     runs-on: ubuntu-18.04
     steps:
