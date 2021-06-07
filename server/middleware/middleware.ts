@@ -6,11 +6,11 @@ const requestLogger = (request: any, response: any, next: any) => {
     logger.info('Body:  ', request.body);
     logger.info('---');
     next();
-}
+};
 
 const unknownEndpoint = (request: any, response: any, next: any) => {
     response.status(404).send({ error: 'unknown endpoint' });
-}
+};
 
 const errorHandler = (error: any, request: any, response: any, next: any) => {
     logger.error(error.message);
@@ -31,10 +31,10 @@ const errorHandler = (error: any, request: any, response: any, next: any) => {
           response.status(400).json({ error: error.message });
     }
     next(error);
-}
+};
 
 export default {
     requestLogger,
     unknownEndpoint,
     errorHandler
-}
+};

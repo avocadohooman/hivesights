@@ -23,28 +23,28 @@ const parsingReview = (object: any, companyId: string) : NewReview => {
         cv: (object.coverLetter) ? parseResume(object.coverLetter) : ""
     };
     return newReview;
-}
+};
 
 const parseCompanyId = (companyId: unknown) : string => {
     if (!companyId || !parsingHelper.isString(companyId)) {
         throw new Error('Incorrect or missing companyId ' + companyId);
     }
     return companyId;
-}
+};
 
 const parseUserName = (userName: unknown) : string => {
     if (!userName || !parsingHelper.isString(userName)) {
         throw new Error('Incorrect or missing userName ' + userName);
     }
     return userName;
-}
+};
 
 const parseUserPictureUrl = (userPictureUrl: unknown) : string => {
     if (!userPictureUrl || !parsingHelper.isString(userPictureUrl)) {
         throw new Error('Incorrect or missing userPictureUrl ' + userPictureUrl);
     }
     return userPictureUrl;
-}
+};
 
 const parseProsCons = (pros: unknown[]) : string[] => {
     let _pros: string[] = [];
@@ -53,16 +53,16 @@ const parseProsCons = (pros: unknown[]) : string[] => {
             throw new Error('Incorrect data type for pro ' + pro);
         }
         return pro;
-    })
+    });
     return _pros;
-}
+};
 
 const parseOverall = (overall: unknown) : string => {
     if (!overall || !parsingHelper.isString(overall)) {
         throw new Error('Incorrect or missing overall ' + overall);
     }
     return overall;
-}
+};
 
 const parseTotalRating = (totalRating: unknown) : number => {
 
@@ -73,7 +73,7 @@ const parseTotalRating = (totalRating: unknown) : number => {
         throw new Error('Score must be between 0 - 5:  ' + totalRating);
     }
     return totalRating;
-}
+};
 
 const parseCriteriaRating = (criteriaRating: unknown) : number => {
     if (criteriaRating === undefined || !parsingHelper.isNumber(criteriaRating)) {
@@ -83,7 +83,7 @@ const parseCriteriaRating = (criteriaRating: unknown) : number => {
         throw new Error('Score must be between 0 - 5:  ' + criteriaRating);
     }
     return criteriaRating;
-}
+};
 
 const parseSalary = (salary: unknown) : number => {
     if (salary === undefined || !parsingHelper.isNumber(salary)) {
@@ -93,7 +93,7 @@ const parseSalary = (salary: unknown) : number => {
         throw new Error('Salary cannot be below 0 ' + salary);
     }
     return salary;
-}
+};
 
 const parseDuration = (duration: unknown) : number => {
     if (duration === undefined || !parsingHelper.isNumber(duration)) {
@@ -103,22 +103,22 @@ const parseDuration = (duration: unknown) : number => {
         throw new Error('duration cannot be below 0 ' + duration);
     }
     return duration;
-}
+};
 
 const parseCoverLetter = (coverLetter: unknown) : string => {
     if (!parsingHelper.isString(coverLetter)) {
          throw new Error('Incorrect or missing coverLetter ' + coverLetter);
     }
     return coverLetter;
-}
+};
 
 const parseResume = (resume: unknown) : string => {
     if (!parsingHelper.isString(resume)) {
          throw new Error('Incorrect or missing resume ' + resume);
     }
     return resume;
-}
+};
 
 export default {
     parsingReview,
-}
+};

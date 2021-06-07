@@ -20,7 +20,7 @@ companyRouter.get('/', async (_req, res) => {
         console.log(error.message);
         return res.status(400).json({error: error.message});
     }
-})
+});
 
 // Get one particular company
 companyRouter.get('/:id', async (req, res) => {
@@ -31,7 +31,7 @@ companyRouter.get('/:id', async (req, res) => {
             return res.status(400).json({error: "Company doesn't exist."});
         }
         const company = await pool.query(`SELECT * FROM ${companyTable} WHERE id = ($1)`, [id]);
-        console.log(`Company ${company.rows[0].companyname} fetched`);;
+        console.log(`Company ${company.rows[0].companyname} fetched`);
         return res.status(200).json(company.rows[0]);
     } catch (error) {
         console.log(error.message);
@@ -65,7 +65,7 @@ companyRouter.put('/:id', async (req, res) => {
             updatedCompanyBody.companyLocation,
             updatedCompanyId
         ]);
-        console.log(`Company ${updatedCompany.rows[0]} updated`);;
+        console.log(`Company ${updatedCompany.rows[0]} updated`);
         return res.status(200).json(updatedCompany.rows);
     } catch (error) {
         console.log(error.message);

@@ -19,7 +19,7 @@ export type Review = {
     coverLetter?: string,
     cv?: string,
     published_date: Date
-}
+};
 
 export type NewReview = Omit<Review, 'id' | 'published_date'>;
 export type CompanyTotalRating = Pick<Review, 'totalRating'>;

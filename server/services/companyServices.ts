@@ -9,7 +9,7 @@ const checkDuplicate = async (newCompany: NewCompany, companyTable: string) => {
       return 0;
     }
     return 1;
-}
+};
 
 const checkIfExists = async (id: any, companyTable: string) => {
   console.log("checkIfExists");
@@ -20,24 +20,24 @@ const checkIfExists = async (id: any, companyTable: string) => {
         console.log("ERROR");
         return 0;
       }
-    })
+    });
   if (company.rowCount === 0) {
     return 0;
   }
   return 1;
-}
+};
 
 const requestParamsId = (req: any, res: any, next: any) => {
     if (req.params && req.params.id && typeof req.params.id === "string") {
-      let num = Number(req.params.id);
+      const num = Number(req.params.id);
       if (!isNaN(num)) {
         req.params.id = Number(req.params.id);
       }
     }
-}
+};
 
 export default {
     checkDuplicate,
     requestParamsId,
     checkIfExists
-}
+};

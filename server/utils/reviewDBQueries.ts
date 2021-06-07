@@ -49,4 +49,4 @@ export default {
         reviewColumns,
         updateScoreColumns,
         updateReviewColumns
-}
+};

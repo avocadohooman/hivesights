@@ -34,13 +34,13 @@ reviewRouter.get('/:id', async (req, res) => {
             return res.status(400).json({error: "Review doesn't exist."});
         }
         const review = await pool.query(`SELECT * FROM ${reviewTable} WHERE id = ($1)`, [id]);
-        console.log(`Review ${review.rows[0]} fetched`);;
+        console.log(`Review ${review.rows[0]} fetched`);
         return res.status(200).json(review.rows[0]);
     } catch (error) {
         console.log(`Error: ${error.message}`);
         return res.status(400).json({error: error.message});
     }
-})
+});
 
 // Get all reviews for a company
 reviewRouter.get('/company/:id', async (req, res) => {
@@ -57,7 +57,7 @@ reviewRouter.get('/company/:id', async (req, res) => {
         console.log(`Error: ${error.message}`);
         return res.status(400).json({error: error.message});
     }
-})
+});
 
 // Create a new review for a company
 reviewRouter.post('/:id', async (req, res) => {
@@ -81,7 +81,7 @@ reviewRouter.post('/:id', async (req, res) => {
         console.log(`Error: ${error.message}`);
         return res.status(400).json({error: error.message});
     }
-})
+});
 
 // Update a review
 reviewRouter.put('/:id', async (req, res) => {
@@ -123,7 +123,7 @@ reviewRouter.put('/:id', async (req, res) => {
             updatedReviewBody.cv,
             reviewId
         ]);
-        console.log(`Review ${updatedReview.rows[0]} udpated`);;
+        console.log(`Review ${updatedReview.rows[0]} udpated`);
         await reviewServices.updateAverageSalary(companyId, reviewTable, companyTable);
         await reviewServices.updateScores(companyId, reviewTable, companyTable);
         return res.status(200).json(updatedReview.rows[0]);
@@ -131,7 +131,7 @@ reviewRouter.put('/:id', async (req, res) => {
         console.log(`Error: ${error.message}`);
         return res.status(400).json({error: error.message});
     }
-})
+});
 
 // Delete a review
 reviewRouter.delete('/:id', async (req, res) => {
@@ -148,6 +148,6 @@ reviewRouter.delete('/:id', async (req, res) => {
         console.log(error.message);
         return res.status(400).json({error: error.message});
     }
-})
+});
 
 export default reviewRouter;

@@ -16,7 +16,7 @@ const checkDuplicate = async (newReview: NewReview, reviewTable: string) => {
     }
     console.log("Duplicate found: ", duplicate.rowCount > 0);
     return 1;
-}
+};
 
 const checkIfExists = async (id: any, reviewTable: string) => {
     console.log("checkIfExists");
@@ -27,12 +27,12 @@ const checkIfExists = async (id: any, reviewTable: string) => {
           console.log("ERROR");
           return 0;
         }
-      })
+      });
     if (review.rowCount === 0) {
       return 0;
     }
     return 1;
-}
+};
 
 const addReview = async (newReview: NewReview, reviewTable: string, companyTable: string) => {
     // newReview.totalRating = calculateTotalScore(newReview);
@@ -60,10 +60,10 @@ const addReview = async (newReview: NewReview, reviewTable: string, companyTable
         newReview.duration,
         newReview.coverLetter,
         newReview.cv
-    ])
+    ]);
     await updateAverageSalary(newReview.companyId, reviewTable, companyTable);
     await updateScores(newReview.companyId, reviewTable, companyTable);
-}
+};
 
 const updateTotalScore = async (companyId: string, reviewTable: string, companyTable: string) => {
     const newTotalScore = await pool.query(`SELECT AVG (totalrating)::NUMERIC(10,2) FROM ${reviewTable} WHERE companyid = ($1)`, [companyId]);
@@ -76,7 +76,7 @@ const updateTotalScore = async (companyId: string, reviewTable: string, companyT
         newTotalScore.rows[0].avg,
         companyId
     ]);
-}
+};
 
 const updateScores = async (companyId: string, reviewTable: string, companyTable: string) => {
     const newTotalQuery = 'AVG (totalrating)::NUMERIC(10,2)';
@@ -123,7 +123,7 @@ const updateScores = async (companyId: string, reviewTable: string, companyTable
     });
     console.log(`Salary ${updatedRating.rows[0]} updated`);
 
-}
+};
 
 const updateAverageSalary = async (companyId: string, reviewTable: string, companyTable: string) => {
     const newAverageSalary = await pool.query(`SELECT AVG (salary)::NUMERIC(10,2) FROM ${reviewTable} WHERE companyid = ($1)`, [companyId]);
@@ -141,7 +141,7 @@ const updateAverageSalary = async (companyId: string, reviewTable: string, compa
           throw new Error("ERROR: " + e.message);
         }
     });
-}
+};
 
 const calculateTotalScore = (newReview: NewReview) : number => {
     const interview : number = newReview.ratingCriteriaInterview * 1;
@@ -152,9 +152,9 @@ const calculateTotalScore = (newReview: NewReview) : number => {
     const perks : number = newReview.ratingCriteriaPerks * 0.8;
     const culture : number = newReview.ratingCriteriaPerks * 1;
 
-    let totalScore = (interview + onboarding + supervision + learning + codingPractices + perks + culture) / 7;
+    const totalScore = (interview + onboarding + supervision + learning + codingPractices + perks + culture) / 7;
     return totalScore;
-}
+};
 
 export default {
     updateTotalScore,
@@ -164,4 +164,4 @@ export default {
     checkIfExists,
     calculateTotalScore,
     addReview
-}
+};
