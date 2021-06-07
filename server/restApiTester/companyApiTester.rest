@@ -6,7 +6,7 @@ POST http://localhost:3000/api/company/
 Content-Type: application/json
 
 {
-    "companyName": "wunderdog",
+    "companyName": "Wunderdog",
     "companyDescription": "Software development agency",
     "logoURL": "https://www.itewiki.fi/thumb.php?src=https://www.itewiki.fi/write/logos/wunderdog.png&size=x100",
     "companyURL": "https://wunderdog.fi/",

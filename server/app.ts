@@ -37,7 +37,7 @@ app.use('/api/company', companyRouter);
 // API Router for reviews
 app.use('/api/reviews', reviewRouter);
 // API Router for kpis
-// app.use('/api/kpi', kpiRouter);
+app.use('/api/kpi', kpiRouter);
 
 // this needs to be after the routes are defined
 app.use(middleware.unknownEndpoint);
