@@ -19,7 +19,8 @@
     "deploy:full": "npm run build-client && git add . && git commit -m uibuild_deploy && npm run deploy",
     "cypress:open": "npx cypress open",
     "test:e2e": "NODE_ENV=test cypress run",
-    "test:int": "NODE_ENV=test jest --verbose --runInBand --detectOpenHandles"
+    "test:int": "NODE_ENV=test jest --verbose --runInBand --detectOpenHandles",
+    "test:int-company": "NODE_ENV=test jest --verbose --runInBand --detectOpenHandles company.test.ts"
   },
   "keywords": [],
   "author": "",

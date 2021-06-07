@@ -1,4 +1,5 @@
-const reviewColumns = `(companyid, 
+const reviewColumns = `(
+    companyid, 
     username, 
     userpictureurl, 
     pros, 
@@ -15,7 +16,8 @@ const reviewColumns = `(companyid,
     salary, 
     duration, 
     coverletter, 
-    cv)`;
+    cv
+)`;
 
 const updateScoreColumns = `averageTotalScore = ($1),
 averageinterviewscore = ($2),

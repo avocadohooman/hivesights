@@ -4,6 +4,7 @@ import middleware from './middleware/middleware';
 import authRouter from './controllers/authRoute';
 import companyRouter from './controllers/companyRoute';
 import reviewRouter from './controllers/reviewRoute';
+import kpiRouter from './controllers/kpiRoute';
 
 const app = express();
 
@@ -35,6 +36,8 @@ app.use('/api/auth', authRouter);
 app.use('/api/company', companyRouter);
 // API Router for reviews
 app.use('/api/reviews', reviewRouter);
+// API Router for kpis
+// app.use('/api/kpi', kpiRouter);
 
 // this needs to be after the routes are defined
 app.use(middleware.unknownEndpoint);

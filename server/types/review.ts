@@ -18,8 +18,8 @@ export type Review = {
     duration: number,
     coverLetter?: string,
     cv?: string,
-    published_date: Date
+    publishedDate: Date
 };
 
-export type NewReview = Omit<Review, 'id' | 'published_date'>;
+export type NewReview = Omit<Review, 'id' | 'publishedDate'>;
 export type CompanyTotalRating = Pick<Review, 'totalRating'>;
