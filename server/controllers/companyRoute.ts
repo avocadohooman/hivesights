@@ -1,5 +1,5 @@
 import express from 'express';
-import { CompanyRating, NewCompany } from '../types/company';
+import { Company, CompanyRating, NewCompany } from '../types/company';
 import pool from '../db';
 import rateLimit from 'express-rate-limit';
 import companyHelper from '../services/companyServices';
@@ -14,8 +14,8 @@ console.log(`Using table: ${companyTable}`);
 // Get all companies in DB
 companyRouter.get('/', async (_req, res) => {
     try {
-        const allCompanies = await pool.query(`SELECT * FROM ${companyTable}`);
-        return res.status(200).json(allCompanies.rows);
+        const allCompaniesDB = await pool.query(`SELECT * FROM ${companyTable}`);
+        return res.status(200).json(allCompaniesDB.rows);
     } catch (error) {
         console.log(error.message);
         return res.status(400).json({error: error.message});

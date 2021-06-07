@@ -118,6 +118,50 @@ describe("Company POST ERROR /", () => {
         expect(allCompanies.body).toHaveLength(4);
         expect(allCompanies.statusCode).toBe(200);
     });
+    test("A an existing company (case insenstitive) cannot be created", async () => {
+        const newCompany: NewCompany = {
+            companyName: "Unicorn01",
+            companyDescription: "Software Development Agency",
+            logoURL: "https://www.google.com",
+            companyURL: "https://gerhardmolin.com/",
+            companyLocation: "Helsinki, Finland"
+        };
+        await api
+            .post(`${apiBaseUrl}`)
+            .send(newCompany)
+            .expect(200)
+            .expect('Content-Type', /application\/json/);
+
+        const newCompanyLowerCase: NewCompany = {
+                companyName: "unicorn01",
+                companyDescription: "Software Development Agency",
+                logoURL: "https://www.google.com",
+                companyURL: "https://gerhardmolin.com/",
+                companyLocation: "Helsinki, Finland"
+        };
+        await api
+            .post(`${apiBaseUrl}`)
+            .send(newCompanyLowerCase)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+
+        const newCompanyCapitalCase: NewCompany = {
+                companyName: "UNICORN01",
+                companyDescription: "Software Development Agency",
+                logoURL: "https://www.google.com",
+                companyURL: "https://gerhardmolin.com/",
+                companyLocation: "Helsinki, Finland"
+        };
+        await api
+            .post(`${apiBaseUrl}`)
+            .send(newCompanyCapitalCase)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+
+        const allCompanies = await api.get(`${apiBaseUrl}`);
+        expect(allCompanies.body).toHaveLength(4);
+        expect(allCompanies.statusCode).toBe(200);
+    });
     test("A company with wrong company description type cannot be created", async () => {
         const newCompany = {
             companyName: "Unicorn01",
