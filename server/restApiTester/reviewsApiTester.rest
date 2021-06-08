@@ -8,16 +8,16 @@ GET http://localhost:3000/api/reviews/41072326-7a4f-4edf-bda1-a9c75c0426fb
 GET http://localhost:3000/api/reviews/company/e3f9f26a-cd04-419a-b367-84e704adb419
 
 ###
-POST http://localhost:3000/api/reviews/612506b2-cfcf-4f90-b355-a40735774a80
+POST http://localhost:3000/api/reviews/9ce0e273-c2d2-461a-9141-d827c02d7583
 Content-Type: application/json
 
 {
     "companyId": "",
     "userName": "hoang",
     "userPicture": "gmolin",
-    "pros": ["Nice"],
-    "cons": ["Ok"],
-    "overall": "Very niceVery niceVery niceVery niceVery niceVery niceVery niceVery niceVery 54ff1b13-4368-4072-a0ef-ba5c7b49c2c454ff1b13-4368-4072-a0ef-ba5c7b49c2c4 niceVery niceVery niceVery nice",
+    "pros": "Nice Nice Nice Nice Nice",
+    "cons": "Bad Bad Bad Bad Bad",
+    "overall": "vey nice",
     "totalRating": 4,
     "ratingCriteriaInterview": 2,
     "ratingCriteriaOnboarding": 3,
@@ -40,8 +40,8 @@ Content-Type: application/json
     "companyId": "6f13b12a-2fde-47ba-b626-945bc4fdcc69",
     "userName": "gmolin",
     "userPicture": "gmolin",
-    "pros": ["Nice"],
-    "cons": ["Ok"],
+    "pros": "Nice",
+    "cons": "Ok",
     "overall": "Very nice",
     "totalRating": 3,
     "ratingCriteriaInterview": 4,

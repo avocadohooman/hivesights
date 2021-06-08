@@ -48,15 +48,16 @@ const parseUserPictureUrl = (userPictureUrl: unknown) : string => {
     return userPictureUrl;
 };
 
-const parseProsCons = (pros: unknown[]) : string[] => {
-    let _pros: string[] = [];
-    _pros = pros.map(pro => {
-        if (!parsingHelper.isString(pro)) {
-            throw new Error('Incorrect data type for pro ' + pro);
-        }
-        return pro;
-    });
-    return _pros;
+const parseProsCons = (prosCons: unknown) : string => {
+    if (!prosCons || !parsingHelper.isString(prosCons)) {
+        throw new Error('Incorrect or missing Pros/Cons ' + prosCons);
+    }
+    const amountOfWords = prosCons.split(" ");
+    console.log("Amount of words", amountOfWords);
+    if (amountOfWords.length < 5) {
+        throw new Error('Pros/Const must constain at least 5 words. Current amount of words: ' + amountOfWords.length);
+    }
+    return prosCons;
 };
 
 const parseOverall = (overall: unknown) : string => {
