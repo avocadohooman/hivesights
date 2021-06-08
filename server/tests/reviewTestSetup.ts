@@ -47,7 +47,9 @@ let intialReviews: NewReview[] = [
         salary: 4200,
         duration: 6,
         coverLetter: "none",
-        cv: "none"  
+        cv: "none",
+        helpful: 1,
+        notHelpful: 0
     },
     {
         companyId: "",
@@ -67,7 +69,8 @@ let intialReviews: NewReview[] = [
         salary: 4000,
         duration: 6,
         coverLetter: "none",
-        cv: "none"     
+        helpful: 3,
+        notHelpful: 0   
     },
     {
         companyId: "",
@@ -87,7 +90,9 @@ let intialReviews: NewReview[] = [
         salary: 3800,
         duration: 6,
         coverLetter: "none",
-        cv: "none"     
+        cv: "none",
+        helpful: 1,
+        notHelpful: 0     
     }
 ]
 

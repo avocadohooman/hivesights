@@ -18,6 +18,8 @@ export type Review = {
     duration: number,
     coverLetter?: string,
     cv?: string,
+    helpful?: number,
+    notHelpful?: number,
     publishedDate: Date
 };
 

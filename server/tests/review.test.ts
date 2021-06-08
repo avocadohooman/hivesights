@@ -86,7 +86,7 @@ describe('Review POST /', () => {
             salary: 3800,
             duration: 6,
             coverLetter: "none",
-            cv: "none" 
+            cv: "none"
         };
         const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Reaktor"]);
         newReview.companyId = company.rows[0].id;
@@ -1335,7 +1335,7 @@ describe('Testing parsing error managment', () => {
 
 //Testing review PUT api method
 describe('Review PUT / ', () => {
-    test("Updating a review works", async () => {
+    test.only("Updating a review works", async () => {
         const updatedReviewBody = {
             companyId: "",
             userName: "UNICORN0101010101",
@@ -1354,7 +1354,9 @@ describe('Review PUT / ', () => {
             salary: 3800,
             duration: 6,
             coverLetter: "none",
-            cv: "none" 
+            cv: "none",
+            helpful: 1,
+            notHelpful: 0
         };
         const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Wunderdog"]);
         updatedReviewBody.companyId = company.rows[0].id;
@@ -1394,7 +1396,9 @@ describe('Review PUT ERROR/ ', () => {
             salary: 3800,
             duration: 6,
             coverLetter: "none",
-            cv: "none" 
+            cv: "none",
+            helpful: 1,
+            notHelpful: 0
         };
         const existingReview = await pool.query(`SELECT id FROM ${reviewTable} WHERE username = ($1)`, ["gmolin"]);
         await api
@@ -1426,7 +1430,7 @@ describe('Review PUT ERROR/ ', () => {
             salary: 3800,
             duration: 6,
             coverLetter: "none",
-            cv: "none" 
+            cv: "none"
         };
         const existingReview = await pool.query(`SELECT id FROM ${reviewTable} WHERE username = ($1)`, ["gmolin"]);
         await api

@@ -20,7 +20,9 @@ const parsingReview = (object: any, companyId: string) : NewReview => {
         salary: parseSalary(object.salary),
         duration: parseDuration(object.duration),
         coverLetter: (object.coverLetter) ? parseCoverLetter(object.coverLetter) : "",
-        cv: (object.coverLetter) ? parseResume(object.coverLetter) : ""
+        cv: (object.cv) ? parseResume(object.coverLetter) : "",
+        helpful: (object.helpful) ? parseVoting(object.helpful) : undefined,
+        notHelpful: (object.helpful) ? parseVoting(object.notHelpful) : undefined,
     };
     return newReview;
 };
@@ -65,7 +67,6 @@ const parseOverall = (overall: unknown) : string => {
 };
 
 const parseTotalRating = (totalRating: unknown) : number => {
-
     if (totalRating === undefined || !parsingHelper.isNumber(totalRating)) {
         throw new Error('Incorrect or missing totalRating ' + totalRating);
     }
@@ -118,6 +119,16 @@ const parseResume = (resume: unknown) : string => {
     }
     return resume;
 };
+
+const parseVoting = (vote: unknown) : number => {
+    if (vote === undefined || !parsingHelper.isNumber(vote)) {
+        throw new Error('Incorrect or missing vote ' + vote);
+    }
+    if (vote < 0) {
+        throw new Error('Score cannot be lower than 0:  ' + vote);
+    }
+    return vote;
+}
 
 export default {
     parsingReview,

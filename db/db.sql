@@ -59,6 +59,8 @@ CREATE TABLE review (
     duration FLOAT NOT NULL,
     coverLetter VARCHAR (256),
     cv VARCHAR (256),
+    helpful INT,
+    notHelpful INT,
     published_date timestamp DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (companyId) REFERENCES company(id) ON DELETE CASCADE
 );
@@ -84,6 +86,8 @@ CREATE TABLE review_test (
     duration FLOAT NOT NULL,
     coverLetter VARCHAR (256),
     cv VARCHAR (256),
+    helpful INT,
+    notHelpful INT,
     published_date timestamp DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (companyId) REFERENCES company_test(id) ON DELETE CASCADE
 );

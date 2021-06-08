@@ -16,7 +16,9 @@ const reviewColumns = `(
     salary, 
     duration, 
     coverletter, 
-    cv
+    cv,
+    helpful,
+    nothelpful
 )`;
 
 const updateScoreColumns = `averageTotalScore = ($1),
@@ -45,7 +47,9 @@ ratingCriteriaCulture = ($13),
 salary = ($14),
 duration = ($15),
 coverLetter =($16),
-cv = ($17)`;
+cv = ($17),
+helpful = ($18),
+nothelpful = ($19)`;
 
 export default {
         reviewColumns,
