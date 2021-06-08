@@ -310,6 +310,36 @@ describe('Testing parsing error managment', () => {
         const allReview = await api.get(`${apiBaseUrl}`);
         expect(allReview.body).toHaveLength(4);
     });
+    test('Adding review with too long review headlin cannot be added', async () => {
+        const wrongTypeReview = {
+            companyId: "",
+            userName: "gmolin",
+            userPicture: "gmolin",
+            pros: ["Great culture", "Nice perks", "Amazing office"],
+            cons: ["Some projects are quite boring"],
+            overall: "A great place to grow as software developerA great place to grow as software developerA great place to grow as software developerA great place to grow as software developerA great place to grow as software developerA great place to grow as software developerA great place to grow as software developerA great place to grow as software developerA great place to grow as software developerA great place to grow as software developerA great place to grow as software developerA great place to grow as software developer",
+            totalRating: 4,
+            ratingCriteriaInterview: 4,
+            ratingCriteriaOnboarding: 2,
+            ratingCriteriaSupervision: 4,
+            ratingCriteriaLearning: 4,
+            ratingCriteriaCodingPractices: 4,
+            ratingCriteriaPerks: 5,
+            ratingCriteriaCulture: 4,
+            salary: 3800,
+            duration: 6,
+            coverLetter: "none",
+            cv: "none" 
+        };
+        const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Reaktor"]);
+        await api
+            .post(`${apiBaseUrl}/${company.rows[0].id}`)
+            .send(wrongTypeReview)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        const allReview = await api.get(`${apiBaseUrl}`);
+        expect(allReview.body).toHaveLength(4);
+    });
     test('Adding review with wrong userPicture datatype cannot be added', async () => {
         const wrongTypeReview = {
             companyId: "",
@@ -1335,7 +1365,7 @@ describe('Testing parsing error managment', () => {
 
 //Testing review PUT api method
 describe('Review PUT / ', () => {
-    test.only("Updating a review works", async () => {
+    test("Updating a review works", async () => {
         const updatedReviewBody = {
             companyId: "",
             userName: "UNICORN0101010101",

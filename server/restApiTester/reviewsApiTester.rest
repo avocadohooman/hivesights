@@ -8,7 +8,7 @@ GET http://localhost:3000/api/reviews/41072326-7a4f-4edf-bda1-a9c75c0426fb
 GET http://localhost:3000/api/reviews/company/e3f9f26a-cd04-419a-b367-84e704adb419
 
 ###
-POST http://localhost:3000/api/reviews/6f13b12a-2fde-47ba-b626-945bc4fdcc69
+POST http://localhost:3000/api/reviews/612506b2-cfcf-4f90-b355-a40735774a80
 Content-Type: application/json
 
 {
@@ -17,7 +17,7 @@ Content-Type: application/json
     "userPicture": "gmolin",
     "pros": ["Nice"],
     "cons": ["Ok"],
-    "overall": "Very nice",
+    "overall": "Very niceVery niceVery niceVery niceVery niceVery niceVery niceVery niceVery 54ff1b13-4368-4072-a0ef-ba5c7b49c2c454ff1b13-4368-4072-a0ef-ba5c7b49c2c4 niceVery niceVery niceVery nice",
     "totalRating": 4,
     "ratingCriteriaInterview": 2,
     "ratingCriteriaOnboarding": 3,
@@ -58,4 +58,4 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/api/reviews/f7a89357-3f22-4c45-9ebd-5cf43fa31941
+DELETE http://localhost:3000/api/reviews/54ff1b13-4368-4072-a0ef-ba5c7b49c2c4

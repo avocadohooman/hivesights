@@ -63,6 +63,10 @@ const parseOverall = (overall: unknown) : string => {
     if (!overall || !parsingHelper.isString(overall)) {
         throw new Error('Incorrect or missing overall ' + overall);
     }
+    console.log("Length:", overall.length);
+    if (overall.length > 120) {
+        throw new Error('Overall message is too long: ' + overall.length + '. Max length is 120 characters');
+    }
     return overall;
 };
 
