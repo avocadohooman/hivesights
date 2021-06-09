@@ -59,8 +59,10 @@ CREATE TABLE review (
     duration FLOAT NOT NULL,
     coverLetter VARCHAR (256),
     cv VARCHAR (256),
-    helpful INT,
-    notHelpful INT,
+    upVotes INT,
+    upVoteUsers TEXT [],
+    downVotes INT,
+    downVoteUsers TEXT [],
     published_date timestamp DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (companyId) REFERENCES company(id) ON DELETE CASCADE
 );
@@ -86,12 +88,13 @@ CREATE TABLE review_test (
     duration FLOAT NOT NULL,
     coverLetter VARCHAR (256),
     cv VARCHAR (256),
-    helpful INT,
-    notHelpful INT,
+    upVotes INT,
+    upVoteUsers TEXT [],
+    downVotes INT,
+    downVoteUsers TEXT [],
     published_date timestamp DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (companyId) REFERENCES company_test(id) ON DELETE CASCADE
 );
-
 
 SELECT * FROM review_test WHERE companyid = 'e3f9f26a-cd04-419a-b367-84e704adb419';
 

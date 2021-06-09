@@ -6,8 +6,8 @@ const parsingReview = (object: any, companyId: string) : NewReview => {
         companyId: parseCompanyId(companyId),
         userName: parseUserName(object.userName),
         userPicture: parseUserPictureUrl(object.userPicture),
-        pros: (object.pros) ? parseProsCons(object.pros) : undefined,
-        cons: (object.cons) ? parseProsCons(object.cons) : undefined,
+        pros: (object.pros || object.downVoteUsers === false) ? parseProsCons(object.pros) : undefined,
+        cons: (object.cons || object.downVoteUsers === false) ? parseProsCons(object.cons) : undefined,
         overall: parseOverall(object.overall),
         totalRating: parseTotalRating(object.totalRating),
         ratingCriteriaInterview: parseCriteriaRating(object.ratingCriteriaInterview),
@@ -19,10 +19,12 @@ const parsingReview = (object: any, companyId: string) : NewReview => {
         ratingCriteriaCulture: parseCriteriaRating(object.ratingCriteriaCulture),
         salary: parseSalary(object.salary),
         duration: parseDuration(object.duration),
-        coverLetter: (object.coverLetter) ? parseCoverLetter(object.coverLetter) : "",
-        cv: (object.cv) ? parseResume(object.coverLetter) : "",
-        helpful: (object.helpful) ? parseVoting(object.helpful) : undefined,
-        notHelpful: (object.helpful) ? parseVoting(object.notHelpful) : undefined,
+        coverLetter: (object.coverLetter || object.downVoteUsers === false) ? parseCoverLetter(object.coverLetter) : "",
+        cv: (object.cv || object.downVoteUsers === false) ? parseResume(object.coverLetter) : "",
+        upVotes: (object.upVotes || object.downVoteUsers === false) ? parseVoting(object.upVotes) : undefined,
+        upVoteUsers: (object.upVoteUsers || object.downVoteUsers === false) ? parseVotingUsers(object.upVoteUsers) : undefined,
+        downVotes: (object.downVotes || object.downVoteUsers === false) ? parseVoting(object.downVotes) : undefined,
+        downVoteUsers: (object.downVoteUsers || object.downVoteUsers === false) ? parseVotingUsers(object.downVoteUsers) : undefined,
     };
     return newReview;
 };
@@ -53,7 +55,6 @@ const parseProsCons = (prosCons: unknown) : string => {
         throw new Error('Incorrect or missing Pros/Cons ' + prosCons);
     }
     const amountOfWords = prosCons.split(" ");
-    console.log("Amount of words", amountOfWords);
     if (amountOfWords.length < 5) {
         throw new Error('Pros/Const must constain at least 5 words. Current amount of words: ' + amountOfWords.length);
     }
@@ -130,9 +131,20 @@ const parseVoting = (vote: unknown) : number => {
         throw new Error('Incorrect or missing vote ' + vote);
     }
     if (vote < 0) {
-        throw new Error('Score cannot be lower than 0:  ' + vote);
+        throw new Error('Vote cannot be lower than 0:  ' + vote);
     }
     return vote;
+}
+
+const parseVotingUsers = (users: unknown[]) : string[] => {
+    let _users: string[] = [];
+    _users = users.map(user => {
+        if (!parsingHelper.isString(user)) {
+            throw new Error('Incorrect data type for user ' + user);
+        }
+        return user;
+    });
+    return _users;
 }
 
 export default {

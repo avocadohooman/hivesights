@@ -102,7 +102,7 @@ reviewRouter.put('/:id', async (req, res) => {
         const updatedReview = await pool.query(`UPDATE ${reviewTable} 
         SET
         ${reviewQueries.updateReviewColumns}
-        WHERE id = ($20)`, 
+        WHERE id = ($22)`, 
         [
             updatedReviewBody.userName,
             updatedReviewBody.userPicture,
@@ -121,8 +121,10 @@ reviewRouter.put('/:id', async (req, res) => {
             updatedReviewBody.duration,
             updatedReviewBody.coverLetter,
             updatedReviewBody.cv,
-            updatedReviewBody.helpful,
-            updatedReviewBody.notHelpful,
+            updatedReviewBody.upVotes,
+            updatedReviewBody.upVoteUsers,
+            updatedReviewBody.downVotes,
+            updatedReviewBody.downVoteUsers,
             reviewId
         ]);
         console.log(`Review ${updatedReview.rows[0]} udpated`);

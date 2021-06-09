@@ -27,7 +27,11 @@ let intialReviews: NewReview[] = [
         salary: 4500,
         duration: 6,
         coverLetter: "none",
-        cv: "none"    
+        cv: "none",
+        upVotes: 0,
+        upVoteUsers: [],
+        downVotes: 0,
+        downVoteUsers: []    
     },
     {
         companyId: "",
@@ -48,8 +52,10 @@ let intialReviews: NewReview[] = [
         duration: 6,
         coverLetter: "none",
         cv: "none",
-        helpful: 1,
-        notHelpful: 0
+        upVotes: 0,
+        upVoteUsers: [],
+        downVotes: 0,
+        downVoteUsers: [] 
     },
     {
         companyId: "",
@@ -69,8 +75,10 @@ let intialReviews: NewReview[] = [
         salary: 4000,
         duration: 6,
         coverLetter: "none",
-        helpful: 3,
-        notHelpful: 0    
+        upVotes: 0,
+        upVoteUsers: [],
+        downVotes: 0,
+        downVoteUsers: []   
     },
     {
         companyId: "",
@@ -91,8 +99,10 @@ let intialReviews: NewReview[] = [
         duration: 6,
         coverLetter: "none",
         cv: "none",
-                helpful: 1,
-        notHelpful: 0     
+        upVotes: 0,
+        upVoteUsers: [],
+        downVotes: 0,
+        downVoteUsers: []      
     }
 ]
 

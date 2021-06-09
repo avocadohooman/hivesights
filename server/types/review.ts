@@ -18,10 +18,13 @@ export type Review = {
     duration: number,
     coverLetter?: string,
     cv?: string,
-    helpful?: number,
-    notHelpful?: number,
+    upVotes?: number,
+    upVoteUsers?: string[],
+    downVotes?: number,
+    downVoteUsers?: string[],
     publishedDate: Date
 };
 
 export type NewReview = Omit<Review, 'id' | 'publishedDate'>;
 export type CompanyTotalRating = Pick<Review, 'totalRating'>;
+export type ReviewVoting = Pick<Review, 'upVotes' | 'downVotes' | 'upVoteUsers' | 'downVoteUsers'>;

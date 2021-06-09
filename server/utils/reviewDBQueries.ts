@@ -17,9 +17,10 @@ const reviewColumns = `(
     duration, 
     coverletter, 
     cv,
-    helpful,
-    nothelpful
-)`;
+    upvotes,
+    upvoteusers,
+    downvotes,
+    downvoteusers)`;
 
 const updateScoreColumns = `averageTotalScore = ($1),
 averageinterviewscore = ($2),
@@ -48,8 +49,10 @@ salary = ($14),
 duration = ($15),
 coverLetter =($16),
 cv = ($17),
-helpful = ($18),
-nothelpful = ($19)`;
+upvotes = ($18),
+upvoteusers = ($19),
+downvotes = ($20),
+downvoteusers = ($21)`;
 
 export default {
         reviewColumns,

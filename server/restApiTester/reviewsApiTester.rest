@@ -5,7 +5,7 @@ GET http://localhost:3000/api/reviews/
 GET http://localhost:3000/api/reviews/41072326-7a4f-4edf-bda1-a9c75c0426fb
 
 ###
-GET http://localhost:3000/api/reviews/company/e3f9f26a-cd04-419a-b367-84e704adb419
+GET http://localhost:3000/api/reviews/company/9ce0e273-c2d2-461a-9141-d827c02d7583
 
 ###
 POST http://localhost:3000/api/reviews/9ce0e273-c2d2-461a-9141-d827c02d7583
@@ -33,15 +33,15 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:3000/api/reviews/41072326-7a4f-4edf-bda1-a9c75c0426fa
+PUT http://localhost:3000/api/reviews/b7415998-3f92-4752-8233-0d7efacb5b57
 Content-Type: application/json
 
 {
-    "companyId": "6f13b12a-2fde-47ba-b626-945bc4fdcc69",
+    "companyId": "8990a061-6729-47dc-a1c9-70e7aa49dd57",
     "userName": "gmolin",
     "userPicture": "gmolin",
-    "pros": "Nice",
-    "cons": "Ok",
+    "pros": "Nice fucking job yeah yeah",
+    "cons": "the moentoring could have been a bit better",
     "overall": "Very nice",
     "totalRating": 3,
     "ratingCriteriaInterview": 4,
@@ -54,7 +54,11 @@ Content-Type: application/json
     "salary": 3000,
     "duration": 8,
     "coverLetter": "none",
-    "cv": "none"
+    "cv": "none",
+    "upVotes": 22,
+    "upVoteUsers": ["npminof"],
+    "downVotes": 0,
+    "downVoteUsers": true 
 }
 
 ###

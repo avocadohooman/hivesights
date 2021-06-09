@@ -1415,8 +1415,10 @@ describe('Review PUT / ', () => {
             duration: 6,
             coverLetter: "none",
             cv: "none",
-            helpful: 1,
-            notHelpful: 0
+            upVotes: 1,
+            upVoteUsers: ["npminof"],
+            downVotes: 0,
+            downVoteUsers: [] 
         };
         const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Wunderdog"]);
         updatedReviewBody.companyId = company.rows[0].id;
@@ -1427,11 +1429,12 @@ describe('Review PUT / ', () => {
             .expect(200)
             .expect('Content-Type', /application\/json/);
         const allReview = await api.get(`${apiBaseUrl}`);
-        
         expect(allReview.statusCode).toBe(200);
         expect(allReview.body).toHaveLength(4);
         expect(allReview.body[3].username).toBe('UNICORN0101010101');
         expect(allReview.body[3].totalrating).toBe(3);
+        expect(allReview.body[3].upvotes).toBe(1);
+        expect(allReview.body[3].upvoteusers[0]).toBe('npminof');
     });
 });
 
@@ -1457,8 +1460,10 @@ describe('Review PUT ERROR/ ', () => {
             duration: 6,
             coverLetter: "none",
             cv: "none",
-            helpful: 1,
-            notHelpful: 0
+            upVotes: 1,
+            upVoteUsers: ["npminof"],
+            downVotes: 0,
+            downVoteUsers: [] 
         };
         const existingReview = await pool.query(`SELECT id FROM ${reviewTable} WHERE username = ($1)`, ["gmolin"]);
         await api
@@ -1490,9 +1495,203 @@ describe('Review PUT ERROR/ ', () => {
             salary: 3800,
             duration: 6,
             coverLetter: "none",
-            cv: "none"
+            cv: "none",
+            upVotes: 1,
+            upVoteUsers: ["npminof"],
+            downVotes: 0,
+            downVoteUsers: [] 
         };
         const existingReview = await pool.query(`SELECT id FROM ${reviewTable} WHERE username = ($1)`, ["gmolin"]);
+        await api
+            .put(`${apiBaseUrl}/${existingReview.rows[0].id}`)
+            .send(updatedReviewBody)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        const allReview = await api.get(`${apiBaseUrl}`);
+        expect(allReview.statusCode).toBe(200);
+        expect(allReview.body).toHaveLength(4);
+        expect(allReview.body).not.toContain('UNICORN0101010101');
+    });
+    test("Updating a review with wrong vote datatype doesn't work", async () => {
+        const updatedReviewBody = {
+            companyId: "",
+            userName: "UNICORN0101010101",
+            userPicture: "gmolin",
+            pros: "Great culture Nice perks Amazing office",
+            cons: "Some projects are quite boring",
+            overall: "A great place to grow as software developer",
+            totalRating: 3,
+            ratingCriteriaInterview: 4,
+            ratingCriteriaOnboarding: 2,
+            ratingCriteriaSupervision: 4,
+            ratingCriteriaLearning: 4,
+            ratingCriteriaCodingPractices: 4,
+            ratingCriteriaPerks: 5,
+            ratingCriteriaCulture: 4,
+            salary: 3800,
+            duration: 6,
+            coverLetter: "none",
+            cv: "none",
+            upVotes: "2",
+            upVoteUsers: ["npminof"],
+            downVotes: 0,
+            downVoteUsers: [] 
+        };
+        const existingReview = await pool.query(`SELECT id FROM ${reviewTable} WHERE username = ($1)`, ["gmolin"]);
+        const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Wunderdog"]);
+        updatedReviewBody.companyId = company.rows[0].id;
+        await api
+            .put(`${apiBaseUrl}/${existingReview.rows[0].id}`)
+            .send(updatedReviewBody)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        const allReview = await api.get(`${apiBaseUrl}`);
+        expect(allReview.statusCode).toBe(200);
+        expect(allReview.body).toHaveLength(4);
+        expect(allReview.body).not.toContain('UNICORN0101010101');
+    });
+    test("Updating a review with upVote less than 0 doesn't work", async () => {
+        const updatedReviewBody = {
+            companyId: "",
+            userName: "UNICORN0101010101",
+            userPicture: "gmolin",
+            pros: "Great culture Nice perks Amazing office",
+            cons: "Some projects are quite boring",
+            overall: "A great place to grow as software developer",
+            totalRating: 3,
+            ratingCriteriaInterview: 4,
+            ratingCriteriaOnboarding: 2,
+            ratingCriteriaSupervision: 4,
+            ratingCriteriaLearning: 4,
+            ratingCriteriaCodingPractices: 4,
+            ratingCriteriaPerks: 5,
+            ratingCriteriaCulture: 4,
+            salary: 3800,
+            duration: 6,
+            coverLetter: "none",
+            cv: "none",
+            upVotes: -11,
+            upVoteUsers: ["npminof"],
+            downVotes: 0,
+            downVoteUsers: [] 
+        };
+        const existingReview = await pool.query(`SELECT id FROM ${reviewTable} WHERE username = ($1)`, ["gmolin"]);
+        const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Wunderdog"]);
+        updatedReviewBody.companyId = company.rows[0].id;
+        await api
+            .put(`${apiBaseUrl}/${existingReview.rows[0].id}`)
+            .send(updatedReviewBody)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        const allReview = await api.get(`${apiBaseUrl}`);
+        expect(allReview.statusCode).toBe(200);
+        expect(allReview.body).toHaveLength(4);
+        expect(allReview.body).not.toContain('UNICORN0101010101');
+    });
+    test("Updating a review with downVote less than 0 doesn't work", async () => {
+        const updatedReviewBody = {
+            companyId: "",
+            userName: "UNICORN0101010101",
+            userPicture: "gmolin",
+            pros: "Great culture Nice perks Amazing office",
+            cons: "Some projects are quite boring",
+            overall: "A great place to grow as software developer",
+            totalRating: 3,
+            ratingCriteriaInterview: 4,
+            ratingCriteriaOnboarding: 2,
+            ratingCriteriaSupervision: 4,
+            ratingCriteriaLearning: 4,
+            ratingCriteriaCodingPractices: 4,
+            ratingCriteriaPerks: 5,
+            ratingCriteriaCulture: 4,
+            salary: 3800,
+            duration: 6,
+            coverLetter: "none",
+            cv: "none",
+            upVotes: 2,
+            upVoteUsers: ["npminof"],
+            downVotes: -454,
+            downVoteUsers: [] 
+        };
+        const existingReview = await pool.query(`SELECT id FROM ${reviewTable} WHERE username = ($1)`, ["gmolin"]);
+        const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Wunderdog"]);
+        updatedReviewBody.companyId = company.rows[0].id;
+        await api
+            .put(`${apiBaseUrl}/${existingReview.rows[0].id}`)
+            .send(updatedReviewBody)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        const allReview = await api.get(`${apiBaseUrl}`);
+        expect(allReview.statusCode).toBe(200);
+        expect(allReview.body).toHaveLength(4);
+        expect(allReview.body).not.toContain('UNICORN0101010101');
+    });
+    test("Updating a review with upVoteUsers datatype doesn't work", async () => {
+        const updatedReviewBody = {
+            companyId: "",
+            userName: "UNICORN0101010101",
+            userPicture: "gmolin",
+            pros: "Great culture Nice perks Amazing office",
+            cons: "Some projects are quite boring",
+            overall: "A great place to grow as software developer",
+            totalRating: 3,
+            ratingCriteriaInterview: 4,
+            ratingCriteriaOnboarding: 2,
+            ratingCriteriaSupervision: 4,
+            ratingCriteriaLearning: 4,
+            ratingCriteriaCodingPractices: 4,
+            ratingCriteriaPerks: 5,
+            ratingCriteriaCulture: 4,
+            salary: 3800,
+            duration: 6,
+            coverLetter: "none",
+            cv: "none",
+            upVotes: 2,
+            upVoteUsers: [0],
+            downVotes: 1,
+            downVoteUsers: [] 
+        };
+        const existingReview = await pool.query(`SELECT id FROM ${reviewTable} WHERE username = ($1)`, ["gmolin"]);
+        const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Wunderdog"]);
+        updatedReviewBody.companyId = company.rows[0].id;
+        await api
+            .put(`${apiBaseUrl}/${existingReview.rows[0].id}`)
+            .send(updatedReviewBody)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+        const allReview = await api.get(`${apiBaseUrl}`);
+        expect(allReview.statusCode).toBe(200);
+        expect(allReview.body).toHaveLength(4);
+        expect(allReview.body).not.toContain('UNICORN0101010101');
+    });
+    test("Updating a review with downVoteUsers datatype doesn't work", async () => {
+        const updatedReviewBody = {
+            companyId: "",
+            userName: "UNICORN0101010101",
+            userPicture: "gmolin",
+            pros: "Great culture Nice perks Amazing office",
+            cons: "Some projects are quite boring",
+            overall: "A great place to grow as software developer",
+            totalRating: 3,
+            ratingCriteriaInterview: 4,
+            ratingCriteriaOnboarding: 2,
+            ratingCriteriaSupervision: 4,
+            ratingCriteriaLearning: 4,
+            ratingCriteriaCodingPractices: 4,
+            ratingCriteriaPerks: 5,
+            ratingCriteriaCulture: 4,
+            salary: 3800,
+            duration: 6,
+            coverLetter: "none",
+            cv: "none",
+            upVotes: 2,
+            upVoteUsers: ["npimenof"],
+            downVotes: 1,
+            downVoteUsers: false 
+        };
+        const existingReview = await pool.query(`SELECT id FROM ${reviewTable} WHERE username = ($1)`, ["gmolin"]);
+        const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Wunderdog"]);
+        updatedReviewBody.companyId = company.rows[0].id;
         await api
             .put(`${apiBaseUrl}/${existingReview.rows[0].id}`)
             .send(updatedReviewBody)
