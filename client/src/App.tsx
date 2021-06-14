@@ -1,21 +1,20 @@
-import React from 'react';
-import * as authServices from './services/authApi';
-const App = () => {
+import React, { useState, useEffect } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useLocation,
+  useHistory,
+} from 'react-router-dom';
+import LandingPage from './components/LandingPage';
 
-  const login42 = async () => {
-    try {
-      const data = await authServices.fortyTwoUrl();
-      console.log("DATA", data);
-      window.location = data.url;
-    } catch (error) {
-      console.log(error.message);
-    }
-  }
+const App = () => {
+  const [user, setUser] = useState({id: '', userName: '', imageUrl: '', intraUrl: '', internshipValidated: false})
+
   return (
-    <div>
-      <h1>Hivesights</h1>
-      <button onClick={login42}>Login</button>
-    </div>
+    <Router>
+      <LandingPage />
+    </Router>
   );
 };
 

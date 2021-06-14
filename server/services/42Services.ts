@@ -2,8 +2,9 @@ import axios from 'axios';
 import jwt from 'jsonwebtoken';
 import {v4 as uuid } from 'uuid';
 import dotenv from 'dotenv';
-dotenv.config();
+import { User } from '../types/user';
 
+dotenv.config();
 const backendURI = 'http://localhost:3000';
 const redirectURI = `${backendURI}/api/auth/42/callback`;
 const userToken: any = {};
@@ -48,10 +49,26 @@ const getUser = async (token: any) => {
                 Authorization: token,
             },
         });
-        console.log("USER DATA", data.id, data.login);
+        const internship = data.projects_users.filter((project: { id: number; status: string, project: {id: number}}) => project.project.id === 826);
+        let internshipValidated: boolean = false;
+        if (internship[0].status === 'finished') {
+            internshipValidated = true;
+        }
+        console.log("User Data", data.login);
+        const user: User = {
+            id: data.id,
+            userName: data.login,
+            imageUrl: data.image_url,
+            intraUrl: data.url,
+            internshipValidated: internshipValidated,
+        };
+        console.log('Return User: ', user);
         return {
             id: data.id,
-            userName: data.login
+            userName: data.login,
+            imageUrl: data.image_url,
+            intraUrl: data.url,
+            internshipValidated: internshipValidated,
         };
     } catch (error) {
         console.log(`${error.message}`);

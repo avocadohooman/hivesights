@@ -1,0 +1,114 @@
+@font-face {
+    font-family: 'Boogie School Sand';
+    src: local('Boogie School Sand'), url(./fonts/Boogie\ School\ Sans.otf) format('opentype');
+}
+
+@font-face {
+    font-family: 'Druk Bold Regular';
+    src: local('Druk Bold Regular'), url(./fonts/Druk\ Bold\ Regular.otf) format('opentype');
+}
+
+@font-face {
+    font-family: 'MICR';
+    src: local('MICR'), url(./fonts/MICR.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'SimpleMono-Bold';
+    font-weight: bold;
+    src: local('SimpleMono'), url(./fonts/SimplonMono-Bold-WebTrial.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'SimpleMono-Bolditalic';
+    font-weight: bold;
+    font-style: italic;
+    src: local('SimpleMono'), url(./fonts/SimplonMono-BoldItalic-WebTrial.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'SimpleMono-Light';
+    font-weight: lighter;
+    src: local('SimpleMono'), url(./fonts/SimplonMono-Light-WebTrial.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'SimpleMono-Lightitalic';
+    font-weight: lighter;
+    font-style: italic;
+    src: local('SimpleMono'), url(./fonts/SimplonMono-LightItalic-WebTrial.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'SimpleMono-Medium';
+    font-weight:  medium;
+    src: local('SimpleMono'), url(./fonts/SimplonMono-Medium-WebTrial.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'SimpleMono-Mediumitalic';
+    font-weight: medium;
+    font-style: italic;
+    src: local('SimpleMono'), url(./fonts/SimplonMono-MediumItalic-WebTrial.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'SimpleMono-Regular';
+    src: local('SimpleMono'), url(./fonts/SimplonMono-Regular-WebTrial.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'SimpleMono-Regularitalic';
+    font-style: italic;
+    src: local('SimpleMono'), url(./fonts/SimplonMono-RegularItalic-WebTrial.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'SimpleNorm-Bold';
+    font-weight: bold;
+    src: local('SimpleNorm'), url(./fonts/SimplonNorm-Bold-WebTrial.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'SimpleNorm-Bolditalic';
+    font-weight: bold;
+    font-style: italic;
+    src: local('SimpleNorm'), url(./fonts/SimplonNorm-BoldItalic-WebTrial.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'SimpleNorm-Light';
+    font-weight: lighter;
+    src: local('SimpleNorm'), url(./fonts/SimplonNorm-Light-WebTrial.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'SimpleNorm-Lightitalic';
+    font-weight: lighter;
+    font-style: italic;
+    src: local('SimpleNorm'), url(./fonts/SimplonNorm-LightItalic-WebTrial.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'SimpleNorm-Medium';
+    font-weight:  medium;
+    src: local('SimpleNorm'), url(./fonts/SimplonNorm-Medium-WebTrial.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'SimpleNorm-Mediumitalic';
+    font-weight: medium;
+    font-style: italic;
+    src: local('SimpleNorm'), url(./fonts/SimplonNorm-MediumItalic-WebTrial.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'SimpleNorm-Regular';
+    src: local('SimpleNorm'), url(./fonts/SimplonNorm-Regular-WebTrial.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'SimpleNorm-Regularitalic';
+    font-style: italic;
+    src: local('SimpleNorm'), url(./fonts/SimplonNorm-RegularItalic-WebTrial.woff) format('woff');
+}
