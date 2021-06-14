@@ -11,9 +11,10 @@ import LandingPage from './components/LandingPage';
 import Hivesights from './components/Hivesights';
 import authApi from './services/authApi';
 import jwt_decode from 'jwt-decode';
+import { StateUser } from './models/userModel';
 
 interface UserToken {
-	id: number,
+	id: string,
 	userName: string,
 	imageUrl: string,
 	intraUrl: string,
@@ -21,7 +22,7 @@ interface UserToken {
 }
 
 const App = () => {
-  const [user, setUser] = useState({id: -1, userName: '', imageUrl: '', intraUrl: '', internshipValidated: false})
+  const [user, setUser] = useState<StateUser | undefined>(undefined);
   const history = useHistory();
 
   useEffect(() => {
@@ -43,20 +44,18 @@ const App = () => {
 				console.log("DECODED", decoded);
 				setUser({id: decoded.id, userName: decoded.userName, imageUrl: decoded.imageUrl, intraUrl: decoded.intraUrl, internshipValidated: decoded.internshipValidated})
 				history.push('/');
-				console.log("User", user);
 			} catch (error) {
 				console.log("ERROR", error);
 			}
 		}
 	};
-
 	checkToken();
   }, []);
 
   return (
     <Router>
 		<Container>
-			{!user.id ? (<LandingPage/>) : (<Hivesights />)}
+			{!user ? (<LandingPage/>) : (<Hivesights user={user}/>)}
 		</Container>
     </Router>
   );

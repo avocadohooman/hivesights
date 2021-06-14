@@ -1,7 +1,8 @@
 import React from 'react';
 
-const Hivesights = () => {
+const Hivesights = (props: any) => {
 
+    console.log("PROPS", props);
     return (
         <div>Hello</div>
     );
