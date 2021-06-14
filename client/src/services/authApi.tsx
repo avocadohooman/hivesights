@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios';
 
 const baseURL = 'http://localhost:3000/api/auth';
@@ -7,4 +8,13 @@ export const fortyTwoUrl = async () => {
     return res.data;
 };
 
-export default fortyTwoUrl;
+const getToken = async (key: any) => {
+    const res: any = await axios.get(baseURL + `/token/${key}`);
+    console.log("RESPONSE", res.data.token);
+    return res.data.token;
+}
+
+export default {
+    fortyTwoUrl,
+    getToken
+}

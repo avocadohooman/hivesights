@@ -3,5 +3,5 @@ export type User = {
     userName: string,
     imageUrl: string,
     intraUrl: string,
-    internshipValidated: boolean
+    internshipValidated: boolean,
 };

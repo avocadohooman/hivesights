@@ -1,5 +1,6 @@
 import express from 'express';
 import authServices from '../services/42Services';
+import { User } from '../types/user';
 
 const authRouter = express.Router();
 
@@ -22,11 +23,24 @@ authRouter.get('/42/callback', async (req, res) => {
         const token = await authServices.getAuthorizationToken(code, state);
         console.log("Getting user");
         const user = await authServices.getUser(token);
-        const key = authServices.setUserToken(user.id);
+        const userForToken: User = {
+            id: user.id,
+            userName: user.userName,
+            imageUrl: user.imageUrl,
+            intraUrl: user.intraUrl,
+            internshipValidated: user.internshipValidated,
+        }
+        console.log("User for Token", userForToken);
+        const key = authServices.setUserToken(userForToken);
         return res.redirect(`http://localhost:3001?auth=${key}`);
     } catch (error) {
         console.log(error.message);
     }
+});
+
+authRouter.get('/token/:key', async (res, req) => {
+    console.log("Getting user token");
+    await authServices.getUserToken(res, req);
 });
 
 export default authRouter;

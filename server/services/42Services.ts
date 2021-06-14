@@ -14,14 +14,26 @@ const get42URL = () => {
     return `${APIbaseURL}?client_id=${process.env.FORTYTWO_CLIENT_ID}&redirect_uri=${redirectURI}&scope=public&response_type=code&state=${process.env.FORTYTWO_STATE}`;
 };
 
-const setUserToken = (id: any) => {
-    const userForToken = {id};
+const setUserToken = (user: User) => {
+    const userForToken = user;
     const key = uuid();
 
     userToken[key] = jwt.sign(userForToken, process.env.SECRET as string, { expiresIn: 60*60 });
-
     return key;
 };
+
+const getUserToken = (req: any, res: any) => {
+    if (!req.params.key) {
+        return res.status(400).json({error: 'Invalid or missing key'});
+    }
+    const token = userToken[req.params.key];
+    if (!token) {
+        return res.status(400).json({error: 'Invalid or missing key'});
+    }
+    userToken[req.params.key] = null;
+    console.log("Got token", token);
+    return res.status(200).json({token});
+}
 
 const getAuthorizationToken = async (code: any, state: any) => {
     console.log('STATE', state, code);
@@ -80,5 +92,6 @@ export default {
     get42URL,
     setUserToken,
     getAuthorizationToken,
-    getUser
+    getUser,
+    getUserToken
 };
