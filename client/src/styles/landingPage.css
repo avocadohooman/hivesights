@@ -1,3 +1,23 @@
+.landingPageContainer {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .title {
-    font-family: Boogie School, Arial, serif;
+    font-size: 100px;
+    font-family: 'Boogie School Sand';
+}
+
+.login {
+    font-size: 50px;
+    font-family: 'SimpleNorm-Regular';
+    border: none;
+    border-bottom: 1px solid #F9DE4B;
+    cursor: pointer;
+    background: none;
+    width: fit-content;
 }

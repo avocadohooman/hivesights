@@ -1,13 +1,8 @@
 import React from 'react';
 import * as authServices from '../services/authApi';
+import '../styles/landingPage.css';
 
 const LandingPage = () => {
-
-	const landingPageStyle = {
-		title: {
-			font-family: 'test',
-		},
-	} as const
 
 	const login42 = async () => {
 		try {
@@ -19,13 +14,12 @@ const LandingPage = () => {
 		}
 	}
 
-
 	return (
-		<div>
-			<div>Hivesights</div>
-			<button onClick={login42}>Login</button>
+		<div className="landingPageContainer">
+			<div className="title">Hivesights</div>
+			<button className="login" onClick={login42}>Sign In</button>
 		</div>
-	)
+	);
 }
 
 export default LandingPage;

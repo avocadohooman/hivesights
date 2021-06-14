@@ -23,7 +23,7 @@ authRouter.get('/42/callback', async (req, res) => {
         console.log("Getting user");
         const user = await authServices.getUser(token);
         const key = authServices.setUserToken(user.id);
-        return res.redirect(`http://localhost:3000?auth=${key}`);
+        return res.redirect(`http://localhost:3001?auth=${key}`);
     } catch (error) {
         console.log(error.message);
     }
