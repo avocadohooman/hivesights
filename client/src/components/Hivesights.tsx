@@ -4,7 +4,7 @@ const Hivesights = (props: any) => {
 
     console.log("PROPS", props);
     return (
-        <div>Hello World</div>
+        <div>{props.user.userName} has validated an internship: {props.user.internshipValidated === true ? 'Yes' : 'No'}</div>
     );
 }
 
