@@ -63,10 +63,11 @@ const addReview = async (newReview: NewReview, reviewTable: string, companyTable
         newReview.upVotes,
         newReview.upVoteUsers,
         newReview.downVotes,
-        newReview.downVoteUsers
+        newReview.downVoteUsers,
     ]);
     await updateAverageSalary(newReview.companyId, reviewTable, companyTable);
     await updateScores(newReview.companyId, reviewTable, companyTable);
+    await updateAmountOfReviews(newReview.companyId, reviewTable, companyTable);
 };
 
 const updateTotalScore = async (companyId: string, reviewTable: string, companyTable: string) => {
@@ -138,6 +139,24 @@ const updateAverageSalary = async (companyId: string, reviewTable: string, compa
     id = ($2)`,
     [
         newAverageSalary.rows[0].avg,
+        companyId
+    ]).catch((e:any) => {
+        if (e) {
+          console.log("ERROR", e);
+          throw new Error("ERROR: " + e.message);
+        }
+    });
+};
+
+const updateAmountOfReviews = async (companyId: string, reviewTable: string, companyTable: string) => {
+    const newAmount = await pool.query(`SELECT * FROM ${reviewTable} WHERE companyid = ($1)`, [companyId]);
+    const updatedAmount = await pool.query(`UPDATE ${companyTable} 
+    SET
+    reviews = ($1) 
+    WHERE
+    id = ($2)`,
+    [
+        newAmount.rowCount,
         companyId
     ]).catch((e:any) => {
         if (e) {

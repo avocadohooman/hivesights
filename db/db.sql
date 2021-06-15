@@ -15,7 +15,8 @@ CREATE TABLE company (
     averagePerksScore FLOAT,
     averageCultureScore FLOAT,
     averageSalaries FLOAT,
-    interviews INT
+    interviews INT,
+    reviews INT
 );
 
 -- Company table for running tests
@@ -35,7 +36,8 @@ CREATE TABLE company_test (
     averagePerksScore FLOAT,
     averageCultureScore FLOAT,
     averageSalaries FLOAT,
-    interviews INT
+    interviews INT,
+    reviews INT
 );
 
 -- Work in progress
@@ -99,3 +101,5 @@ CREATE TABLE review_test (
 SELECT * FROM review_test WHERE companyid = 'e3f9f26a-cd04-419a-b367-84e704adb419';
 
 SELECT id FROM company_test WHERE companyname = 'Wunderdog';
+
+SELECT * FROM review_test WHERE companyid = 'af2e0ee6-a2d0-4fe1-aad4-d183a4528429';

@@ -1,7 +1,7 @@
 import React from 'react';
-import * as authServices from '../services/authApi';
-import '../styles/landingPage.css';
-import { User } from '../models/userModel';
+import * as authServices from '../../services/authApi';
+import '../../styles/landingPage.css';
+import { User } from '../../models/userModel';
 
 const LandingPage = () => {
 

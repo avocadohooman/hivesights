@@ -7,7 +7,7 @@ import {
   useLocation,
   useHistory,
 } from 'react-router-dom';
-import LandingPage from './components/LandingPage';
+import LandingPage from './components/Landing/LandingPage';
 import Hivesights from './components/Hivesights';
 import Navbar from './components/Navbar';
 import authApi from './services/authApi';

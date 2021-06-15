@@ -1,5 +1,5 @@
 import React from 'react';
-import { StateKpi } from '../models/kpiModel';
+import { StateKpi } from '../../models/kpiModel';
 import KeyIndicator from './KeyIndicator';
 
 const KeyIndicatorsWrapper = ({kpi}: {kpi: StateKpi | undefined}): JSX.Element => {
