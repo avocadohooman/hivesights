@@ -30,17 +30,32 @@
     background-size: cover;
     box-shadow: 0 4px 12px rgba(149,157,165,.2);
     border-radius: 50%;
+    border: 1px solid #F9DE4B;
 }
 
 .headerUserName {
     font-family: 'Druk Bold Regular';
     font-size: 24px;
-    margin-right: 30px;
-    margin-left: 20px;
+    margin-right: 22px;
+    margin-left: 10px;
 }
 
 .userSection {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
+}
+
+.signOutWrapper {
+    width: 20px;
+    height: 20px;
+    margin-right: 20px;
+    margin-bottom: 3px;
+    cursor: pointer;
+}
+
+.signOutWrapper:hover {
+    width: 22px;
+    height: 22px;
 }

@@ -54,7 +54,7 @@ const App = () => {
 
   return (
     <Router>
-		{user ? (<Navbar setUser={setUser} user={user}/>) : <LandingPage />} 
+		{user && <Navbar setUser={setUser} user={user}/>}
 		<Container>
 			{!user ? (<LandingPage/>) : (<Hivesights user={user}/>)}
 		</Container>
