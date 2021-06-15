@@ -55,7 +55,7 @@ const App = () => {
   return (
     <Router>
 		{user && <Navbar setUser={setUser} user={user}/>}
-		<Container>
+		<Container maxWidth="md">
 			{!user ? (<LandingPage/>) : (<Hivesights user={user}/>)}
 		</Container>
     </Router>

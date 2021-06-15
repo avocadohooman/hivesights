@@ -2,6 +2,7 @@ import React from 'react';
 import '../styles/navBar.css';
 import { ReactComponent as SignOut } from '../assets/signOut.svg';
 import Tooltip from '@material-ui/core/Tooltip';
+import { useHistory } from 'react-router';
 
 const Navbar = (props: any) => {
 
@@ -11,15 +12,20 @@ const Navbar = (props: any) => {
     const headerAvatarStyle = {
         backgroundImage: `url(${avatarImageUrl})`,
     }
+    const history = useHistory();
     
     const handleLogout = () => {
         localStorage.removeItem('token');
         props.setUser(undefined);
     }   
 
+    const handleGoHome = () => {
+        history.push('/');
+    }
+
     return (
         <div className="navbar">
-            <button className="logoTitle">{logoTitle}</button>
+            <button className="logoTitle" onClick={handleGoHome}>{logoTitle}</button>
             <div className="userSection">
                 <div className="headerAvatarWrapper" style={headerAvatarStyle}></div>
                 <div className="headerUserName">{userName}</div>
