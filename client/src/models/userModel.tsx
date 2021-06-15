@@ -4,7 +4,7 @@ export type User = {
     imageUrl: string,
     intraUrl: string,
     internshipValidated: boolean,
-};
+}
 
 export interface StateUser {
     id: string,
@@ -12,4 +12,4 @@ export interface StateUser {
     imageUrl: string,
     intraUrl: string,
     internshipValidated: boolean,
-};
+}

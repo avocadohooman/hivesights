@@ -1,6 +1,6 @@
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
-import {v4 as uuid } from 'uuid';
+import { v4 as uuid } from 'uuid';
 import dotenv from 'dotenv';
 import { User } from '../types/user';
 
@@ -54,7 +54,6 @@ const getAuthorizationToken = async (code: any, state: any) => {
 };
 
 const getUser = async (token: any) => {
-    console.log("TOKEN", token);
     try {
         const { data } = await axios.get('https://api.intra.42.fr/v2/me', {
             headers: {
@@ -66,7 +65,6 @@ const getUser = async (token: any) => {
         if (internship[0].status === 'finished') {
             internshipValidated = true;
         }
-        console.log("User Data", data.login);
         const user: User = {
             id: data.id,
             userName: data.login,

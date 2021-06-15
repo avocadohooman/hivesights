@@ -9,6 +9,7 @@ import {
 } from 'react-router-dom';
 import LandingPage from './components/LandingPage';
 import Hivesights from './components/Hivesights';
+import Navbar from './components/Navbar';
 import authApi from './services/authApi';
 import jwt_decode from 'jwt-decode';
 import { StateUser } from './models/userModel';
@@ -28,7 +29,6 @@ const App = () => {
   useEffect(() => {
 	const checkToken = async () => {
 		let token = localStorage.getItem('token');
-
 		if (!token && location.search.startsWith('?auth=')) {
 			const key = location.search.substr(6);
 			try {
@@ -40,8 +40,8 @@ const App = () => {
 		if (token) {
 			try {
 				const decoded = jwt_decode<UserToken>(token);
-				// setAuthToken(token);
-				console.log("DECODED", decoded);
+				authApi.setAuthToken(token);
+				window.localStorage.setItem('token', token);
 				setUser({id: decoded.id, userName: decoded.userName, imageUrl: decoded.imageUrl, intraUrl: decoded.intraUrl, internshipValidated: decoded.internshipValidated})
 				history.push('/');
 			} catch (error) {
@@ -54,6 +54,7 @@ const App = () => {
 
   return (
     <Router>
+		{user ? (<Navbar setUser={setUser} user={user}/>) : <LandingPage />} 
 		<Container>
 			{!user ? (<LandingPage/>) : (<Hivesights user={user}/>)}
 		</Container>

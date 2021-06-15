@@ -113,3 +113,8 @@
     src: local('SimpleNorm'), url(./fonts/SimplonNorm-RegularItalic-WebTrial.woff) format('woff');
 }
 
+body, html {
+    width: 100%;
+    margin-left: 0px;
+    margin-top: 0px;
+}
