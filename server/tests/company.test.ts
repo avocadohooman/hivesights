@@ -12,13 +12,13 @@ const apiBaseUrl = '/api/company/';
 //clearing database before each test
 beforeEach(async () => {
     try {
-        console.log(`clearning ${table} table`);
+        // console.log(`clearning ${table} table`);
         await pool.query(`DELETE FROM ${table} *`);
-        console.log(`${table} cleared`);
+        // console.log(`${table} cleared`);
 
-        console.log(`Populating ${table}`);
+        // console.log(`Populating ${table}`);
         await helper.populateTable();
-        console.log(`${table} populated`);
+        // console.log(`${table} populated`);
     } catch (error) {
         console.log(`Error: ${error.message}`);
     }

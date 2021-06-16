@@ -15,10 +15,10 @@ const apiBaseUrl = '/api/reviews';
 // Getting latest company ids from company_table
 beforeAll(async () => {
     try {
-        console.log(`fetching latest company ids from ${companyTable}`);
+        // console.log(`fetching latest company ids from ${companyTable}`);
         const getWunderdogId = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ['Wunderdog']);
         const getFuturiceId = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ['Futurice']);
-        console.log(`Got Wunderdog ID: ${getWunderdogId.rows[0].id} and Futurice ID: ${getFuturiceId.rows[0].id}`);
+        // console.log(`Got Wunderdog ID: ${getWunderdogId.rows[0].id} and Futurice ID: ${getFuturiceId.rows[0].id}`);
         helper.intialReviews[0].companyId = getWunderdogId.rows[0].id;
         helper.intialReviews[1].companyId = getWunderdogId.rows[0].id;
         helper.intialReviews[2].companyId = getFuturiceId.rows[0].id;
@@ -31,13 +31,13 @@ beforeAll(async () => {
 // clearing review database and fetching correct company ids once before all tests
 beforeEach(async () => {
     try {
-        console.log(`clearing ${reviewTable}`);
+        // console.log(`clearing ${reviewTable}`);
         await pool.query(`DELETE FROM ${reviewTable}`);
-        console.log(`${reviewTable} cleared`);
+        // console.log(`${reviewTable} cleared`);
         
-        console.log(`Populating ${reviewTable}`);
+        // console.log(`Populating ${reviewTable}`);
         await helper.populatingTable();
-        console.log(`${reviewTable} populated`);
+        // console.log(`${reviewTable} populated`);
     } catch (error) {
         console.log(`Error: ${error.message}`);
     }
@@ -54,7 +54,6 @@ describe('Review GET /', () => {
     test("Getting one review with ID", async () => {
         const allReview = await api.get(`${apiBaseUrl}`);
         const reviewId = allReview.body[0].id;
-        console.log('Review ID', reviewId);
         const reviewWithId = await api.get(`${apiBaseUrl}/${reviewId}`);
         expect(reviewWithId.statusCode).toBe(200);
         expect(reviewWithId.body[0].id).toBe(reviewId);
