@@ -15,6 +15,7 @@ CREATE TABLE company (
     averagePerksScore FLOAT,
     averageCultureScore FLOAT,
     averageSalaries FLOAT,
+    averageDuration FLOAT,
     interviews INT,
     reviews INT
 );
@@ -36,6 +37,7 @@ CREATE TABLE company_test (
     averagePerksScore FLOAT,
     averageCultureScore FLOAT,
     averageSalaries FLOAT,
+    averageDuration FLOAT,
     interviews INT,
     reviews INT
 );
@@ -103,3 +105,5 @@ SELECT * FROM review_test WHERE companyid = 'e3f9f26a-cd04-419a-b367-84e704adb41
 SELECT id FROM company_test WHERE companyname = 'Wunderdog';
 
 SELECT * FROM review_test WHERE companyid = 'af2e0ee6-a2d0-4fe1-aad4-d183a4528429';
+
+SELECT AVG (duration)::NUMERIC(10,2) FROM review_test WHERE companyid = 'eb8f599a-1479-40cf-9cf1-7fcc9e16de0a';

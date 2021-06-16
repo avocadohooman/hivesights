@@ -23,7 +23,7 @@ const KeyIndicator = ({keyIndicator, label}: {keyIndicator: number | undefined, 
             {!keyIndicator && 
                 <CircularProgress />
             }
-            {label === 'Total Score' && 
+            {label === 'Total Score' && keyIndicator && 
                 <div className="keyIndicator">{keyIndicatorValue}<span className="labelSmall">/5</span></div>
             }
             {label !== 'Total Score' && 

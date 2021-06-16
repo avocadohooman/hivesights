@@ -2,7 +2,11 @@ import React from 'react';
 import { StateKpi } from '../../models/kpiModel';
 import KeyIndicator from './KeyIndicator';
 
-const KeyIndicatorsWrapper = ({kpi}: {kpi: StateKpi | undefined}): JSX.Element => {
+const KeyIndicatorsWrapper = ({
+        kpi
+    }: {
+        kpi: StateKpi | undefined
+    }): JSX.Element => {
     console.log("Key Indicator KPIs", kpi);
 
     const durationLabel = 'Duration';

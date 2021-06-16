@@ -28,3 +28,5 @@ export type Review = {
 export type NewReview = Omit<Review, 'id' | 'publishedDate'>;
 export type CompanyTotalRating = Pick<Review, 'totalRating'>;
 export type ReviewVoting = Pick<Review, 'upVotes' | 'downVotes' | 'upVoteUsers' | 'downVoteUsers'>;
+
+export type SetReview = React.Dispatch<React.SetStateAction<Review | undefined>>;

@@ -13,3 +13,5 @@ export interface StateUser {
     intraUrl: string,
     internshipValidated: boolean,
 }
+
+export type SetUser = React.Dispatch<React.SetStateAction<StateUser | undefined>>

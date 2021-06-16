@@ -3,12 +3,18 @@ import '../styles/navBar.css';
 import { ReactComponent as SignOut } from '../assets/signOut.svg';
 import Tooltip from '@material-ui/core/Tooltip';
 import { useHistory } from 'react-router';
+import { User, SetUser } from '../models/userModel';
 
-const Navbar = (props: any) => {
+const Navbar = ({
+        user, setUser
+    }: {
+        user: User | undefined, 
+        setUser: SetUser
+    }): JSX.Element => {
 
     const logoTitle = 'Hivesights';
-    const avatarImageUrl = props.user.imageUrl;
-    const userName = props.user.userName;
+    const avatarImageUrl = user?.imageUrl;
+    const userName = user?.userName;
     const headerAvatarStyle = {
         backgroundImage: `url(${avatarImageUrl})`,
     }
@@ -16,7 +22,7 @@ const Navbar = (props: any) => {
     
     const handleLogout = () => {
         localStorage.removeItem('token');
-        props.setUser(undefined);
+        setUser(undefined);
     }   
 
     const handleGoHome = () => {

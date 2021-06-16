@@ -7,10 +7,14 @@ import companyApi from '../services/companyApi';
 import KeyIndicatorsWrapper from './KeyIndicators/KeyIndicatorsWrapper';
 import CompaniesWrapper from './Companies/CompaniesWrapper';
 
-const Hivesights = ({user}: {user: User}): JSX.Element=> {
+const Hivesights = ({
+        user
+    }: {
+        user: User
+    }): JSX.Element=> {
 
     const [kpi, setKpi] = useState<StateKpi | undefined>(undefined);
-    const [companies, setCompanies] = useState<Company[] | undefined>(undefined);
+    const [companies, setCompanies] = useState<Company[]>([]);
     const currentUser: User = {
         id: user.id,
         userName: user.userName,
