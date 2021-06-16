@@ -1,5 +1,5 @@
 import express from 'express';
-import { Company, CompanyRating, NewCompany } from '../types/company';
+import { Company, CompanyDB, CompanyRating, NewCompany } from '../types/company';
 import pool from '../db';
 import rateLimit from 'express-rate-limit';
 import companyHelper from '../services/companyServices';
@@ -15,7 +15,27 @@ console.log(`Using table: ${companyTable}`);
 companyRouter.get('/', async (_req, res) => {
     try {
         const allCompaniesDB = await pool.query(`SELECT * FROM ${companyTable}`);
-        return res.status(200).json(allCompaniesDB.rows);
+        let companies: Company[] = [];
+        companies = allCompaniesDB.rows.map((row: CompanyDB) => ({
+            id: row.id,
+            companyName: row.companyname,
+            companyDescription: row.companydescription,
+            logoURL: row.logourl,
+            companyURL: row.companyurl,
+            companyLocation: row.companylocation,
+            averageTotalScore: row.averagetotalscore,
+            averageInterviewScore: row.averageinterviewscore,
+            averageOnboardingScore: row.averageonboardingscore,
+            averageSupervisionScore: row.averagesupervisionscore,
+            averageLearningScore: row.averagelearningscore,
+            averageCodingPracticesScore: row.averagecodingpracticesscore,
+            averagePerksScore: row.averageperksscore,
+            averageCultureScore: row.averageculturescore,
+            averageSalaries: row.averagesalaries,
+            interviews: row.interviews,
+            reviews: row.reviews,
+        }));
+        return res.status(200).json(companies);
     } catch (error) {
         console.log(error.message);
         return res.status(400).json({error: error.message});
@@ -30,9 +50,28 @@ companyRouter.get('/:id', async (req, res) => {
             console.log("Company doesn't exist ERROR");
             return res.status(400).json({error: "Company doesn't exist."});
         }
-        const company = await pool.query(`SELECT * FROM ${companyTable} WHERE id = ($1)`, [id]);
-        console.log(`Company ${company.rows[0].companyName} fetched`);
-        return res.status(200).json(company.rows[0]);
+        const companyDB = await pool.query(`SELECT * FROM ${companyTable} WHERE id = ($1)`, [id]);
+        const company: Company = companyDB.rows.map((row: CompanyDB) => ({
+            id: row.id,
+            companyName: row.companyname,
+            companyDescription: row.companydescription,
+            logoURL: row.logourl,
+            companyURL: row.companyurl,
+            companyLocation: row.companylocation,
+            averageTotalScore: row.averagetotalscore,
+            averageInterviewScore: row.averageinterviewscore,
+            averageOnboardingScore: row.averageonboardingscore,
+            averageSupervisionScore: row.averagesupervisionscore,
+            averageLearningScore: row.averagelearningscore,
+            averageCodingPracticesScore: row.averagecodingpracticesscore,
+            averagePerksScore: row.averageperksscore,
+            averageCultureScore: row.averageculturescore,
+            averageSalaries: row.averagesalaries,
+            interviews: row.interviews,
+            reviews: row.reviews,
+        }));
+        console.log(`Company fetched`, company);
+        return res.status(200).json(company);
     } catch (error) {
         console.log(error.message);
         return res.status(400).json({error: error.message});

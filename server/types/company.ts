@@ -20,3 +20,23 @@ export type Company = {
 
 export type NewCompany = Omit<Company, 'id' | 'averageSalaries' | 'interviews'>;
 export type CompanyRating = Pick<Company, 'averageTotalScore'>;
+
+export type CompanyDB = {
+    id: string,
+    companyname: string,
+    companydescription: string,
+    logourl: string,
+    companyurl: string,
+    companylocation: string,
+    averagetotalscore?: number,
+    averageinterviewscore?: number,
+    averageonboardingscore?: number,
+    averagesupervisionscore?: number,
+    averagelearningscore?: number,
+    averagecodingpracticesscore?: number,
+    averageperksscore?: number,
+    averageculturescore?: number,
+    averagesalaries?: number,
+    interviews?: number,
+    reviews?: number,
+};

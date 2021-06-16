@@ -1,6 +1,6 @@
 import express from 'express';
 import pool from '../db';
-import { NewReview } from '../types/review';
+import { NewReview, Review, ReviewDB } from '../types/review';
 import parsingService from '../services/reviewParsing';
 import companyServices from '../services/companyServices';
 import reviewServices from '../services/reviewServices';
@@ -17,8 +17,36 @@ const reviewColumns = reviewQueries.reviewColumns;
 // Get all reviews in DB
 reviewRouter.get('/', async (req, res) => {
     try {
-        const allReviews = await pool.query(`SELECT * FROM ${reviewTable}`);
-        return res.status(200).json(allReviews.rows);
+        const allReviewsDB = await pool.query(`SELECT * FROM ${reviewTable}`);
+        let allReviews: Review[] = [];
+        allReviews = allReviewsDB.rows.map((row: ReviewDB) => ({
+            id: row.id,
+            companyId: row.companyid,
+            userName: row.username,
+            userPicture: row.userpictureurl,
+            pros: row.pros,
+            cons: row.cons,
+            overall: row.overall,
+            totalRating: row.totalrating,
+            ratingCriteriaInterview: row.ratingcriteriainterview,
+            ratingCriteriaOnboarding: row.ratingcriteriaonboarding,
+            ratingCriteriaSupervision: row.ratingcriteriasupervision,
+            ratingCriteriaLearning: row.ratingcriterialearning,
+            ratingCriteriaCodingPractices: row.ratingcriteriacodingpractices,
+            ratingCriteriaPerks: row.ratingcriteriaperks,
+            ratingCriteriaCulture: row.ratingcriteriaculture,
+            salary: row.salary,
+            duration: row.duration,
+            coverLetter: row.coverletter,
+            cv: row.cv,
+            upVotes: row.upvotes,
+            upVoteUsers: row.upvoteusers,
+            downVotes: row.downvotes,
+            downVoteUsers: row.downvoteusers,
+            publishedDate: row.published_date
+        }));
+        console.log('All review types', allReviews);
+        return res.status(200).json(allReviews);
     } catch (error) {
         console.log(error.message);
         return res.status(400).json({error: error.message});
@@ -33,9 +61,36 @@ reviewRouter.get('/:id', async (req, res) => {
             console.log("Review doesn't exist ERROR");
             return res.status(400).json({error: "Review doesn't exist."});
         }
-        const review = await pool.query(`SELECT * FROM ${reviewTable} WHERE id = ($1)`, [id]);
-        console.log(`Review ${review.rows[0]} fetched`);
-        return res.status(200).json(review.rows[0]);
+        const reviewDB = await pool.query(`SELECT * FROM ${reviewTable} WHERE id = ($1)`, [id]);
+        let review: Review[] = [];
+        review = reviewDB.rows.map((row: ReviewDB) => ({
+            id: row.id,
+            companyId: row.companyid,
+            userName: row.username,
+            userPicture: row.userpictureurl,
+            pros: row.pros,
+            cons: row.cons,
+            overall: row.overall,
+            totalRating: row.totalrating,
+            ratingCriteriaInterview: row.ratingcriteriainterview,
+            ratingCriteriaOnboarding: row.ratingcriteriaonboarding,
+            ratingCriteriaSupervision: row.ratingcriteriasupervision,
+            ratingCriteriaLearning: row.ratingcriterialearning,
+            ratingCriteriaCodingPractices: row.ratingcriteriacodingpractices,
+            ratingCriteriaPerks: row.ratingcriteriaperks,
+            ratingCriteriaCulture: row.ratingcriteriaculture,
+            salary: row.salary,
+            duration: row.duration,
+            coverLetter: row.coverletter,
+            cv: row.cv,
+            upVotes: row.upvotes,
+            upVoteUsers: row.upvoteusers,
+            downVotes: row.downvotes,
+            downVoteUsers: row.downvoteusers,
+            publishedDate: row.published_date
+        }));
+        console.log(`Review fetched`, review);
+        return res.status(200).json(review);
     } catch (error) {
         console.log(`Error: ${error.message}`);
         return res.status(400).json({error: error.message});
