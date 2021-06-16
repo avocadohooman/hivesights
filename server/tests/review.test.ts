@@ -1734,7 +1734,6 @@ describe('Review DELETE /', () => {
     })
 });
 
-
 afterAll(async () => {
 	await pool.end();
 	console.log('pool has drained');

@@ -41,8 +41,24 @@ const requestParamsId = (req: any, res: any, next: any) => {
     }
 };
 
+const addCompany = async (newCompany: NewCompany, companyTable: string) => {
+  const addedCompany = await pool.query(`INSERT INTO ${companyTable} 
+  (companyName, companyDescription, logoURL, companyURL, companyLocation)
+  VALUES
+  ($1, $2, $3, $4, $5)
+  RETURNING *`, 
+  [
+      newCompany.companyName,
+      newCompany.companyDescription,
+      newCompany.logoURL,
+      newCompany.companyURL,
+      newCompany.companyLocation
+  ]);
+}
+
 export default {
     checkDuplicate,
     requestParamsId,
-    checkIfExists
+    checkIfExists,
+    addCompany
 };

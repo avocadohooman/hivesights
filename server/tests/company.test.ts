@@ -17,30 +17,7 @@ beforeEach(async () => {
         console.log(`${table} cleared`);
 
         console.log(`Populating ${table}`);
-        await pool.query(`INSERT INTO ${table} ${companyColumns} VALUES ($1, $2, $3, $4, $5) RETURNING *`, 
-        [
-            helper.intialCompanies[0].companyName,
-            helper.intialCompanies[0].companyDescription,
-            helper.intialCompanies[0].logoURL,
-            helper.intialCompanies[0].companyURL,
-            helper.intialCompanies[0].companyLocation
-        ]);
-        await pool.query(`INSERT INTO ${table} ${companyColumns} VALUES ($1, $2, $3, $4, $5) RETURNING *`, 
-        [
-            helper.intialCompanies[1].companyName,
-            helper.intialCompanies[1].companyDescription,
-            helper.intialCompanies[1].logoURL,
-            helper.intialCompanies[1].companyURL,
-            helper.intialCompanies[1].companyLocation
-        ]);
-        await pool.query(`INSERT INTO ${table} ${companyColumns} VALUES ($1, $2, $3, $4, $5) RETURNING *`, 
-        [
-            helper.intialCompanies[2].companyName,
-            helper.intialCompanies[2].companyDescription,
-            helper.intialCompanies[2].logoURL,
-            helper.intialCompanies[2].companyURL,
-            helper.intialCompanies[2].companyLocation
-        ]);
+        await helper.populateTable();
         console.log(`${table} populated`);
     } catch (error) {
         console.log(`Error: ${error.message}`);
@@ -53,7 +30,7 @@ describe("Company GET / ", () => {
         const allCompanies = await api.get(`${apiBaseUrl}`);
         const id = allCompanies.body[0].id;
         expect(allCompanies.statusCode).toBe(200);
-        expect(allCompanies.body).toHaveLength(3);
+        expect(allCompanies.body).toHaveLength(9);
     });
 
     test("Getting company by ID", async () => {
@@ -86,8 +63,8 @@ describe("Company POST / ", () => {
             .expect(200)
             .expect('Content-Type', /application\/json/);
         const allCompanies = await api.get(`${apiBaseUrl}`);
-        expect(allCompanies.body).toHaveLength(4);
-        expect(allCompanies.body[3].companyName).toBe("Unicorn01");
+        expect(allCompanies.body).toHaveLength(10);
+        expect(allCompanies.body[9].companyName).toBe("Unicorn01");
         expect(allCompanies.statusCode).toBe(200);
     });
 });
@@ -115,7 +92,7 @@ describe("Company POST ERROR /", () => {
             .expect('Content-Type', /application\/json/);
 
         const allCompanies = await api.get(`${apiBaseUrl}`);
-        expect(allCompanies.body).toHaveLength(4);
+        expect(allCompanies.body).toHaveLength(10);
         expect(allCompanies.statusCode).toBe(200);
     });
     test("A an existing company (case insenstitive) cannot be created", async () => {
@@ -159,7 +136,7 @@ describe("Company POST ERROR /", () => {
             .expect('Content-Type', /application\/json/);
 
         const allCompanies = await api.get(`${apiBaseUrl}`);
-        expect(allCompanies.body).toHaveLength(4);
+        expect(allCompanies.body).toHaveLength(10);
         expect(allCompanies.statusCode).toBe(200);
     });
     test("A company with wrong company description type cannot be created", async () => {
@@ -176,7 +153,7 @@ describe("Company POST ERROR /", () => {
             .expect(400)
             .expect('Content-Type', /application\/json/);
         const allCompanies = await api.get(`${apiBaseUrl}`);
-        expect(allCompanies.body).toHaveLength(3);
+        expect(allCompanies.body).toHaveLength(9);
     })
 
     test("A company with wrong company name type cannot be created", async () => {
@@ -193,7 +170,7 @@ describe("Company POST ERROR /", () => {
             .expect(400)
             .expect('Content-Type', /application\/json/);
         const allCompanies = await api.get(`${apiBaseUrl}`);
-        expect(allCompanies.body).toHaveLength(3);
+        expect(allCompanies.body).toHaveLength(9);
     })
 
     test("A company with wrong logo type cannot be created", async () => {
@@ -210,7 +187,7 @@ describe("Company POST ERROR /", () => {
             .expect(400)
             .expect('Content-Type', /application\/json/);
         const allCompanies = await api.get(`${apiBaseUrl}`);
-        expect(allCompanies.body).toHaveLength(3);
+        expect(allCompanies.body).toHaveLength(9);
     })
 
     test("A company with wrong company url type cannot be created", async () => {
@@ -227,7 +204,7 @@ describe("Company POST ERROR /", () => {
             .expect(400)
             .expect('Content-Type', /application\/json/);
         const allCompanies = await api.get(`${apiBaseUrl}`);
-        expect(allCompanies.body).toHaveLength(3);
+        expect(allCompanies.body).toHaveLength(9);
     })
 
     test("A company with wrong companyLocation type cannot be created", async () => {
@@ -244,7 +221,7 @@ describe("Company POST ERROR /", () => {
             .expect(400)
             .expect('Content-Type', /application\/json/);
         const allCompanies = await api.get(`${apiBaseUrl}`);
-        expect(allCompanies.body).toHaveLength(3);
+        expect(allCompanies.body).toHaveLength(9);
     })
 
     test("A company with missing name cannot be created", async () => {
@@ -260,7 +237,7 @@ describe("Company POST ERROR /", () => {
             .expect(400)
             .expect('Content-Type', /application\/json/);
         const allCompanies = await api.get(`${apiBaseUrl}`);
-        expect(allCompanies.body).toHaveLength(3);
+        expect(allCompanies.body).toHaveLength(9);
     })
 
     test("A company with missing description cannot be created", async () => {
@@ -276,7 +253,7 @@ describe("Company POST ERROR /", () => {
             .expect(400)
             .expect('Content-Type', /application\/json/);
         const allCompanies = await api.get(`${apiBaseUrl}`);
-        expect(allCompanies.body).toHaveLength(3);
+        expect(allCompanies.body).toHaveLength(9);
     })
 
     test("A company with missing logo cannot be created", async () => {
@@ -292,7 +269,7 @@ describe("Company POST ERROR /", () => {
             .expect(400)
             .expect('Content-Type', /application\/json/);
         const allCompanies = await api.get(`${apiBaseUrl}`);
-        expect(allCompanies.body).toHaveLength(3);
+        expect(allCompanies.body).toHaveLength(9);
     })
 
     test("A company with missing company URL cannot be created", async () => {
@@ -308,7 +285,7 @@ describe("Company POST ERROR /", () => {
             .expect(400)
             .expect('Content-Type', /application\/json/);
         const allCompanies = await api.get(`${apiBaseUrl}`);
-        expect(allCompanies.body).toHaveLength(3);
+        expect(allCompanies.body).toHaveLength(9);
     })
 
     test("A company with missing location cannot be created", async () => {
@@ -324,7 +301,7 @@ describe("Company POST ERROR /", () => {
             .expect(400)
             .expect('Content-Type', /application\/json/);
         const allCompanies = await api.get(`${apiBaseUrl}`);
-        expect(allCompanies.body).toHaveLength(3);
+        expect(allCompanies.body).toHaveLength(9);
     })
 });
 
@@ -386,7 +363,7 @@ describe("Company PUT ERROR/ ", () => {
             .expect(400)
             .expect('Content-Type', /application\/json/);
         allCompanies = await api.get(`${apiBaseUrl}`);
-        expect(allCompanies.body).toHaveLength(3);
+        expect(allCompanies.body).toHaveLength(9);
     })
 
     test("A company with wrong company name type cannot be updated", async () => {
@@ -405,7 +382,7 @@ describe("Company PUT ERROR/ ", () => {
             .expect(400)
             .expect('Content-Type', /application\/json/);
         allCompanies = await api.get(`${apiBaseUrl}`);
-        expect(allCompanies.body).toHaveLength(3);
+        expect(allCompanies.body).toHaveLength(9);
     })
 
     test("A company with wrong logo type cannot be updated", async () => {
@@ -424,7 +401,7 @@ describe("Company PUT ERROR/ ", () => {
             .expect(400)
             .expect('Content-Type', /application\/json/);
         allCompanies = await api.get(`${apiBaseUrl}`);
-        expect(allCompanies.body).toHaveLength(3);
+        expect(allCompanies.body).toHaveLength(9);
     })
 
     test("A company with wrong company url type cannot be updated", async () => {
@@ -443,7 +420,7 @@ describe("Company PUT ERROR/ ", () => {
             .expect(400)
             .expect('Content-Type', /application\/json/);
         allCompanies = await api.get(`${apiBaseUrl}`);
-        expect(allCompanies.body).toHaveLength(3);
+        expect(allCompanies.body).toHaveLength(9);
     })
 
     test("A company with wrong companyLocation type cannot be updated", async () => {
@@ -462,7 +439,7 @@ describe("Company PUT ERROR/ ", () => {
             .expect(400)
             .expect('Content-Type', /application\/json/);
         allCompanies = await api.get(`${apiBaseUrl}`);
-        expect(allCompanies.body).toHaveLength(3);
+        expect(allCompanies.body).toHaveLength(9);
     })
 
     test("A company with missing name cannot be updated", async () => {
@@ -480,7 +457,7 @@ describe("Company PUT ERROR/ ", () => {
             .expect(400)
             .expect('Content-Type', /application\/json/);
         allCompanies = await api.get(`${apiBaseUrl}`);
-        expect(allCompanies.body).toHaveLength(3);
+        expect(allCompanies.body).toHaveLength(9);
     })
 
     test("A company with missing description cannot be updated", async () => {
@@ -498,7 +475,7 @@ describe("Company PUT ERROR/ ", () => {
             .expect(400)
             .expect('Content-Type', /application\/json/);
         allCompanies = await api.get(`${apiBaseUrl}`);
-        expect(allCompanies.body).toHaveLength(3);
+        expect(allCompanies.body).toHaveLength(9);
     })
 
     test("A company with missing logo cannot be updated", async () => {
@@ -516,7 +493,7 @@ describe("Company PUT ERROR/ ", () => {
             .expect(400)
             .expect('Content-Type', /application\/json/);
         allCompanies = await api.get(`${apiBaseUrl}`);
-        expect(allCompanies.body).toHaveLength(3);
+        expect(allCompanies.body).toHaveLength(9);
     })
 
     test("A company with missing company URL cannot be updated", async () => {
@@ -534,7 +511,7 @@ describe("Company PUT ERROR/ ", () => {
             .expect(400)
             .expect('Content-Type', /application\/json/);
         allCompanies = await api.get(`${apiBaseUrl}`);
-        expect(allCompanies.body).toHaveLength(3);
+        expect(allCompanies.body).toHaveLength(9);
     })
 
     test("A company with missing location cannot be updated", async () => {
@@ -552,7 +529,7 @@ describe("Company PUT ERROR/ ", () => {
             .expect(400)
             .expect('Content-Type', /application\/json/);
         allCompanies = await api.get(`${apiBaseUrl}`);
-        expect(allCompanies.body).toHaveLength(3);
+        expect(allCompanies.body).toHaveLength(9);
     })
 });
 
@@ -566,7 +543,7 @@ describe("Company DELETE / ", () => {
             .delete(`${apiBaseUrl}/${id}`)
             .expect(200)
         allCompanies = await api.get(`${apiBaseUrl}`);
-        expect(allCompanies.body).toHaveLength(2);
+        expect(allCompanies.body).toHaveLength(8);
         expect(allCompanies.statusCode).toBe(200);
     });
 });
@@ -578,7 +555,7 @@ describe("Company DELETE ERROR / ", () => {
             .delete(`${apiBaseUrl}/45345435435`)
             .expect(400)
         const allCompanies = await api.get(`${apiBaseUrl}`);
-        expect(allCompanies.body).toHaveLength(3);
+        expect(allCompanies.body).toHaveLength(9);
         expect(allCompanies.statusCode).toBe(200);
     });
 });

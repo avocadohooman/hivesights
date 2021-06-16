@@ -4,6 +4,7 @@ import pool from '../db';
 import rateLimit from 'express-rate-limit';
 import companyHelper from '../services/companyServices';
 import companyParsing from '../services/companyParsing';
+import companyServices from '../services/companyServices';
 
 const companyRouter = express.Router();
 
@@ -155,19 +156,8 @@ companyRouter.post('/', async (req, res) => {
             console.log("Duplicate ERROR");
             return res.status(400).json({error: 'Company already exists.'});
         }
-        const addedCompany = await pool.query(`INSERT INTO ${companyTable} 
-        (companyName, companyDescription, logoURL, companyURL, companyLocation)
-        VALUES
-        ($1, $2, $3, $4, $5)
-        RETURNING *`, 
-        [
-            newCompany.companyName,
-            newCompany.companyDescription,
-            newCompany.logoURL,
-            newCompany.companyURL,
-            newCompany.companyLocation
-        ]);
-        return res.status(200).json(addedCompany.rows[0]);
+        await companyServices.addCompany(newCompany, companyTable);
+        return res.status(200).json(newCompany);
     } catch (error) {
         console.log(error.message);
         return res.status(400).json({error: error.message});
