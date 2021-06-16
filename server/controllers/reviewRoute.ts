@@ -183,6 +183,8 @@ reviewRouter.put('/:id', async (req, res) => {
         console.log(`Review ${updatedReview.rows[0]} udpated`);
         await reviewServices.updateAverageSalary(companyId, reviewTable, companyTable);
         await reviewServices.updateScores(companyId, reviewTable, companyTable);
+        await reviewServices.updateAverageSalary(companyId, reviewTable, companyTable);
+        await reviewServices.updateAverageDuration(companyId, reviewTable, companyTable);
         return res.status(200).json(updatedReview.rows[0]);
     } catch (error) {
         console.log(`Error: ${error.message}`);

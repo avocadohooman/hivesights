@@ -14,11 +14,12 @@ export type Company = {
     averagePerksScore?: number,
     averageCultureScore?: number,
     averageSalaries?: number,
+    averageDuration?: number,
     interviews?: number,
     reviews?: number,
 };
 
-export type NewCompany = Omit<Company, 'id' | 'averageSalaries' | 'interviews'>;
+export type NewCompany = Omit<Company, 'id' | 'averageSalaries' | 'averageduration' | 'interviews'>;
 export type CompanyRating = Pick<Company, 'averageTotalScore'>;
 
 export type CompanyDB = {
@@ -37,6 +38,7 @@ export type CompanyDB = {
     averageperksscore?: number,
     averageculturescore?: number,
     averagesalaries?: number,
+    averageduration?: number,
     interviews?: number,
     reviews?: number,
 };

@@ -68,6 +68,7 @@ const addReview = async (newReview: NewReview, reviewTable: string, companyTable
     await updateAverageSalary(newReview.companyId, reviewTable, companyTable);
     await updateScores(newReview.companyId, reviewTable, companyTable);
     await updateAmountOfReviews(newReview.companyId, reviewTable, companyTable);
+    await updateAverageDuration(newReview.companyId, reviewTable, companyTable);
 };
 
 const updateTotalScore = async (companyId: string, reviewTable: string, companyTable: string) => {
@@ -166,6 +167,24 @@ const updateAmountOfReviews = async (companyId: string, reviewTable: string, com
     });
 };
 
+const updateAverageDuration = async (companyId: string, reviewTable: string, companyTable: string) => {
+    const newDuration = await pool.query(`SELECT AVG (duration)::NUMERIC(10,2) FROM ${reviewTable} WHERE companyid = ($1)`, [companyId]);
+    const updatedDuration = await pool.query(`UPDATE ${companyTable} 
+    SET
+    averageduration = ($1) 
+    WHERE
+    id = ($2)`,
+    [
+        newDuration.rows[0].avg,
+        companyId
+    ]).catch((e:any) => {
+        if (e) {
+          console.log("ERROR", e);
+          throw new Error("ERROR: " + e.message);
+        }
+    });
+};
+
 const calculateTotalScore = (newReview: NewReview) : number => {
     const interview : number = newReview.ratingCriteriaInterview * 1;
     const onboarding : number = newReview.ratingCriteriaOnboarding * 1.2;
@@ -183,6 +202,7 @@ export default {
     updateTotalScore,
     updateScores,
     updateAverageSalary,
+    updateAverageDuration,
     checkDuplicate,
     checkIfExists,
     calculateTotalScore,

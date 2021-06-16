@@ -32,6 +32,7 @@ companyRouter.get('/', async (_req, res) => {
             averagePerksScore: row.averageperksscore,
             averageCultureScore: row.averageculturescore,
             averageSalaries: row.averagesalaries,
+            averageDuration: row.averageduration,
             interviews: row.interviews,
             reviews: row.reviews,
         }));
@@ -67,6 +68,7 @@ companyRouter.get('/:id', async (req, res) => {
             averagePerksScore: row.averageperksscore,
             averageCultureScore: row.averageculturescore,
             averageSalaries: row.averagesalaries,
+            averageDuration: row.averageduration,
             interviews: row.interviews,
             reviews: row.reviews,
         }));
