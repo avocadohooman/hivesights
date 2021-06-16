@@ -70,7 +70,6 @@ companyRouter.get('/:id', async (req, res) => {
             interviews: row.interviews,
             reviews: row.reviews,
         }));
-        console.log(`Company fetched`, company);
         return res.status(200).json(company);
     } catch (error) {
         console.log(error.message);

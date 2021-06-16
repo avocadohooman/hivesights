@@ -45,7 +45,6 @@ reviewRouter.get('/', async (req, res) => {
             downVoteUsers: row.downvoteusers,
             publishedDate: row.published_date
         }));
-        console.log('All review types', allReviews);
         return res.status(200).json(allReviews);
     } catch (error) {
         console.log(error.message);
@@ -89,7 +88,6 @@ reviewRouter.get('/:id', async (req, res) => {
             downVoteUsers: row.downvoteusers,
             publishedDate: row.published_date
         }));
-        console.log(`Review fetched`, review);
         return res.status(200).json(review);
     } catch (error) {
         console.log(`Error: ${error.message}`);

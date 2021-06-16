@@ -54,9 +54,10 @@ describe('Review GET /', () => {
     test("Getting one review with ID", async () => {
         const allReview = await api.get(`${apiBaseUrl}`);
         const reviewId = allReview.body[0].id;
+        console.log('Review ID', reviewId);
         const reviewWithId = await api.get(`${apiBaseUrl}/${reviewId}`);
         expect(reviewWithId.statusCode).toBe(200);
-        expect(reviewWithId.body.id).toBe(reviewId);
+        expect(reviewWithId.body[0].id).toBe(reviewId);
     });
 
     test("Getting error with invalid ID", async () => {
@@ -102,9 +103,9 @@ describe('Review POST /', () => {
         
         expect(allReview.statusCode).toBe(200);
         expect(allReview.body).toHaveLength(5);
-        expect(allReview.body[4].username).toBe('Unicorn01');
-        expect(allReview.body[4].totalrating).toBe(3);
-        expect(companyScoreTwoDec).toBe(allReview.body[4].totalrating.toFixed(2));
+        expect(allReview.body[4].userName).toBe('Unicorn01');
+        expect(allReview.body[4].totalRating).toBe(3);
+        expect(companyScoreTwoDec).toBe(allReview.body[4].totalRating.toFixed(2));
         expect(allReview.body[4].salary).toBe(companyAverageSalary.rows[0].averagesalaries);
     });
     test("Adding a review with empty pros works", async () => {
@@ -142,9 +143,9 @@ describe('Review POST /', () => {
 
         expect(allReview.statusCode).toBe(200);
         expect(allReview.body).toHaveLength(5);
-        expect(allReview.body[4].username).toBe('Unicorn01');
-        expect(allReview.body[4].totalrating).toBe(4);
-        expect(companyScoreTwoDec).toBe(allReview.body[4].totalrating.toFixed(2));
+        expect(allReview.body[4].userName).toBe('Unicorn01');
+        expect(allReview.body[4].totalRating).toBe(4);
+        expect(companyScoreTwoDec).toBe(allReview.body[4].totalRating.toFixed(2));
         expect(allReview.body[4].salary).toBe(companyAverageSalary.rows[0].averagesalaries);
     });
     test("Adding a review with empty cons works", async () => {
@@ -182,9 +183,9 @@ describe('Review POST /', () => {
 
         expect(allReview.statusCode).toBe(200);
         expect(allReview.body).toHaveLength(5);
-        expect(allReview.body[4].username).toBe('Unicorn01');
-        expect(allReview.body[4].totalrating).toBe(4);
-        expect(companyScoreTwoDec).toBe(allReview.body[4].totalrating.toFixed(2));
+        expect(allReview.body[4].userName).toBe('Unicorn01');
+        expect(allReview.body[4].totalRating).toBe(4);
+        expect(companyScoreTwoDec).toBe(allReview.body[4].totalRating.toFixed(2));
         expect(allReview.body[4].salary).toBe(companyAverageSalary.rows[0].averagesalaries);
     });
     test("Adding a review with total score 0 works", async () => {
@@ -222,9 +223,9 @@ describe('Review POST /', () => {
         
         expect(allReview.statusCode).toBe(200);
         expect(allReview.body).toHaveLength(5);
-        expect(allReview.body[4].username).toBe('Unicorn01');
-        expect(allReview.body[4].totalrating).toBe(0);
-        expect(companyScoreTwoDec).toBe(allReview.body[4].totalrating.toFixed(2));
+        expect(allReview.body[4].userName).toBe('Unicorn01');
+        expect(allReview.body[4].totalRating).toBe(0);
+        expect(companyScoreTwoDec).toBe(allReview.body[4].totalRating.toFixed(2));
         expect(allReview.body[4].salary).toBe(companyAverageSalary.rows[0].averagesalaries);
     });
 });
@@ -1431,10 +1432,10 @@ describe('Review PUT / ', () => {
         const allReview = await api.get(`${apiBaseUrl}`);
         expect(allReview.statusCode).toBe(200);
         expect(allReview.body).toHaveLength(4);
-        expect(allReview.body[3].username).toBe('UNICORN0101010101');
-        expect(allReview.body[3].totalrating).toBe(3);
-        expect(allReview.body[3].upvotes).toBe(1);
-        expect(allReview.body[3].upvoteusers[0]).toBe('npminof');
+        expect(allReview.body[3].userName).toBe('UNICORN0101010101');
+        expect(allReview.body[3].totalRating).toBe(3);
+        expect(allReview.body[3].upVotes).toBe(1);
+        expect(allReview.body[3].upVoteUsers[0]).toBe('npminof');
     });
 });
 

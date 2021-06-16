@@ -61,7 +61,7 @@ describe("Company GET / ", () => {
         const id = allCompanies.body[0].id;
         const companyWithId = await api.get(`${apiBaseUrl}${id}`);
         expect(companyWithId.statusCode).toBe(200);
-        expect(companyWithId.body.id).toBe(id);
+        expect(companyWithId.body[0].id).toBe(id);
     });
 
     test("Getting error with invalid ID", async () => {
@@ -87,7 +87,7 @@ describe("Company POST / ", () => {
             .expect('Content-Type', /application\/json/);
         const allCompanies = await api.get(`${apiBaseUrl}`);
         expect(allCompanies.body).toHaveLength(4);
-        expect(allCompanies.body[3].companyname).toBe("Unicorn01");
+        expect(allCompanies.body[3].companyName).toBe("Unicorn01");
         expect(allCompanies.statusCode).toBe(200);
     });
 });
@@ -347,7 +347,7 @@ describe("Company PUT / ", () => {
         const getUpdatedCompany = await api
                                         .get(`${apiBaseUrl}/${id}`)
                                         .expect(200)
-        expect(getUpdatedCompany.body.companyname).toContain("Wundercat");
+        expect(getUpdatedCompany.body[0].companyName).toContain("Wundercat");
         expect(getUpdatedCompany.statusCode).toBe(200);
     })
 });
