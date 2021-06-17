@@ -38,7 +38,7 @@ companyRouter.get('/', async (_req, res) => {
             reviews: row.reviews,
         }));
         return res.status(200).json(companies);
-    } catch (error) {
+    } catch (error: any) {
         console.log(error.message);
         return res.status(400).json({error: error.message});
     }
@@ -74,7 +74,7 @@ companyRouter.get('/:id', async (req, res) => {
             reviews: row.reviews,
         }));
         return res.status(200).json(company);
-    } catch (error) {
+    } catch (error: any) {
         console.log(error.message);
         return res.status(400).json({error: error.message});
     }
@@ -108,7 +108,7 @@ companyRouter.put('/:id', async (req, res) => {
         ]);
         console.log(`Company ${updatedCompany.rows[0]} updated`);
         return res.status(200).json(updatedCompany.rows);
-    } catch (error) {
+    } catch (error: any) {
         console.log(error.message);
         return res.status(400).json({error: error.message});
     }
@@ -135,7 +135,7 @@ companyRouter.put('/updateRating/:id', async (req, res) => {
         ]);
         console.log(`Company ${updatedRating.rows[0]} updated`);
         return res.status(200).json(updatedRating.rows);
-    } catch (error) {
+    } catch (error: any) {
         console.log(error.message);
         return res.status(400).json({error: error.message});
     }
@@ -158,7 +158,7 @@ companyRouter.post('/', async (req, res) => {
         }
         await companyServices.addCompany(newCompany, companyTable);
         return res.status(200).json(newCompany);
-    } catch (error) {
+    } catch (error: any) {
         console.log(error.message);
         return res.status(400).json({error: error.message});
     }
@@ -175,7 +175,7 @@ companyRouter.delete('/:id', async (req, res) => {
         await pool.query(`DELETE FROM ${companyTable} WHERE id = ($1)`, [id]);
         console.log(`company deleted`);
         return res.status(200).json({message: "Company deleted"});
-    } catch (error) {
+    } catch (error: any) {
         console.log(error.message);
         return res.status(400).json({error: error.message});
     }

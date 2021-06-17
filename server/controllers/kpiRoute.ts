@@ -22,7 +22,7 @@ kpiRouter.get('/', async (req, res) => {
             averageScore: keyKpi.rows[0].averagescore
         }
         return res.status(200).json(returnKPI);
-    } catch (error) {
+    } catch (error: any) {
         console.log(error.message);
         return res.status(400).json({error: error.message});    }
 });

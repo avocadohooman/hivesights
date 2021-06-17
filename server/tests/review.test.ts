@@ -23,7 +23,7 @@ beforeAll(async () => {
         helper.intialReviews[1].companyId = getWunderdogId.rows[0].id;
         helper.intialReviews[2].companyId = getFuturiceId.rows[0].id;
         helper.intialReviews[3].companyId = getFuturiceId.rows[0].id;
-    } catch (error) {
+    } catch (error: any) {
         console.log(`Error: ${error.message}`);
     }
 })
@@ -38,7 +38,7 @@ beforeEach(async () => {
         // console.log(`Populating ${reviewTable}`);
         await helper.populatingTable();
         // console.log(`${reviewTable} populated`);
-    } catch (error) {
+    } catch (error: any) {
         console.log(`Error: ${error.message}`);
     }
 });

@@ -46,7 +46,7 @@ reviewRouter.get('/', async (req, res) => {
             publishedDate: row.published_date
         }));
         return res.status(200).json(allReviews);
-    } catch (error) {
+    } catch (error: any) {
         console.log(error.message);
         return res.status(400).json({error: error.message});
     }
@@ -89,7 +89,7 @@ reviewRouter.get('/:id', async (req, res) => {
             publishedDate: row.published_date
         }));
         return res.status(200).json(review);
-    } catch (error) {
+    } catch (error: any) {
         console.log(`Error: ${error.message}`);
         return res.status(400).json({error: error.message});
     }
@@ -106,7 +106,7 @@ reviewRouter.get('/company/:id', async (req, res) => {
         const reviews = await pool.query(`SELECT * FROM ${reviewTable} WHERE companyid = ($1)`, [id]);
         console.log('Reviews fetched', reviews.rows);
         return res.status(200).json(reviews.rows);
-    } catch (error) {
+    } catch (error: any) {
         console.log(`Error: ${error.message}`);
         return res.status(400).json({error: error.message});
     }
@@ -130,7 +130,7 @@ reviewRouter.post('/:id', async (req, res) => {
             await reviewServices.addReview(newReview, reviewTable, companyTable);
             return res.status(200).json(newReview); 
         }
-    } catch (error) {
+    } catch (error: any) {
         console.log(`Error: ${error.message}`);
         return res.status(400).json({error: error.message});
     }
@@ -186,7 +186,7 @@ reviewRouter.put('/:id', async (req, res) => {
         await reviewServices.updateAverageSalary(companyId, reviewTable, companyTable);
         await reviewServices.updateAverageDuration(companyId, reviewTable, companyTable);
         return res.status(200).json(updatedReview.rows[0]);
-    } catch (error) {
+    } catch (error: any) {
         console.log(`Error: ${error.message}`);
         return res.status(400).json({error: error.message});
     }
@@ -203,7 +203,7 @@ reviewRouter.delete('/:id', async (req, res) => {
         await pool.query(`DELETE FROM ${reviewTable} WHERE id = ($1)`, [reviewId]);
         console.log('review deleted');
         return res.status(200).json({message: 'Review deleted'});
-    } catch (error) {
+    } catch (error: any) {
         console.log(error.message);
         return res.status(400).json({error: error.message});
     }

@@ -44,7 +44,8 @@ const App = () => {
 				window.localStorage.setItem('token', token);
 				setUser({id: decoded.id, userName: decoded.userName, imageUrl: decoded.imageUrl, intraUrl: decoded.intraUrl, internshipValidated: decoded.internshipValidated})
 				history.push('/');
-			} catch (error) {
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			} catch (error: any) {
 				console.log("ERROR", error);
 			}
 		}

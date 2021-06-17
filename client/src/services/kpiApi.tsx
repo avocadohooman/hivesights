@@ -8,7 +8,7 @@ const getKeyKpi = async () => {
     try {
         const res: any = await axios.get<KPI>(baseURL + '/');
         return res.data;    
-    } catch (error) {
+    } catch (error: any) {
         return error;
     }
 }

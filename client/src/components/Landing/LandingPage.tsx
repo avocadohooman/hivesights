@@ -10,7 +10,8 @@ const LandingPage = () => {
 			const data = await authServices.fortyTwoUrl();
 			console.log("DATA", data);
 			window.location = data.url;
-		} catch (error) {
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		} catch (error: any) {
 			console.log(error.message);
 		}
 	}

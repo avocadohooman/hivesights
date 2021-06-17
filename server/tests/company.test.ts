@@ -19,7 +19,7 @@ beforeEach(async () => {
         // console.log(`Populating ${table}`);
         await helper.populateTable();
         // console.log(`${table} populated`);
-    } catch (error) {
+    } catch (error: any) {
         console.log(`Error: ${error.message}`);
     }
 });

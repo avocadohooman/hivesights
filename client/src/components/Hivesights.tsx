@@ -1,11 +1,18 @@
 import React, { useState, useEffect, Suspense } from 'react';
+
+// Data models 
 import { Company } from '../models/companyModel';
 import { KPI, StateKpi } from '../models/kpiModel';
 import { User } from '../models/userModel';
+
+// API services
 import kpiApi from '../services/kpiApi';
 import companyApi from '../services/companyApi';
+
+// Components
 import KeyIndicatorsWrapper from './KeyIndicators/KeyIndicatorsWrapper';
 import CompaniesWrapper from './Companies/CompaniesWrapper';
+import CompanyFilterWrapper from './Filter/companyFilterWrapper';
 
 const Hivesights = ({
         user
@@ -15,6 +22,7 @@ const Hivesights = ({
 
     const [kpi, setKpi] = useState<StateKpi | undefined>(undefined);
     const [companies, setCompanies] = useState<Company[]>([]);
+    const [filteredCompanies, setCompanyFilter] = useState<Company[]>([]);
     const currentUser: User = {
         id: user.id,
         userName: user.userName,
@@ -28,16 +36,16 @@ const Hivesights = ({
             try {
                 const res: KPI = await kpiApi.getKeyKpi();
                 setKpi({averageDuration: res.averageDuration, averageSalary: res.averageSalary, averageScore: res.averageScore});
-            } catch (error) {
+            } catch (error: any) {
                 console.log(error);
             }
         }
         const getCompanies = async() => {
             try {
                 const companies: Company[] = await companyApi.getAllCompanies();
-                console.log("Companies?", companies);
                 setCompanies(companies);
-            } catch (error) {
+                setCompanyFilter(companies);
+            } catch (error: any) {
                 console.log(error);
             }
         }
@@ -45,12 +53,22 @@ const Hivesights = ({
         getCompanies();
     }, []);
 
-    console.log("Current User", currentUser);
+    const handleCompanySearch = (event: any) => {
+        event.preventDefault();
+        const value: string = event.target.value.toLowerCase();
+        let result: Company[] = [];
+        result = companies.filter((data) => {
+            return data.companyName.toLowerCase().search(value) != -1;
+        });
+        setCompanyFilter(result);
+    }
+
     return (
         <div>
             <Suspense fallback={<div>Loading...</div>}>
                 <KeyIndicatorsWrapper kpi={kpi}/>
-                <CompaniesWrapper companies={companies}/>
+                <CompanyFilterWrapper handleCompanySearch={handleCompanySearch}/>
+                <CompaniesWrapper companies={filteredCompanies}/>
             </Suspense>
         </div>
     );

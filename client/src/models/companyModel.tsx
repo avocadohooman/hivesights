@@ -5,7 +5,7 @@ export interface Company {
     logoURL: string,
     companyURL: string,
     companyLocation: string,
-    averageTotalScore?: number,
+    averageTotalScore: number,
     averageInterviewScore?: number,
     averageOnboardingScore?: number,
     averageSupervisionScore?: number,
@@ -22,4 +22,4 @@ export interface Company {
 export type NewCompany = Omit<Company, 'id' | 'averageSalaries' | 'interviews'>;
 export type CompanyRating = Pick<Company, 'averageTotalScore'>;
 
-export type SetCompany = React.Dispatch<React.SetStateAction<Company | undefined>>
+export type SetCompany = React.Dispatch<React.SetStateAction<Company[] | undefined>>

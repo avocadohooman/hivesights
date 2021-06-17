@@ -5,13 +5,12 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 const KeyIndicator = ({keyIndicator, label}: {keyIndicator: number | undefined, label: string}): JSX.Element => {
 
     let keyIndicatorValue = '';
-    let keyIndicatorLabel = `Avg. ${label}`;
+    const keyIndicatorLabel = `Avg. ${label}`;
     if (keyIndicator) {
         if (label === 'Salary') {
             keyIndicatorValue = `${keyIndicator} €`;
         } else if (label === 'Total Score') {
             keyIndicatorValue = `${keyIndicator}`;
-            keyIndicatorLabel = `${label}`;
         } else {
             keyIndicatorValue = `${keyIndicator} Months`;
         }

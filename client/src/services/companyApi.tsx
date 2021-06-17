@@ -8,7 +8,7 @@ const getAllCompanies = async () => {
     try {
         const res: any = await axios.get<Company[]>(baseURL + '/');
         return res.data;    
-    } catch (error) {
+    } catch (error: any) {
         return error;
     }
 }

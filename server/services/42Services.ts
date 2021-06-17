@@ -48,7 +48,7 @@ const getAuthorizationToken = async (code: any, state: any) => {
         });
         console.log("DATA", data);
         return `${data.token_type} ${data.access_token}`;
-    } catch (error) {
+    } catch (error: any) {
         console.log(`${error.message}`);
     }
 };
@@ -80,7 +80,7 @@ const getUser = async (token: any) => {
             intraUrl: data.url,
             internshipValidated: internshipValidated,
         };
-    } catch (error) {
+    } catch (error: any) {
         console.log(`${error.message}`);
         return ({error: error.message});
     }

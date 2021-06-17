@@ -7,7 +7,7 @@ const authRouter = express.Router();
 authRouter.get('/42', (req, res) => {
     try {
         return res.json({url: authServices.get42URL()});
-    } catch (error) {
+    } catch (error: any) {
         console.log(error.message);
     }    
 });
@@ -33,7 +33,7 @@ authRouter.get('/42/callback', async (req, res) => {
         console.log("User for Token", userForToken);
         const key = authServices.setUserToken(userForToken);
         return res.redirect(`http://localhost:3001?auth=${key}`);
-    } catch (error) {
+    } catch (error: any) {
         console.log(error.message);
     }
 });
