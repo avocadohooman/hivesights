@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Data model
-import { HandleCompanySearchFunction } from '../../models/miscModels';
+import { HandleCompanySearchFunction, OnChangeEvent } from '../../models/miscModels';
 
 // CSS style
 import '../../styles/companyFilter.css';
@@ -28,7 +28,7 @@ const CompanySearch = ({
                         width: '224px'
                     }}
                     id="outlined-adornment-amount"
-                    onChange={(event) => handleCompanySearch(event)}
+                    onChange={(event: OnChangeEvent) => handleCompanySearch(event)}
                     labelWidth={140}
                     endAdornment={
                         <SearchIcon />

@@ -4,6 +4,8 @@ import React, { useState, useEffect, Suspense } from 'react';
 import { Company } from '../models/companyModel';
 import { KPI, StateKpi } from '../models/kpiModel';
 import { User } from '../models/userModel';
+import { OnChangeEvent } from '../models/miscModels'
+import { SelectionFilter } from '../models/filterModels';
 
 // API services
 import kpiApi from '../services/kpiApi';
@@ -53,7 +55,7 @@ const Hivesights = ({
         getCompanies();
     }, []);
 
-    const handleCompanySearch = (event: any) => {
+    const handleCompanySearch = (event: OnChangeEvent) => {
         event.preventDefault();
         const value: string = event.target.value.toLowerCase();
         let result: Company[] = [];
@@ -63,19 +65,36 @@ const Hivesights = ({
         setCompanyFilter(result);
     }
 
-    const handleCompanySelection = (event: any, value: number) => {
+    const handleCompanySelection = (event: OnChangeEvent, value: SelectionFilter, label: string) => {
         event.preventDefault();
-        console.log("Value", event.target.value)
-        // let value: number = event.target.value;
-        if (isNaN(value)) {
-            value = 0;
+        console.log("Label", label, value)
+        if (!value) {
+            setCompanyFilter(companies);
+            return ;
         }
         let result: Company[] = [];
-        result = companies.filter((data) => {
-            return data.averageSalaries >= value   
-        });
+        if (label === 'Scores') {
+            result = companies.filter((data) => data.averageTotalScore >= value.value);
+        } else if (label === 'Salary') {
+            result = companies.filter((data) => data.averageSalaries >= value.value);
+        } 
+        // else {
+        //     result = handleSorting(value);
+        // }
+        console.log("Result", result);
         setCompanyFilter(result);
     }
+
+    // const handleSorting = (value: SelectionFilter):Company[] => {
+    //     const result: Company[] = [];
+    //     console.log("Value Sorting", value);
+
+    //     switch (value.value) {
+    //         case 'name asc':
+    //         return result = companies.filter((data) => data.companyName.toLowerCase())
+    //     }
+    //     return result;
+    // }
 
     return (
         <div>

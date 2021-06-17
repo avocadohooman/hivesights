@@ -1,4 +1,8 @@
-export type HandleCompanySearchFunction = (event: any) => void;
+import { SelectionFilter } from './filterModels';
 
-export type HandleCompanySelectFunction = (event: any, value: number) => void;
+export type OnChangeEvent = React.ChangeEvent<HTMLInputElement>;
+
+export type HandleCompanySearchFunction = (event: OnChangeEvent) => void;
+
+export type HandleCompanySelectFunction = (event: OnChangeEvent, value: SelectionFilter, label: string) => void;
 

@@ -8,7 +8,8 @@ import CompanySelect from './companyCustomSelect';
 import '../../styles/companyFilter.css';
 
 // Data model
-import { HandleCompanySearchFunction, HandleCompanySelectFunction } from '../../models/miscModels';
+import { HandleCompanySearchFunction, HandleCompanySelectFunction, OnChangeEvent } from '../../models/miscModels';
+import { SelectionFilter } from '../../models/filterModels';
 
 // JSON for selectOptions
 import customSelectOption from './customSelectOptions.json';
@@ -25,25 +26,19 @@ const CompanyFilterWrapper = ({
         {
             id: 'company-score',
             label: 'Scores',
-            options: customSelectOption.score.map((score: any) => {
-                return { title: (score.title), averageSalaries: score.averageSalaries };
-            }),
+            options: customSelectOption.score,
             name: 'score',
         },
         {
             id: 'company-salary',
             label: 'Salary',
-            options: customSelectOption.salary.map((salary) => {
-            return { title: (salary.title), averageSalaries: salary.averageSalaries };
-            }),
+            options: customSelectOption.salary,
             name: 'salary',
         },
         {
             id: 'company-sort',
             label: 'Sort',
-            options: customSelectOption.sorts.map((sort) => {
-            return { title: (sort.title), sort: sort.sort };
-            }),
+            options: customSelectOption.sorts,
             name: 'sort',
         },
     ];
@@ -54,7 +49,7 @@ const CompanyFilterWrapper = ({
             
             {selectOptions.map((select) => (
                 <CompanySelect
-                    onChange={(event: any, value: number) => handleCompanySelection(event, value)}
+                    onChange={(event: OnChangeEvent, value: SelectionFilter) => handleCompanySelection(event, value, select.label)}
                     id={select.id} 
                     key={select.id}
                     label={select.label}
