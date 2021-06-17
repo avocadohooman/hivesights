@@ -13,7 +13,7 @@ export interface Company {
     averageCodingPracticesScore?: number,
     averagePerksScore?: number,
     averageCultureScore?: number,
-    averageSalaries?: number,
+    averageSalaries: number,
     averageDuration?: number,
     interviews?: number,
     reviews?: number,

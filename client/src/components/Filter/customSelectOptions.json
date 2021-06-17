@@ -1,0 +1,77 @@
+{
+    "score": [
+      {
+        "score": "5",
+        "averageTotalScore": 5
+      },
+      {
+        "score": "4+",
+        "averageTotalScore": 4
+      },
+      {
+        "score": "3+",
+        "averageTotalScore": 3
+      },
+      {
+        "score": "2+",
+        "averageTotalScore": 2
+      },
+      {
+        "score": "1+",
+        "averageTotalScore": 1
+      }
+    ],
+    "sorts": [
+      {
+        "title": "A - Z",
+        "sort": "name asc"
+      },
+      {
+        "title": "Z - A",
+        "sort": "name desc"
+      },
+      {
+        "title": "Most Reviews",
+        "sort": "review desc"
+      },
+      {
+        "title": "Least Reviews",
+        "sort": "review asc"
+      },
+      {
+        "title": "Most Popular",
+        "sort": "rating desc"
+      },
+      {
+        "title": "Least Popular",
+        "sort": "rating asc"
+      }
+    ],
+    "salary": [
+      {
+        "title": "3500+",
+        "averageSalaries": 3500
+      },
+      {
+        "title": "3000+",
+        "averageSalaries": 3000
+      },
+      {
+        "title": "2500+",
+        "averageSalaries": 2500
+      },
+      {
+        "title": "2000+",
+        "averageSalaries": 2000
+      },
+      {
+        "title": "1500+",
+        "averageSalaries": 1500
+      },
+      {
+        "title": "1000+",
+        "averageSalaries": 1000
+      }
+    ]
+  }
+  

@@ -63,11 +63,25 @@ const Hivesights = ({
         setCompanyFilter(result);
     }
 
+    const handleCompanySelection = (event: any, value: number) => {
+        event.preventDefault();
+        console.log("Value", event.target.value)
+        // let value: number = event.target.value;
+        if (isNaN(value)) {
+            value = 0;
+        }
+        let result: Company[] = [];
+        result = companies.filter((data) => {
+            return data.averageSalaries >= value   
+        });
+        setCompanyFilter(result);
+    }
+
     return (
         <div>
             <Suspense fallback={<div>Loading...</div>}>
                 <KeyIndicatorsWrapper kpi={kpi}/>
-                <CompanyFilterWrapper handleCompanySearch={handleCompanySearch}/>
+                <CompanyFilterWrapper handleCompanySearch={handleCompanySearch} handleCompanySelection={handleCompanySelection}/>
                 <CompaniesWrapper companies={filteredCompanies}/>
             </Suspense>
         </div>

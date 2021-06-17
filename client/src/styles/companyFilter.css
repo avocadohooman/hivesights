@@ -1,8 +1,12 @@
-.compnayFilterWrapper {
+.companyFilterWrapper {
     display: flex;
     width: 100%;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
     margin-top: 50px;
+}
+
+.companySearch {
+    max-width: 224px;
 }
