@@ -1,17 +1,22 @@
+// React Libraris
 import React from 'react';
 
 //Components
 import CompanySearch from './companyCustomSearch';
 import CompanySelect from './companyCustomSelect';
 
-// CSS style
-import '../../styles/companyFilter.css';
-
-// Data model
+// Data models 
 import { HandleCompanySearchFunction, HandleCompanySelectFunction, OnChangeEvent } from '../../models/miscModels';
 import { SelectionFilter } from '../../models/filterModels';
 
-// JSON for selectOptions
+// API services
+
+// CSS style
+import '../../styles/companyFilter.css';
+
+// UI Libraries
+
+// Assets
 import customSelectOption from './customSelectOptions.json';
 
 const CompanyFilterWrapper = ({

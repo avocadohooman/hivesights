@@ -1,6 +1,21 @@
+// React Libraris
 import React from 'react';
-import { StateKpi } from '../../models/kpiModel';
+
+// Components
 import KeyIndicator from './KeyIndicator';
+
+// Data models 
+import { StateKpi } from '../../models/kpiModel';
+
+// API services
+
+// CSS styles
+
+// UI Libraries
+
+// Assets
+
+
 
 const KeyIndicatorsWrapper = ({
         kpi

@@ -1,7 +1,17 @@
-import { Tooltip } from '@material-ui/core';
+// React Libraris
 import React from 'react';
+// Components
+
+// Data models 
 import { Company } from '../../models/companyModel';
+// API services
+
+// CSS styles
 import '../../styles/company.css';
+// UI Libraries
+import { Tooltip } from '@material-ui/core';
+
+// Assets
 
 const OneCompany = ({
         company

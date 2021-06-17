@@ -1,9 +1,23 @@
+// React Libraris
 import React from 'react';
-import '../styles/navBar.css';
-import { ReactComponent as SignOut } from '../assets/signOut.svg';
-import Tooltip from '@material-ui/core/Tooltip';
 import { useHistory } from 'react-router';
+
+// Components
+
+// Data models 
 import { User, SetUser } from '../models/userModel';
+
+// API services
+
+// CSS styles
+import '../styles/navBar.css';
+
+// UI Libraries
+import Tooltip from '@material-ui/core/Tooltip';
+
+// Assets
+import { ReactComponent as SignOut } from '../assets/signOut.svg';
+
 
 const Navbar = ({
         user, setUser

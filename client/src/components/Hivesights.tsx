@@ -1,8 +1,13 @@
+// React Libraris
 import React, { useState, useEffect, Suspense } from 'react';
+// Components
+import KeyIndicatorsWrapper from './KeyIndicators/KeyIndicatorsWrapper';
+import CompaniesWrapper from './Companies/CompaniesWrapper';
+import CompanyFilterWrapper from './Filter/companyFilterWrapper';
 
 // Data models 
 import { Company } from '../models/companyModel';
-import { KPI, StateKpi } from '../models/kpiModel';
+import { StateKpi } from '../models/kpiModel';
 import { User } from '../models/userModel';
 import { OnChangeEvent } from '../models/miscModels'
 import { SelectionFilter } from '../models/filterModels';
@@ -11,10 +16,11 @@ import { SelectionFilter } from '../models/filterModels';
 import kpiApi from '../services/kpiApi';
 import companyApi from '../services/companyApi';
 
-// Components
-import KeyIndicatorsWrapper from './KeyIndicators/KeyIndicatorsWrapper';
-import CompaniesWrapper from './Companies/CompaniesWrapper';
-import CompanyFilterWrapper from './Filter/companyFilterWrapper';
+// CSS styles
+
+// UI Libraries
+
+// Assets
 
 const Hivesights = ({
         user
@@ -36,8 +42,8 @@ const Hivesights = ({
     useEffect(() => {
         const getKpi = async() => {
             try {
-                const res: KPI = await kpiApi.getKeyKpi();
-                setKpi({averageDuration: res.averageDuration, averageSalary: res.averageSalary, averageScore: res.averageScore});
+                const res: StateKpi = await kpiApi.getKeyKpi();
+                setKpi(res);
             } catch (error: any) {
                 console.log(error);
             }

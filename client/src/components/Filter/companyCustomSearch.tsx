@@ -1,7 +1,13 @@
+// React Libraris
 import React from 'react';
+
+// Components
 
 // Data model
 import { HandleCompanySearchFunction, OnChangeEvent } from '../../models/miscModels';
+
+// API services
+
 
 // CSS style
 import '../../styles/companyFilter.css';
@@ -10,6 +16,9 @@ import '../../styles/companyFilter.css';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import { FormControl, InputLabel } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
+
+// Assets
+
 
 const CompanySearch = ({
         handleCompanySearch

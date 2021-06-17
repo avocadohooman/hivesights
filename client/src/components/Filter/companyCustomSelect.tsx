@@ -1,8 +1,19 @@
+// React Libraris
 import React from 'react';
+
+// Components
+
+// Data models 
+
+// API services
+
+// CSS styles
 
 // UI Libraries
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
+
+// Assets
 
 const CompanySelect = ({
         options,

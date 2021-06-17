@@ -1,6 +1,20 @@
+// React Libraris
 import React from 'react'
+
+// Components
+
+// Data models 
+
+// API services
+
+// CSS styles
 import '../../styles/keyIndicators.css';
+
+// UI Libraries
 import CircularProgress from '@material-ui/core/CircularProgress';
+
+// Assets
+
 
 const KeyIndicator = ({keyIndicator, label}: {keyIndicator: number | undefined, label: string}): JSX.Element => {
 

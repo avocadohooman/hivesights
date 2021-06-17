@@ -1,7 +1,21 @@
+// React Libraris
 import React from 'react';
-import * as authServices from '../../services/authApi';
-import '../../styles/landingPage.css';
+
+// Components
+
+// Data models 
 import { User } from '../../models/userModel';
+
+// API services
+import * as authServices from '../../services/authApi';
+
+// CSS styles
+import '../../styles/landingPage.css';
+
+// UI Libraries
+
+// Assets
+
 
 const LandingPage = () => {
 

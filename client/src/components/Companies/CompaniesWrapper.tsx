@@ -1,8 +1,20 @@
+// React Libraris
 import React from 'react';
-import { Company } from '../../models/companyModel';
+
+// Components
 import OneCompany from './Company';
+
+// Data models 
+import { Company } from '../../models/companyModel';
+
+// API services
+
+// CSS styles
 import '../../styles/company.css';
-import { Tooltip } from '@material-ui/core';
+
+// UI Libraries
+
+// Assets
 
 const CompaniesWrapper = ({
         companies
