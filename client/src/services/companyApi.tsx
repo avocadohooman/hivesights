@@ -13,6 +13,15 @@ const getAllCompanies = async () => {
     }
 }
 
+const getOneCompany = async (id: string) => {
+    try {
+        const res: any = await axios.get<Company[]>(`${baseURL}/${id}`);
+        return res.data;
+    } catch (error: any) {
+        return error;
+    }
+}
 export default {
     getAllCompanies,
+    getOneCompany
 }

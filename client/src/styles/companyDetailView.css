@@ -1,0 +1,38 @@
+.companyDetailViewKeyInfoWrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 50px;
+}
+
+.oneCompanyLogoBig {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    border: 1px solid #ADD2DD;
+}
+
+.oneCompanyNameBig {
+    font-family: 'SimpleMono-Medium';
+    font-size: 18px;
+    position: absolute;
+    top: 60px;
+    left: 111px;
+    min-width: 200px;
+}
+
+.oneCompanyLocation{
+    font-family: 'SimpleMono-Medium';
+    font-size: 15px;
+    position: absolute;
+    top: 87px;
+    left: 112px;
+    min-width: 200px;
+}
+
+a {
+    color: #ADD2DD;
+}

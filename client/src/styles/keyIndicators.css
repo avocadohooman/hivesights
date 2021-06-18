@@ -11,6 +11,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
 }
 
 .keyIndicator {
@@ -21,6 +22,10 @@
 .label {
     font-family: 'SimpleMono-Regular';
     font-size: 18px;
+    position: absolute;
+    top: 60px;
+    text-align: center;
+    min-width: 200px;
 }
 
 .labelSmall {

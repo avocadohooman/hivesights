@@ -1,5 +1,6 @@
 // React Libraris
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 // Components
 import OneCompany from './Company';
@@ -22,11 +23,12 @@ const CompaniesWrapper = ({
         companies: Company[]
     }): JSX.Element => {
     
-    console.log("Companies received", companies);
-    return ( 
+    return (
         <div className="allCompanyWrapper">
             {companies.map(company =>
-                <OneCompany key={company.id} company={company}/>
+                <Link className="oneCompanyWrapper oneCompanyLink" key={company.id} to={`/company/${company.id}`}>
+                    <OneCompany key={company.id} company={company}/>
+                </Link>
             )}
         </div>
     )

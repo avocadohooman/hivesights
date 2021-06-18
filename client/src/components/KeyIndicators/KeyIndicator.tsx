@@ -29,7 +29,7 @@ const KeyIndicator = ({keyIndicator, label}: {keyIndicator: number | undefined, 
             keyIndicatorValue = `${keyIndicator} Months`;
         }
     }
-
+    
     return (
         
         <div className="keyIndicatorWrapper">

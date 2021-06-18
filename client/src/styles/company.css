@@ -74,6 +74,11 @@
     text-align: center;
 }
 
+.oneCompanyLink { 
+    text-decoration: none; /* no underline */
+    color: inherit;
+}
+
 @media (max-width: 768px) {
     .allCompanyWrapper {
         display: flex;

@@ -41,7 +41,7 @@ beforeEach(async () => {
     } catch (error: any) {
         console.log(`Error: ${error.message}`);
     }
-}, 30000);
+}, 10000);
 
 // Testing GET API methods including error cases
 describe('Review GET /', () => {

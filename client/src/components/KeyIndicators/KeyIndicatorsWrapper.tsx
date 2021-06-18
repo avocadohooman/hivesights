@@ -22,7 +22,6 @@ const KeyIndicatorsWrapper = ({
     }: {
         kpi: StateKpi | undefined
     }): JSX.Element => {
-    console.log("Key Indicator KPIs", kpi);
 
     const durationLabel = 'Duration';
     const salaryLabel = 'Salary';

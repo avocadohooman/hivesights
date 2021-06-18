@@ -1,9 +1,11 @@
 // React Libraris
 import React, { useState, useEffect, Suspense } from 'react';
+
 // Components
 import KeyIndicatorsWrapper from './KeyIndicators/KeyIndicatorsWrapper';
 import CompaniesWrapper from './Companies/CompaniesWrapper';
 import CompanyFilterWrapper from './Filter/companyFilterWrapper';
+import CompanyDetailView from './Companies/CompanyDetailView';
 
 // Data models 
 import { Company } from '../models/companyModel';
@@ -15,6 +17,7 @@ import { SelectionFilter } from '../models/filterModels';
 // API services
 import kpiApi from '../services/kpiApi';
 import companyApi from '../services/companyApi';
+import { Route, Switch } from 'react-router-dom';
 
 // CSS styles
 
@@ -76,7 +79,6 @@ const Hivesights = ({
 
     const handleCompanySelection = (event: OnChangeEvent, value: SelectionFilter, label: string) => {
         event.preventDefault();
-        console.log("Label", label, value)
         if (!value) {
             setCompanyFilter(companies);
             return ;
@@ -126,9 +128,18 @@ const Hivesights = ({
     return (
         <div>
             <Suspense fallback={<div>Loading...</div>}>
-                <KeyIndicatorsWrapper kpi={kpi}/>
-                <CompanyFilterWrapper handleCompanySearch={handleCompanySearch} handleCompanySelection={handleCompanySelection}/>
-                <CompaniesWrapper companies={filteredCompanies}/>
+                <Switch>
+                    <Route exact path="/">
+                        <KeyIndicatorsWrapper kpi={kpi}/>
+                        <CompanyFilterWrapper handleCompanySearch={handleCompanySearch} handleCompanySelection={handleCompanySelection}/>
+                        <CompaniesWrapper companies={filteredCompanies}/>
+                    </Route>
+                    <Route path="/company/:id" render={(props) => (
+                        // eslint-disable-next-line react/prop-types
+                        <CompanyDetailView id={props.match.params.id}/>
+                        )}>
+                    </Route> 
+                </Switch>
             </Suspense>
         </div>
     );
