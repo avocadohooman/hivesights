@@ -16,7 +16,7 @@ export interface Company {
     averageSalaries: number,
     averageDuration?: number,
     interviews?: number,
-    reviews?: number,
+    reviews: number,
 }
 
 export type NewCompany = Omit<Company, 'id' | 'averageSalaries' | 'interviews'>;

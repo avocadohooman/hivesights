@@ -25,9 +25,7 @@ const CompaniesWrapper = ({
     console.log("Companies received", companies);
     return ( 
         <div className="allCompanyWrapper">
-            {companies.sort(function(a: Company, b: Company) {
-                return b.averageTotalScore - a.averageTotalScore
-            }).map(company =>
+            {companies.map(company =>
                 <OneCompany key={company.id} company={company}/>
             )}
         </div>

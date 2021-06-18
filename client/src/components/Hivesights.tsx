@@ -30,7 +30,7 @@ const Hivesights = ({
 
     const [kpi, setKpi] = useState<StateKpi | undefined>(undefined);
     const [companies, setCompanies] = useState<Company[]>([]);
-    const [filteredCompanies, setCompanyFilter] = useState<Company[]>([]);
+    const [filteredCompanies, setCompanyFilter] = useState<Company[]>(companies);
     const currentUser: User = {
         id: user.id,
         userName: user.userName,
@@ -51,6 +51,9 @@ const Hivesights = ({
         const getCompanies = async() => {
             try {
                 const companies: Company[] = await companyApi.getAllCompanies();
+                companies.sort((function(a: Company, b: Company) {
+                    return a.companyName > b.companyName ? 1 : -1; 
+                }));
                 setCompanies(companies);
                 setCompanyFilter(companies);
             } catch (error: any) {
@@ -83,24 +86,45 @@ const Hivesights = ({
             result = companies.filter((data) => data.averageTotalScore >= value.value);
         } else if (label === 'Salary') {
             result = companies.filter((data) => data.averageSalaries >= value.value);
-        } 
-        // else {
-        //     result = handleSorting(value);
-        // }
-        console.log("Result", result);
+        } else if (label === 'Sort') {
+            result = handleSorting(value);
+        }        
         setCompanyFilter(result);
+        console.log("Companies", filteredCompanies, result);
     }
 
-    // const handleSorting = (value: SelectionFilter):Company[] => {
-    //     const result: Company[] = [];
-    //     console.log("Value Sorting", value);
+    const handleSorting = (value: SelectionFilter):Company[] => {
+        const result: Company[] = [];
+        console.log("Value Sorting", value);
 
-    //     switch (value.value) {
-    //         case 'name asc':
-    //         return result = companies.filter((data) => data.companyName.toLowerCase())
-    //     }
-    //     return result;
-    // }
+        switch (value.value) {
+            case 'name asc':
+                return filteredCompanies.slice().sort(function(a: Company, b: Company) {
+                    return a.companyName > b.companyName ? 1 : -1;
+                });
+            case 'name desc': 
+                return filteredCompanies.slice().sort(function(a: Company, b: Company) {
+                    return a.companyName < b.companyName ? 1 : -1;
+                });
+            case 'review asc':
+                return filteredCompanies.slice().sort(function(a: Company, b: Company) {
+                    return a.reviews > b.reviews ? 1 : -1;
+                });
+            case 'review desc':
+                return filteredCompanies.slice().sort(function(a: Company, b: Company) {
+                    return a.reviews < b.reviews ? 1 : -1;
+                });
+            case 'rating asc':
+                return filteredCompanies.slice().sort(function(a: Company, b: Company) {
+                    return a.averageTotalScore > b.averageTotalScore ? 1 : -1;
+                });
+            case 'rating desc':
+                return filteredCompanies.slice().sort(function(a: Company, b: Company) {
+                    return a.averageTotalScore < b.averageTotalScore ? 1 : -1;
+                });
+        }
+        return result;
+    }
 
     return (
         <div>
