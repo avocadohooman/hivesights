@@ -88,6 +88,7 @@ describe('Review POST /', () => {
             coverLetter: "none",
             cv: "none"
         };
+        jest.setTimeout(10000);
         const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Reaktor"]);
         newReview.companyId = company.rows[0].id;
         await api
@@ -1420,6 +1421,7 @@ describe('Review PUT / ', () => {
             downVotes: 0,
             downVoteUsers: [] 
         };
+        jest.setTimeout(10000);
         const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Wunderdog"]);
         updatedReviewBody.companyId = company.rows[0].id;
         const existingReview = await pool.query(`SELECT id FROM ${reviewTable} WHERE username = ($1)`, ["gmolin"]);
