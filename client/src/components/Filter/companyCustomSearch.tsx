@@ -27,10 +27,11 @@ const CompanySearch = ({
     }): JSX.Element => {
 
     return (
-        <div className="companySearch">
+        <div>
             <FormControl size="small" fullWidth variant="outlined">
                 <InputLabel htmlFor="outlined-adornment-amount">Search</InputLabel>
                 <OutlinedInput 
+                    className="companySearch"
                     type="search"
                     style={{ 
                         borderRadius: '50px',

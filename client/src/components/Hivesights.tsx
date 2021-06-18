@@ -90,13 +90,10 @@ const Hivesights = ({
             result = handleSorting(value);
         }        
         setCompanyFilter(result);
-        console.log("Companies", filteredCompanies, result);
     }
 
     const handleSorting = (value: SelectionFilter):Company[] => {
-        const result: Company[] = [];
-        console.log("Value Sorting", value);
-
+        const result: Company[] = filteredCompanies;
         switch (value.value) {
             case 'name asc':
                 return filteredCompanies.slice().sort(function(a: Company, b: Company) {

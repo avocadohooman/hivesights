@@ -34,9 +34,19 @@ jobs:
       - name: Install Modules
         working-directory: ./server
         run: npm install
+      - name: Run Jest Company Tests
+        working-directory: ./server
+        run: npm run test:int company.test.ts
+        env:
+          DATABASE_URL: ${{secrets.DATABASE_URL}}
       - name: Run Jest
         working-directory: ./server
-        run: npm run test:int
+        run: npm run test:int review.test.ts
+        env:
+          DATABASE_URL: ${{secrets.DATABASE_URL}}
+      - name: Run Jest
+        working-directory: ./server
+        run: npm run test:int kpi.test.ts
         env:
           DATABASE_URL: ${{secrets.DATABASE_URL}}
   bump_version:

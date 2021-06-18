@@ -28,13 +28,17 @@ const CompanySelect = ({
     }): JSX.Element => {
     return (
         <Autocomplete
+            className="companySearch"
             id={id}
             size="small"
             options={options}
             onChange={onChange}
             getOptionLabel={(option: any) => option.title}
             getOptionSelected={(option: any) => option.title}
-            style={{ width: 300 }}
+            style={{ 
+                width: 300,
+                borderColor: 'transparent' 
+            }}
             renderInput={(params) => <TextField {...params} label={label} variant="outlined" />}
         />
     );

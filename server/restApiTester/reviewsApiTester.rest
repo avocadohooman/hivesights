@@ -8,7 +8,7 @@ GET http://localhost:3000/api/reviews/0b1e8d61-24ad-4ab2-a7cf-f0dd09ced1f1
 GET http://localhost:3000/api/reviews/company/9ce0e273-c2d2-461a-9141-d827c02d7583
 
 ###
-POST http://localhost:3000/api/reviews/af2e0ee6-a2d0-4fe1-aad4-d183a4528429
+POST http://localhost:3000/api/reviews/e90a07d8-7620-428b-8837-fe9cc9bcf7e6
 Content-Type: application/json
 
 {

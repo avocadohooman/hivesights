@@ -31,20 +31,20 @@
         "value": "name desc"
       },
       {
+        "title": "Highest Rated",
+        "value": "rating desc"
+      },
+      {
+        "title": "Lowest Rated",
+        "value": "rating asc"
+      },
+      {
         "title": "Most Reviews",
         "value": "review desc"
       },
       {
         "title": "Least Reviews",
         "value": "review asc"
-      },
-      {
-        "title": "Most Popular",
-        "value": "rating desc"
-      },
-      {
-        "title": "Least Popular",
-        "value": "rating asc"
       }
     ],
     "salary": [
