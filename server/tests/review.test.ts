@@ -41,7 +41,7 @@ beforeEach(async () => {
     } catch (error: any) {
         console.log(`Error: ${error.message}`);
     }
-});
+}, 30000);
 
 // Testing GET API methods including error cases
 describe('Review GET /', () => {
@@ -88,7 +88,6 @@ describe('Review POST /', () => {
             coverLetter: "none",
             cv: "none"
         };
-        jest.setTimeout(10000);
         const company = await pool.query(`SELECT id FROM ${companyTable} WHERE companyname = ($1)`, ["Reaktor"]);
         newReview.companyId = company.rows[0].id;
         await api
