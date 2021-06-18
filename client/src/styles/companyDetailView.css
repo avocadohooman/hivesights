@@ -65,6 +65,9 @@ a {
 }
 
 .oneCompantSubRatingTooltop {
-    font-size: 16px !important;
     cursor: pointer;
+}
+
+.oneCompantSubRatingTooltop:hover {
+    background: #ADD2DD !important;
 }
