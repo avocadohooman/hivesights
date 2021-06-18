@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 // Components
 import KeyIndicator from '../KeyIndicators/KeyIndicator';
+import CompanySubRatings from './CompanySubRatings';
 
 // Data models 
 import { Company } from '../../models/companyModel';
@@ -64,6 +65,7 @@ const CompanyDetailView = ({
                     <KeyIndicator keyIndicator={company[0].averageDuration} label={durationLabel}/>
                 </div>
             }
+            {company && <CompanySubRatings company={company}/>}
         </div>
     )
 }
