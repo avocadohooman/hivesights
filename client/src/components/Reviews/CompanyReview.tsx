@@ -1,5 +1,5 @@
 // React Libraris
-import React from 'react';
+import React, { useState } from 'react';
 
 // Components
 import KeyIndicator from '../KeyIndicators/KeyIndicator';
@@ -17,6 +17,7 @@ import { Review } from '../../models/reviewModel';
 
 // CSS styles
 import '../../styles/companyReview.css';
+import ReadFullReview from './ReadFullReview';
 
 
 // UI Libraries
@@ -29,12 +30,18 @@ const CompanyReview = ({
         review: Review | undefined
     }): JSX.Element => {
 
+    const [expand, setExpand] = useState(false);
+
     const durationLabel = 'Duration';
     const salaryLabel = 'Salary';
     const ratingLabel = 'Total Score';
 
+    const handleExpand = () => {
+        setExpand(prevCheck => !prevCheck);
+    }
+
     return (
-        <div className="companyReview">
+        <div className={expand === true ? 'companyReview' : 'companyReviewExpand'}>
             <div className="companyReviewOverallSection">
                 <Avatar size='m' avatarImageUrl={review?.userPicture} />
                 <UserName userName={review?.userName}/>
@@ -54,7 +61,12 @@ const CompanyReview = ({
                 <ProsConsHeader label='cons' />
                 <ProsConsText text={review?.cons} />
             </div>
-        
+
+            
+
+            {!expand && <div className="companyReviewHandleExpand">
+                <ReadFullReview  handleExpand={handleExpand}/>
+            </div>}
         </div>
     )
 }

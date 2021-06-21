@@ -12,6 +12,15 @@
     height: 550px;
     margin-bottom: 20px;
     overflow: hidden;
+    position: relative;
+}
+
+.companyReviewExpand {
+    border: 1px solid #ADD2DD;
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    position: relative;
 }
 
 .companyReviewOverallSection {
@@ -64,4 +73,28 @@
     font-family: 'SimpleNorm-Regular';
     font-size: 16px;
     margin-bottom: 20px;
+}
+
+.companyReviewHandleExpand {
+    background-image: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1));
+    cursor: pointer;
+    position: absolute;
+    padding-top: auto;
+    padding-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    bottom: 5px;
+    height: 75px;
+    width: 100%;
+}
+
+.companyReviewHandleText {
+    font-family: 'SimpleMono-Regular';
+    font-size: 16px;
+    color: #DE7E2F;
+    text-decoration: underline;
+    margin-top: 25px;
 }

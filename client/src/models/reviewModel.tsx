@@ -30,3 +30,4 @@ export type CompanyTotalRating = Pick<Review, 'totalRating'>;
 export type ReviewVoting = Pick<Review, 'upVotes' | 'downVotes' | 'upVoteUsers' | 'downVoteUsers'>;
 
 export type SetReview = React.Dispatch<React.SetStateAction<Review | undefined>>;
+export type SetExpand = React.Dispatch<React.SetStateAction<boolean>>

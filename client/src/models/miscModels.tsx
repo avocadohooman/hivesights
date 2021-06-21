@@ -6,3 +6,4 @@ export type HandleCompanySearchFunction = (event: OnChangeEvent) => void;
 
 export type HandleCompanySelectFunction = (event: OnChangeEvent, value: SelectionFilter, label: string) => void;
 
+export type HandleExpandFunction = () => void;
