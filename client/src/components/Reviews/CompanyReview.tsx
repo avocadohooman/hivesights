@@ -9,6 +9,9 @@ import ReviewOverall from './ReviewOverall';
 import ReviewDate from './ReviewDate';
 import ProsConsHeader from './ProsConsHeader';
 import ProsConsText from './ProsConsText';
+import ReadFullReview from './ReadFullReview';
+import ReviewSubRating from './ReviewSubRatings';
+import ReviewSubRatingHeader from './SubCategoryRaingsHeader';
 
 // Data models 
 import { Review } from '../../models/reviewModel';
@@ -17,7 +20,6 @@ import { Review } from '../../models/reviewModel';
 
 // CSS styles
 import '../../styles/companyReview.css';
-import ReadFullReview from './ReadFullReview';
 
 
 // UI Libraries
@@ -27,7 +29,7 @@ import ReadFullReview from './ReadFullReview';
 const CompanyReview = ({ 
         review
     } : { 
-        review: Review | undefined
+        review: Review
     }): JSX.Element => {
 
     const [expand, setExpand] = useState(false);
@@ -41,7 +43,7 @@ const CompanyReview = ({
     }
 
     return (
-        <div className={expand === true ? 'companyReview' : 'companyReviewExpand'}>
+        <div className={expand === false ? 'companyReview' : 'companyReviewExpand'}>
             <div className="companyReviewOverallSection">
                 <Avatar size='m' avatarImageUrl={review?.userPicture} />
                 <UserName userName={review?.userName}/>
@@ -62,7 +64,10 @@ const CompanyReview = ({
                 <ProsConsText text={review?.cons} />
             </div>
 
-            
+            <div className="companyReviewSubRatings">
+                <ReviewSubRatingHeader label='Subcategory Ratings'/>
+                <ReviewSubRating review={review} />
+            </div>
 
             {!expand && <div className="companyReviewHandleExpand">
                 <ReadFullReview  handleExpand={handleExpand}/>

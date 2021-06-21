@@ -22,7 +22,7 @@ import Rating from '@material-ui/lab/Rating';
 import { Theme, Tooltip, withStyles } from '@material-ui/core';
 
 // Assets
-import subCategoryToolTips from './subCategoryToolTips.json';
+import subCategoryToolTips from '../../utils/subCategoryToolTips.json';
  
 const HtmlTooltip = withStyles((theme: Theme) => ({
     tooltip: {
@@ -50,7 +50,7 @@ const CompanySubRatings = ({
                 aria-controls="panel1a-content"
                 id="panel1a-header"
                 >
-                    <Typography className="oneCompanySubRatingHeader">{company[0].companyName} Subcategory Ratings</Typography>
+                <Typography className="oneCompanySubRatingHeader">{company[0].companyName} - Average Subcategory Ratings</Typography>
                 </AccordionSummary>
                 <AccordionDetails className="oneCompanySubRatingWrapper">
                     
