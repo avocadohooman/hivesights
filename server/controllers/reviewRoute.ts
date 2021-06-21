@@ -103,9 +103,36 @@ reviewRouter.get('/company/:id', async (req, res) => {
             console.log("Company doesn't exist ERROR");
             return res.status(400).json({error: "Company doesn't exist."});
         }
-        const reviews = await pool.query(`SELECT * FROM ${reviewTable} WHERE companyid = ($1)`, [id]);
-        console.log('Reviews fetched', reviews.rows);
-        return res.status(200).json(reviews.rows);
+        const reviewsDB = await pool.query(`SELECT * FROM ${reviewTable} WHERE companyid = ($1)`, [id]);
+        let reviews: Review[] = [];
+        reviews = reviewsDB.rows.map((row: ReviewDB) => ({
+            id: row.id,
+            companyId: row.companyid,
+            userName: row.username,
+            userPicture: row.userpictureurl,
+            pros: row.pros,
+            cons: row.cons,
+            overall: row.overall,
+            totalRating: row.totalrating,
+            ratingCriteriaInterview: row.ratingcriteriainterview,
+            ratingCriteriaOnboarding: row.ratingcriteriaonboarding,
+            ratingCriteriaSupervision: row.ratingcriteriasupervision,
+            ratingCriteriaLearning: row.ratingcriterialearning,
+            ratingCriteriaCodingPractices: row.ratingcriteriacodingpractices,
+            ratingCriteriaPerks: row.ratingcriteriaperks,
+            ratingCriteriaCulture: row.ratingcriteriaculture,
+            salary: row.salary,
+            duration: row.duration,
+            coverLetter: row.coverletter,
+            cv: row.cv,
+            upVotes: row.upvotes,
+            upVoteUsers: row.upvoteusers,
+            downVotes: row.downvotes,
+            downVoteUsers: row.downvoteusers,
+            publishedDate: row.published_date
+        }));
+        console.log('Reviews fetched', reviews);
+        return res.status(200).json(reviews);
     } catch (error: any) {
         console.log(`Error: ${error.message}`);
         return res.status(400).json({error: error.message});

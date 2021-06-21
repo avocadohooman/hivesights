@@ -13,9 +13,17 @@ const getAllReviews = async () => {
     }
 }
 
-const getOneReview = async (id: string) => {
+const getCompanyReviews = async (companyId: string) => {
     try {
-        const res: any = await axios.get<Review[]>(`${baseURL}/${id}`);
+        const res: any = await axios.get<Review[]>(`${baseURL}/company/${companyId}`);
+        return res.data;
+    } catch (error: any) {
+        return error;
+    }
+}
+const getOneReview = async (reviewId: string) => {
+    try {
+        const res: any = await axios.get<Review[]>(`${baseURL}/${reviewId}`);
         return res.data;
     } catch (error: any) {
         return error;
@@ -24,5 +32,6 @@ const getOneReview = async (id: string) => {
 
 export default {
     getAllReviews,
+    getCompanyReviews,
     getOneReview
 }

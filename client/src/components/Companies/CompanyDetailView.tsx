@@ -7,9 +7,11 @@ import CompanySubRatings from './CompanySubRatings';
 
 // Data models 
 import { Company } from '../../models/companyModel';
+import { Review } from '../../models/reviewModel';
 
 // API services
 import companyApi from '../../services/companyApi';
+import reviewApi from '../../services/reviewApi';
 
 // CSS styles
 import '../../styles/company.css';
@@ -28,6 +30,7 @@ const CompanyDetailView = ({
     }): JSX.Element => {
 
     const [company, setCompany] = useState<Company[]>();
+    const [reviews, setReviews] = useState<Review[]>()
 
     const durationLabel = 'Duration';
     const salaryLabel = 'Salary';
@@ -42,7 +45,16 @@ const CompanyDetailView = ({
                 console.log(error);
             }
         }
+        const getCompanyReviews = async () => {
+            try {
+                const reviews: Review[] = await reviewApi.getCompanyReviews(id);
+                console.log("Reviews", reviews);
+            } catch (error) {
+                console.log(error);
+            }
+        }
         getOneCompany();
+        getCompanyReviews();
     }, []);
 
     return (
