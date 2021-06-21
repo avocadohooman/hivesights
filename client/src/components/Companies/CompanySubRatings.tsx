@@ -50,7 +50,7 @@ const CompanySubRatings = ({
                 aria-controls="panel1a-content"
                 id="panel1a-header"
                 >
-                    <Typography className="oneCompanySubRatingHeader">{company[0].companyName} Sub-Ratings</Typography>
+                    <Typography className="oneCompanySubRatingHeader">{company[0].companyName} Subcategory Ratings</Typography>
                 </AccordionSummary>
                 <AccordionDetails className="oneCompanySubRatingWrapper">
                     

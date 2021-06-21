@@ -9,7 +9,7 @@ import {
 } from 'react-router-dom';
 import LandingPage from './components/Landing/LandingPage';
 import Hivesights from './components/Hivesights';
-import Navbar from './components/Navbar';
+import Navbar from './components/Navbar/Navbar';
 import authApi from './services/authApi';
 import jwt_decode from 'jwt-decode';
 import { StateUser } from './models/userModel';

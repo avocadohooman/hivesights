@@ -3,20 +3,22 @@ import React from 'react';
 import { useHistory } from 'react-router';
 
 // Components
+import Avatar from './Avatar';
+import UserName from './UserName';
 
 // Data models 
-import { User, SetUser } from '../models/userModel';
+import { User, SetUser } from '../../models/userModel';
 
 // API services
 
 // CSS styles
-import '../styles/navBar.css';
+import '../../styles/navBar.css';
 
 // UI Libraries
 import Tooltip from '@material-ui/core/Tooltip';
 
 // Assets
-import { ReactComponent as SignOut } from '../assets/signOut.svg';
+import { ReactComponent as SignOut } from '../../assets/signOut.svg';
 
 
 const Navbar = ({
@@ -47,8 +49,8 @@ const Navbar = ({
         <div className="navbar">
             <button className="logoTitle" onClick={handleGoHome}>{logoTitle}</button>
             <div className="userSection">
-                <div className="headerAvatarWrapper" style={headerAvatarStyle}></div>
-                <div className="headerUserName">{userName}</div>
+                <Avatar avatarImageUrl={avatarImageUrl}/>
+                <UserName userName={userName}/>
                 <Tooltip title="Sign Out">
                     <SignOut onClick={handleLogout} className="signOutWrapper"/>
                 </Tooltip>
