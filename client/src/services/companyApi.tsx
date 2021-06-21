@@ -21,6 +21,7 @@ const getOneCompany = async (id: string) => {
         return error;
     }
 }
+
 export default {
     getAllCompanies,
     getOneCompany

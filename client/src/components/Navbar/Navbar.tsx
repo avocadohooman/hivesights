@@ -31,9 +31,6 @@ const Navbar = ({
     const logoTitle = 'Hivesights';
     const avatarImageUrl = user?.imageUrl;
     const userName = user?.userName;
-    const headerAvatarStyle = {
-        backgroundImage: `url(${avatarImageUrl})`,
-    }
     const history = useHistory();
     
     const handleLogout = () => {
