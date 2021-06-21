@@ -5,7 +5,7 @@ GET http://localhost:3000/api/reviews/
 GET http://localhost:3000/api/reviews/0b1e8d61-24ad-4ab2-a7cf-f0dd09ced1f1
 
 ###
-GET http://localhost:3000/api/reviews/company/9ce0e273-c2d2-461a-9141-d827c02d7583
+GET http://localhost:3000/api/reviews/company/91bdef63-585e-4eaf-8050-8456c40b95d3
 
 ###
 POST http://localhost:3000/api/reviews/e90a07d8-7620-428b-8837-fe9cc9bcf7e6

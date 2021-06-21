@@ -57,6 +57,7 @@ const Hivesights = ({
                 companies.sort((function(a: Company, b: Company) {
                     return a.companyName > b.companyName ? 1 : -1; 
                 }));
+                console.log("Companies?", companies);
                 setCompanies(companies);
                 setCompanyFilter(companies);
             } catch (error: any) {
