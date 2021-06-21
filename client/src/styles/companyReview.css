@@ -1,0 +1,38 @@
+.companyReviewsWrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border: black;
+    margin-top: 100px;
+}
+
+.companyReview {
+    border: 1px solid #ADD2DD;
+    width: 100%;
+    height: 550px;
+    margin-bottom: 20px;
+}
+
+.companyReviewOverallSection {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.companyReviewOverallQuote {
+    font-family: 'SimpleNorm-Mediumitalic';
+}
+
+.companyReviewKeyIndicators {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 20px;
+    margin-right: 20px;
+}

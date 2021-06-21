@@ -16,10 +16,13 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 // Assets
 
 
-const KeyIndicator = ({keyIndicator, label}: {keyIndicator: number | undefined, label: string}): JSX.Element => {
+const KeyIndicator = ({keyIndicator, label, average}: {keyIndicator: number | undefined, label: string, average: boolean}): JSX.Element => {
 
     let keyIndicatorValue = '';
-    const keyIndicatorLabel = `Avg. ${label}`;
+    let keyIndicatorLabel = `${label}`;
+    if (average) {
+        keyIndicatorLabel = `Avg. ${label}`;
+    }
     if (keyIndicator) {
         if (label === 'Salary') {
             keyIndicatorValue = `${keyIndicator} €`;
@@ -29,7 +32,7 @@ const KeyIndicator = ({keyIndicator, label}: {keyIndicator: number | undefined, 
             keyIndicatorValue = `${keyIndicator} Months`;
         }
     }
-    
+
     return (
         
         <div className="keyIndicatorWrapper">

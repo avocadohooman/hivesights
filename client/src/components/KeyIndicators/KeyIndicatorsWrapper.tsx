@@ -29,9 +29,9 @@ const KeyIndicatorsWrapper = ({
 
     return (
         <div className="keyIndicatorsWrapper ">
-            <KeyIndicator keyIndicator={kpi?.averageSalary} label={salaryLabel}/>
-            <KeyIndicator keyIndicator={kpi?.averageScore} label={ratingLabel}/>
-            <KeyIndicator keyIndicator={kpi?.averageDuration} label={durationLabel}/>
+            <KeyIndicator average={true}  keyIndicator={kpi?.averageSalary} label={salaryLabel}/>
+            <KeyIndicator average={true}  keyIndicator={kpi?.averageScore} label={ratingLabel}/>
+            <KeyIndicator average={true}  keyIndicator={kpi?.averageDuration} label={durationLabel}/>
         </div>
     )
 }

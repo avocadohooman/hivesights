@@ -12,7 +12,7 @@ let intialReviews: NewReview[] = [
     {
         companyId: "",
         userName: "gmolin",
-        userPicture: "gmolin",
+        userPicture: "https://cdn.intra.42.fr/users/medium_gmolin.jpg",
         pros: "Great culture Nice perks Amazing office",
         cons: "Some projects are quite boring",
         overall: "A great place to grow as software developer",
@@ -35,8 +35,8 @@ let intialReviews: NewReview[] = [
     },
     {
         companyId: "",
-        userName: "hoang",
-        userPicture: "hoang",
+        userName: "hopham",
+        userPicture: "https://cdn.intra.42.fr/users/medium_hopham.jpg",
         pros: "Great culture Nice perks Amazing office",
         cons: "Company language could be more English",
         overall: "A great place to grow as software developer",
@@ -59,8 +59,8 @@ let intialReviews: NewReview[] = [
     },
     {
         companyId: "",
-        userName: "niklas",
-        userPicture: "niklas",
+        userName: "npimenof",
+        userPicture: "https://cdn.intra.42.fr/users/medium_npimenof.jpg",
         pros: "Great culture Nice perks Amazing office",
         cons: "Some projects are quite boring",
         overall: "A great place to grow as software developer",
@@ -82,8 +82,8 @@ let intialReviews: NewReview[] = [
     },
     {
         companyId: "",
-        userName: "Pia",
-        userPicture: "Pia",
+        userName: "pandersi",
+        userPicture: "https://cdn.intra.42.fr/users/medium_pandersi.jpg",
         pros: "Great culture Nice perks Amazing office",
         cons: "Some projects are quite boring",
         overall: "A great place to grow as software developer",

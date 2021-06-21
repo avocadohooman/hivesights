@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 // Components
 import KeyIndicator from '../KeyIndicators/KeyIndicator';
 import CompanySubRatings from './CompanySubRatings';
+import CompanyReviewsWrapper from '../Reviews/CompanyReviewsWrapper';
 
 // Data models 
 import { Company } from '../../models/companyModel';
@@ -48,7 +49,10 @@ const CompanyDetailView = ({
         const getCompanyReviews = async () => {
             try {
                 const reviews: Review[] = await reviewApi.getCompanyReviews(id);
-                console.log("Reviews", reviews);
+                reviews.sort(function(a: Review, b: Review) {
+                    return  new Date(a.publishedDate).getTime() - new Date(b.publishedDate).getTime()
+                });
+                setReviews(reviews);
             } catch (error) {
                 console.log(error);
             }
@@ -62,22 +66,23 @@ const CompanyDetailView = ({
             {company &&
                 <div className="companyDetailViewKeyInfoWrapper">
                     <div className="oneCompanyLogoWrapper">
-                        <img className="oneCompanyLogoBig" src={company[0].logoURL}></img>
+                        <img className="oneCompanyLogoBig" src={company[0]?.logoURL}></img>
 
                         <div className="oneCompanyNameBig">
-                            <a href={company[0].companyURL}> {company[0].companyName}</a>
+                            <a href={company[0]?.companyURL}> {company[0]?.companyName}</a>
                         </div>
                         <div className="oneCompanyLocation">
-                            {company[0].companyLocation}
+                            {company[0]?.companyLocation}
                         </div>
 
                     </div>
-                    <KeyIndicator keyIndicator={company[0].averageSalaries} label={salaryLabel}/>
-                    <KeyIndicator keyIndicator={company[0].averageTotalScore} label={ratingLabel}/>
-                    <KeyIndicator keyIndicator={company[0].averageDuration} label={durationLabel}/>
+                    <KeyIndicator average={true} keyIndicator={company[0].averageSalaries} label={salaryLabel}/>
+                    <KeyIndicator average={true}  keyIndicator={company[0].averageTotalScore} label={ratingLabel}/>
+                    <KeyIndicator average={true}  keyIndicator={company[0].averageDuration} label={durationLabel}/>
                 </div>
             }
             {company && <CompanySubRatings company={company}/>}
+            {reviews && <CompanyReviewsWrapper reviews={reviews}/>}
         </div>
     )
 }

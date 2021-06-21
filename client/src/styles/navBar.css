@@ -24,9 +24,18 @@
     text-shadow: 0 4px 12px rgba(149,157,165,.2);
 }
 
-.headerAvatarWrapper {
+.headerAvatarWrapperSmall {
     width: 50px;
     height: 50px;
+    background-size: cover;
+    box-shadow: 0 4px 12px rgba(149,157,165,.2);
+    border-radius: 50%;
+    border: 1px solid #F9DE4B;
+}
+
+.headerAvatarWrapperMedium {
+    width: 75px;
+    height: 75px;
     background-size: cover;
     box-shadow: 0 4px 12px rgba(149,157,165,.2);
     border-radius: 50%;

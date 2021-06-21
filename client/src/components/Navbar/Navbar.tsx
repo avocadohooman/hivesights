@@ -46,7 +46,7 @@ const Navbar = ({
         <div className="navbar">
             <button className="logoTitle" onClick={handleGoHome}>{logoTitle}</button>
             <div className="userSection">
-                <Avatar avatarImageUrl={avatarImageUrl}/>
+                <Avatar size='s' avatarImageUrl={avatarImageUrl}/>
                 <UserName userName={userName}/>
                 <Tooltip title="Sign Out">
                     <SignOut onClick={handleLogout} className="signOutWrapper"/>

@@ -16,16 +16,21 @@ import '../../styles/navBar.css';
 
 
 const Avatar = ({
-        avatarImageUrl
+        avatarImageUrl,
+        size
     } : {
-        avatarImageUrl: string | undefined
+        avatarImageUrl: string | undefined,
+        size: string
     }): JSX.Element => {
 
     const headerAvatarStyle = {
         backgroundImage: `url(${avatarImageUrl})`,
     }
     return (
-        <div className="headerAvatarWrapper" style={headerAvatarStyle}></div>
+        <div>
+            {size === 's' && <div className="headerAvatarWrapperSmall" style={headerAvatarStyle}></div>}
+            {size === 'm' && <div className="headerAvatarWrapperMedium" style={headerAvatarStyle}></div>}
+        </div>
     )
 }
 
