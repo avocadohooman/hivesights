@@ -66,18 +66,15 @@ const CompanyDetailView = ({
 
     const handleVoting = async (id: string, updatedReview: NewReview) => {
         try {
-            const review = await reviewApi.updateReview(id, updatedReview);
+            await reviewApi.updateReview(id, updatedReview);
             reviews?.find(item => {
-                console.log('Found item?', item);
                 if (item.id === id) {
                     item.upVoteUsers = updatedReview.upVoteUsers;
-                    item.upVotes += 1;
+                    item.upVotes = updatedReview.upVotes;
                     item.downVotes = updatedReview.downVotes;
                     item.downVoteUsers = updatedReview.downVoteUsers;
                 }
-                console.log("Updated review", item);
             });
-            console.log('Handle Voting, after PUT call', reviews);
             setReviews(reviews);
         } catch (error) {
             console.log(error);

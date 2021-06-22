@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 // React Libraris
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 // Components
 
@@ -31,24 +31,31 @@ const ReviewVoting = ({
         handleVoting: HandleVotingFunction
     }) => {
 
-    let votes = review.upVotes - review.downVotes;
-    if (votes < 0) {
-        votes = 0;
+    
+    const [hasUserUpVoted, setUserUpVote] = useState(review.upVoteUsers.find(user => user === currentUser.userName));
+    const [hasUserDownVoted, setUserDownVote] = useState(review.downVoteUsers.find(user => user === currentUser.userName));
+    
+    const getVotes = (totalVotes: number) : number => {
+        if (totalVotes >= 0) {
+            return totalVotes;
+        }
+        return 0;
     }
-    const totalVotesLabel = `${votes} students found this review helpful`;
-    const hasUserUpVoted = review.upVoteUsers.find(user => user === currentUser.userName);
-    const hasUserDownVoted = review.downVoteUsers.find(user => user === currentUser.userName);
+    const [votes, setVotes] = useState<number>(getVotes(review.upVotes - review.downVotes));
 
     const handleUpVote = async () => {
-        console.log('Handling Up Vote');
         const updatedReview: Review = {...review};
         updatedReview.upVoteUsers.push(currentUser.userName);
         updatedReview.upVotes += 1;
         if (updatedReview.downVoteUsers.find(user => user === currentUser.userName)) {
             updatedReview.downVoteUsers = updatedReview.downVoteUsers.filter(user => user !== currentUser.userName);
-            updatedReview.downVotes -= 1;
+            if (updatedReview.downVotes > 0) {
+                updatedReview.downVotes -= 1;
+            }
         }
-        console.log('Handling Up Vote - Updated Review', updatedReview);
+        setUserDownVote(updatedReview.downVoteUsers.find(user => user === currentUser.userName));
+        setUserUpVote(updatedReview.upVoteUsers.find(user => user === currentUser.userName));
+        setVotes(getVotes(updatedReview.upVotes - updatedReview.downVotes));
         handleVoting(review.id, updatedReview);
     }
 
@@ -58,10 +65,17 @@ const ReviewVoting = ({
         updatedReview.downVotes += 1;
         if (updatedReview.upVoteUsers.find(user => user === currentUser.userName)) {
             updatedReview.upVoteUsers = updatedReview.upVoteUsers.filter(user => user !== currentUser.userName);
-            updatedReview.upVotes -= 1;
+            if (updatedReview.upVotes > 0) {
+                updatedReview.upVotes -= 1;
+            }
         }
+        setUserUpVote(updatedReview.upVoteUsers.find(user => user === currentUser.userName));
+        setUserDownVote(updatedReview.downVoteUsers.find(user => user === currentUser.userName));
+        setVotes(getVotes(updatedReview.upVotes - updatedReview.downVotes));
         handleVoting(review.id, updatedReview);
     }
+
+    const totalVotesLabel = `${votes} student(s) found this review helpful`;
 
     return (
         <div className="companyReviewVoting">
@@ -97,3 +111,7 @@ const ReviewVoting = ({
 }
 
 export default ReviewVoting;
+
+function setState(): [any, any] {
+    throw new Error('Function not implemented.');
+}

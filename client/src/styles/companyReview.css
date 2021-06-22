@@ -139,7 +139,7 @@
 }
 
 .companyReviewThumbsUpVoted {
-    background: white;
+    background: transparent;
     font-family: 'SimpleNorm-Regular';
     border: 1px solid #8FBC87;
     color: #8FBC87;
@@ -156,7 +156,7 @@
 }
 
 .companyReviewThumbsDownVoted {
-    background: white;
+    background: transparent;
     font-family: 'SimpleNorm-Regular';
     border: 1px solid #D23E41;
     color: #D23E41;
