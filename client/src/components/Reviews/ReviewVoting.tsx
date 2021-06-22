@@ -41,37 +41,33 @@ const ReviewVoting = ({
         }
         return 0;
     }
-    const [votes, setVotes] = useState<number>(getVotes(review.upVotes - review.downVotes));
+    const [votes, setVotes] = useState<number>(getVotes(review.upVoteUsers.length - review.downVoteUsers.length));
 
     const handleUpVote = () => {
         const updatedReview: Review = {...review};
-        updatedReview.upVoteUsers.push(currentUser.userName);
-        updatedReview.upVotes += 1;
+        if (!updatedReview.upVoteUsers.find(user => user === currentUser.userName)) {
+            updatedReview.upVoteUsers.push(currentUser.userName);
+        }
         if (updatedReview.downVoteUsers.find(user => user === currentUser.userName)) {
             updatedReview.downVoteUsers = updatedReview.downVoteUsers.filter(user => user !== currentUser.userName);
-            if (updatedReview.downVotes > 0) {
-                updatedReview.downVotes -= 1;
-            }
         }
         setUserDownVote(updatedReview.downVoteUsers.find(user => user === currentUser.userName));
         setUserUpVote(updatedReview.upVoteUsers.find(user => user === currentUser.userName));
-        setVotes(getVotes(updatedReview.upVotes - updatedReview.downVotes));
+        setVotes(getVotes(updatedReview.upVoteUsers.length - updatedReview.downVoteUsers.length));
         handleVoting(review.id, updatedReview);
     }
 
     const handleDownVote = () => {
         const updatedReview: Review = {...review};
-        updatedReview.downVoteUsers.push(currentUser.userName);
-        updatedReview.downVotes += 1;
+        if (!updatedReview.downVoteUsers.find(user => user === currentUser.userName)) {
+            updatedReview.downVoteUsers.push(currentUser.userName);
+        }
         if (updatedReview.upVoteUsers.find(user => user === currentUser.userName)) {
             updatedReview.upVoteUsers = updatedReview.upVoteUsers.filter(user => user !== currentUser.userName);
-            if (updatedReview.upVotes > 0) {
-                updatedReview.upVotes -= 1;
-            }
         }
         setUserUpVote(updatedReview.upVoteUsers.find(user => user === currentUser.userName));
         setUserDownVote(updatedReview.downVoteUsers.find(user => user === currentUser.userName));
-        setVotes(getVotes(updatedReview.upVotes - updatedReview.downVotes));
+        setVotes(getVotes(updatedReview.upVoteUsers.length - updatedReview.downVoteUsers.length));
         handleVoting(review.id, updatedReview);
     }
 

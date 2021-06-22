@@ -71,8 +71,8 @@ const CompanyDetailView = ({
             reviews?.find(item => {
                 if (item.id === id) {
                     item.upVoteUsers = updatedReview.upVoteUsers;
-                    item.upVotes = updatedReview.upVotes;
-                    item.downVotes = updatedReview.downVotes;
+                    item.upVotes = updatedReview.upVoteUsers.length;
+                    item.downVotes = updatedReview.downVoteUsers.length;
                     item.downVoteUsers = updatedReview.downVoteUsers;
                 }
             });
