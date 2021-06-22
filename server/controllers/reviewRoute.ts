@@ -178,7 +178,7 @@ reviewRouter.put('/:id', async (req, res) => {
         }
         const updatedReviewBody: NewReview = parsingService.parsingReview(req.body, companyId);
         // updatedReviewBody.totalRating = reviewServices.calculateTotalScore(updatedReviewBody);
-        console.log("Total Score: ", updatedReviewBody.totalRating);
+        console.log("Updated Review Body ", updatedReviewBody);
         const updatedReview = await pool.query(`UPDATE ${reviewTable} 
         SET
         ${reviewQueries.updateReviewColumns}
@@ -207,7 +207,7 @@ reviewRouter.put('/:id', async (req, res) => {
             updatedReviewBody.downVoteUsers,
             reviewId
         ]);
-        console.log(`Review ${updatedReview.rows[0]} udpated`);
+        console.log(`Review udpated`, updatedReview);
         await reviewServices.updateAverageSalary(companyId, reviewTable, companyTable);
         await reviewServices.updateScores(companyId, reviewTable, companyTable);
         await reviewServices.updateAverageDuration(companyId, reviewTable, companyTable);

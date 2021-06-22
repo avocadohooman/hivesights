@@ -15,6 +15,7 @@ import ReviewVoting from './ReviewVoting';
 // Data models 
 import { Review } from '../../models/reviewModel';
 import { User } from '../../models/userModel';
+import { HandleVotingFunction } from '../../models/miscModels';
 
 // API services
 
@@ -29,10 +30,12 @@ import ReviewHeaders from './ReviewHeader';
 
 const CompanyReview = ({ 
         review,
-        currentUser
+        currentUser,
+        handleVoting
     } : { 
         review: Review,
-        currentUser: User
+        currentUser: User,
+        handleVoting: HandleVotingFunction
     }): JSX.Element => {
 
     const [expand, setExpand] = useState(false);
@@ -74,7 +77,7 @@ const CompanyReview = ({
 
             <div className="companyReviewVotingWrapper">
                 <ReviewHeaders header='Was this review useful?' color='' size='20px'/>
-                <ReviewVoting currentUser={currentUser} review={review}/>
+                <ReviewVoting handleVoting={handleVoting} currentUser={currentUser} review={review}/>
             </div>
             
             {!expand && <div className="companyReviewHandleExpand">

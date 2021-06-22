@@ -7,6 +7,7 @@ import CompanyReview from './CompanyReview';
 // Data models 
 import { Review } from '../../models/reviewModel';
 import { User } from '../../models/userModel';
+import { HandleVotingFunction } from '../../models/miscModels';
 
 // API services
 
@@ -19,17 +20,19 @@ import '../../styles/companyReview.css';
 
 const CompanyReviewsWrapper = ({ 
         reviews,
-        currentUser
+        currentUser,
+        handleVoting
     } : { 
         reviews: Review[] | undefined,
         currentUser: User
+        handleVoting: HandleVotingFunction
     }): JSX.Element => {
 
         console.log("Review?", reviews);
     return (
         <div className="companyReviewsWrapper"> 
             {reviews?.map(review => 
-                <CompanyReview key={review.id} currentUser={currentUser} review={review}/>
+                <CompanyReview key={review.id} currentUser={currentUser} handleVoting={handleVoting} review={review}/>
             )}
         </div>
     )

@@ -5,8 +5,9 @@ import React from 'react';
 // Components
 
 // Data models 
-import { Review } from '../../models/reviewModel';
+import { NewReview, Review } from '../../models/reviewModel';
 import { User } from '../../models/userModel';
+import { HandleVotingFunction } from '../../models/miscModels';
 
 // API services
 
@@ -22,10 +23,12 @@ import { ReactComponent as ThumbsDown } from '../../assets/thumbsDown.svg';
 
 const ReviewVoting = ({ 
         review,
-        currentUser
+        currentUser,
+        handleVoting
     } : { 
         review: Review,
-        currentUser: User
+        currentUser: User,
+        handleVoting: HandleVotingFunction
     }) => {
 
     let votes = review.upVotes - review.downVotes;
@@ -36,6 +39,30 @@ const ReviewVoting = ({
     const hasUserUpVoted = review.upVoteUsers.find(user => user === currentUser.userName);
     const hasUserDownVoted = review.downVoteUsers.find(user => user === currentUser.userName);
 
+    const handleUpVote = async () => {
+        console.log('Handling Up Vote');
+        const updatedReview: Review = {...review};
+        updatedReview.upVoteUsers.push(currentUser.userName);
+        updatedReview.upVotes += 1;
+        if (updatedReview.downVoteUsers.find(user => user === currentUser.userName)) {
+            updatedReview.downVoteUsers = updatedReview.downVoteUsers.filter(user => user !== currentUser.userName);
+            updatedReview.downVotes -= 1;
+        }
+        console.log('Handling Up Vote - Updated Review', updatedReview);
+        handleVoting(review.id, updatedReview);
+    }
+
+    const handleDownVote = async () => {
+        const updatedReview: Review = {...review};
+        updatedReview.downVoteUsers.push(currentUser.userName);
+        updatedReview.downVotes += 1;
+        if (updatedReview.upVoteUsers.find(user => user === currentUser.userName)) {
+            updatedReview.upVoteUsers = updatedReview.upVoteUsers.filter(user => user !== currentUser.userName);
+            updatedReview.upVotes -= 1;
+        }
+        handleVoting(review.id, updatedReview);
+    }
+
     return (
         <div className="companyReviewVoting">
             <div className="companyReviewThumbsWrapper">
@@ -45,18 +72,18 @@ const ReviewVoting = ({
                     </div>
                 }
                 {!hasUserUpVoted && 
-                    <div className="companyReviewThumbs">
+                    <div onClick={handleUpVote} className="companyReviewThumbs">
                         <ThumbsUp/> Yes
                     </div>
                 }
 
                 {hasUserDownVoted && 
                     <div className="companyReviewThumbsDownVoted">
-                        <ThumbsDown className="companyReviewThumbsDownVotedSvg" /> Yes
+                        <ThumbsDown className="companyReviewThumbsDownVotedSvg" /> No
                     </div>
                 }
                 {!hasUserDownVoted && 
-                    <div className="companyReviewThumbs">
+                    <div onClick={handleDownVote} className="companyReviewThumbs">
                         <ThumbsDown/> No
                     </div>
                 }

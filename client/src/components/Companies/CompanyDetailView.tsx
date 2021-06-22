@@ -66,8 +66,19 @@ const CompanyDetailView = ({
 
     const handleVoting = async (id: string, updatedReview: NewReview) => {
         try {
-            const review: Review = await reviewApi.updateReview(id, updatedReview);
-            console.log("Updated review", review);
+            const review = await reviewApi.updateReview(id, updatedReview);
+            reviews?.find(item => {
+                console.log('Found item?', item);
+                if (item.id === id) {
+                    item.upVoteUsers = updatedReview.upVoteUsers;
+                    item.upVotes += 1;
+                    item.downVotes = updatedReview.downVotes;
+                    item.downVoteUsers = updatedReview.downVoteUsers;
+                }
+                console.log("Updated review", item);
+            });
+            console.log('Handle Voting, after PUT call', reviews);
+            setReviews(reviews);
         } catch (error) {
             console.log(error);
         }
@@ -94,7 +105,7 @@ const CompanyDetailView = ({
                 </div>
             }
             {company && <CompanySubRatings company={company}/>}
-            {reviews && <CompanyReviewsWrapper currentUser={currentUser} reviews={reviews}/>}
+            {reviews && <CompanyReviewsWrapper currentUser={currentUser} handleVoting={handleVoting} reviews={reviews}/>}
         </div>
     )
 }
