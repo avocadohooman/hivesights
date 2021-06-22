@@ -76,7 +76,7 @@ const CompanyReview = ({
             </div>
 
             <div className="companyReviewVotingWrapper">
-                <ReviewHeaders header='Was this review helpfu?' color='' size='20px'/>
+                <ReviewHeaders header='Was this review helpful?' color='' size='20px'/>
                 <ReviewVoting handleVoting={handleVoting} currentUser={currentUser} review={review}/>
             </div>
             

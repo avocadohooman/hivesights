@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import KeyIndicator from '../KeyIndicators/KeyIndicator';
 import CompanySubRatings from './CompanySubRatings';
 import CompanyReviewsWrapper from '../Reviews/CompanyReviewsWrapper';
+import CreateReviewButton from '../Reviews/CreateReviewWrapper';
 
 // Data models 
 import { Company } from '../../models/companyModel';
@@ -102,6 +103,7 @@ const CompanyDetailView = ({
                 </div>
             }
             {company && <CompanySubRatings company={company}/>}
+            {company && currentUser.internshipValidated === true && <CreateReviewButton companyId={company[0].id} />}
             {reviews && <CompanyReviewsWrapper currentUser={currentUser} handleVoting={handleVoting} reviews={reviews}/>}
         </div>
     )

@@ -40,9 +40,18 @@ const updateReview = async (reviewId: string, updatedReview: NewReview) => {
     }
 }
 
+const createReview = async (companyId: string, newReview: NewReview) => {
+    try {
+        const res: any = await axios.post<NewReview>(`${baseURL}/${companyId}`, newReview);
+    } catch (error: any) {
+        return error;
+    }
+}
+
 export default {
     getAllReviews,
     getCompanyReviews,
     getOneReview,
-    updateReview
+    updateReview,
+    createReview
 }

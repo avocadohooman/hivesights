@@ -3,13 +3,13 @@
     display: flex;
     flex-direction: column;
     border: black;
-    margin-top: 100px;
+    margin-top: 10px;
 }
 
 .companyReview {
     border: 1px solid #ADD2DD;
     width: 100%;
-    height: 550px;
+    height: 450px;
     margin-bottom: 20px;
     overflow: hidden;
     position: relative;

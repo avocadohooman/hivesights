@@ -1,11 +1,11 @@
 /* eslint-disable react/no-unescaped-entities */
 // React Libraris
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 // Components
 
 // Data models 
-import { NewReview, Review } from '../../models/reviewModel';
+import { Review } from '../../models/reviewModel';
 import { User } from '../../models/userModel';
 import { HandleVotingFunction } from '../../models/miscModels';
 
@@ -43,7 +43,7 @@ const ReviewVoting = ({
     }
     const [votes, setVotes] = useState<number>(getVotes(review.upVotes - review.downVotes));
 
-    const handleUpVote = async () => {
+    const handleUpVote = () => {
         const updatedReview: Review = {...review};
         updatedReview.upVoteUsers.push(currentUser.userName);
         updatedReview.upVotes += 1;
@@ -59,7 +59,7 @@ const ReviewVoting = ({
         handleVoting(review.id, updatedReview);
     }
 
-    const handleDownVote = async () => {
+    const handleDownVote = () => {
         const updatedReview: Review = {...review};
         updatedReview.downVoteUsers.push(currentUser.userName);
         updatedReview.downVotes += 1;
@@ -111,7 +111,3 @@ const ReviewVoting = ({
 }
 
 export default ReviewVoting;
-
-function setState(): [any, any] {
-    throw new Error('Function not implemented.');
-}

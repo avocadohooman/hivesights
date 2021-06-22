@@ -27,6 +27,8 @@ const CompanyReviewsWrapper = ({
         currentUser: User
         handleVoting: HandleVotingFunction
     }): JSX.Element => {
+    
+        
 
         console.log("Review?", reviews);
     return (

@@ -4,7 +4,6 @@ import React from 'react';
 // Components
 
 // Data models 
-import { User } from '../../models/userModel';
 
 // API services
 import * as authServices from '../../services/authApi';
