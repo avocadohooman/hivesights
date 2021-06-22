@@ -71,18 +71,18 @@ const addReview = async (newReview: NewReview, reviewTable: string, companyTable
     await updateAverageDuration(newReview.companyId, reviewTable, companyTable);
 };
 
-const updateTotalScore = async (companyId: string, reviewTable: string, companyTable: string) => {
-    const newTotalScore = await pool.query(`SELECT AVG (totalrating)::NUMERIC(10,2) FROM ${reviewTable} WHERE companyid = ($1)`, [companyId]);
-    const updatedRating = await pool.query(`UPDATE ${companyTable} 
-    SET
-    averageTotalScore = ($1) 
-    WHERE
-    id = ($2)`,
-    [
-        newTotalScore.rows[0].avg,
-        companyId
-    ]);
-};
+// const updateTotalScore = async (companyId: string, reviewTable: string, companyTable: string) => {
+//     const newTotalScore = await pool.query(`SELECT AVG (totalrating)::NUMERIC(10,2) FROM ${reviewTable} WHERE companyid = ($1)`, [companyId]);
+//     const updatedRating = await pool.query(`UPDATE ${companyTable} 
+//     SET
+//     averageTotalScore = ($1) 
+//     WHERE
+//     id = ($2)`,
+//     [
+//         newTotalScore.rows[0].avg,
+//         companyId
+//     ]);
+// };
 
 const updateScores = async (companyId: string, reviewTable: string, companyTable: string) => {
     const newTotalQuery = 'AVG (totalrating)::NUMERIC(10,2)';
@@ -185,26 +185,25 @@ const updateAverageDuration = async (companyId: string, reviewTable: string, com
     });
 };
 
-const calculateTotalScore = (newReview: NewReview) : number => {
-    const interview : number = newReview.ratingCriteriaInterview * 1;
-    const onboarding : number = newReview.ratingCriteriaOnboarding * 1.2;
-    const supervision : number = newReview.ratingCriteriaSupervision * 1.2;
-    const learning : number = newReview.ratingCriteriaLearning * 1;
-    const codingPractices : number = newReview.ratingCriteriaCodingPractices * 1;
-    const perks : number = newReview.ratingCriteriaPerks * 0.8;
-    const culture : number = newReview.ratingCriteriaPerks * 1;
+// const calculateTotalScore = (newReview: NewReview) : number => {
+//     const interview : number = newReview.ratingCriteriaInterview * 1;
+//     const onboarding : number = newReview.ratingCriteriaOnboarding * 1.2;
+//     const supervision : number = newReview.ratingCriteriaSupervision * 1.2;
+//     const learning : number = newReview.ratingCriteriaLearning * 1;
+//     const codingPractices : number = newReview.ratingCriteriaCodingPractices * 1;
+//     const perks : number = newReview.ratingCriteriaPerks * 0.8;
+//     const culture : number = newReview.ratingCriteriaPerks * 1;
 
-    const totalScore = (interview + onboarding + supervision + learning + codingPractices + perks + culture) / 7;
-    return totalScore;
-};
+//     const totalScore = (interview + onboarding + supervision + learning + codingPractices + perks + culture) / 7;
+//     return totalScore;
+// };
 
 export default {
-    updateTotalScore,
     updateScores,
     updateAverageSalary,
     updateAverageDuration,
     checkDuplicate,
     checkIfExists,
-    calculateTotalScore,
-    addReview
+    addReview,
+    updateAmountOfReviews
 };

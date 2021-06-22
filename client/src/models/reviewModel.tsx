@@ -3,8 +3,8 @@ export type Review = {
     companyId: string,
     userName: string,
     userPicture: string,
-    pros?: string,
-    cons?: string,
+    pros: string,
+    cons: string,
     overall: string,
     totalRating: number,
     ratingCriteriaInterview: number,
@@ -18,10 +18,10 @@ export type Review = {
     duration: number,
     coverLetter?: string,
     cv?: string,
-    upVotes?: number,
-    upVoteUsers?: string[],
-    downVotes?: number,
-    downVoteUsers?: string[],
+    upVotes: number,
+    upVoteUsers: string[],
+    downVotes: number,
+    downVoteUsers: string[],
     publishedDate: Date
 };
 

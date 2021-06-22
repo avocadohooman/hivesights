@@ -27,9 +27,9 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 100%;
     align-items: center;
-    margin-left: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
     margin-top: 20px;
     margin-bottom: 50px;
 }
@@ -42,7 +42,6 @@
     font-family: 'SimpleMono-Regular';
     font-size: 16px;
     margin-left: auto;
-    margin-right: 40px;
 }
 
 .companyReviewKeyIndicators {
@@ -50,23 +49,17 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
     margin-bottom: 50px;
 }
 
 .companyReviewProsCons {
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-}
-
-.companyReviewProsConsHeader {
-    font-family: 'Druk Bold Regular';
-    font-size: 34px;
-    margin-bottom: 20px;
 }
 
 .companyReviewProConstText {
@@ -75,9 +68,14 @@
     margin-bottom: 20px;
 }
 
+
+.companyReviewHeader {
+    font-family: 'SimpleNorm-Medium';
+    margin-bottom: 10px;
+}
+
 .companyReviewHandleExpand {
     background-image: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1));
-    cursor: pointer;
     position: absolute;
     padding-top: auto;
     padding-bottom: auto;
@@ -97,16 +95,85 @@
     color: #DE7E2F;
     text-decoration: underline;
     margin-top: 25px;
+    cursor: pointer;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .companyReviewSubRatings {
     margin-top: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
 }
 
-.companyReviewSubRatingsHeader {
-    font-family: 'Druk Bold Regular';
-    font-size: 34px;
-    margin-bottom: 10px;
+.companyReviewVotingWrapper {
+    margin-top: 40px;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 40px;
+}
+
+.companyReviewVoting {
+    display: flex;
+    flex-direction: column;
+}
+
+.companyReviewThumbsWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 150px;
+}
+
+.companyReviewThumbs {
+    background: #BAB7BD;
+    font-family: 'SimpleNorm-Regular';
+    font-size: 16px;
+    width: 70px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    cursor: pointer;
+}
+
+.companyReviewThumbsUpVoted {
+    background: white;
+    font-family: 'SimpleNorm-Regular';
+    border: 1px solid #8FBC87;
+    color: #8FBC87;
+    font-size: 16px;
+    width: 70px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.companyReviewThumbsUpVotedSvg {
+    filter: invert(76%) sepia(14%) saturate(755%) hue-rotate(65deg) brightness(90%) contrast(90%);
+}
+
+.companyReviewThumbsDownVoted {
+    background: white;
+    font-family: 'SimpleNorm-Regular';
+    border: 1px solid #D23E41;
+    color: #D23E41;
+    font-size: 16px;
+    width: 70px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.companyReviewThumbsDownVotedSvg {
+    filter: invert(26%) sepia(66%) saturate(3085%) hue-rotate(340deg) brightness(89%) contrast(83%);
+}
+
+.companyReviewsTotalVotes {
+    margin-top: 10px;
+    font-family: 'SimpleNorm-Regular';
+    font-size: 16px;
 }

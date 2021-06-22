@@ -30,8 +30,19 @@ const getOneReview = async (reviewId: string) => {
     }
 }
 
+const updateReview = async (reviewId: string, updatedReview: NewReview) => {
+    try {
+        const res: any = await axios.put<NewReview>(`${baseURL}/${reviewId}`, updatedReview);
+        return res.data;
+    } catch (error: any) {
+        return error;
+
+    }
+}
+
 export default {
     getAllReviews,
     getCompanyReviews,
-    getOneReview
+    getOneReview,
+    updateReview
 }

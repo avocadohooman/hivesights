@@ -6,6 +6,7 @@ import CompanyReview from './CompanyReview';
 
 // Data models 
 import { Review } from '../../models/reviewModel';
+import { User } from '../../models/userModel';
 
 // API services
 
@@ -17,16 +18,18 @@ import '../../styles/companyReview.css';
 // Assets
 
 const CompanyReviewsWrapper = ({ 
-        reviews
+        reviews,
+        currentUser
     } : { 
-        reviews: Review[] | undefined
+        reviews: Review[] | undefined,
+        currentUser: User
     }): JSX.Element => {
 
         console.log("Review?", reviews);
     return (
         <div className="companyReviewsWrapper"> 
             {reviews?.map(review => 
-                <CompanyReview key={review.id} review = {review}/>
+                <CompanyReview key={review.id} currentUser={currentUser} review={review}/>
             )}
         </div>
     )

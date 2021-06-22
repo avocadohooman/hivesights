@@ -7,19 +7,20 @@ import Avatar from '../Navbar/Avatar';
 import UserName from '../Navbar/UserName';
 import ReviewOverall from './ReviewOverall';
 import ReviewDate from './ReviewDate';
-import ProsConsHeader from './ProsConsHeader';
 import ProsConsText from './ProsConsText';
 import ReadFullReview from './ReadFullReview';
 import ReviewSubRating from './ReviewSubRatings';
-import ReviewSubRatingHeader from './SubCategoryRaingsHeader';
+import ReviewVoting from './ReviewVoting';
 
 // Data models 
 import { Review } from '../../models/reviewModel';
+import { User } from '../../models/userModel';
 
 // API services
 
 // CSS styles
 import '../../styles/companyReview.css';
+import ReviewHeaders from './ReviewHeader';
 
 
 // UI Libraries
@@ -27,9 +28,11 @@ import '../../styles/companyReview.css';
 // Assets
 
 const CompanyReview = ({ 
-        review
+        review,
+        currentUser
     } : { 
-        review: Review
+        review: Review,
+        currentUser: User
     }): JSX.Element => {
 
     const [expand, setExpand] = useState(false);
@@ -58,17 +61,22 @@ const CompanyReview = ({
             </div>
 
             <div className="companyReviewProsCons">
-                <ProsConsHeader label='pro' />
+                <ReviewHeaders header='Pros' color='#8FBC87' size='24px'/>
                 <ProsConsText text={review?.pros} />
-                <ProsConsHeader label='cons' />
+                <ReviewHeaders header='Cons' color='#D23E41' size='24px' />
                 <ProsConsText text={review?.cons} />
             </div>
 
             <div className="companyReviewSubRatings">
-                <ReviewSubRatingHeader label='Subcategory Ratings'/>
+                <ReviewHeaders header='Subcategory Ratings' color='' size='24px'/>
                 <ReviewSubRating review={review} />
             </div>
 
+            <div className="companyReviewVotingWrapper">
+                <ReviewHeaders header='Was this review useful?' color='' size='20px'/>
+                <ReviewVoting currentUser={currentUser} review={review}/>
+            </div>
+            
             {!expand && <div className="companyReviewHandleExpand">
                 <ReadFullReview  handleExpand={handleExpand}/>
             </div>}

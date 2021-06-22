@@ -137,7 +137,7 @@ const Hivesights = ({
                     </Route>
                     <Route path="/company/:id" render={(props) => (
                         // eslint-disable-next-line react/prop-types
-                        <CompanyDetailView id={props.match.params.id}/>
+                        <CompanyDetailView currentUser={currentUser} id={props.match.params.id}/>
                         )}>
                     </Route> 
                 </Switch>

@@ -8,7 +8,8 @@ import CompanyReviewsWrapper from '../Reviews/CompanyReviewsWrapper';
 
 // Data models 
 import { Company } from '../../models/companyModel';
-import { Review } from '../../models/reviewModel';
+import { NewReview, Review } from '../../models/reviewModel';
+import { User } from '../../models/userModel';
 
 // API services
 import companyApi from '../../services/companyApi';
@@ -25,9 +26,11 @@ import '../../styles/companyDetailView.css'
 
 
 const CompanyDetailView = ({
-        id
+        id,
+        currentUser
     } : {
         id: string
+        currentUser: User
     }): JSX.Element => {
 
     const [company, setCompany] = useState<Company[]>();
@@ -36,7 +39,7 @@ const CompanyDetailView = ({
     const durationLabel = 'Duration';
     const salaryLabel = 'Salary';
     const ratingLabel = 'Total Score';
-
+    
     useEffect(() => {
         const getOneCompany = async () => {
             try {
@@ -61,6 +64,15 @@ const CompanyDetailView = ({
         getCompanyReviews();
     }, []);
 
+    const handleVoting = async (id: string, updatedReview: NewReview) => {
+        try {
+            const review: Review = await reviewApi.updateReview(id, updatedReview);
+            console.log("Updated review", review);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <div>
             {company &&
@@ -82,7 +94,7 @@ const CompanyDetailView = ({
                 </div>
             }
             {company && <CompanySubRatings company={company}/>}
-            {reviews && <CompanyReviewsWrapper reviews={reviews}/>}
+            {reviews && <CompanyReviewsWrapper currentUser={currentUser} reviews={reviews}/>}
         </div>
     )
 }
