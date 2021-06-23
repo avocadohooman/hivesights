@@ -10,6 +10,8 @@
     margin-right: 16px;
     border: 1px solid #ADD2DD;
     height: 500px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .addReviewInfoTextWrapper {
@@ -24,13 +26,20 @@
     font-family: 'SimpleNorm-Medium';
     font-size: 20px;
     margin-top: 20px;
-    margin-left: 20px;
+    margin-bottom: 20px;
 }
 
 .companyAddReviewFormHeader {
     font-family: 'SimpleNorm-Light';
     margin-bottom: 10px;
+    margin-top: 15px;
 }
+
+.companyAddReviewFormHeader:after {
+    content:" *";
+    color: red;
+}
+
 
 @media (max-width: 750px) {
     .addReviewWrapper {

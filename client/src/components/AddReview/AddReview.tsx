@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable react/no-unescaped-entities */
 // React Libraris
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 
 // Components
 import AddReviewHeader from './AddReviewHeader';
@@ -18,7 +19,9 @@ import { User } from '../../models/userModel';
 import '../../styles/addReview.css';
 
 // UI Libraries
-import TextField from '@material-ui/core/TextField';
+import { Rating } from '@material-ui/lab';
+import AddReviewOverallScore from './AddReviewOverallScore';
+import AddReviewSubCategories from './AddReviewSubCategories';
 
 // Assets
 
@@ -70,44 +73,61 @@ const AddReview = ({
         }
         setNewReview(review);
     }
-    const handleOverallScore = (event: OnChangeEvent) => {
+
+    const handleOverallScore = (event: ChangeEvent<{}>, newValue: number | null) => {
         event.preventDefault();
-        setOverallScore(event.target.valueAsNumber);
+        if (newValue) {
+            setOverallScore(newValue);
+        }
     }
 
-    const handleRecruitment = (event: OnChangeEvent) => {
+    const handleRecruitment = (event: ChangeEvent<{}>, newValue: number | null) => {
         event.preventDefault();
-        setRecruitment(event.target.valueAsNumber);
+        if (newValue) {    
+            setRecruitment(newValue);
+        }
     }
 
-    const handleOnboarding = (event: OnChangeEvent) => {
+    const handleOnboarding = (event: ChangeEvent<{}>, newValue: number | null) => {
         event.preventDefault();
-        setOnboarding(event.target.valueAsNumber);
+        if (newValue) {    
+            setOnboarding(newValue);
+        }
     }
 
-    const handleMentoring = (event: OnChangeEvent) => {
+    const handleMentoring = (event: ChangeEvent<{}>, newValue: number | null) => {
         event.preventDefault();
-        setMentoring(event.target.valueAsNumber);
+        if (newValue) {    
+            setMentoring(newValue);
+        }
     }
 
-    const handleLearning = (event: OnChangeEvent) => {
+    const handleLearning = (event: ChangeEvent<{}>, newValue: number | null) => {
         event.preventDefault();
-        setLearning(event.target.valueAsNumber);
+        if (newValue) {    
+            setLearning(newValue);
+        }
     }
 
-    const handlePerks= (event: OnChangeEvent) => {
+    const handlePerks= (event: ChangeEvent<{}>, newValue: number | null) => {
         event.preventDefault();
-        setPerks(event.target.valueAsNumber);
+        if (newValue) {    
+            setPerks(newValue);
+        }
     }
 
-    const handleCulture = (event: OnChangeEvent) => {
+    const handleCulture = (event: ChangeEvent<{}>, newValue: number | null) => {
         event.preventDefault();
-        setCulture(event.target.valueAsNumber);
+        if (newValue) {    
+            setCulture(newValue);
+        }
     }
 
-    const handleCodingPractices = (event: OnChangeEvent) => {
+    const handleCodingPractices = (event: ChangeEvent<{}>, newValue: number | null) => {
         event.preventDefault();
-        setCodingPractices(event.target.valueAsNumber);
+        if (newValue) {    
+            setCodingPractices(newValue);
+        }
     }
 
     const handleOverallHeadline = (event: OnChangeEvent) => {
@@ -125,14 +145,18 @@ const AddReview = ({
         setCons(event.target.value);
     }
 
-    const handleDuration = (event: OnChangeEvent) => {
+    const handleDuration = (event: ChangeEvent<{}>, newValue: number | null) => {
         event.preventDefault();
-        setDuration(event.target.valueAsNumber);
+        if (newValue) { 
+            setDuration(newValue);
+        }
     }
 
-    const handleSalary = (event: OnChangeEvent) => {
+    const handleSalary = (event: ChangeEvent<{}>, newValue: number | null) => {
         event.preventDefault();
-        setSalary(event.target.valueAsNumber);
+        if (newValue) { 
+            setSalary(newValue);
+        }
     }
 
     return (
@@ -140,7 +164,23 @@ const AddReview = ({
             {company && 
                 <div className="addReviewFormWrapper">
                     <AddReviewHeader companyName={company.companyName} />
-
+                    <AddReviewOverallScore value={overallScore} handleOverallScore={handleOverallScore}/>
+                    <AddReviewSubCategories 
+                        recruitment={recruitment}
+                        onboarding={onboarding}
+                        mentoring={mentoring}
+                        learning={learning}
+                        perks={perks}
+                        culture={culture}
+                        codingPractices={codingPractices}
+                        handleRecruitment = {handleRecruitment}
+                        handleOnboarding = {handleOnboarding}
+                        handleMentoring = {handleMentoring}
+                        handleLearning = {handleLearning}
+                        handlePerks = {handlePerks}
+                        handleCulture = {handleCulture}
+                        handleCodingPractices = {handleCodingPractices}
+                    />
                 </div>
             }
             <div className="addReviewInfoTextWrapper"> 

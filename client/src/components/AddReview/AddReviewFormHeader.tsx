@@ -12,6 +12,7 @@ import React from 'react';
 import '../../styles/addReview.css';
 
 // UI Libraries
+import { Rating } from '@material-ui/lab';
 
 // Assets
 

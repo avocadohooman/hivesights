@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-types */
+import { ChangeEvent } from 'react';
 import { SelectionFilter } from './filterModels';
 import { NewReview, UpdatedReview } from './reviewModel';
 
@@ -10,3 +12,5 @@ export type HandleCompanySelectFunction = (event: OnChangeEvent, value: Selectio
 export type HandleExpandFunction = () => void;
 
 export type HandleVotingFunction = (id: string, updatedReview: UpdatedReview) => void;
+
+export type HandleNewScores = (event: ChangeEvent<{}>, newValue: number | null) => void;
