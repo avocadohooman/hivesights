@@ -65,6 +65,8 @@ const CompanyDetailView = ({
         getCompanyReviews();
     }, []);
 
+    console.log('Current User', currentUser);
+
     const handleVoting = async (id: string, updatedReview: UpdatedReview) => {
         try {
             await reviewApi.updateReview(id, updatedReview);

@@ -12,6 +12,8 @@ import AddReviewProsCons from './AddReviewProsCons';
 import AddReviewFormHeader from './AddReviewFormHeader';
 import AddReviewDuration from './AddReviewDuration';
 import AddReviewSalary from './AddReviewSalary';
+import CancelReview from './CancelReviewButton';
+import AddReviewButton from './AddReviewButton';
 
 // Data models 
 import { NewReview } from '../../models/reviewModel';
@@ -20,6 +22,7 @@ import { OnChangeEvent } from '../../models/miscModels';
 import { User } from '../../models/userModel';
 
 // API services
+import reviewApi from '../../services/reviewApi';
 
 // CSS styles
 import '../../styles/addReview.css';
@@ -71,25 +74,64 @@ const AddReview = ({
 
     const company = companies.find(company => company.id === id);
 
-    const handleNewReview = () => {
-        const review: NewReview = {
-            userName: currentUser.userName,
-            userPicture: currentUser.imageUrl,
-            pros: pros,
-            cons: cons,
-            overall: overallHeadline,
-            totalRating: overallScore,
-            ratingCriteriaInterview: recruitment,
-            ratingCriteriaOnboarding: onboarding,
-            ratingCriteriaSupervision: mentoring,
-            ratingCriteriaLearning: learning,
-            ratingCriteriaCodingPractices: codingPractices,
-            ratingCriteriaPerks: perks,
-            ratingCriteriaCulture: culture,
-            salary: salary,
-            duration: duration,
+    const handleNewReview = async () => {
+        if (validateData()) {
+            const review: NewReview = {
+                userName: currentUser.userName,
+                userPicture: currentUser.imageUrl,
+                pros: pros,
+                cons: cons,
+                overall: overallHeadline,
+                totalRating: overallScore,
+                ratingCriteriaInterview: recruitment,
+                ratingCriteriaOnboarding: onboarding,
+                ratingCriteriaSupervision: mentoring,
+                ratingCriteriaLearning: learning,
+                ratingCriteriaCodingPractices: codingPractices,
+                ratingCriteriaPerks: perks,
+                ratingCriteriaCulture: culture,
+                salary: salary,
+                duration: duration,
+                upVoteUsers: [],
+                upVotes: 0,
+                downVoteUsers: [],
+                downVotes: 0,
+            }
+            setNewReview(review);
+            try {
+                await reviewApi.createReview(id, review);
+            } catch (error: any) {
+                console.log('Error', error);
+            }
         }
-        setNewReview(review);
+    }
+
+    const validateData = () : number => {
+        const amountOfWordsPros = pros.split(' ');
+        const amountOfWordsCons = cons.split(' ');
+        if (overallHeadline.length > 120) {
+            setHeadlineError(true);
+            setHeadlineErrorMessage('The headline cannot be longer than 120 character');
+            return 0;
+        }
+        if (amountOfWordsCons.length < 5 && amountOfWordsPros.length < 5) {
+            setConsError(true);
+            setConsErrorMessage(`Cons need to have at least 5 words`);
+            setProsError(true);
+            setProsErrorMessage(`Pros need to have at least 5 words`);
+            return 0;
+        } 
+        if (amountOfWordsPros.length < 5) {
+            setProsError(true);
+            setProsErrorMessage(`Pros need to have at least 5 words`);
+            return 0;
+        }
+        if (salary < 0) {
+            setSalaryError(true);
+            setSalaryErrorMessage('Salary can\'t be negative');
+            return 0;
+        }
+        return 1
     }
 
     const handleOverallScore = (event: ChangeEvent<{}>, newValue: number | null) => {
@@ -165,11 +207,15 @@ const AddReview = ({
 
     const handlePros = (event: OnChangeEvent) => {
         event.preventDefault();
+        setProsError(false);
+        setProsErrorMessage('');
         setPros(event.target.value);
     }
 
     const handleCons = (event: OnChangeEvent) => {
         event.preventDefault();
+        setConsError(false);
+        setConsErrorMessage('');
         setCons(event.target.value);
     }
 
@@ -226,6 +272,11 @@ const AddReview = ({
 
                     <AddReviewFormHeader header='Salary' color='#343C44' size='14px'/>
                     <AddReviewSalary error={errorSalary} errorMessage={errorSalarysMessage} salary={salary} handleSalary={handleSalary}/>
+                    
+                    <div className="addReviewButtonsWrapper">
+                        <CancelReview companyId={id} />
+                        <AddReviewButton handleNewReview={handleNewReview} />
+                    </div>
                 </div>
             }
             <div className="addReviewInfoTextWrapper"> 

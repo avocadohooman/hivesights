@@ -37,8 +37,8 @@ const AddReviewSalary = ({
                 type="number" inputProps={{ min: "0", step: "1" }} 
                 id="overallHeader"
                 style={{ margin: 0, width: 150}}
-                error = {salary < 1 || !!error}
-                helperText={ salary < 1 ? 'Min. 1' : 'Salary in €' }
+                error = {salary < 0 || !!error}
+                helperText={ salary < 0 ? 'Min. 0' : 'Salary in €' }
                 fullWidth
                 variant="filled"
                 onChange={(event: OnChangeEvent)=> handleSalary(event)}

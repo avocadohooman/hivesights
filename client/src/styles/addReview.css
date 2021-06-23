@@ -42,6 +42,11 @@
     color: red;
 }
 
+.addReviewButtonsWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
 
 @media (max-width: 750px) {
     .addReviewWrapper {
