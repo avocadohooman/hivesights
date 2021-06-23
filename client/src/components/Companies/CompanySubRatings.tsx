@@ -54,49 +54,49 @@ const CompanySubRatings = ({
                 </AccordionSummary>
                 <AccordionDetails className="oneCompanySubRatingWrapper">
                     
-                    <HtmlTooltip className="oneCompantSubRatingTooltop" title={subCategoryToolTips.recruitment.text}>
+                    <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.recruitment.text}>
                         <Typography className="oneCompanySubRatingLabels"> 
                             Recruitment Process
                                 <Rating name="read-only" value={company[0].averageInterviewScore} precision={0.5} readOnly />
                         </Typography>
                     </HtmlTooltip> 
 
-                    <HtmlTooltip className="oneCompantSubRatingTooltop" title={subCategoryToolTips.onboarding.text}>
+                    <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.onboarding.text}>
                         <Typography className="oneCompanySubRatingLabels"> 
                                 Onboarding 
                                 <Rating name="read-only" value={company[0].averageOnboardingScore} precision={0.5} readOnly />
                         </Typography>
                     </HtmlTooltip> 
 
-                    <HtmlTooltip className="oneCompantSubRatingTooltop" title={subCategoryToolTips.mentoring.text}>
+                    <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.mentoring.text}>
                         <Typography className="oneCompanySubRatingLabels"> 
                                 Mentoring 
                                 <Rating name="read-only" value={company[0].averageSupervisionScore} precision={0.5} readOnly />
                         </Typography>
                     </HtmlTooltip> 
 
-                    <HtmlTooltip className="oneCompantSubRatingTooltop" title={subCategoryToolTips.learning.text}>
+                    <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.learning.text}>
                         <Typography className="oneCompanySubRatingLabels"> 
                                 Learning 
                                 <Rating name="read-only" value={company[0].averageLearningScore} precision={0.5} readOnly />
                         </Typography>
                     </HtmlTooltip> 
 
-                    <HtmlTooltip className="oneCompantSubRatingTooltop" title={subCategoryToolTips.perks.text}>
+                    <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.perks.text}>
                         <Typography className="oneCompanySubRatingLabels"> 
                                 Perks 
                                 <Rating name="read-only" value={company[0].averagePerksScore} precision={0.5} readOnly />
                         </Typography>
                     </HtmlTooltip> 
 
-                    <HtmlTooltip className="oneCompantSubRatingTooltop" title={subCategoryToolTips.culture.text}>
+                    <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.culture.text}>
                         <Typography className="oneCompanySubRatingLabels"> 
                                 Culture 
                                 <Rating name="read-only" value={company[0].averageCultureScore} precision={0.5} readOnly />
                         </Typography>
                     </HtmlTooltip> 
 
-                    <HtmlTooltip className="oneCompantSubRatingTooltop" title={subCategoryToolTips.codingPractices.text}>
+                    <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.codingPractices.text}>
                         <Typography className="oneCompanySubRatingLabels"> 
                                 Coding Practices 
                                 <Rating name="read-only" value={company[0].averageCodingPracticesScore} precision={0.5} readOnly />

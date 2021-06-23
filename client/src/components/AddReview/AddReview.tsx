@@ -22,6 +22,7 @@ import '../../styles/addReview.css';
 import { Rating } from '@material-ui/lab';
 import AddReviewOverallScore from './AddReviewOverallScore';
 import AddReviewSubCategories from './AddReviewSubCategories';
+import AddReaviewHeadline from './AddReviewHeadline';
 
 // Assets
 
@@ -183,6 +184,8 @@ const AddReview = ({
                         handleCulture = {handleCulture}
                         handleCodingPractices = {handleCodingPractices}
                     />
+                    <AddReaviewHeadline handleOverallHeadline={handleOverallHeadline}/>
+
                 </div>
             }
             <div className="addReviewInfoTextWrapper"> 

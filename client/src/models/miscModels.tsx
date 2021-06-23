@@ -14,3 +14,5 @@ export type HandleExpandFunction = () => void;
 export type HandleVotingFunction = (id: string, updatedReview: UpdatedReview) => void;
 
 export type HandleNewScores = (event: ChangeEvent<{}>, newValue: number | null) => void;
+
+export type HandleNewFields = (event: OnChangeEvent) => void;

@@ -64,10 +64,10 @@ a {
     margin-bottom: 10px;
 }
 
-.oneCompantSubRatingTooltop {
+.oneCompanySubRatingTooltip {
     cursor: pointer;
 }
 
-.oneCompantSubRatingTooltop:hover {
+.oneCompanySubRatingTooltip:hover {
     background: #ADD2DD !important;
 }
