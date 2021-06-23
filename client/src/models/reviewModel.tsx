@@ -25,7 +25,9 @@ export type Review = {
     publishedDate: Date
 };
 
-export type NewReview = Omit<Review, 'id' | 'publishedDate'>;
+export type NewReview = Omit<Review, 'id' | 'publishedDate' | 'companyId' | 'coverLetter' | 'cv' | 'upVotes' | 'upVoteUsers' | 'downVotes' | 'downVoteUsers'>;
+export type UpdatedReview = Omit<Review, 'id' | 'publishedDate'>;
+
 export type CompanyTotalRating = Pick<Review, 'totalRating'>;
 export type ReviewVoting = Pick<Review, 'upVotes' | 'downVotes' | 'upVoteUsers' | 'downVoteUsers'>;
 

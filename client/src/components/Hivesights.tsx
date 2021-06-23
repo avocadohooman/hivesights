@@ -144,7 +144,7 @@ const Hivesights = ({
                     </Route>
                     <Route path="/review/:id" render={(props) => (
                         <Container maxWidth="md">
-                            <AddReview companies={companies} id={props.match.params.id} />
+                            <AddReview companies={companies} currentUser={currentUser} id={props.match.params.id} />
                         </Container>
                     )}>
                     </Route> 

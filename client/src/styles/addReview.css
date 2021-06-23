@@ -27,6 +27,11 @@
     margin-left: 20px;
 }
 
+.companyAddReviewFormHeader {
+    font-family: 'SimpleNorm-Light';
+    margin-bottom: 10px;
+}
+
 @media (max-width: 750px) {
     .addReviewWrapper {
         display: flex;

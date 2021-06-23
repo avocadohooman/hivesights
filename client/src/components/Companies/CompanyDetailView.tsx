@@ -9,7 +9,7 @@ import CreateReviewButton from '../Reviews/CreateReviewButton';
 
 // Data models 
 import { Company } from '../../models/companyModel';
-import { NewReview, Review } from '../../models/reviewModel';
+import { NewReview, Review, UpdatedReview } from '../../models/reviewModel';
 import { User } from '../../models/userModel';
 
 // API services
@@ -65,7 +65,7 @@ const CompanyDetailView = ({
         getCompanyReviews();
     }, []);
 
-    const handleVoting = async (id: string, updatedReview: NewReview) => {
+    const handleVoting = async (id: string, updatedReview: UpdatedReview) => {
         try {
             await reviewApi.updateReview(id, updatedReview);
             reviews?.find(item => {
