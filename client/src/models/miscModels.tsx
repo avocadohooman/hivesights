@@ -4,6 +4,7 @@ import { SelectionFilter } from './filterModels';
 import { NewReview, UpdatedReview } from './reviewModel';
 
 export type OnChangeEvent = React.ChangeEvent<HTMLInputElement>;
+export type OnChangeEventSelect = React.ChangeEvent<{ name?: string | undefined; value: unknown; }>;
 
 export type HandleCompanySearchFunction = (event: OnChangeEvent) => void;
 
@@ -14,5 +15,7 @@ export type HandleExpandFunction = () => void;
 export type HandleVotingFunction = (id: string, updatedReview: UpdatedReview) => void;
 
 export type HandleNewScores = (event: ChangeEvent<{}>, newValue: number | null) => void;
+
+export type HandleNewDuration= ( value: unknown, name?: string | undefined ) => void;
 
 export type HandleNewFields = (event: OnChangeEvent) => void;

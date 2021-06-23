@@ -21,7 +21,7 @@ const AddReviewHeader = ({
         companyName: string
     }) => {
 
-    const header = `Add a Review for ${companyName}`;
+    const header = `Write a Review for ${companyName}`;
     return (
         <div className="addReviewHeader">{header}</div>
     )

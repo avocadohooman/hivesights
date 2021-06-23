@@ -5,7 +5,13 @@ import React, { ChangeEvent, useState } from 'react';
 
 // Components
 import AddReviewHeader from './AddReviewHeader';
+import AddReviewOverallScore from './AddReviewOverallScore';
+import AddReviewSubCategories from './AddReviewSubCategories';
+import AddReaviewHeadline from './AddReviewHeadline';
+import AddReviewProsCons from './AddReviewProsCons';
 import AddReviewFormHeader from './AddReviewFormHeader';
+import AddReviewDuration from './AddReviewDuration';
+import AddReviewSalary from './AddReviewSalary';
 
 // Data models 
 import { NewReview } from '../../models/reviewModel';
@@ -19,10 +25,7 @@ import { User } from '../../models/userModel';
 import '../../styles/addReview.css';
 
 // UI Libraries
-import { Rating } from '@material-ui/lab';
-import AddReviewOverallScore from './AddReviewOverallScore';
-import AddReviewSubCategories from './AddReviewSubCategories';
-import AddReaviewHeadline from './AddReviewHeadline';
+
 
 // Assets
 
@@ -46,11 +49,25 @@ const AddReview = ({
     const [perks, setPerks] = useState<number>(0);
     const [culture, setCulture] = useState<number>(0);
     const [codingPractices, setCodingPractices] = useState<number>(0);
+
     const [overallHeadline, setOverallHeadline] = useState<string>("");
+    const [errorHeadline, setHeadlineError] = useState<boolean>(false);
+    const [errorHeadlineMessage, setHeadlineErrorMessage] = useState<string>("");
+
     const [pros, setPros] = useState<string>("");
+    const [errorPros, setProsError] = useState<boolean>(false);
+    const [errorProsMessage, setProsErrorMessage] = useState<string>("");
+
     const [cons, setCons] = useState<string>("");
-    const [duration, setDuration] = useState<number>(0);
+    const [errorCons, setConsError] = useState<boolean>(false);
+    const [errorConsMessage, setConsErrorMessage] = useState<string>("");
+
+    const [duration, setDuration] = useState<number>(1);
+
     const [salary, setSalary] = useState<number>(0);
+    const [errorSalary, setSalaryError] = useState<boolean>(false);
+    const [errorSalarysMessage, setSalaryErrorMessage] = useState<string>("");
+
 
     const company = companies.find(company => company.id === id);
 
@@ -135,10 +152,18 @@ const AddReview = ({
 
     const handleOverallHeadline = (event: OnChangeEvent) => {
         event.preventDefault();
+        if (event.target.value.length > 120) {
+            setHeadlineError(true);
+            setHeadlineErrorMessage('The headline cannot be longer than 120 character');
+        } else {
+            setHeadlineError(false);
+            setHeadlineErrorMessage('');
+        }
         setOverallHeadline(event.target.value);
+        console.log('Overall headline', overallHeadline);
     }
 
-    const handleOverallPros = (event: OnChangeEvent) => {
+    const handlePros = (event: OnChangeEvent) => {
         event.preventDefault();
         setPros(event.target.value);
     }
@@ -148,17 +173,21 @@ const AddReview = ({
         setCons(event.target.value);
     }
 
-    const handleDuration = (event: ChangeEvent<{}>, newValue: number | null) => {
-        event.preventDefault();
-        if (newValue) { 
-            setDuration(newValue);
+    const handleDuration = (value: any) => {
+        if (isNumber(value.props.value)) { 
+            setDuration(value.props.value);
         }
     }
 
-    const handleSalary = (event: ChangeEvent<{}>, newValue: number | null) => {
+    const isNumber = (value: unknown) : value is number => {
+        return typeof value === "number" || value instanceof Number;
+    };
+
+    const handleSalary = (event: OnChangeEvent) => {
         event.preventDefault();
-        if (newValue) { 
-            setSalary(newValue);
+        if (event.target.value) { 
+            setSalary(Number(event.target.value));
+            console.log("Salary", salary);
         }
     }
 
@@ -184,8 +213,19 @@ const AddReview = ({
                         handleCulture = {handleCulture}
                         handleCodingPractices = {handleCodingPractices}
                     />
-                    <AddReaviewHeadline handleOverallHeadline={handleOverallHeadline}/>
+                    <AddReaviewHeadline error={errorHeadline} errorMessage={errorHeadlineMessage} handleOverallHeadline={handleOverallHeadline}/>
+                    
+                    <AddReviewFormHeader header='Pros' color='#343C44' size='14px'/>
+                    <AddReviewProsCons error={errorPros} errorMessage={errorProsMessage} handleOverallProsCons={handlePros}/>
 
+                    <AddReviewFormHeader header='Cons' color='#343C44' size='14px'/>
+                    <AddReviewProsCons error={errorCons} errorMessage={errorConsMessage} handleOverallProsCons={handleCons}/>
+
+                    <AddReviewFormHeader header='Duration' color='#343C44' size='14px'/>
+                    <AddReviewDuration duration={duration} handleDuration={handleDuration}/>
+
+                    <AddReviewFormHeader header='Salary' color='#343C44' size='14px'/>
+                    <AddReviewSalary error={errorSalary} errorMessage={errorSalarysMessage} salary={salary} handleSalary={handleSalary}/>
                 </div>
             }
             <div className="addReviewInfoTextWrapper"> 

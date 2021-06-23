@@ -11,35 +11,37 @@ import { HandleNewFields, OnChangeEvent } from '../../models/miscModels';
 
 // CSS styles
 import '../../styles/companyReview.css';
-import AddReviewFormHeader from './AddReviewFormHeader';
 
 // UI Libraries
 import { TextField } from '@material-ui/core';
+import Input from '@material-ui/core/Input';
 
 // Assets
 
-const AddReaviewHeadline = ({
+const AddReviewSalary = ({
         error, 
         errorMessage,
-        handleOverallHeadline
+        handleSalary,
+        salary
     } : {
         error : boolean, 
         errorMessage: string,
-        handleOverallHeadline: HandleNewFields
+        handleSalary: HandleNewFields,
+        salary: number
     }) => {
 
     return (
         <div>
-            <AddReviewFormHeader header='Review Headline' color='#343C44' size='14px'/>
             <TextField
-                error={!!error}
                 label={errorMessage}
+                type="number" inputProps={{ min: "0", step: "1" }} 
                 id="overallHeader"
-                style={{ margin: 0 }}
-                helperText="Max 120 characters"
+                style={{ margin: 0, width: 150}}
+                error = {salary < 1 || !!error}
+                helperText={ salary < 1 ? 'Min. 1' : 'Salary in €' }
                 fullWidth
                 variant="filled"
-                onChange={(event: OnChangeEvent)=> handleOverallHeadline(event)}
+                onChange={(event: OnChangeEvent)=> handleSalary(event)}
                 margin="normal"
                 InputLabelProps={{
                     shrink: true,
@@ -49,4 +51,4 @@ const AddReaviewHeadline = ({
     )
 }
 
-export default AddReaviewHeadline;
+export default AddReviewSalary;

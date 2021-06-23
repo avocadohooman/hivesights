@@ -9,9 +9,11 @@
     max-width: calc(100% - (300px + 16px));
     margin-right: 16px;
     border: 1px solid #ADD2DD;
-    height: 500px;
+    height: auto;
     padding-left: 20px;
     padding-right: 20px;
+    padding-bottom: 40px;
+    margin-bottom: 40px;
 }
 
 .addReviewInfoTextWrapper {
@@ -32,7 +34,7 @@
 .companyAddReviewFormHeader {
     font-family: 'SimpleNorm-Light';
     margin-bottom: 10px;
-    margin-top: 15px;
+    margin-top: 25px;
 }
 
 .companyAddReviewFormHeader:after {
