@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import KeyIndicator from '../KeyIndicators/KeyIndicator';
 import CompanySubRatings from './CompanySubRatings';
 import CompanyReviewsWrapper from '../Reviews/CompanyReviewsWrapper';
-import CreateReviewButton from '../Reviews/CreateReviewWrapper';
+import CreateReviewButton from '../Reviews/CreateReviewButton';
 
 // Data models 
 import { Company } from '../../models/companyModel';

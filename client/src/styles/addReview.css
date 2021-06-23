@@ -1,0 +1,42 @@
+.addReviewWrapper {
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+}
+
+.addReviewFormWrapper {
+    width: calc(100% - (300px + 16px));
+    max-width: calc(100% - (300px + 16px));
+    margin-right: 16px;
+    border: 1px solid #ADD2DD;
+    height: 500px;
+}
+
+.addReviewInfoTextWrapper {
+    width: 300px;
+    max-width: 300px;
+    min-width: 300px;    
+    background: #ADD2DD;
+    height: 300px;
+}
+
+.addReviewHeader {
+    font-family: 'SimpleNorm-Medium';
+    font-size: 20px;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+@media (max-width: 750px) {
+    .addReviewWrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .addReviewFormWrapper,
+    .addReviewInfoTextWrapper {
+        width: 100%;
+        max-width: 100%;
+        min-width: 100%;
+    }
+}

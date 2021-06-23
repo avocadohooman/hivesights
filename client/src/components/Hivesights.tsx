@@ -1,11 +1,14 @@
+/* eslint-disable react/prop-types */
 // React Libraris
 import React, { useState, useEffect, Suspense } from 'react';
+import { Route, Switch } from 'react-router-dom';
 
 // Components
 import KeyIndicatorsWrapper from './KeyIndicators/KeyIndicatorsWrapper';
 import CompaniesWrapper from './Companies/CompaniesWrapper';
 import CompanyFilterWrapper from './Filter/companyFilterWrapper';
 import CompanyDetailView from './Companies/CompanyDetailView';
+import AddReview from './AddReview/AddReview';
 
 // Data models 
 import { Company } from '../models/companyModel';
@@ -17,7 +20,7 @@ import { SelectionFilter } from '../models/filterModels';
 // API services
 import kpiApi from '../services/kpiApi';
 import companyApi from '../services/companyApi';
-import { Route, Switch } from 'react-router-dom';
+import { Container } from '@material-ui/core';
 
 // CSS styles
 
@@ -136,12 +139,14 @@ const Hivesights = ({
                         <CompaniesWrapper companies={filteredCompanies}/>
                     </Route>
                     <Route path="/company/:id" render={(props) => (
-                        // eslint-disable-next-line react/prop-types
                         <CompanyDetailView currentUser={currentUser} id={props.match.params.id}/>
                         )}>
                     </Route>
-                    <Route path="/review/:id">
-                        
+                    <Route path="/review/:id" render={(props) => (
+                        <Container maxWidth="md">
+                            <AddReview companies={companies} id={props.match.params.id} />
+                        </Container>
+                    )}>
                     </Route> 
                 </Switch>
             </Suspense>
