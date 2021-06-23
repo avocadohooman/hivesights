@@ -30,7 +30,7 @@ const AddReviewOverallScore = ({
     return (
         <div className="companyAddReviewOverallScore">
             <AddReviewFormHeader header='Overall Rating' color='#343C44' size='14px'/>
-            <Rating name="half-rating" value={value} precision={0.5} size="large"  
+            <Rating name="overallScore" defaultValue={value} precision={0.5} size="large"  
                         onChange={(event, newValue) => handleOverallScore(event, newValue)}/>
         </div>
     )

@@ -76,6 +76,7 @@ const AddReview = ({
 
     const handleOverallScore = (event: ChangeEvent<{}>, newValue: number | null) => {
         event.preventDefault();
+        console.log('In handle overall score', newValue);
         if (newValue) {
             setOverallScore(newValue);
         }
@@ -83,6 +84,7 @@ const AddReview = ({
 
     const handleRecruitment = (event: ChangeEvent<{}>, newValue: number | null) => {
         event.preventDefault();
+        console.log('In handle recruitment', newValue);
         if (newValue) {    
             setRecruitment(newValue);
         }

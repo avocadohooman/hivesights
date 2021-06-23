@@ -47,13 +47,13 @@ const AddReviewSubCategories = ({
         handleCulture,
         handleCodingPractices
     } : {
-        recruitment: number | null,
-        onboarding: number | null,
-        mentoring: number | null,
-        learning: number | null,
-        perks: number | null,
-        culture: number | null,
-        codingPractices: number | null,
+        recruitment: number | undefined,
+        onboarding: number | undefined,
+        mentoring: number | undefined,
+        learning: number | undefined,
+        perks: number | undefined,
+        culture: number | undefined,
+        codingPractices: number | undefined,
         handleRecruitment: HandleNewScores,
         handleOnboarding: HandleNewScores,
         handleMentoring: HandleNewScores,
@@ -70,7 +70,7 @@ const AddReviewSubCategories = ({
             <HtmlTooltip className="oneCompantSubRatingTooltop" title={subCategoryToolTips.recruitment.text}>
                 <Typography className="oneCompanySubRatingLabels"> 
                     Recruitment Process
-                    <Rating name="half-rating" value={recruitment} precision={0.5}   
+                    <Rating name="recruitment" defaultValue={recruitment} precision={0.5}   
                         onChange={(event, newValue) => handleRecruitment(event, newValue)}/>
                 </Typography>
             </HtmlTooltip> 
@@ -78,7 +78,7 @@ const AddReviewSubCategories = ({
             <HtmlTooltip className="oneCompantSubRatingTooltop" title={subCategoryToolTips.onboarding.text}>
                 <Typography className="oneCompanySubRatingLabels"> 
                         Onboarding 
-                        <Rating name="half-rating" value={onboarding} precision={0.5}   
+                        <Rating name="onboarding" defaultValue={onboarding} precision={0.5}   
                         onChange={(event, newValue) => handleOnboarding(event, newValue)}/>
                 </Typography>
             </HtmlTooltip> 
@@ -86,7 +86,7 @@ const AddReviewSubCategories = ({
             <HtmlTooltip className="oneCompantSubRatingTooltop" title={subCategoryToolTips.mentoring.text}>
                 <Typography className="oneCompanySubRatingLabels"> 
                         Mentoring 
-                        <Rating name="half-rating" value={mentoring} precision={0.5}   
+                        <Rating name="mentoring" defaultValue={mentoring} precision={0.5}   
                         onChange={(event, newValue) => handleMentoring(event, newValue)}/>
                 </Typography>
             </HtmlTooltip> 
@@ -94,7 +94,7 @@ const AddReviewSubCategories = ({
             <HtmlTooltip className="oneCompantSubRatingTooltop" title={subCategoryToolTips.learning.text}>
                 <Typography className="oneCompanySubRatingLabels"> 
                         Learning 
-                        <Rating name="half-rating" value={learning} precision={0.5}   
+                        <Rating name="learning" defaultValue={learning} precision={0.5}   
                         onChange={(event, newValue) => handleLearning(event, newValue)}/>
                 </Typography>
             </HtmlTooltip> 
@@ -102,7 +102,7 @@ const AddReviewSubCategories = ({
             <HtmlTooltip className="oneCompantSubRatingTooltop" title={subCategoryToolTips.perks.text}>
                 <Typography className="oneCompanySubRatingLabels"> 
                         Perks 
-                        <Rating name="half-rating" value={perks} precision={0.5}   
+                        <Rating name="perks" defaultValue={perks} precision={0.5}   
                         onChange={(event, newValue) => handlePerks(event, newValue)}/>
                 </Typography>
             </HtmlTooltip> 
@@ -110,7 +110,7 @@ const AddReviewSubCategories = ({
             <HtmlTooltip className="oneCompantSubRatingTooltop" title={subCategoryToolTips.culture.text}>
                 <Typography className="oneCompanySubRatingLabels"> 
                         Culture 
-                        <Rating name="half-rating" value={culture} precision={0.5}   
+                        <Rating name="culture" defaultValue={culture} precision={0.5}   
                         onChange={(event, newValue) => handleCulture(event, newValue)}/>
                 </Typography>
             </HtmlTooltip> 
@@ -118,7 +118,7 @@ const AddReviewSubCategories = ({
             <HtmlTooltip className="oneCompantSubRatingTooltop" title={subCategoryToolTips.codingPractices.text}>
                 <Typography className="oneCompanySubRatingLabels"> 
                         Coding Practices 
-                        <Rating name="half-rating" value={codingPractices} precision={0.5}   
+                        <Rating name="codingPractices" defaultValue={codingPractices} precision={0.5}   
                         onChange={(event, newValue) => handleCodingPractices(event, newValue)}/>
                 </Typography>
             </HtmlTooltip>
