@@ -153,7 +153,7 @@ const AddReview = ({
         }
         if (salary < 0) {
             setSalaryError(true);
-            setSalaryErrorMessage('Salary can\'t be negative and can only contain digits 0-9');
+            setSalaryErrorMessage('Salary can\'t be negative');
             return 0;
         }
         return 1
