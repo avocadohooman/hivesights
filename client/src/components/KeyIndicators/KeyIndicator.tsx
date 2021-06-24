@@ -12,7 +12,7 @@ import '../../styles/keyIndicators.css';
 
 // UI Libraries
 import CircularProgress from '@material-ui/core/CircularProgress';
-
+import StarIcon from '@material-ui/icons/Star';
 // Assets
 
 
@@ -33,7 +33,6 @@ const KeyIndicator = ({keyIndicator, label, average}: {keyIndicator: number, lab
         }
     }
 
-    console.log("Total score", keyIndicatorValue);
     return (
         
         <div className="keyIndicatorWrapper">
@@ -43,7 +42,10 @@ const KeyIndicator = ({keyIndicator, label, average}: {keyIndicator: number, lab
                 <CircularProgress /> 
             }
             {label === 'Total Score' && keyIndicator && 
-                <div className="keyIndicator">{keyIndicatorValue}<span className="labelSmall">/5</span></div>
+                <div className="keyIndicatorScore">
+                    <StarIcon className="star"/>
+                    <div className="keyIndicator">{keyIndicatorValue}<span className="labelSmall">/5</span></div>
+                </div>
             }
             {label !== 'Total Score' && 
                 <div className="keyIndicator">{keyIndicatorValue} </div>

@@ -19,6 +19,16 @@
     font-size: 44px;
 }
 
+.keyIndicatorScore {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.star {
+    color: #FFB400;
+}
+
 .label {
     font-family: 'SimpleMono-Regular';
     font-size: 15px;

@@ -10,6 +10,7 @@ import { Company } from '../../models/companyModel';
 import '../../styles/company.css';
 // UI Libraries
 import { Tooltip } from '@material-ui/core';
+import StarIcon from '@material-ui/icons/Star';
 
 // Assets
 
@@ -41,7 +42,9 @@ const OneCompany = ({
                         {company.companyName}
                     </div>
                     <div className="oneCompanyScoreWrapper">
-                        {company.averageTotalScore && <div className="oneCompanyScore"> {company.averageTotalScore}<span style={scoreStyle}>/5</span></div>}   
+                        {company.averageTotalScore && 
+                        <div className="oneCompanyScore"> {company.averageTotalScore}<span style={scoreStyle}>/5</span>
+                        </div>}   
                         {company.averageTotalScore === null && <div className="oneCompanyScore">n/A</div>}   
                     </div>
                 </div>

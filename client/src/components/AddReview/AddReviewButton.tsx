@@ -80,7 +80,7 @@ const AddReviewButton = ({
                 <Button
                     variant="outlined"
                     color="primary"
-                    disabled={btnDisabled}
+                    disabled={true}
                     className={classes.buttonSuccess} 
                     onClick={handleNewReview}>
                         <CheckCircleOutlineIcon style={{ color: green[500]}}/>

@@ -27,10 +27,7 @@ const CompanyReviewsWrapper = ({
         currentUser: User
         handleVoting: HandleVotingFunction
     }): JSX.Element => {
-    
-        
 
-        console.log("Review?", reviews);
     return (
         <div className="companyReviewsWrapper"> 
             {reviews?.map(review => 
