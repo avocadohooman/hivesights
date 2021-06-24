@@ -152,7 +152,7 @@ reviewRouter.post('/:id', async (req, res) => {
             } 
             if (!await reviewServices.checkDuplicate(newReview, reviewTable)) {
                 console.log("Review for this company exists already");
-                return res.status(400).json({error: `Review for this company by ${newReview.userName} already exists`}); 
+                return res.status(400).json({error: `Review for this company by ${newReview.userName} already exists, or ${newReview.userName} has already written a review for another company`}); 
             }
             await reviewServices.addReview(newReview, reviewTable, companyTable);
             return res.status(200).json(newReview); 

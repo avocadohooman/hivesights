@@ -99,7 +99,10 @@ const AddReview = ({
             }
             setNewReview(review);
             try {
-                await reviewApi.createReview(id, review);
+                let isDone = false;
+                await reviewApi
+                    .createReview(id, review)
+                    .then(x => console.log(isDone = true));
             } catch (error: any) {
                 console.log('Error', error);
             }

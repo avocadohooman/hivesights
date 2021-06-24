@@ -33,8 +33,7 @@ const OneCompany = ({
     }
     return (
         <Tooltip title="Click to read more or submit a review"> 
-            <div className="oneCompanyWrapper">
-
+            <div>
                 <div className="oneCompanyLogoWrapper">
                     <img className="oneCompanyLogo" src={company.logoURL}></img>
 
