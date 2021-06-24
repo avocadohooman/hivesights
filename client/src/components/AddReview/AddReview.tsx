@@ -16,6 +16,7 @@ import AddReviewSalary from './AddReviewSalary';
 import CancelReview from './CancelReviewButton';
 import AddReviewButton from './AddReviewButton';
 import AddReviewAlert from './AddReviewError';
+import AddReviewInfoText from './AddReviewInfoText';
 
 // Data models 
 import { NewReview } from '../../models/reviewModel';
@@ -265,50 +266,55 @@ const AddReview = ({
         <div className="addReviewWrapper">
             {company && 
                 <div className="addReviewFormWrapper">
-                    <AddReviewHeader companyName={company.companyName} />
-                    <AddReviewOverallScore value={overallScore} handleOverallScore={handleOverallScore}/>
-                    <AddReviewSubCategories 
-                        recruitment={recruitment}
-                        onboarding={onboarding}
-                        mentoring={mentoring}
-                        learning={learning}
-                        perks={perks}
-                        culture={culture}
-                        codingPractices={codingPractices}
-                        handleRecruitment = {handleRecruitment}
-                        handleOnboarding = {handleOnboarding}
-                        handleMentoring = {handleMentoring}
-                        handleLearning = {handleLearning}
-                        handlePerks = {handlePerks}
-                        handleCulture = {handleCulture}
-                        handleCodingPractices = {handleCodingPractices}
-                    />
-                    <AddReaviewHeadline error={errorHeadline} errorMessage={errorHeadlineMessage} handleOverallHeadline={handleOverallHeadline}/>
-                    
-                    <AddReviewFormHeader header='Pros' color='#343C44' size='14px'/>
-                    <AddReviewProsCons error={errorPros} errorMessage={errorProsMessage} handleOverallProsCons={handlePros}/>
+                    <div className="addReviewInnerWrapperForm"> 
+                        <AddReviewHeader companyName={company.companyName} />
+                        <AddReviewOverallScore value={overallScore} handleOverallScore={handleOverallScore}/>
+                        <AddReviewSubCategories 
+                            recruitment={recruitment}
+                            onboarding={onboarding}
+                            mentoring={mentoring}
+                            learning={learning}
+                            perks={perks}
+                            culture={culture}
+                            codingPractices={codingPractices}
+                            handleRecruitment = {handleRecruitment}
+                            handleOnboarding = {handleOnboarding}
+                            handleMentoring = {handleMentoring}
+                            handleLearning = {handleLearning}
+                            handlePerks = {handlePerks}
+                            handleCulture = {handleCulture}
+                            handleCodingPractices = {handleCodingPractices}
+                        />
+                        <AddReaviewHeadline error={errorHeadline} errorMessage={errorHeadlineMessage} handleOverallHeadline={handleOverallHeadline}/>
+                        
+                        <AddReviewFormHeader header='Pros' color='#343C44' size='14px'/>
+                        <AddReviewProsCons error={errorPros} errorMessage={errorProsMessage} handleOverallProsCons={handlePros}/>
 
-                    <AddReviewFormHeader header='Cons' color='#343C44' size='14px'/>
-                    <AddReviewProsCons error={errorCons} errorMessage={errorConsMessage} handleOverallProsCons={handleCons}/>
+                        <AddReviewFormHeader header='Cons' color='#343C44' size='14px'/>
+                        <AddReviewProsCons error={errorCons} errorMessage={errorConsMessage} handleOverallProsCons={handleCons}/>
 
-                    <AddReviewFormHeader header='Duration' color='#343C44' size='14px'/>
-                    <AddReviewDuration duration={duration} handleDuration={handleDuration}/>
+                        <AddReviewFormHeader header='Duration' color='#343C44' size='14px'/>
+                        <AddReviewDuration duration={duration} handleDuration={handleDuration}/>
 
-                    <AddReviewFormHeader header='Salary' color='#343C44' size='14px'/>
-                    <AddReviewSalary error={errorSalary} errorMessage={errorSalarysMessage} salary={salary} handleSalary={handleSalary}/>
-                    
-                    <div className="addReviewAlert">
-                        <AddReviewAlert type={alertType} message={alert} title={alertTitle} postError={postError} setPostError={setPostError}/>
-                    </div>
+                        <AddReviewFormHeader header='Salary' color='#343C44' size='14px'/>
+                        <AddReviewSalary error={errorSalary} errorMessage={errorSalarysMessage} salary={salary} handleSalary={handleSalary}/>
+                        
+                        <div className="addReviewAlert">
+                            <AddReviewAlert type={alertType} message={alert} title={alertTitle} postError={postError} setPostError={setPostError}/>
+                        </div>
 
-                    <div className="addReviewButtonsWrapper">
-                        <CancelReview companyId={id} />
-                        <AddReviewButton success={postSuccess} btnDisabled={btnDisable} handleNewReview={handleNewReview} />
+                        <div className="addReviewButtonsWrapper">
+                            <CancelReview companyId={id} />
+                            <AddReviewButton success={postSuccess} btnDisabled={btnDisable} handleNewReview={handleNewReview} />
+                        </div>
                     </div>
                 </div>
             }
             <div className="addReviewInfoTextWrapper"> 
+                <div className="addReviewInnerWrapperInfoTextWrapper">
+                    <AddReviewInfoText />
 
+                </div>
             </div>
         </div>
     )

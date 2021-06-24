@@ -5,15 +5,18 @@
 }
 
 .addReviewFormWrapper {
-    width: calc(100% - (300px + 16px));
-    max-width: calc(100% - (300px + 16px));
+    width: calc(100% - (300px + 36px));
+    max-width: calc(100% - (300px + 36px));
     margin-right: 16px;
     border: 1px solid #ADD2DD;
     height: auto;
-    padding-left: 20px;
-    padding-right: 20px;
     padding-bottom: 40px;
     margin-bottom: 40px;
+}
+
+.addReviewInnerWrapperForm {
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .addReviewInfoTextWrapper {
@@ -21,7 +24,11 @@
     max-width: 300px;
     min-width: 300px;    
     background: #ADD2DD;
-    height: 300px;
+    height: 380px;
+}
+
+.addReviewInnerWrapperInfoTextWrapper{
+    margin: 20px;
 }
 
 .addReviewHeader {
@@ -53,10 +60,31 @@
     margin-bottom: -30px;
 }
 
+.addReviewInfoTextHeader {
+    font-family: 'SimpleNorm-Medium';
+    font-size: 20px;
+}
+
+.addReviewInfoTextRegular {
+    font-family: 'SimpleNorm-Regular';
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+.addReviewInfoTextEmphasize{
+    font-family: 'SimpleNorm-Medium';
+    font-size: 16px;
+    margin-top: 15px;
+}
+
 @media (max-width: 750px) {
     .addReviewWrapper {
         display: flex;
         flex-direction: column;
+    }
+
+    .addReviewFormWrapper {
+        margin-bottom: 10px;
     }
 
     .addReviewFormWrapper,
@@ -64,5 +92,9 @@
         width: 100%;
         max-width: 100%;
         min-width: 100%;
+    }
+
+    .addReviewInfoTextWrapper {
+        height: 260px;
     }
 }
