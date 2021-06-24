@@ -62,4 +62,9 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/api/reviews/00518f89-7ceb-4b9b-98aa-c99ddaa4b879
+DELETE http://localhost:3000/api/reviews/f9a514be-556d-49d0-9592-c3847921a42e
+Content-Type: application/json
+
+{
+    "user": "hopham"
+}

@@ -11,6 +11,8 @@ import ProsConsText from './ProsConsText';
 import ReadFullReview from './ReadFullReview';
 import ReviewSubRating from './ReviewSubRatings';
 import ReviewVoting from './ReviewVoting';
+import ReviewHeaders from './ReviewHeader';
+import DeleteReview from './DeleteReview';
 
 // Data models 
 import { Review } from '../../models/reviewModel';
@@ -21,7 +23,6 @@ import { HandleVotingFunction } from '../../models/miscModels';
 
 // CSS styles
 import '../../styles/companyReview.css';
-import ReviewHeaders from './ReviewHeader';
 
 
 // UI Libraries
@@ -55,6 +56,7 @@ const CompanyReview = ({
                 <UserName userName={review?.userName}/>
                 <ReviewOverall overall={review?.overall} />
                 <ReviewDate date={review?.publishedDate}/>
+                {currentUser.userName === review.userName && <DeleteReview currentUser={currentUser} review={review}/>}
             </div>
 
             <div className="companyReviewKeyIndicators">

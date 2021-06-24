@@ -36,9 +36,12 @@
 
 .companyReviewOverallQuote {
     font-family: 'SimpleNorm-Mediumitalic';
+    max-width: 700px;
 }
 
 .companyReviewDate {
+    display: flex;
+    flex-direction: row;
     font-family: 'SimpleMono-Regular';
     font-size: 16px;
     margin-left: auto;
@@ -68,7 +71,6 @@
     margin-bottom: 20px;
 }
 
-
 .companyReviewHeader {
     font-family: 'SimpleNorm-Medium';
     margin-bottom: 10px;
@@ -93,6 +95,8 @@
     font-family: 'SimpleMono-Regular';
     font-size: 16px;
     color: #DE7E2F;
+    background: white;
+    padding: 10px;
     text-decoration: underline;
     margin-top: 25px;
     cursor: pointer;

@@ -227,8 +227,14 @@ reviewRouter.delete('/:id', async (req, res) => {
             console.log("Review doesn't exist ERROR");
             return res.status(400).json({error: "Review doesn't exist."});
         }
-        const companyDB = await pool.query(`SELECT companyid FROM ${reviewTable} WHERE id = ($1)`, [reviewId]);
-        const companyId = companyDB.rows[0].companyid;    
+        const userNameDb = await pool.query(`SELECT username FROM ${reviewTable} WHERE id = ($1)`, [reviewId]);
+        const userName = userNameDb.rows[0].username;
+        console.log('Body Username', req.body.user);
+        if (userName !== req.body.user) {
+            return res.status(400).json({error: 'Invalid rights'});
+        }
+        const companyIdDB = await pool.query(`SELECT companyid FROM ${reviewTable} WHERE id = ($1)`, [reviewId]);
+        const companyId = companyIdDB.rows[0].companyid;    
         await pool.query(`DELETE FROM ${reviewTable} WHERE id = ($1)`, [reviewId]);
         await reviewServices.updateAverageSalary(companyId, reviewTable, companyTable);
         await reviewServices.updateScores(companyId, reviewTable, companyTable);

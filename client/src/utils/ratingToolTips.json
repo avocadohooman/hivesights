@@ -1,0 +1,34 @@
+{
+    "overall": {
+        "info": "",
+        "reviewGuideline": ""
+    },
+    "recruitment": {
+        "info": "Measures how well the company has designed the recruitment process, e.g. how was the communication with the applicant? Did they give feedback?",
+        "reviewGuideline": ""
+    },
+    "onboarding": {
+        "info": "Measures the onbaording process for new applicants.",
+        "reviewGuideline": ""
+    },
+    "mentoring": {
+        "info": "Measures the mentoring inhouse.",
+        "reviewGuideline": ""
+    },
+    "learning": {
+        "info": "Measures the learning opportunities.",
+        "reviewGuideline": ""
+    },
+    "perks": {
+        "info": "Measures what kind of perks you get.",
+        "reviewGuideline": ""
+    },
+    "culture": {
+        "info": "Measures the company culture.",
+        "reviewGuideline": ""
+    },
+    "codingPractices": {
+        "info": "Measures coding practicies at the company.",
+        "reviewGuideline": ""
+    }
+}

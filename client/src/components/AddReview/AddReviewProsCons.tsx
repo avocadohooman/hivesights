@@ -11,7 +11,6 @@ import { HandleNewFields, OnChangeEvent } from '../../models/miscModels';
 
 // CSS styles
 import '../../styles/companyReview.css';
-import AddReviewFormHeader from './AddReviewFormHeader';
 
 // UI Libraries
 import { TextField } from '@material-ui/core';

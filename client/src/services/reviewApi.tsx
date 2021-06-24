@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios';
 import { Review, NewReview, ReviewVoting} from '../models/reviewModel';
+import { User } from '../models/userModel';
 
 const baseURL = '/api/reviews';
 
@@ -28,10 +29,16 @@ const createReview = async (companyId: string, newReview: NewReview) => {
     return res.data;
 }
 
+const deleteReview = async (reviewId: string, currentUser: User)  => {
+    const res: any = await axios.delete<Review>(`${baseURL}/${reviewId}`, {data: {user: currentUser.userName}});
+    return res.data;
+}
+
 export default {
     getAllReviews,
     getCompanyReviews,
     getOneReview,
     updateReview,
-    createReview
+    createReview,
+    deleteReview
 }

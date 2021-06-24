@@ -135,9 +135,9 @@ const AddReview = ({
     const validateData = () : number => {
         const amountOfWordsPros = pros.split(' ');
         const amountOfWordsCons = cons.split(' ');
-        if (overallHeadline.length > 120) {
+        if (overallHeadline.length > 120 || overallHeadline.length === 0) {
             setHeadlineError(true);
-            setHeadlineErrorMessage('The headline cannot be longer than 120 character');
+            setHeadlineErrorMessage('The headline cannot be longer than 120 character, or be empty');
             return 0;
         }
         if (amountOfWordsCons.length < 5 && amountOfWordsPros.length < 5) {

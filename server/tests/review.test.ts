@@ -1710,9 +1710,11 @@ describe('Review DELETE /', () => {
     test('a review can be deleted', async () => {
         let allReview = await api.get(`${apiBaseUrl}`);
         const reviewId = allReview.body[0].id;
+        const reviewUser = allReview.body[0].userName;
 
         await api
             .delete(`${apiBaseUrl}/${reviewId}`)
+            .send({user: reviewUser})
             .expect(200)
         allReview = await api.get(`${apiBaseUrl}`);
         expect(allReview.body).toHaveLength(3);
@@ -1729,6 +1731,20 @@ describe('Review DELETE /', () => {
             .delete(`${apiBaseUrl}/2323232323`)
             .expect(400)
         let allReview = await api.get(`${apiBaseUrl}`);
+        expect(allReview.body).toHaveLength(4);
+        expect(allReview.statusCode).toBe(200);
+    })
+
+    test('a user with invalid rights cannot delete a review', async () => {
+
+        let allReview = await api.get(`${apiBaseUrl}`);
+        const reviewId = allReview.body[0].id;
+
+        await api
+            .delete(`${apiBaseUrl}/${reviewId}`)
+            .send({user: "INVALID"})
+            .expect(400)
+        allReview = await api.get(`${apiBaseUrl}`);
         expect(allReview.body).toHaveLength(4);
         expect(allReview.statusCode).toBe(200);
     })

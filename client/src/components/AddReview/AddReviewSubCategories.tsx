@@ -18,7 +18,7 @@ import { HandleNewScores } from '../../models/miscModels';
 import { Theme, Tooltip, Typography, withStyles } from '@material-ui/core';
 
 // Assets
-import subCategoryToolTips from '../../utils/subCategoryToolTips.json';
+import subCategoryToolTips from '../../utils/ratingToolTips.json';
 
 const HtmlTooltip = withStyles((theme: Theme) => ({
     tooltip: {
@@ -67,7 +67,7 @@ const AddReviewSubCategories = ({
     return (
         <div>
             <AddReviewFormHeader header='Subcategories' color='#343C44' size='14px'/>
-            <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.recruitment.text}>
+            <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.recruitment.reviewGuideline}>
                 <Typography className="oneCompanySubRatingLabels"> 
                     Recruitment Process
                     <Rating name="recruitment" value={recruitment} precision={1}   
@@ -75,7 +75,7 @@ const AddReviewSubCategories = ({
                 </Typography>
             </HtmlTooltip> 
 
-            <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.onboarding.text}>
+            <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.onboarding.reviewGuideline}>
                 <Typography className="oneCompanySubRatingLabels"> 
                         Onboarding 
                         <Rating name="onboarding" value={onboarding} precision={1}   
@@ -83,7 +83,7 @@ const AddReviewSubCategories = ({
                 </Typography>
             </HtmlTooltip> 
 
-            <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.mentoring.text}>
+            <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.mentoring.reviewGuideline}>
                 <Typography className="oneCompanySubRatingLabels"> 
                         Mentoring 
                         <Rating name="mentoring" value={mentoring} precision={1}   
@@ -91,7 +91,7 @@ const AddReviewSubCategories = ({
                 </Typography>
             </HtmlTooltip> 
 
-            <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.learning.text}>
+            <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.learning.reviewGuideline}>
                 <Typography className="oneCompanySubRatingLabels"> 
                         Learning 
                         <Rating name="learning" value={learning} precision={1}   
@@ -99,7 +99,7 @@ const AddReviewSubCategories = ({
                 </Typography>
             </HtmlTooltip> 
 
-            <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.perks.text}>
+            <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.perks.reviewGuideline}>
                 <Typography className="oneCompanySubRatingLabels"> 
                         Perks 
                         <Rating name="perks" value={perks} precision={1}   
@@ -107,7 +107,7 @@ const AddReviewSubCategories = ({
                 </Typography>
             </HtmlTooltip> 
 
-            <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.culture.text}>
+            <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.culture.reviewGuideline}>
                 <Typography className="oneCompanySubRatingLabels"> 
                         Culture 
                         <Rating name="culture" value={culture} precision={1}   
@@ -115,7 +115,7 @@ const AddReviewSubCategories = ({
                 </Typography>
             </HtmlTooltip> 
 
-            <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.codingPractices.text}>
+            <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.codingPractices.reviewGuideline}>
                 <Typography className="oneCompanySubRatingLabels"> 
                         Coding Practices 
                         <Rating name="codingPractices" value={codingPractices} precision={1}   

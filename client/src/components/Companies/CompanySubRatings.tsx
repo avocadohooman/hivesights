@@ -22,7 +22,7 @@ import Rating from '@material-ui/lab/Rating';
 import { Theme, Tooltip, withStyles } from '@material-ui/core';
 
 // Assets
-import subCategoryToolTips from '../../utils/subCategoryToolTips.json';
+import subCategoryToolTips from '../../utils/ratingToolTips.json';
  
 const HtmlTooltip = withStyles((theme: Theme) => ({
     tooltip: {
@@ -54,49 +54,49 @@ const CompanySubRatings = ({
                 </AccordionSummary>
                 <AccordionDetails className="oneCompanySubRatingWrapper">
                     
-                    <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.recruitment.text}>
+                    <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.recruitment.info}>
                         <Typography className="oneCompanySubRatingLabels"> 
                             Recruitment Process
                                 <Rating name="read-only" value={company[0].averageInterviewScore} precision={0.5} readOnly />
                         </Typography>
                     </HtmlTooltip> 
 
-                    <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.onboarding.text}>
+                    <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.onboarding.info}>
                         <Typography className="oneCompanySubRatingLabels"> 
                                 Onboarding 
                                 <Rating name="read-only" value={company[0].averageOnboardingScore} precision={0.5} readOnly />
                         </Typography>
                     </HtmlTooltip> 
 
-                    <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.mentoring.text}>
+                    <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.mentoring.info}>
                         <Typography className="oneCompanySubRatingLabels"> 
                                 Mentoring 
                                 <Rating name="read-only" value={company[0].averageSupervisionScore} precision={0.5} readOnly />
                         </Typography>
                     </HtmlTooltip> 
 
-                    <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.learning.text}>
+                    <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.learning.info}>
                         <Typography className="oneCompanySubRatingLabels"> 
                                 Learning 
                                 <Rating name="read-only" value={company[0].averageLearningScore} precision={0.5} readOnly />
                         </Typography>
                     </HtmlTooltip> 
 
-                    <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.perks.text}>
+                    <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.perks.info}>
                         <Typography className="oneCompanySubRatingLabels"> 
                                 Perks 
                                 <Rating name="read-only" value={company[0].averagePerksScore} precision={0.5} readOnly />
                         </Typography>
                     </HtmlTooltip> 
 
-                    <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.culture.text}>
+                    <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.culture.info}>
                         <Typography className="oneCompanySubRatingLabels"> 
                                 Culture 
                                 <Rating name="read-only" value={company[0].averageCultureScore} precision={0.5} readOnly />
                         </Typography>
                     </HtmlTooltip> 
 
-                    <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.codingPractices.text}>
+                    <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.codingPractices.info}>
                         <Typography className="oneCompanySubRatingLabels"> 
                                 Coding Practices 
                                 <Rating name="read-only" value={company[0].averageCodingPracticesScore} precision={0.5} readOnly />

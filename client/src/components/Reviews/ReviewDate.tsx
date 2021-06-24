@@ -13,6 +13,8 @@ import '../../styles/companyReview.css';
 
 // UI Libraries
 import moment from 'moment';
+import DeleteIcon from '@material-ui/icons/Delete';
+import { IconButton } from '@material-ui/core';
 
 // Assets
 
@@ -28,6 +30,7 @@ const ReviewDate = ({
         <div className="companyReviewDate" >
             {reviewDate}
         </div>
+
     )
 }
 
