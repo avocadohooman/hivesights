@@ -97,7 +97,7 @@ const CompanyDetailView = ({
                         </div>
 
                     </div>
-                    <KeyIndicator average={true} keyIndicator={company[0].averageSalaries} label={salaryLabel}/>
+                    <KeyIndicator average={true}  keyIndicator={company[0].averageSalaries} label={salaryLabel}/>
                     <KeyIndicator average={true}  keyIndicator={company[0].averageTotalScore} label={ratingLabel}/>
                     <KeyIndicator average={true}  keyIndicator={company[0].averageDuration} label={durationLabel}/>
                 </div>

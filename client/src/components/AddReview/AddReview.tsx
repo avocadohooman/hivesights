@@ -49,14 +49,14 @@ const AddReview = ({
     const history = useHistory();
 
     const [newReview, setNewReview] = useState<NewReview | null>();
-    const [overallScore, setOverallScore] = useState<number>(0);
-    const [recruitment, setRecruitment] = useState<number>(0);
-    const [onboarding, setOnboarding] = useState<number>(0);
-    const [mentoring, setMentoring] = useState<number>(0);
-    const [learning, setLearning] = useState<number>(0);
-    const [perks, setPerks] = useState<number>(0);
-    const [culture, setCulture] = useState<number>(0);
-    const [codingPractices, setCodingPractices] = useState<number>(0);
+    const [overallScore, setOverallScore] = useState<number>(1);
+    const [recruitment, setRecruitment] = useState<number>(1);
+    const [onboarding, setOnboarding] = useState<number>(1);
+    const [mentoring, setMentoring] = useState<number>(1);
+    const [learning, setLearning] = useState<number>(1);
+    const [perks, setPerks] = useState<number>(1);
+    const [culture, setCulture] = useState<number>(1);
+    const [codingPractices, setCodingPractices] = useState<number>(1);
 
     const [overallHeadline, setOverallHeadline] = useState<string>("");
     const [errorHeadline, setHeadlineError] = useState<boolean>(false);
@@ -119,7 +119,7 @@ const AddReview = ({
                 setAlertTitle("Success: ");
                 setTimeout(() => {
                         history.push(`/company/${id}`);
-                    }, 500);
+                    }, 1000);
             } catch (error: any) {
                 setPostSuccess(false);
                 setPostError(true);

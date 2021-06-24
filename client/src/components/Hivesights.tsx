@@ -34,7 +34,7 @@ const Hivesights = ({
         user: User
     }): JSX.Element=> {
 
-    const [kpi, setKpi] = useState<StateKpi | undefined>(undefined);
+    const [kpi, setKpi] = useState<StateKpi>({averageDuration: 0, averageSalary: 0, averageScore: 0});
     const [companies, setCompanies] = useState<Company[]>([]);
     const [filteredCompanies, setCompanyFilter] = useState<Company[]>(companies);
     const currentUser: User = {

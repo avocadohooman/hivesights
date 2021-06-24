@@ -42,7 +42,7 @@ const OneCompany = ({
                     </div>
                     <div className="oneCompanyScoreWrapper">
                         {company.averageTotalScore && <div className="oneCompanyScore"> {company.averageTotalScore}<span style={scoreStyle}>/5</span></div>}   
-                        {!company.averageTotalScore && <div className="oneCompanyScore">n/A</div>}   
+                        {company.averageTotalScore === null && <div className="oneCompanyScore">n/A</div>}   
                     </div>
                 </div>
                 

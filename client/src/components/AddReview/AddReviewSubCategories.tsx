@@ -70,7 +70,7 @@ const AddReviewSubCategories = ({
             <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.recruitment.text}>
                 <Typography className="oneCompanySubRatingLabels"> 
                     Recruitment Process
-                    <Rating name="recruitment" value={recruitment} precision={0.5}   
+                    <Rating name="recruitment" value={recruitment} precision={1}   
                         onChange={(event, newValue) => handleRecruitment(event, newValue)}/>
                 </Typography>
             </HtmlTooltip> 
@@ -78,7 +78,7 @@ const AddReviewSubCategories = ({
             <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.onboarding.text}>
                 <Typography className="oneCompanySubRatingLabels"> 
                         Onboarding 
-                        <Rating name="onboarding" value={onboarding} precision={0.5}   
+                        <Rating name="onboarding" value={onboarding} precision={1}   
                         onChange={(event, newValue) => handleOnboarding(event, newValue)}/>
                 </Typography>
             </HtmlTooltip> 
@@ -86,7 +86,7 @@ const AddReviewSubCategories = ({
             <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.mentoring.text}>
                 <Typography className="oneCompanySubRatingLabels"> 
                         Mentoring 
-                        <Rating name="mentoring" value={mentoring} precision={0.5}   
+                        <Rating name="mentoring" value={mentoring} precision={1}   
                         onChange={(event, newValue) => handleMentoring(event, newValue)}/>
                 </Typography>
             </HtmlTooltip> 
@@ -94,7 +94,7 @@ const AddReviewSubCategories = ({
             <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.learning.text}>
                 <Typography className="oneCompanySubRatingLabels"> 
                         Learning 
-                        <Rating name="learning" value={learning} precision={0.5}   
+                        <Rating name="learning" value={learning} precision={1}   
                         onChange={(event, newValue) => handleLearning(event, newValue)}/>
                 </Typography>
             </HtmlTooltip> 
@@ -102,7 +102,7 @@ const AddReviewSubCategories = ({
             <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.perks.text}>
                 <Typography className="oneCompanySubRatingLabels"> 
                         Perks 
-                        <Rating name="perks" value={perks} precision={0.5}   
+                        <Rating name="perks" value={perks} precision={1}   
                         onChange={(event, newValue) => handlePerks(event, newValue)}/>
                 </Typography>
             </HtmlTooltip> 
@@ -110,7 +110,7 @@ const AddReviewSubCategories = ({
             <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.culture.text}>
                 <Typography className="oneCompanySubRatingLabels"> 
                         Culture 
-                        <Rating name="culture" value={culture} precision={0.5}   
+                        <Rating name="culture" value={culture} precision={1}   
                         onChange={(event, newValue) => handleCulture(event, newValue)}/>
                 </Typography>
             </HtmlTooltip> 
@@ -118,7 +118,7 @@ const AddReviewSubCategories = ({
             <HtmlTooltip className="oneCompanySubRatingTooltip" title={subCategoryToolTips.codingPractices.text}>
                 <Typography className="oneCompanySubRatingLabels"> 
                         Coding Practices 
-                        <Rating name="codingPractices" value={codingPractices} precision={0.5}   
+                        <Rating name="codingPractices" value={codingPractices} precision={1}   
                         onChange={(event, newValue) => handleCodingPractices(event, newValue)}/>
                 </Typography>
             </HtmlTooltip>
