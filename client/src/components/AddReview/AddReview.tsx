@@ -2,6 +2,7 @@
 /* eslint-disable react/no-unescaped-entities */
 // React Libraris
 import React, { ChangeEvent, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 // Components
 import AddReviewHeader from './AddReviewHeader';
@@ -14,6 +15,7 @@ import AddReviewDuration from './AddReviewDuration';
 import AddReviewSalary from './AddReviewSalary';
 import CancelReview from './CancelReviewButton';
 import AddReviewButton from './AddReviewButton';
+import AddReviewAlert from './AddReviewError';
 
 // Data models 
 import { NewReview } from '../../models/reviewModel';
@@ -28,6 +30,7 @@ import reviewApi from '../../services/reviewApi';
 import '../../styles/addReview.css';
 
 // UI Libraries
+import { Color } from '@material-ui/core';
 
 
 // Assets
@@ -42,6 +45,8 @@ const AddReview = ({
         currentUser: User,
         id: string
     }): JSX.Element => {
+
+    const history = useHistory();
 
     const [newReview, setNewReview] = useState<NewReview | null>();
     const [overallScore, setOverallScore] = useState<number>(0);
@@ -71,10 +76,18 @@ const AddReview = ({
     const [errorSalary, setSalaryError] = useState<boolean>(false);
     const [errorSalarysMessage, setSalaryErrorMessage] = useState<string>("");
 
+    const [btnDisable, setBtnDsiable] = useState<boolean>(false);
+    const [postSuccess, setPostSuccess] = useState<boolean>(false);
+    const [postError, setPostError] = useState<boolean>(false);
+    
+    const [alert, setAlertMessage] = useState<string>("");
+    const [alertType, setAlertType] = useState<string>("")
+    const [alertTitle, setAlertTitle] = useState<string>("")
 
     const company = companies.find(company => company.id === id);
 
     const handleNewReview = async () => {
+        setBtnDsiable(true);
         if (validateData()) {
             const review: NewReview = {
                 userName: currentUser.userName,
@@ -99,14 +112,23 @@ const AddReview = ({
             }
             setNewReview(review);
             try {
-                let isDone = false;
-                await reviewApi
-                    .createReview(id, review)
-                    .then(x => console.log(isDone = true));
+                await reviewApi.createReview(id, review);
+                setPostSuccess(true);
+                setAlertType("success");
+                setAlertMessage('Review successfully added!');
+                setAlertTitle("Success: ");
+                setTimeout(() => {
+                        history.push(`/company/${id}`);
+                    }, 500);
             } catch (error: any) {
-                console.log('Error', error);
+                setPostSuccess(false);
+                setPostError(true);
+                setAlertMessage(error.response.data.error);
+                setAlertType("error");
+                setAlertTitle("Error: ");
             }
         }
+        setBtnDsiable(false);
     }
 
     const validateData = () : number => {
@@ -131,7 +153,7 @@ const AddReview = ({
         }
         if (salary < 0) {
             setSalaryError(true);
-            setSalaryErrorMessage('Salary can\'t be negative');
+            setSalaryErrorMessage('Salary can\'t be negative and can only contain digits 0-9');
             return 0;
         }
         return 1
@@ -236,7 +258,6 @@ const AddReview = ({
         event.preventDefault();
         if (event.target.value) { 
             setSalary(Number(event.target.value));
-            console.log("Salary", salary);
         }
     }
 
@@ -276,9 +297,13 @@ const AddReview = ({
                     <AddReviewFormHeader header='Salary' color='#343C44' size='14px'/>
                     <AddReviewSalary error={errorSalary} errorMessage={errorSalarysMessage} salary={salary} handleSalary={handleSalary}/>
                     
+                    <div className="addReviewAlert">
+                        <AddReviewAlert type={alertType} message={alert} title={alertTitle} postError={postError} setPostError={setPostError}/>
+                    </div>
+
                     <div className="addReviewButtonsWrapper">
                         <CancelReview companyId={id} />
-                        <AddReviewButton handleNewReview={handleNewReview} />
+                        <AddReviewButton success={postSuccess} btnDisabled={btnDisable} handleNewReview={handleNewReview} />
                     </div>
                 </div>
             }

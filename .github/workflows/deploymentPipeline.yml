@@ -35,7 +35,7 @@ jobs:
       - name: Install Modules
         working-directory: ./server
         run: npm install
-      - name: Run Jest Company Tests
+      - name: Run Jest
         working-directory: ./server
         run: npm run test:int
         env:

@@ -222,12 +222,19 @@ reviewRouter.put('/:id', async (req, res) => {
 // Delete a review
 reviewRouter.delete('/:id', async (req, res) => {
     const reviewId: string = req.params.id;
+    const companyDB = await pool.query(`SELECT companyid FROM ${reviewTable} WHERE id = ($1)`, [reviewId]);
+    console.log("Company ID", companyDB.rows[0].companyid);
+    const companyId = companyDB.rows[0].companyid;
     try {
         if (!await reviewServices.checkIfExists(reviewId, reviewTable)) {
             console.log("Review doesn't exist ERROR");
             return res.status(400).json({error: "Review doesn't exist."});
         }
         await pool.query(`DELETE FROM ${reviewTable} WHERE id = ($1)`, [reviewId]);
+        await reviewServices.updateAverageSalary(companyId, reviewTable, companyTable);
+        await reviewServices.updateScores(companyId, reviewTable, companyTable);
+        await reviewServices.updateAverageDuration(companyId, reviewTable, companyTable);
+        await reviewServices.updateAmountOfReviews(companyId, reviewTable, companyTable);
         console.log('review deleted');
         return res.status(200).json({message: 'Review deleted'});
     } catch (error: any) {

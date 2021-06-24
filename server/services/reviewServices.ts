@@ -8,8 +8,8 @@ const updateScoreColumns = reviewDBQueries.updateScoreColumns;
 const checkDuplicate = async (newReview: NewReview, reviewTable: string) => {
     console.log('Check for duplicates');
     const userName = newReview.userName;
-    const companyId = newReview.companyId;
-    const duplicate = await pool.query(`SELECT companyid FROM ${reviewTable} WHERE username = ($1)`, [userName]);
+    // const companyId = newReview.companyId;
+    const duplicate = await pool.query(`SELECT username FROM ${reviewTable} WHERE username = ($1)`, [userName]);
     if (duplicate.rowCount > 0) {
         console.log("Duplicate found: ", duplicate.rowCount > 0);
         return 0;  

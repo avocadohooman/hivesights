@@ -5,21 +5,13 @@ import { Company } from '../models/companyModel';
 const baseURL = '/api/company';
 
 const getAllCompanies = async () => {
-    try {
-        const res: any = await axios.get<Company[]>(baseURL + '/');
-        return res.data;    
-    } catch (error: any) {
-        return error;
-    }
+    const res: any = await axios.get<Company[]>(baseURL + '/');
+    return res.data;    
 }
 
 const getOneCompany = async (id: string) => {
-    try {
-        const res: any = await axios.get<Company[]>(`${baseURL}/${id}`);
-        return res.data;
-    } catch (error: any) {
-        return error;
-    }
+    const res: any = await axios.get<Company[]>(`${baseURL}/${id}`);
+    return res.data;
 }
 
 export default {
