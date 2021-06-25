@@ -28,8 +28,10 @@ const KeyIndicator = ({keyIndicator, label, average}: {keyIndicator: number, lab
             keyIndicatorValue = `${keyIndicator} €`;
         } else if (label === 'Total Score') {
             keyIndicatorValue = `${keyIndicator}`;
-        } else {
+        } else if (label === 'Duration'){
             keyIndicatorValue = `${keyIndicator} Months`;
+        } else {
+            keyIndicatorValue = `${keyIndicator}`;
         }
     }
 

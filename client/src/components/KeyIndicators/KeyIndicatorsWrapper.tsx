@@ -26,11 +26,14 @@ const KeyIndicatorsWrapper = ({
     const durationLabel = 'Duration';
     const salaryLabel = 'Salary';
     const ratingLabel = 'Total Score';
+    const reviewLabels = 'Review(s) written'
+    console.log("KPIs", kpi);
 
     return (
         <div className="keyIndicatorsWrapper ">
-            <KeyIndicator average={true}  keyIndicator={kpi.averageSalary} label={salaryLabel}/>
+            <KeyIndicator average={false} keyIndicator={kpi.reviews} label={reviewLabels}/>
             <KeyIndicator average={true}  keyIndicator={kpi.averageScore} label={ratingLabel}/>
+            <KeyIndicator average={true}  keyIndicator={kpi.averageSalary} label={salaryLabel}/>
             <KeyIndicator average={true}  keyIndicator={kpi.averageDuration} label={durationLabel}/>
         </div>
     )
