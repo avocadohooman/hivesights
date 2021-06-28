@@ -32,7 +32,7 @@ authRouter.get('/42/callback', async (req, res) => {
         }
         console.log("User for Token", userForToken);
         const key = authServices.setUserToken(userForToken);
-        return res.redirect(`http://localhost:3001?auth=${key}`);
+        return res.redirect(`http://localhost:3002?auth=${key}`);
     } catch (error: any) {
         console.log(error.message);
     }

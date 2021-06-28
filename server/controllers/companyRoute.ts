@@ -5,6 +5,7 @@ import rateLimit from 'express-rate-limit';
 import companyHelper from '../services/companyServices';
 import companyParsing from '../services/companyParsing';
 import companyServices from '../services/companyServices';
+import middleware from './../middleware/middleware';
 
 const companyRouter = express.Router();
 
@@ -149,7 +150,7 @@ const postApiLimiter = rateLimit({
 });
 
 // Create new company
-companyRouter.post('/', async (req, res) => {
+companyRouter.post('/', middleware.userExtractor, async (req, res) => {
     try {
         const newCompany: NewCompany = companyParsing.parsingCompany(req.body);
         if (!await companyHelper.checkDuplicate(newCompany, companyTable)) {

@@ -1,4 +1,5 @@
 import logger from '../utils/logger';
+import jwt from 'jsonwebtoken';
 
 const requestLogger = (request: any, response: any, next: any) => {
     logger.info('Method:', request.method);
@@ -41,11 +42,22 @@ const tokenExtractor = (req: any, res: any, next: any) => {
     req.token = null;
   }
   next();
-}
+};
  
+const userExtractor = async (req: any, res: any, next: any) => {
+  if (process.env.NODE_ENV !== "server" && process.env.NODE_ENV !== "test") {
+    const decodedToken: any = jwt.verify(req.token, process.env.SECRET as string);
+    if (decodedToken.userName !== "gmolin") {
+        return res.status(400).json({error: "Invalid rights"});
+    }
+  }
+  next();
+}
+
 export default {
     requestLogger,
     unknownEndpoint,
     errorHandler,
-    tokenExtractor
+    tokenExtractor,
+    userExtractor
 };

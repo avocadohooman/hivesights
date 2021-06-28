@@ -1707,14 +1707,13 @@ describe('Review PUT ERROR/ ', () => {
 
 // Testing review DELETE api methods
 describe('Review DELETE /', () => {
-    test('a review can be deleted', async () => {
+    test.only('a review can be deleted', async () => {
         let allReview = await api.get(`${apiBaseUrl}`);
         const reviewId = allReview.body[0].id;
         const reviewUser = allReview.body[0].userName;
 
         await api
             .delete(`${apiBaseUrl}/${reviewId}`)
-            .send({user: reviewUser})
             .expect(200)
         allReview = await api.get(`${apiBaseUrl}`);
         expect(allReview.body).toHaveLength(3);

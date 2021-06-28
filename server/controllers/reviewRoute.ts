@@ -5,6 +5,8 @@ import parsingService from '../services/reviewParsing';
 import companyServices from '../services/companyServices';
 import reviewServices from '../services/reviewServices';
 import reviewQueries from '../utils/reviewDBQueries';
+import middleware from '../middleware/middleware';
+import jwt from 'jsonwebtoken';
 
 const reviewRouter = express.Router();
 // Setting up table depending on NODE_ENV
@@ -220,18 +222,21 @@ reviewRouter.put('/:id', async (req, res) => {
 });
 
 // Delete a review
-reviewRouter.delete('/:id', async (req, res) => {
+reviewRouter.delete('/:id', middleware.userExtractor, async (req: any, res: any) => {
     const reviewId: string = req.params.id;
     try {
         if (!await reviewServices.checkIfExists(reviewId, reviewTable)) {
             console.log("Review doesn't exist ERROR");
             return res.status(400).json({error: "Review doesn't exist."});
         }
-        const userNameDb = await pool.query(`SELECT username FROM ${reviewTable} WHERE id = ($1)`, [reviewId]);
-        const userName = userNameDb.rows[0].username;
-        console.log('Body Username', req.body.user);
-        if (userName !== req.body.user) {
-            return res.status(400).json({error: 'Invalid rights'});
+        if (process.env.NODE_ENV !== "server" && process.env.NODE_ENV !== "test") {
+            const userNameDb = await pool.query(`SELECT username FROM ${reviewTable} WHERE id = ($1)`, [reviewId]);
+            const decodedToken: any = jwt.verify(req.token, process.env.SECRET as string);
+            const userName = userNameDb.rows[0].username;
+            console.log('Body Username', req.body.user, "Decoded Token Username", decodedToken.userName);
+            if (userName !== decodedToken.userName) {
+                return res.status(400).json({error: 'Invalid rights'});
+            }
         }
         const companyIdDB = await pool.query(`SELECT companyid FROM ${reviewTable} WHERE id = ($1)`, [reviewId]);
         const companyId = companyIdDB.rows[0].companyid;    
