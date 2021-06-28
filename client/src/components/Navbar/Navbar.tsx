@@ -5,6 +5,7 @@ import { useHistory } from 'react-router';
 // Components
 import Avatar from './Avatar';
 import UserName from './UserName';
+import RouteAddCompanyButton from '../AddCompany/RouteAddCompanyButton';
 
 // Data models 
 import { User, SetUser } from '../../models/userModel';
@@ -24,7 +25,7 @@ import { ReactComponent as SignOut } from '../../assets/signOut.svg';
 const Navbar = ({
         user, setUser
     }: {
-        user: User | undefined, 
+        user: User, 
         setUser: SetUser
     }): JSX.Element => {
 
@@ -42,13 +43,14 @@ const Navbar = ({
         history.push('/');
         // Hotfix: when returning to main page, filtered selection is still rendered 
         // which requires to manually reload page in order to get all companies again
-        window.location.reload();
+        // window.location.reload();
     }
 
     return (
         <div className="navbar">
             <button className="logoTitle" onClick={handleGoHome}>{logoTitle}</button>
             <div className="userSection">
+                {user.userName === 'gmolin' && <RouteAddCompanyButton />}
                 <Avatar size='s' avatarImageUrl={avatarImageUrl}/>
                 <UserName userName={userName}/>
                 <Tooltip title="Sign Out">

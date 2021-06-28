@@ -56,7 +56,7 @@ const CompanyReview = ({
                 <UserName userName={review?.userName}/>
                 <ReviewOverall overall={review?.overall} />
                 <ReviewDate date={review?.publishedDate}/>
-                {currentUser.userName === review.userName && <DeleteReview currentUser={currentUser} review={review}/>}
+                {currentUser.userName === review.userName && <DeleteReview review={review}/>}
             </div>
 
             <div className="companyReviewKeyIndicators">

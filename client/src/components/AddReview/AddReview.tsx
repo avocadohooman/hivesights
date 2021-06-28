@@ -31,7 +31,6 @@ import reviewApi from '../../services/reviewApi';
 import '../../styles/addReview.css';
 
 // UI Libraries
-import { Color } from '@material-ui/core';
 
 
 // Assets

@@ -19,7 +19,7 @@ export interface Company {
     reviews: number,
 }
 
-export type NewCompany = Omit<Company, 'id' | 'averageSalaries' | 'interviews'>;
+export type NewCompany = Pick<Company, 'companyName' | 'companyDescription' | 'logoURL' | 'companyURL' | 'companyLocation'>;
 export type CompanyRating = Pick<Company, 'averageTotalScore'>;
 
 export type SetCompany = React.Dispatch<React.SetStateAction<Company[] | undefined>>

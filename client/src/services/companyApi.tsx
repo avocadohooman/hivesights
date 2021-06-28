@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios';
-import { Company } from '../models/companyModel';
+import { Company, NewCompany } from '../models/companyModel';
 
 const baseURL = '/api/company';
 
@@ -14,7 +14,13 @@ const getOneCompany = async (id: string) => {
     return res.data;
 }
 
+const createCompany = async (newCompany: NewCompany) => {
+    const res: any = await axios.post<NewCompany>(baseURL, newCompany);
+    return res.data;
+}
+
 export default {
     getAllCompanies,
-    getOneCompany
+    getOneCompany,
+    createCompany
 }

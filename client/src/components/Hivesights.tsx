@@ -9,6 +9,7 @@ import CompaniesWrapper from './Companies/CompaniesWrapper';
 import CompanyFilterWrapper from './Filter/companyFilterWrapper';
 import CompanyDetailView from './Companies/CompanyDetailView';
 import AddReview from './AddReview/AddReview';
+import AddCompany from './AddCompany/AddCompany';
 
 // Data models 
 import { Company } from '../models/companyModel';
@@ -137,15 +138,18 @@ const Hivesights = ({
                         <CompanyFilterWrapper handleCompanySearch={handleCompanySearch} handleCompanySelection={handleCompanySelection}/>
                         <CompaniesWrapper companies={filteredCompanies}/>
                     </Route>
-                    <Route path="/company/:id" render={(props) => (
+                    <Route exact path="/company/:id" render={(props) => (
                         <CompanyDetailView currentUser={currentUser} id={props.match.params.id}/>
                         )}>
                     </Route>
-                    <Route path="/review/:id" render={(props) => (
+                    <Route exact path="/review/:id" render={(props) => (
                         <Container maxWidth="md">
                             <AddReview companies={companies} currentUser={currentUser} id={props.match.params.id} />
                         </Container>
                     )}>
+                    </Route>
+                    <Route exact path="/newCompany/">
+                        {user.userName === "gmolin" && <AddCompany />}
                     </Route> 
                 </Switch>
             </Suspense>

@@ -22,15 +22,13 @@ import { IconButton } from '@material-ui/core';
 
 const DeleteReview = ({ 
         review,
-        currentUser,
     } : {  
         review: Review,
-        currentUser: User
     }): JSX.Element => {
 
     const handleDelete = async () =>{
         try {
-            await reviewApi.deleteReview(review.id, currentUser);
+            await reviewApi.deleteReview(review.id);
             window.location.reload();
         } catch (error: any) {
             console.log("Error", error.response.data.message);

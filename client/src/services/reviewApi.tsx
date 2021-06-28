@@ -29,8 +29,8 @@ const createReview = async (companyId: string, newReview: NewReview) => {
     return res.data;
 }
 
-const deleteReview = async (reviewId: string, currentUser: User)  => {
-    const res: any = await axios.delete<Review>(`${baseURL}/${reviewId}`, {data: {user: currentUser.userName}});
+const deleteReview = async (reviewId: string)  => {
+    const res: any = await axios.delete<Review>(`${baseURL}/${reviewId}`);
     return res.data;
 }
 
