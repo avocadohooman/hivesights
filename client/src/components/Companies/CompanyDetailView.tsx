@@ -90,7 +90,7 @@ const CompanyDetailView = ({
                         <img className="oneCompanyLogoBig" src={company[0]?.logoURL}></img>
 
                         <div className="oneCompanyNameBig">
-                            <a href={company[0]?.companyURL}> {company[0]?.companyName}</a>
+                            <a href={company[0].companyURL}> {company[0]?.companyName}</a>
                         </div>
                         <div className="oneCompanyLocation">
                             {company[0]?.companyLocation}
