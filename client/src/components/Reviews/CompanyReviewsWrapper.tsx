@@ -23,14 +23,14 @@ const CompanyReviewsWrapper = ({
         currentUser,
         handleVoting
     } : { 
-        reviews: Review[] | undefined,
+        reviews: Review[],
         currentUser: User
         handleVoting: HandleVotingFunction
     }): JSX.Element => {
 
     return (
         <div className="companyReviewsWrapper"> 
-            {reviews?.map(review => 
+            {reviews.map(review => 
                 <CompanyReview key={review.id} currentUser={currentUser} handleVoting={handleVoting} review={review}/>
             )}
         </div>

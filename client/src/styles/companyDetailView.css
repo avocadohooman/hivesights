@@ -73,3 +73,28 @@ a {
 .oneCompanySubRatingTooltip:hover {
     background: #ADD2DD !important;
 }
+
+.skeletonReview {
+    margin-top: 50px;
+}
+
+.createFirstReviewWrapper {
+    width: 100%;
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.createFirstReviewIcon { 
+    font-size: 150px !important;
+    color: #ADD2DD;
+}
+
+.createFirstReviewText {
+    font-family: 'SimpleNorm-Regular' !important;
+    max-width: 450px;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: -60px;
+}

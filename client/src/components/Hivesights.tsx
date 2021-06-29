@@ -13,7 +13,7 @@ import AddCompany from './AddCompany/AddCompany';
 
 // Data models 
 import { Company } from '../models/companyModel';
-import { StateKpi } from '../models/kpiModel';
+import { KPI, StateKpi } from '../models/kpiModel';
 import { User } from '../models/userModel';
 import { OnChangeEvent } from '../models/miscModels'
 import { SelectionFilter } from '../models/filterModels';
@@ -22,6 +22,7 @@ import { SelectionFilter } from '../models/filterModels';
 import kpiApi from '../services/kpiApi';
 import companyApi from '../services/companyApi';
 import { Container } from '@material-ui/core';
+import { Skeleton } from '@material-ui/lab';
 
 // CSS styles
 
@@ -35,7 +36,7 @@ const Hivesights = ({
         user: User
     }): JSX.Element=> {
 
-    const [kpi, setKpi] = useState<StateKpi>({averageDuration: 0, averageSalary: 0, averageScore: 0, reviews: 0});
+    const [kpi, setKpi] = useState<StateKpi>();
     const [companies, setCompanies] = useState<Company[]>([]);
     const [filteredCompanies, setCompanyFilter] = useState<Company[]>(companies);
     const currentUser: User = {
@@ -132,28 +133,26 @@ const Hivesights = ({
 
     return (
         <div>
-            <Suspense fallback={<div>Loading...</div>}>
-                <Switch>
-                    <Route exact path="/">
-                        <KeyIndicatorsWrapper kpi={kpi}/>
-                        <CompanyFilterWrapper handleCompanySearch={handleCompanySearch} handleCompanySelection={handleCompanySelection}/>
-                        <CompaniesWrapper user={user} companies={filteredCompanies}/>
-                    </Route>
-                    <Route exact path="/company/:id" render={(props) => (
-                        <CompanyDetailView currentUser={currentUser} id={props.match.params.id}/>
-                        )}>
-                    </Route>
-                    <Route exact path="/review/:id" render={(props) => (
-                        <Container maxWidth="md">
-                            <AddReview companies={companies} currentUser={currentUser} id={props.match.params.id} />
-                        </Container>
+            <Switch>
+                <Route exact path="/">
+                    <KeyIndicatorsWrapper kpi={kpi}/>
+                    <CompanyFilterWrapper handleCompanySearch={handleCompanySearch} handleCompanySelection={handleCompanySelection}/>
+                    <CompaniesWrapper user={user} companies={filteredCompanies}/>
+                </Route>
+                <Route exact path="/company/:id" render={(props) => (
+                    <CompanyDetailView currentUser={currentUser} id={props.match.params.id}/>
                     )}>
-                    </Route>
-                    <Route exact path="/newCompany/">
-                        {user.userName === "gmolin" && <AddCompany />}
-                    </Route> 
-                </Switch>
-            </Suspense>
+                </Route>
+                <Route exact path="/review/:id" render={(props) => (
+                    <Container maxWidth="md">
+                        <AddReview companies={companies} currentUser={currentUser} id={props.match.params.id} />
+                    </Container>
+                )}>
+                </Route>
+                <Route exact path="/newCompany/">
+                    {user.userName === "gmolin" && <AddCompany />}
+                </Route> 
+            </Switch>
         </div>
     );
 }

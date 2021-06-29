@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 // Components
 
 // Data models 
+import { User } from '../../models/userModel';
 
 // API services
 
@@ -15,6 +16,8 @@ import '../../styles/createReview.css';
 // UI Libraries
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import { Typography } from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
 
 // Assets
 
@@ -30,12 +33,25 @@ const useStyles = makeStyles((theme) => ({
           borderColor: '#B979A6'
       }
     },
+    buttonDisable: {
+        margin: theme.spacing(3, 0, 0),
+        borderColor: 'grey',
+        background: 'grey',
+        marginTop: '100px',
+        color: 'white',
+        '&:hover': {
+            color: 'black',
+            borderColor: 'grey'
+        }
+      },
   }));
 
 const CreateReviewButton = ({ 
-        companyId
+        companyId,
+        currentUser
     } : { 
-        companyId: string
+        companyId: string,
+        currentUser: User
     }): JSX.Element => {
 
     const history = useHistory();
@@ -46,13 +62,30 @@ const CreateReviewButton = ({
     const classes = useStyles();
 
     return (
-        <Button
-        variant="outlined"
-        color="primary"
-        className={classes.button} 
-        onClick={goToReviewCreation}>
-            Add A Review
-        </Button>
+        <div>
+        {currentUser.internshipValidated &&
+            <Button
+            variant="outlined"
+            color="primary"
+            className={classes.button} 
+            onClick={goToReviewCreation}>
+                Add A Review
+            </Button>
+        }
+
+        {!currentUser.internshipValidated &&
+            <div>
+                <Button
+                variant="outlined"
+                color="primary"
+                className={classes.buttonDisable} 
+                >
+                    Add A Review (disabled) 
+                </Button>
+            </div>
+        }
+        </div>
+
     )
 }
 

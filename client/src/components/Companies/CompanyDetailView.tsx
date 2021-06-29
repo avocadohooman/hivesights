@@ -7,6 +7,7 @@ import KeyIndicator from '../KeyIndicators/KeyIndicator';
 import CompanySubRatings from './CompanySubRatings';
 import CompanyReviewsWrapper from '../Reviews/CompanyReviewsWrapper';
 import CreateReviewButton from '../Reviews/CreateReviewButton';
+import CreateFirstReview from '../Reviews/CreateFirstReview';
 
 // Data models 
 import { Company } from '../../models/companyModel';
@@ -24,6 +25,7 @@ import '../../styles/companyDetailView.css'
 // UI Libraries
 import DeleteIcon from '@material-ui/icons/Delete';
 import { IconButton } from '@material-ui/core';
+import { Alert, Skeleton } from '@material-ui/lab';
 
 // Assets
 
@@ -51,6 +53,7 @@ const CompanyDetailView = ({
             try {
                 const company: Company[] = await companyApi.getOneCompany(id);
                 setCompany(company);
+                console.log("Company", company[0]);
             } catch (error: any) {
                 console.log(error);
             }
@@ -96,6 +99,7 @@ const CompanyDetailView = ({
             console.log("Error", error.response.data.message);
         }
     }
+    const reviewDisabledLabel = "You need to have 'Company Mid Evaluation' validated in order to write a review";
 
     return (
         <div>
@@ -124,9 +128,38 @@ const CompanyDetailView = ({
                     <KeyIndicator average={true}  keyIndicator={company[0].averageDuration} label={durationLabel}/>
                 </div>
             }
+            {!company &&
+                <div className="companyDetailViewKeyInfoWrapper">
+                    <div>
+                        <Skeleton variant="rect" width={100} height={100} /> 
+                    </div>
+
+                    <div> 
+                        <Skeleton variant="circle" width={100} height={100} /> 
+                        <Skeleton variant="text" />
+                    </div>
+
+                    <div> 
+                        <Skeleton variant="circle" width={100} height={100} /> 
+                        <Skeleton variant="text" />
+                    </div>
+
+                    <div> 
+                        <Skeleton variant="circle" width={100} height={100} /> 
+                        <Skeleton variant="text" />
+                    </div>
+                </div>
+            }
             {company && <CompanySubRatings company={company}/>}
-            {company && currentUser.internshipValidated === true && <CreateReviewButton companyId={company[0].id} />}
-            {reviews && <CompanyReviewsWrapper currentUser={currentUser} handleVoting={handleVoting} reviews={reviews}/>}
+            {company && reviews && reviews.length > 0 && <CreateReviewButton currentUser={currentUser} companyId={company[0].id} />}
+            {!currentUser.internshipValidated && <Alert severity="info">{reviewDisabledLabel}</Alert>}
+            {company && reviews && reviews.length === 0 && <CreateFirstReview currentUser={currentUser} companyId={company[0].id} />}
+            {reviews && reviews.length > 0  && <CompanyReviewsWrapper currentUser={currentUser} handleVoting={handleVoting} reviews={reviews}/>}
+            {!reviews && 
+                <div className="skeletonReview">
+                    <Skeleton variant="rect" width={1280} height={400}/> 
+                </div>
+            }
         </div>
     )
 }

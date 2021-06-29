@@ -6,6 +6,7 @@ import KeyIndicator from './KeyIndicator';
 
 // Data models 
 import { StateKpi } from '../../models/kpiModel';
+import { Skeleton } from '@material-ui/lab';
 
 // API services
 
@@ -20,7 +21,7 @@ import { StateKpi } from '../../models/kpiModel';
 const KeyIndicatorsWrapper = ({
         kpi
     }: {
-        kpi: StateKpi
+        kpi: StateKpi | undefined
     }): JSX.Element => {
 
     const durationLabel = 'Duration';
@@ -30,10 +31,42 @@ const KeyIndicatorsWrapper = ({
 
     return (
         <div className="keyIndicatorsWrapper ">
-            <KeyIndicator average={false} keyIndicator={kpi.reviews} label={reviewLabels}/>
-            <KeyIndicator average={true}  keyIndicator={kpi.averageScore} label={ratingLabel}/>
-            <KeyIndicator average={true}  keyIndicator={kpi.averageSalary} label={salaryLabel}/>
-            <KeyIndicator average={true}  keyIndicator={kpi.averageDuration} label={durationLabel}/>
+            {kpi?.reviews 
+                ? 
+                <KeyIndicator average={false} keyIndicator={kpi.reviews} label={reviewLabels}/> 
+                : 
+                <div>
+                    <Skeleton variant="circle" width={100} height={100} /> 
+                    <Skeleton variant="text" />
+                </div>
+            }
+            {kpi?.averageScore 
+                ? 
+                <KeyIndicator average={true} keyIndicator={kpi.averageScore} label={ratingLabel}/> 
+                : 
+                <div>
+                    <Skeleton variant="circle" width={100} height={100} /> 
+                    <Skeleton variant="text" />
+                </div>
+            }
+            {kpi?.averageSalary 
+                ? 
+                <KeyIndicator average={true} keyIndicator={kpi.averageSalary} label={salaryLabel}/> 
+                : 
+                <div>
+                    <Skeleton variant="circle" width={100} height={100} /> 
+                    <Skeleton variant="text" />
+                </div>
+            }
+            {kpi?.averageDuration 
+                ? 
+                <KeyIndicator average={true} keyIndicator={kpi.averageDuration} label={durationLabel}/> 
+                : 
+                <div>
+                    <Skeleton variant="circle" width={100} height={100} /> 
+                    <Skeleton variant="text" />
+                </div>
+            }
         </div>
     )
 }

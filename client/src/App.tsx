@@ -40,12 +40,7 @@ const App = () => {
 		if (token) {
 			try {
 				const decoded = jwt_decode<UserToken>(token);
-				const { exp }: any = jwt_decode(token);
-				const expirationTime = (exp * 1000) - 60000;
-				if (Date.now() >= expirationTime) {
-					localStorage.removeItem('token');
-					setUser(undefined);
-				}
+
 				authApi.setAuthToken(token);
 				window.localStorage.setItem('token', token as string);
 				setUser({id: decoded.id, userName: decoded.userName, imageUrl: decoded.imageUrl, intraUrl: decoded.intraUrl, internshipValidated: decoded.internshipValidated})
@@ -56,9 +51,20 @@ const App = () => {
 			}
 		}
 	};
+	const checkTokenExpiration = () => {
+		const token = localStorage.getItem('token');
+		if (token) {
+			const { exp }: any = jwt_decode(token);
+			const expirationTime = (exp * 1000) - 60000;
+			if (Date.now() >= expirationTime) {
+				localStorage.removeItem('token');
+				setUser(undefined);
+			}
+		}
+	}
 	checkToken();
-	setTimeout(() => {
-		checkToken();
+	setInterval(() => {
+		checkTokenExpiration();
 	}, 10000);
 
   }, []);
