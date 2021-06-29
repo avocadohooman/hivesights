@@ -37,9 +37,11 @@ const CreateFirstReview = ({
             <div> 
                 <EmojiNatureIcon className="createFirstReviewIcon" />
             </div>
-            <div className="createFirstReviewText">
-                    {callToAction}
-            </div>
+            {currentUser.internshipValidated && 
+                <div className="createFirstReviewText">
+                        {callToAction}
+                </div>
+            }
             <CreateReviewButton currentUser={currentUser} companyId={companyId} />
             {!currentUser.internshipValidated && <Alert severity="info">{reviewDisabledLabel}</Alert>}
         </div>

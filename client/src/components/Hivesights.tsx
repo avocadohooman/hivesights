@@ -22,7 +22,6 @@ import { SelectionFilter } from '../models/filterModels';
 import kpiApi from '../services/kpiApi';
 import companyApi from '../services/companyApi';
 import { Container } from '@material-ui/core';
-import { Skeleton } from '@material-ui/lab';
 
 // CSS styles
 
@@ -130,6 +129,7 @@ const Hivesights = ({
         }
         return result;
     }
+
 
     return (
         <div>

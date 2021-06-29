@@ -5,6 +5,7 @@
     width: 100%;
     justify-content: space-around;
     margin-top: 80px;
+    height: auto;
 }
 
 .keyIndicatorWrapper {
@@ -12,6 +13,8 @@
     flex-direction: column;
     align-items: center;
     position: relative;
+    min-width: 200px;
+    min-height: 100px;
 }
 
 .keyIndicator {

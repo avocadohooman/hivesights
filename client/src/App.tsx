@@ -40,7 +40,6 @@ const App = () => {
 		if (token) {
 			try {
 				const decoded = jwt_decode<UserToken>(token);
-
 				authApi.setAuthToken(token);
 				window.localStorage.setItem('token', token as string);
 				setUser({id: decoded.id, userName: decoded.userName, imageUrl: decoded.imageUrl, intraUrl: decoded.intraUrl, internshipValidated: decoded.internshipValidated})
