@@ -43,8 +43,8 @@ const App = () => {
 				const { exp }: any = jwt_decode(token);
 				const expirationTime = (exp * 1000) - 60000;
 				if (Date.now() >= expirationTime) {
+					localStorage.removeItem('token');
 					setUser(undefined);
-					history.push('/');
 				}
 				authApi.setAuthToken(token);
 				window.localStorage.setItem('token', token as string);
@@ -57,7 +57,13 @@ const App = () => {
 		}
 	};
 	checkToken();
+	setTimeout(() => {
+		checkToken();
+	}, 10000);
+
   }, []);
+
+
 
   return (
     <Router>

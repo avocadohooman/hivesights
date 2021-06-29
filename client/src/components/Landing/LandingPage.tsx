@@ -21,7 +21,6 @@ const LandingPage = () => {
 	const login42 = async () => {
 		try {
 			const data = await authServices.fortyTwoUrl();
-			console.log("DATA", data);
 			window.location = data.url;
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} catch (error: any) {

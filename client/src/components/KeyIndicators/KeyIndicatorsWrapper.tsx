@@ -27,7 +27,6 @@ const KeyIndicatorsWrapper = ({
     const salaryLabel = 'Salary';
     const ratingLabel = 'Total Score';
     const reviewLabels = 'Review(s) written'
-    console.log("KPIs", kpi);
 
     return (
         <div className="keyIndicatorsWrapper ">

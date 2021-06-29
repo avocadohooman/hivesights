@@ -20,7 +20,9 @@
     "cypress:open": "npx cypress open",
     "test:e2e": "NODE_ENV=test cypress run",
     "test:int": "NODE_ENV=test jest --verbose --runInBand --detectOpenHandles",
-    "test:int-company": "NODE_ENV=test jest --verbose --runInBand --detectOpenHandles company.test.ts"
+    "test:int-company": "NODE_ENV=test jest --verbose --runInBand --detectOpenHandles company.test.ts",
+    "test:int-review": "NODE_ENV=test jest --verbose --runInBand --detectOpenHandles review.test.ts"
+
   },
   "keywords": [],
   "author": "",

@@ -10,7 +10,7 @@ export const fortyTwoUrl = async () => {
 
 const getToken = async (key: any) => {
     const res: any = await axios.get(baseURL + `/token/${key}`);
-    console.log("RESPONSE", res.data.token);
+    // console.log("RESPONSE", res.data.token);
     return res.data.token;
 }
 

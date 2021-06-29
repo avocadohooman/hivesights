@@ -7,14 +7,14 @@ const intialCompanies: NewCompany[] = [
     {
         companyName: "Wunderdog",
         companyDescription: "Software Development Agency",
-        logoURL: "https://www.itewiki.fi/thumb.php?src=https://www.itewiki.fi/write/logos/wunderdog.png&size=x100",
+        logoURL: "https://hivesights.s3.eu-central-1.amazonaws.com/company_logos/wunderdog.png",
         companyURL: "https://wunderdog.fi/",
         companyLocation: "Helsinki, Finland"
     },
     {
         companyName: "Futurice",
         companyDescription: "Software Development Agency",
-        logoURL: "https://mb.cision.com/Public/15075/3030667/be2c1c70d27b5cfd_org.png",
+        logoURL: "https://hivesights.s3.eu-central-1.amazonaws.com/company_logos/futurice.png",
         companyURL: "https://futurice.fi/",
         companyLocation: "Helsinki, Finland"
     },
@@ -28,42 +28,42 @@ const intialCompanies: NewCompany[] = [
     {
         companyName: "School Day",
         companyDescription: "EdTech Startup",
-        logoURL: "https://www.schoolday.com/images/2019/02/25/schoolday-logo.jpg",
+        logoURL: "https://hivesights.s3.eu-central-1.amazonaws.com/company_logos/schoolday-logo.jpeg",
         companyURL: "https://schoolday.com/",
         companyLocation: "Helsinki, Finland"
     },
     {
         companyName: "Holvi",
         companyDescription: "Payment Startup",
-        logoURL: "https://theme.zdassets.com/theme_assets/129677/051049ceaf14b1f18e9eba7791231233d227ec7f.png",
+        logoURL: "https://hivesights.s3.eu-central-1.amazonaws.com/company_logos/holvi_logo.png",
         companyURL: "https://holvi.com/",
         companyLocation: "Helsinki, Finland"
     },
     {
         companyName: "Unity",
         companyDescription: "Game Developer",
-        logoURL: "https://img.favpng.com/5/12/9/unity-technologies-finland-oy-technology-video-game-png-favpng-7H4uC2D0e5dCMkr1uxeNj6xye.jpg",
+        logoURL: "https://hivesights.s3.eu-central-1.amazonaws.com/company_logos/unity.jpeg",
         companyURL: "https://unity.com/",
         companyLocation: "Helsinki, Finland"
     },
     {
         companyName: "F-Secure",
         companyDescription: "Cyber Security",
-        logoURL: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/F-Secure_Logo.png/1200px-F-Secure_Logo.png",
+        logoURL: "https://hivesights.s3.eu-central-1.amazonaws.com/company_logos/f_secure.png",
         companyURL: "https://f-secure.com/",
         companyLocation: "Helsinki, Finland"
     },
     {
         companyName: "Hive Helsinki",
         companyDescription: "Coding School",
-        logoURL: "https://cdn.xboxdev.com/wp-content/uploads/2018/12/05001727/Hive-Helsinki-Logo-Xboxdev.com_.png",
+        logoURL: "https://hivesights.s3.eu-central-1.amazonaws.com/company_logos/hive.png",
         companyURL: "https://hive.fi/",
         companyLocation: "Helsinki, Finland"
     },
     {
         companyName: "Wunderman Thompson",
         companyDescription: "Consulting Firm",
-        logoURL: "https://www.wundermanthompson.com/img/wt-logo-seo-1x1.jpg",
+        logoURL: "https://hivesights.s3.eu-central-1.amazonaws.com/company_logos/wunderman_thompson.jpeg",
         companyURL: "https://wundermanthompson.com/",
         companyLocation: "Helsinki, Finland"
     },

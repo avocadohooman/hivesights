@@ -1,34 +1,34 @@
 {
     "overall": {
-        "info": "",
-        "reviewGuideline": ""
+        "info": "This score tells about the overall internship experience",
+        "reviewGuideline": "What score would you give your overall internship experience? 1: Very poor, 5: Great!"
     },
     "recruitment": {
-        "info": "Measures how well the company has designed the recruitment process, e.g. how was the communication with the applicant? Did they give feedback?",
-        "reviewGuideline": ""
+        "info": "This score measures how well the whole recruitment process was designed and executed, from an applicants perspective",
+        "reviewGuideline": "How was the recruitment process? Did you receive feedback and were the stages clearly communicated? 1: Very poorly, 5: Great"
     },
     "onboarding": {
-        "info": "Measures the onbaording process for new applicants.",
-        "reviewGuideline": ""
+        "info": "This scores measures how well the intern was onboarded and integrated into the company",
+        "reviewGuideline": "How was the onboarding? Did you receive clear guidance and a soft landing? 1: Very poorly, 5: Great"
     },
     "mentoring": {
-        "info": "Measures the mentoring inhouse.",
-        "reviewGuideline": ""
+        "info": "This score measures the mentorship quality of the internship",
+        "reviewGuideline": "How was the mentoring during your internship? Did you have a dedicated mentor? Did you get enough feedback? 1: Very poorly, 5: Great"
     },
     "learning": {
-        "info": "Measures the learning opportunities.",
-        "reviewGuideline": ""
+        "info": "Learning measures how well the intern was supported in achieving her/his professional goals",
+        "reviewGuideline": "How were you personal/professional goal supported? Did the company make sure you learn? 1: Very poorly, 5: Great"
     },
     "perks": {
-        "info": "Measures what kind of perks you get.",
-        "reviewGuideline": ""
+        "info": "Perks are non-wage offerings given to employees that extend beyond salaries and benefits ",
+        "reviewGuideline": "What kind of perks did you receive in addition to your salary? 1: Almost none, 5: A lot"
     },
     "culture": {
-        "info": "Measures the company culture.",
-        "reviewGuideline": ""
+        "info": "Company culture can be defined as a set of shared values, goals, attitudes and practices that characterize an organization. This score measures the perceived company culture.",
+        "reviewGuideline": "How did you perceive the company culture? Did the company also walk the talk, or were values just a PowerPoint slide? 1: Poor culture, 5: Amazing culture"
     },
     "codingPractices": {
-        "info": "Measures coding practicies at the company.",
-        "reviewGuideline": ""
+        "info": "This score measures if the company practices good coding practices/standards, like e.g. coding reviews, DEVOPs, documentation, testing",
+        "reviewGuideline": "What kind of coding practices/standards did the company follow? Did you learn new good habits, or bad habits? 1: Almost no coding practices, 5: A lot of useful coding practices"
     }
 }

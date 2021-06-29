@@ -151,9 +151,9 @@ const AddReview = ({
             setProsErrorMessage(`Pros need to have at least 5 words`);
             return 0;
         }
-        if (salary < 0) {
+        if (salary < 0 || salary > 10000) {
             setSalaryError(true);
-            setSalaryErrorMessage('Salary can\'t be negative');
+            setSalaryErrorMessage('Invalid amount for salary: can\'t be negative or too high');
             return 0;
         }
         return 1
@@ -161,7 +161,7 @@ const AddReview = ({
 
     const handleOverallScore = (event: ChangeEvent<{}>, newValue: number | null) => {
         event.preventDefault();
-        console.log('In handle overall score', newValue);
+        // console.log('In handle overall score', newValue);
         if (newValue) {
             setOverallScore(newValue);
         }
@@ -169,7 +169,7 @@ const AddReview = ({
 
     const handleRecruitment = (event: ChangeEvent<{}>, newValue: number | null) => {
         event.preventDefault();
-        console.log('In handle recruitment', newValue);
+        // console.log('In handle recruitment', newValue);
         if (newValue) {    
             setRecruitment(newValue);
         }
@@ -227,7 +227,7 @@ const AddReview = ({
             setHeadlineErrorMessage('');
         }
         setOverallHeadline(event.target.value);
-        console.log('Overall headline', overallHeadline);
+        // console.log('Overall headline', overallHeadline);
     }
 
     const handlePros = (event: OnChangeEvent) => {

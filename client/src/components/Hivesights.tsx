@@ -63,7 +63,7 @@ const Hivesights = ({
                 }));
                 setCompanies(companies);
                 setCompanyFilter(companies);
-                console.log("Companies", companies);
+                // console.log("Companies", companies);
             } catch (error: any) {
                 console.log(error);
             }
