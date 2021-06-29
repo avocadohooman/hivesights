@@ -40,8 +40,14 @@ const App = () => {
 		if (token) {
 			try {
 				const decoded = jwt_decode<UserToken>(token);
+				const { exp }: any = jwt_decode(token);
+				const expirationTime = (exp * 1000) - 60000;
+				if (Date.now() >= expirationTime) {
+					setUser(undefined);
+					history.push('/');
+				}
 				authApi.setAuthToken(token);
-				window.localStorage.setItem('token', token);
+				window.localStorage.setItem('token', token as string);
 				setUser({id: decoded.id, userName: decoded.userName, imageUrl: decoded.imageUrl, intraUrl: decoded.intraUrl, internshipValidated: decoded.internshipValidated})
 				history.push('/');
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any

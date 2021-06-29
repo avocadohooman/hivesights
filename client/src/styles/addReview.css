@@ -95,6 +95,6 @@
     }
 
     .addReviewInfoTextWrapper {
-        height: 260px;
+        min-height: 260px;
     }
 }

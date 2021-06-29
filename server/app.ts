@@ -30,12 +30,13 @@ app.get('/health', (_req, res) => {
     res.send('ok');
 });
 
-if (process.env.NODE_ENV !== "server" && process.env.NODE_ENV !== "test") {
-    app.use(middleware.tokenExtractor);
-}
 
 // API Router for 42 Authentication
 app.use('/api/auth', authRouter);
+// Extracting token for company, rewview and kpi route
+if (process.env.NODE_ENV !== "test") {
+    app.use(middleware.tokenExtractor);
+}
 // API Router for companies
 app.use('/api/company', companyRouter);
 // API Router for reviews

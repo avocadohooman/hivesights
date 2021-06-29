@@ -19,8 +19,14 @@ const createCompany = async (newCompany: NewCompany) => {
     return res.data;
 }
 
+const deleteCompany = async (companyId: string) => {
+    const res: any = await axios.delete(`${baseURL}/${companyId}`);
+    return res.data;
+}
+
 export default {
     getAllCompanies,
     getOneCompany,
-    createCompany
+    createCompany,
+    deleteCompany
 }

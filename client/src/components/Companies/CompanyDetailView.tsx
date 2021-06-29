@@ -1,5 +1,6 @@
 // React Libraris
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 // Components
 import KeyIndicator from '../KeyIndicators/KeyIndicator';
@@ -21,6 +22,8 @@ import '../../styles/company.css';
 import '../../styles/companyDetailView.css'
 
 // UI Libraries
+import DeleteIcon from '@material-ui/icons/Delete';
+import { IconButton } from '@material-ui/core';
 
 // Assets
 
@@ -41,6 +44,8 @@ const CompanyDetailView = ({
     const salaryLabel = 'Salary';
     const ratingLabel = 'Total Score';
     
+    const history = useHistory();
+
     useEffect(() => {
         const getOneCompany = async () => {
             try {
@@ -82,6 +87,16 @@ const CompanyDetailView = ({
         }
     }
 
+    const handleDelete = async () =>{
+        try {
+            await companyApi.deleteCompany(id);
+            history.push('/');
+            window.location.reload();
+        } catch (error: any) {
+            console.log("Error", error.response.data.message);
+        }
+    }
+
     return (
         <div>
             {company &&
@@ -91,6 +106,13 @@ const CompanyDetailView = ({
 
                         <div className="oneCompanyNameBig">
                             <a href={company[0].companyURL}> {company[0]?.companyName}</a>
+                            {currentUser.userName === 'gmolin' && 
+                            <div className="companyDelete">
+                                <IconButton onClick={handleDelete} aria-label="delete">
+                                    <DeleteIcon />
+                                </IconButton>
+                            </div>
+                        }
                         </div>
                         <div className="oneCompanyLocation">
                             {company[0]?.companyLocation}

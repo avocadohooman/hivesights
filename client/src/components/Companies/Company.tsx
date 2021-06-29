@@ -4,8 +4,10 @@ import React from 'react';
 
 // Data models 
 import { Company } from '../../models/companyModel';
-// API services
+import { User } from '../../models/userModel';
 
+// API services
+import companyApi from '../../services/companyApi';
 // CSS styles
 import '../../styles/company.css';
 // UI Libraries
@@ -14,9 +16,11 @@ import StarIcon from '@material-ui/icons/Star';
 // Assets
 
 const OneCompany = ({
-        company
+        company,
+        user
     }:{
-        company: Company
+        company: Company,
+        user: User
     }):JSX.Element => {
 
     const scoreStyle = {
@@ -31,6 +35,7 @@ const OneCompany = ({
     if (!company.reviews) {
         company.reviews = 0;
     }
+
     return (
         <div>
             <div className="oneCompanyLogoWrapper">
@@ -39,11 +44,15 @@ const OneCompany = ({
                 <div className="oneCompanyName">
                     {company.companyName}
                 </div>
+  
                 <div className="oneCompanyScoreWrapper">
                     {company.averageTotalScore && 
-                    <div className="oneCompanyScore"> {company.averageTotalScore}<span style={scoreStyle}>/5</span>
+                    <div className="oneCompanyScore">
+                    <StarIcon className="star"/> 
+                    {company.averageTotalScore}
+                    
                     </div>}   
-                    {company.averageTotalScore === null && <div className="oneCompanyScore">n/A</div>}   
+                    {company.averageTotalScore === null && <div className="oneCompanyScoreEmpty">n/A</div>}   
                 </div>
             </div>
             

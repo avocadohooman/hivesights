@@ -50,7 +50,7 @@ const tokenExtractor = (req: any, res: any, next: any) => {
 };
  
 const userExtractorCompanyRights = async (req: any, res: any, next: any) => {
-  if (process.env.NODE_ENV !== "server" && process.env.NODE_ENV !== "test") {
+  if (process.env.NODE_ENV !== "test") {
     const decodedToken: any = jwt.verify(req.token, process.env.SECRET as string);
     if (decodedToken.userName !== "gmolin") {
         return res.status(400).json({error: "Invalid rights"});
@@ -61,7 +61,7 @@ const userExtractorCompanyRights = async (req: any, res: any, next: any) => {
 
 const userExtractorReviewRights = async (req: any, res: any, next: any) => {
   const reviewId: string = req.params.id;
-  if (process.env.NODE_ENV !== "server" && process.env.NODE_ENV !== "test") {
+  if (process.env.NODE_ENV !== "test") {
     const userNameDb = await pool.query(`SELECT username FROM ${reviewTable} WHERE id = ($1)`, [reviewId]);
     const decodedToken: any = jwt.verify(req.token, process.env.SECRET as string);
     const userName = userNameDb.rows[0].username;    

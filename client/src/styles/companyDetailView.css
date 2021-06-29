@@ -19,9 +19,11 @@
     font-family: 'SimpleMono-Medium';
     font-size: 18px;
     position: absolute;
-    top: 60px;
+    top: 50px;
     left: 111px;
-    min-width: 200px;
+    min-width: 255px;
+    display: flex;
+    align-items: center;
 }
 
 .oneCompanyLocation{

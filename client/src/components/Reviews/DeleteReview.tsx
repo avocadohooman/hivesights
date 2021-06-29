@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 // React Libraris
 import React from 'react';
-
+import { useHistory } from 'react-router';
 // Components
 
 // Data models 
@@ -25,6 +25,8 @@ const DeleteReview = ({
     } : {  
         review: Review,
     }): JSX.Element => {
+
+    const history = useHistory();
 
     const handleDelete = async () =>{
         try {

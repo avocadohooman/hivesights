@@ -7,6 +7,7 @@ import OneCompany from './Company';
 
 // Data models 
 import { Company } from '../../models/companyModel';
+import { User } from '../../models/userModel';
 
 // API services
 
@@ -18,16 +19,18 @@ import '../../styles/company.css';
 // Assets
 
 const CompaniesWrapper = ({
-        companies
+        companies,
+        user
     }: {
-        companies: Company[]
+        companies: Company[],
+        user: User
     }): JSX.Element => {
     
     return (
         <div className="allCompanyWrapper">
             {companies.map(company =>
                 <Link className="oneCompanyWrapper oneCompanyLink" key={company.id} to={`/company/${company.id}`}>
-                    <OneCompany key={company.id} company={company}/>
+                    <OneCompany user={user} key={company.id} company={company}/>
                 </Link>
             )}
         </div>

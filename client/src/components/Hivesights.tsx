@@ -137,7 +137,7 @@ const Hivesights = ({
                     <Route exact path="/">
                         <KeyIndicatorsWrapper kpi={kpi}/>
                         <CompanyFilterWrapper handleCompanySearch={handleCompanySearch} handleCompanySelection={handleCompanySelection}/>
-                        <CompaniesWrapper companies={filteredCompanies}/>
+                        <CompaniesWrapper user={user} companies={filteredCompanies}/>
                     </Route>
                     <Route exact path="/company/:id" render={(props) => (
                         <CompanyDetailView currentUser={currentUser} id={props.match.params.id}/>
