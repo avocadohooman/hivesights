@@ -150,7 +150,7 @@ const postApiLimiter = rateLimit({
 });
 
 // Create new company
-companyRouter.post('/', middleware.userExtractor, async (req, res) => {
+companyRouter.post('/', middleware.userExtractorCompanyRights, async (req, res) => {
     try {
         const newCompany: NewCompany = companyParsing.parsingCompany(req.body);
         if (!await companyHelper.checkDuplicate(newCompany, companyTable)) {
@@ -166,7 +166,7 @@ companyRouter.post('/', middleware.userExtractor, async (req, res) => {
 });
 
 // Delete company
-companyRouter.delete('/:id', async (req, res) => {
+companyRouter.delete('/:id', middleware.userExtractorCompanyRights, async (req, res) => {
     const id: string = req.params.id;
     try {
         if (!await companyHelper.checkIfExists(id, companyTable)) {

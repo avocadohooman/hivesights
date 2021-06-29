@@ -1,5 +1,9 @@
 import logger from '../utils/logger';
 import jwt from 'jsonwebtoken';
+import pool from '../db';
+
+const reviewTable = process.env.NODE_END === 'production' ? 'review' : 'review_test';
+const companyTable = process.env.NODE_END === 'production' ? 'company' : 'company_test';
 
 const requestLogger = (request: any, response: any, next: any) => {
     logger.info('Method:', request.method);
@@ -40,11 +44,12 @@ const tokenExtractor = (req: any, res: any, next: any) => {
     req.token = authorization.substr(7);
   } else {
     req.token = null;
+    return res.status(400).json({error: "Invalid or expired token"});
   }
   next();
 };
  
-const userExtractor = async (req: any, res: any, next: any) => {
+const userExtractorCompanyRights = async (req: any, res: any, next: any) => {
   if (process.env.NODE_ENV !== "server" && process.env.NODE_ENV !== "test") {
     const decodedToken: any = jwt.verify(req.token, process.env.SECRET as string);
     if (decodedToken.userName !== "gmolin") {
@@ -54,10 +59,25 @@ const userExtractor = async (req: any, res: any, next: any) => {
   next();
 }
 
+const userExtractorReviewRights = async (req: any, res: any, next: any) => {
+  const reviewId: string = req.params.id;
+  if (process.env.NODE_ENV !== "server" && process.env.NODE_ENV !== "test") {
+    const userNameDb = await pool.query(`SELECT username FROM ${reviewTable} WHERE id = ($1)`, [reviewId]);
+    const decodedToken: any = jwt.verify(req.token, process.env.SECRET as string);
+    const userName = userNameDb.rows[0].username;    
+    if (userName !== decodedToken.userName || !decodedToken) {
+      return res.status(400).json({error: 'Invalid rights'});
+    }
+  }
+  next();
+}
+
+
 export default {
     requestLogger,
     unknownEndpoint,
     errorHandler,
     tokenExtractor,
-    userExtractor
+    userExtractorCompanyRights,
+    userExtractorReviewRights
 };
