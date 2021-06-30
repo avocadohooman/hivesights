@@ -40,16 +40,24 @@ jobs:
         run: npm run test:int
         env:
           DATABASE_URL: ${{secrets.DATABASE_URL}}
-      # - name: Run Jest Review Tests
-      #   working-directory: ./server
-      #   run: npm run test:int review.test.ts
-      #   env:
-      #     DATABASE_URL: ${{secrets.DATABASE_URL}}
-      # - name: Run Jest KPI Tests
-      #   working-directory: ./server
-      #   run: npm run test:int kpi.test.ts
-      #   env:
-      #     DATABASE_URL: ${{secrets.DATABASE_URL}}
+  deployment:
+    needs: [integration_test]
+    name: Heroku Deployment
+    if: ${{ github.event_name == 'push' && contains(join(github.event.commits.*.message, ' '), '#deploy') }}
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "hivesights" #Must be unique in Heroku
+          heroku_email: "gerhard@minimumbadass.com"
+          healthcheck: "https://hivesights.herokuapp.com/health"
+          checkstring: "ok"
+          delay: 10
   bump_version:
     needs: [integration_test]
     name: Bump version and push tag

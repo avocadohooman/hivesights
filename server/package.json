@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",
-    "build:client": "rm -rf build && cd ../client && npm run build --prod && cp -r build ../server",
+    "build:client": "rm -rf build && cd ../client && npm run build --prod && cp -r build ../",
     "start": "ts-node index.ts",
     "start:server-dev": "NODE_ENV=server ts-node-dev index.ts",
     "start:dev": "NODE_ENV=development ts-node-dev index.ts",

@@ -1,0 +1,5 @@
+{
+    "scripts": {
+    "start:prod": "cd ./server && NODE_ENV=production ts-node index.ts"
+  }
+}
