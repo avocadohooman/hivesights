@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import { User } from '../types/user';
 
 dotenv.config();
-const backendURI = 'http://localhost:3000';
+const backendURI = process.env.NODE_ENV === 'production' ? 'https://hivesights.herokuapp.com/' : 'http://localhost:3000';
 const redirectURI = `${backendURI}/api/auth/42/callback`;
 const userToken: any = {};
 
