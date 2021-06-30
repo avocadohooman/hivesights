@@ -3,7 +3,7 @@ import authServices from '../services/42Services';
 import { User } from '../types/user';
 
 const authRouter = express.Router();
-const FRONTEND_URL = process.env.NODE_ENV === 'production' ? 'http://localhost:3000/' : process.env.FRONTEND_URL_DEV;
+const FRONTEND_URL = process.env.NODE_ENV === 'production' ? 'https://hivesights.herokuapp.com/' : process.env.FRONTEND_URL_DEV;
 
 authRouter.get('/42', (req, res) => {
     try {
