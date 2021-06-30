@@ -107,3 +107,4 @@ build
 db/
 
 server/build
+cypress.env.json

@@ -3,6 +3,7 @@ import authServices from '../services/42Services';
 import { User } from '../types/user';
 
 const authRouter = express.Router();
+const FRONTEND_URL = process.env.NODE_ENV === 'production' ? 'http://localhost' : process.env.FRONTEND_URL_DEV;
 
 authRouter.get('/42', (req, res) => {
     try {
@@ -32,7 +33,7 @@ authRouter.get('/42/callback', async (req, res) => {
         }
         console.log("User for Token", userForToken);
         const key = authServices.setUserToken(userForToken);
-        return res.redirect(`http://localhost:3002?auth=${key}`);
+        return res.redirect(`${FRONTEND_URL}?auth=${key}`);
     } catch (error: any) {
         console.log(error.message);
     }

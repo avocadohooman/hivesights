@@ -3,3 +3,4 @@ db
 client
 .eslintrc.cjs
 tests/*
+cypress/*

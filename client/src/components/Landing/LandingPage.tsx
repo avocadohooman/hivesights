@@ -31,7 +31,7 @@ const LandingPage = () => {
 	return (
 		<div className="landingPageContainer">
 			<div className="title">Hivesights</div>
-			<button className="login" onClick={login42}>Sign In</button>
+			<button id="signIn" className="login" onClick={login42}>Sign In</button>
 		</div>
 	);
 }

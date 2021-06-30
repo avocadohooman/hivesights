@@ -27,6 +27,17 @@ const App = () => {
   const history = useHistory();
 
   useEffect(() => {
+	const checkTokenExpiration = () => {
+		const token = localStorage.getItem('token');
+		if (token) {
+			const { exp }: any = jwt_decode(token);
+			const expirationTime = (exp * 1000) - 60000;
+			if (Date.now() >= expirationTime) {
+				localStorage.removeItem('token');
+				setUser(undefined);
+			}
+		}
+	}
 	const checkToken = async () => {
 		let token = localStorage.getItem('token');
 		if (!token && location.search.startsWith('?auth=')) {
@@ -50,22 +61,10 @@ const App = () => {
 			}
 		}
 	};
-	const checkTokenExpiration = () => {
-		const token = localStorage.getItem('token');
-		if (token) {
-			const { exp }: any = jwt_decode(token);
-			const expirationTime = (exp * 1000) - 60000;
-			if (Date.now() >= expirationTime) {
-				localStorage.removeItem('token');
-				setUser(undefined);
-			}
-		}
-	}
-	checkToken();
 	setInterval(() => {
 		checkTokenExpiration();
 	}, 10000);
-
+	checkToken();
   }, []);
 
 

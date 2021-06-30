@@ -10,6 +10,7 @@ import CompanyFilterWrapper from './Filter/companyFilterWrapper';
 import CompanyDetailView from './Companies/CompanyDetailView';
 import AddReview from './AddReview/AddReview';
 import AddCompany from './AddCompany/AddCompany';
+import ReviewHeaders from './Reviews/ReviewHeader';
 
 // Data models 
 import { Company } from '../models/companyModel';
