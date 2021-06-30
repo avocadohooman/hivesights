@@ -16,8 +16,8 @@ app.use(express.json({limit: '10kb'}));
 
 
 // when client is ready, activate this line
-if (process.env.NODE_ENV !== "server") {
-    app.use(express.static('../build'));
+if (process.env.NODE_ENV !== 'server') {
+    app.use(express.static('./build'));
 }
 
 // this middleware needs to be used before routes are defined
@@ -45,9 +45,9 @@ app.use('/api/reviews', reviewRouter);
 // API Router for kpis
 app.use('/api/kpi', kpiRouter);
 
-app.get('/health', async (req, res) => {
+app.get('/health', (req, res) => {
     res.send('ok');
-})
+});
 
 // this needs to be after the routes are defined
 app.use(middleware.unknownEndpoint);
