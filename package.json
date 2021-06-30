@@ -1,5 +1,6 @@
 {
     "scripts": {
-      "start:prod": "cd ./server && npm install && NODE_ENV=production ts-node index.ts"
+      "start:prod": "cd server && NODE_ENV=production ts-node index.ts",
+      "heroku-postbuild": "cd server && npm install"
   }
 }
