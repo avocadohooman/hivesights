@@ -103,8 +103,7 @@ dist
 # TernJS port file
 .tern-port
 
-build
 db/
 
-server/build
+client/build
 cypress.env.json
