@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import express from 'express';
 import authServices from '../services/42Services';
 import { User } from '../types/user';
@@ -30,7 +34,7 @@ authRouter.get('/42/callback', async (req, res) => {
             imageUrl: user.imageUrl,
             intraUrl: user.intraUrl,
             internshipValidated: user.internshipValidated,
-        }
+        };
         console.log("User for Token", userForToken);
         const key = authServices.setUserToken(userForToken);
         return res.redirect(`${FRONTEND_URL}?auth=${key}`);
