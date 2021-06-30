@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import express from 'express';
 import pool from '../db';
 import { NewReview, Review, ReviewDB } from '../types/review';
@@ -6,12 +10,11 @@ import companyServices from '../services/companyServices';
 import reviewServices from '../services/reviewServices';
 import reviewQueries from '../utils/reviewDBQueries';
 import middleware from '../middleware/middleware';
-import jwt from 'jsonwebtoken';
 
 const reviewRouter = express.Router();
 // Setting up table depending on NODE_ENV
-const reviewTable = process.env.NODE_END === 'production' ? 'review' : 'review_test';
-const companyTable = process.env.NODE_END === 'production' ? 'company' : 'company_test';
+const reviewTable = process.env.NODE_ENV === 'production' ? 'review' : 'review_test';
+const companyTable = process.env.NODE_ENV === 'production' ? 'company' : 'company_test';
 console.log(`Using table: ${reviewTable}`);
 
 const reviewColumns = reviewQueries.reviewColumns;
@@ -19,7 +22,7 @@ const reviewColumns = reviewQueries.reviewColumns;
 // Get all reviews in DB
 reviewRouter.get('/', async (req, res) => {
     try {
-        const allReviewsDB = await pool.query(`SELECT * FROM ${reviewTable}`);
+        const allReviewsDB: any = await pool.query(`SELECT * FROM ${reviewTable}`);
         let allReviews: Review[] = [];
         allReviews = allReviewsDB.rows.map((row: ReviewDB) => ({
             id: row.id,
