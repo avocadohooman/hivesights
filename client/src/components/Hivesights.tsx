@@ -62,8 +62,8 @@ const Hivesights = ({
                 companies.sort((function(a: Company, b: Company) {
                     return a.companyName > b.companyName ? 1 : -1; 
                 }));
-                setCompanies(companies);
-                setCompanyFilter(companies);
+                setCompanies([]);
+                setCompanyFilter([]);
                 // console.log("Companies", companies);
             } catch (error: any) {
                 console.log(error);
@@ -138,7 +138,7 @@ const Hivesights = ({
                 <Route exact path="/">
                     <KeyIndicatorsWrapper kpi={kpi} setKpi={setKpi}/>
                     <CompanyFilterWrapper handleCompanySearch={handleCompanySearch} handleCompanySelection={handleCompanySelection}/>
-                    <CompaniesWrapper user={user} companies={filteredCompanies}/>
+                    <CompaniesWrapper user={user} companies={filteredCompanies} />
                 </Route>
                 <Route exact path="/company/:id" render={(props) => (
                     <CompanyDetailView currentUser={currentUser} id={props.match.params.id}/>

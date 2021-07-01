@@ -59,7 +59,7 @@ jobs:
           checkstring: "ok"
           delay: 10
   bump_version:
-    needs: [integration_test]
+    needs: [integration_test, deployment]
     name: Bump version and push tag
     runs-on: ubuntu-18.04
     steps:

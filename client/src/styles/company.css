@@ -97,8 +97,9 @@
     color: inherit;
 }
 
-.companyDelete {
-
+.noCompanies {
+    width: 100%;
+    border: 1px solid #ADD2DD;
 }
 
 @media (max-width: 768px) {
