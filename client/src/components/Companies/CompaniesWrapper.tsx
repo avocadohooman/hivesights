@@ -33,7 +33,7 @@ const CompaniesWrapper = ({
     const [noData, setNoData] = useState<boolean>(false);
 
     setTimeout(() => {
-        if (!companies || companies.length === 0) {
+        if (companies.length === 0) {
             setNoData(true);
         }
     }, 5000);
@@ -41,12 +41,12 @@ const CompaniesWrapper = ({
     return (
         <div className="allCompanyWrapper">
             {!noData && companies.length === 0 && loadingArray.map(item =><div key={item.id} className="oneCompanyWrapperSkeleton"><Skeleton  variant="rect" width={370} height={170} /></div>)}
-            {!noData && companies.map(company =>
+            {companies.map(company =>
                 <Link className="oneCompanyWrapper oneCompanyLink" key={company.id} to={`/company/${company.id}`}>
                     <OneCompany user={user} key={company.id} company={company}/>
                 </Link>
             )}
-            {noData && <NoCompanies />}
+            {noData && companies.length === 0 && <NoCompanies />}
         </div>
     );
 };

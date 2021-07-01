@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",
-    "build:client": "rm -rf build && cd ../client && npm run build --prod && cp -r build ../",
+    "build:client": "rm -rf build && cd ./client && npm run build --prod && cp -r build ../",
     "start": "ts-node index.ts",
     "start:server-dev": "NODE_ENV=server ts-node-dev server/index.ts",
     "start:dev": "NODE_ENV=development ts-node-dev server/index.ts",
@@ -16,7 +16,7 @@
     "eslint-file:": "eslint",
     "eslint-file-fix:": "eslint --fix",
     "deploy": "git add . && git commit -m deploying && git push",
-    "deploy:full": "npm run build-client && git add . && git commit -m uibuild_deploy && npm run deploy",
+    "deploy:full": "npm run build:client && git add . && git commit -m \"#deploy uibuild_deploy\" && npm run deploy",
     "cypress:open": "npx cypress open",
     "test:e2e": "NODE_ENV=test cypress run",
     "test:int": "NODE_ENV=test jest --verbose --runInBand --detectOpenHandles",

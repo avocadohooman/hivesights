@@ -21,7 +21,9 @@ const NoCompanies = (): JSX.Element => {
 
     return (
         <div className="noCompanies">
-            No companies available :(
+            <div>No companies available :(  </div>
+            <div>The bees are working hard to resolve this issue.</div>
+            <div>If this state remains, please contact <a href="mailto: gmolin@student.hive.fi">gmolin@student.hive.fi</a> </div>
         </div>
     )
 }

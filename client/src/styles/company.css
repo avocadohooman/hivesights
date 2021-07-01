@@ -98,8 +98,15 @@
 }
 
 .noCompanies {
+    font-family: 'SimpleNorm-Regular';
     width: 100%;
     border: 1px solid #ADD2DD;
+    height: 500px;
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 @media (max-width: 768px) {

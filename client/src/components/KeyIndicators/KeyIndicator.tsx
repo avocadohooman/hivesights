@@ -50,7 +50,7 @@ const KeyIndicator = ({keyIndicator, label, average}: {keyIndicator: number, lab
             {label !== 'Total Score' && keyIndicator !== -1 &&
                 <div className="keyIndicator">{keyIndicatorValue} </div>
             }
-            {keyIndicator !== -1 && <div className="label">{keyIndicatorLabel}</div>}
+            <div className="label">{keyIndicatorLabel}</div>
         </div>
     );
 };

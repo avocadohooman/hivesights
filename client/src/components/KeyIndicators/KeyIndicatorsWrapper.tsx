@@ -34,7 +34,6 @@ const KeyIndicatorsWrapper = ({
     setTimeout(() => {
         if (kpi?.reviews === null && kpi?.averageDuration === null  && kpi?.averageSalary === null  && kpi?.averageScore === null) {
             setKpi({reviews: -1, averageScore: -1, averageDuration: -1, averageSalary: -1});
-            console.log('No KPIs available');
         }
     }, 5000);
     return (

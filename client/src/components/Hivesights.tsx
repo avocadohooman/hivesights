@@ -58,13 +58,12 @@ const Hivesights = ({
         }
         const getCompanies = async() => {
             try {
-                const companies: Company[] = await companyApi.getAllCompanies();
-                companies.sort((function(a: Company, b: Company) {
+                const getCompanies: Company[] = await companyApi.getAllCompanies();
+                getCompanies.sort((function(a: Company, b: Company) {
                     return a.companyName > b.companyName ? 1 : -1; 
                 }));
-                setCompanies([]);
-                setCompanyFilter([]);
-                // console.log("Companies", companies);
+                setCompanies(getCompanies);
+                setCompanyFilter(getCompanies);
             } catch (error: any) {
                 console.log(error);
             }
