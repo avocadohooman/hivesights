@@ -23,7 +23,7 @@ const ReviewOverall = ({
     
     return (
         <div className="companyReviewOverallQuote">"{overall}"</div>
-    )
-}
+    );
+};
 
 export default ReviewOverall;

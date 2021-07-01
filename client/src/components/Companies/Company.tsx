@@ -25,7 +25,7 @@ const OneCompany = ({
 
     const scoreStyle = {
         fontSize: '14px',
-    }
+    };
     if (!company.averageDuration) {
         company.averageDuration = 0;
     }
@@ -62,7 +62,7 @@ const OneCompany = ({
                 <div>{company.averageDuration} Months<div>Avg. Duration</div></div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default OneCompany;

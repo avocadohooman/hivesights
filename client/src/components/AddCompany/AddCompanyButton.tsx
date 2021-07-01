@@ -86,7 +86,7 @@ const AddCompanyButton = ({
                 </Button>
             }
         </div>
-    )
-}
+    );
+};
 
 export default AddCompanyButton;

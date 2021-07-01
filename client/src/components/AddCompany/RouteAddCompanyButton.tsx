@@ -40,7 +40,7 @@ const RouteAddCompanyButton = () => {
 
     const goToAddCompanyRoute = () => {
         history.push('/newCompany/');
-    }
+    };
     const classes = useStyles();
 
     return (
@@ -51,7 +51,7 @@ const RouteAddCompanyButton = () => {
         onClick={goToAddCompanyRoute}>
             Add A Company
         </Button>
-    )
-}
+    );
+};
 
 export default RouteAddCompanyButton;

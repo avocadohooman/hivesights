@@ -25,6 +25,6 @@ const ReadFullReview = ({
     return (
         <div onClick={handleExpand} className="companyReviewHandleText">Read Full Review</div>
     );
-}
+};
 
 export default ReadFullReview;

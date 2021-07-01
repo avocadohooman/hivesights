@@ -81,8 +81,8 @@ const AddReview = ({
     const [postError, setPostError] = useState<boolean>(false);
     
     const [alert, setAlertMessage] = useState<string>("");
-    const [alertType, setAlertType] = useState<string>("")
-    const [alertTitle, setAlertTitle] = useState<string>("")
+    const [alertType, setAlertType] = useState<string>("");
+    const [alertTitle, setAlertTitle] = useState<string>("");
 
     const company = companies.find(company => company.id === id);
 
@@ -109,7 +109,7 @@ const AddReview = ({
                 upVotes: 0,
                 downVoteUsers: [],
                 downVotes: 0,
-            }
+            };
             setNewReview(review);
             try {
                 await reviewApi.createReview(id, review);
@@ -129,7 +129,7 @@ const AddReview = ({
             }
         }
         setBtnDsiable(false);
-    }
+    };
 
     const validateData = () : number => {
         const amountOfWordsPros = pros.split(' ');
@@ -156,8 +156,8 @@ const AddReview = ({
             setSalaryErrorMessage('Invalid amount for salary: can\'t be negative or too high');
             return 0;
         }
-        return 1
-    }
+        return 1;
+    };
 
     const handleOverallScore = (event: ChangeEvent<{}>, newValue: number | null) => {
         event.preventDefault();
@@ -165,7 +165,7 @@ const AddReview = ({
         if (newValue) {
             setOverallScore(newValue);
         }
-    }
+    };
 
     const handleRecruitment = (event: ChangeEvent<{}>, newValue: number | null) => {
         event.preventDefault();
@@ -173,49 +173,49 @@ const AddReview = ({
         if (newValue) {    
             setRecruitment(newValue);
         }
-    }
+    };
 
     const handleOnboarding = (event: ChangeEvent<{}>, newValue: number | null) => {
         event.preventDefault();
         if (newValue) {    
             setOnboarding(newValue);
         }
-    }
+    };
 
     const handleMentoring = (event: ChangeEvent<{}>, newValue: number | null) => {
         event.preventDefault();
         if (newValue) {    
             setMentoring(newValue);
         }
-    }
+    };
 
     const handleLearning = (event: ChangeEvent<{}>, newValue: number | null) => {
         event.preventDefault();
         if (newValue) {    
             setLearning(newValue);
         }
-    }
+    };
 
     const handlePerks= (event: ChangeEvent<{}>, newValue: number | null) => {
         event.preventDefault();
         if (newValue) {    
             setPerks(newValue);
         }
-    }
+    };
 
     const handleCulture = (event: ChangeEvent<{}>, newValue: number | null) => {
         event.preventDefault();
         if (newValue) {    
             setCulture(newValue);
         }
-    }
+    };
 
     const handleCodingPractices = (event: ChangeEvent<{}>, newValue: number | null) => {
         event.preventDefault();
         if (newValue) {    
             setCodingPractices(newValue);
         }
-    }
+    };
 
     const handleOverallHeadline = (event: OnChangeEvent) => {
         event.preventDefault();
@@ -228,27 +228,27 @@ const AddReview = ({
         }
         setOverallHeadline(event.target.value);
         // console.log('Overall headline', overallHeadline);
-    }
+    };
 
     const handlePros = (event: OnChangeEvent) => {
         event.preventDefault();
         setProsError(false);
         setProsErrorMessage('');
         setPros(event.target.value);
-    }
+    };
 
     const handleCons = (event: OnChangeEvent) => {
         event.preventDefault();
         setConsError(false);
         setConsErrorMessage('');
         setCons(event.target.value);
-    }
+    };
 
     const handleDuration = (value: any) => {
         if (isNumber(value.props.value)) { 
             setDuration(value.props.value);
         }
-    }
+    };
 
     const isNumber = (value: unknown) : value is number => {
         return typeof value === "number" || value instanceof Number;
@@ -259,7 +259,7 @@ const AddReview = ({
         if (event.target.value) { 
             setSalary(Number(event.target.value));
         }
-    }
+    };
 
     return (
         <div className="addReviewWrapper">
@@ -316,7 +316,7 @@ const AddReview = ({
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default AddReview;

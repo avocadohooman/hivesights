@@ -25,13 +25,13 @@ const Avatar = ({
 
     const headerAvatarStyle = {
         backgroundImage: `url(${avatarImageUrl})`,
-    }
+    };
     return (
         <div>
             {size === 's' && <div className="headerAvatarWrapperSmall" style={headerAvatarStyle}></div>}
             {size === 'm' && <div className="headerAvatarWrapperMedium" style={headerAvatarStyle}></div>}
         </div>
-    )
-}
+    );
+};
 
 export default Avatar;

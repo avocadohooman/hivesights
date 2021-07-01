@@ -48,7 +48,7 @@ const AddReviewAlert = ({
                 {message}
             </Alert>}
         </div>
-    )
-}
+    );
+};
 
 export default AddReviewAlert;

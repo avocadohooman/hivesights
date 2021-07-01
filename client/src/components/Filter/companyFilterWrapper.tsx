@@ -64,6 +64,6 @@ const CompanyFilterWrapper = ({
 
         </div>
     );
-}
+};
 
 export default CompanyFilterWrapper;

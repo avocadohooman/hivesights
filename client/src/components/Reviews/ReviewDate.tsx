@@ -31,7 +31,7 @@ const ReviewDate = ({
             {reviewDate}
         </div>
 
-    )
-}
+    );
+};
 
 export default ReviewDate;

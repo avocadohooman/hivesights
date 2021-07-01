@@ -12,7 +12,7 @@ import { Review } from '../../models/reviewModel';
 // CSS styles
 import '../../styles/companyReview.css';
 import '../../styles/company.css';
-import '../../styles/companyDetailView.css'
+import '../../styles/companyDetailView.css';
 
 // UI Libraries
 import Typography from '@material-ui/core/Typography';
@@ -89,7 +89,7 @@ const ReviewSubRating = ({
                 </Typography>
             </HtmlTooltip>
         </div>
-    )
-}
+    );
+};
 
 export default ReviewSubRating;

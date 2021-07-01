@@ -20,7 +20,7 @@ const AddCompanyHeader = () => {
     const header = `Create a new Company`;
     return (
         <div className="addCompanyHeader">{header}</div>
-    )
-}
+    );
+};
 
 export default AddCompanyHeader;

@@ -43,7 +43,7 @@ const CancelReview = ({
 
     const cancelReviewCreation = () => {
         history.push(`/company/${companyId}`);
-    }
+    };
 
     const classes = useStyles();
 
@@ -55,7 +55,7 @@ const CancelReview = ({
         onClick={cancelReviewCreation}>
             Cancel
         </Button>
-    )
-}
+    );
+};
 
 export default CancelReview;

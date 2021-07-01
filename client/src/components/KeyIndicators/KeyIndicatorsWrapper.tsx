@@ -5,7 +5,7 @@ import React from 'react';
 import KeyIndicator from './KeyIndicator';
 
 // Data models 
-import { StateKpi } from '../../models/kpiModel';
+import { SetKPI, StateKpi } from '../../models/kpiModel';
 import { Skeleton } from '@material-ui/lab';
 
 // API services
@@ -19,16 +19,24 @@ import { Skeleton } from '@material-ui/lab';
 
 
 const KeyIndicatorsWrapper = ({
-        kpi
+        kpi,
+        setKpi
     }: {
-        kpi: StateKpi | undefined
+        kpi: StateKpi | undefined,
+        setKpi: SetKPI
     }): JSX.Element => {
 
     const durationLabel = 'Duration';
     const salaryLabel = 'Salary';
     const ratingLabel = 'Total Score';
-    const reviewLabels = 'Review(s) written'
+    const reviewLabels = 'Review(s) written';
 
+    setTimeout(() => {
+        if (kpi?.reviews === null && kpi?.averageDuration === null  && kpi?.averageSalary === null  && kpi?.averageScore === null) {
+            setKpi({reviews: -1, averageScore: -1, averageDuration: -1, averageSalary: -1});
+            console.log('No KPIs available');
+        }
+    }, 5000);
     return (
         <div className="keyIndicatorsWrapper ">
             {kpi?.reviews 
@@ -68,7 +76,7 @@ const KeyIndicatorsWrapper = ({
                 </div>
             }
         </div>
-    )
-}
+    );
+};
 
 export default KeyIndicatorsWrapper;

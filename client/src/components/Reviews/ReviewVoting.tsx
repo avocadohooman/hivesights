@@ -40,7 +40,7 @@ const ReviewVoting = ({
             return totalVotes;
         }
         return 0;
-    }
+    };
     const [votes, setVotes] = useState<number>(getVotes(review.upVoteUsers.length - review.downVoteUsers.length));
 
     const handleUpVote = () => {
@@ -55,7 +55,7 @@ const ReviewVoting = ({
         setUserUpVote(updatedReview.upVoteUsers.find(user => user === currentUser.userName));
         setVotes(getVotes(updatedReview.upVoteUsers.length - updatedReview.downVoteUsers.length));
         handleVoting(review.id, updatedReview);
-    }
+    };
 
     const handleDownVote = () => {
         const updatedReview: Review = {...review};
@@ -69,7 +69,7 @@ const ReviewVoting = ({
         setUserDownVote(updatedReview.downVoteUsers.find(user => user === currentUser.userName));
         setVotes(getVotes(updatedReview.upVoteUsers.length - updatedReview.downVoteUsers.length));
         handleVoting(review.id, updatedReview);
-    }
+    };
 
     const totalVotesLabel = `${votes} student(s) found this review helpful`;
 
@@ -103,7 +103,7 @@ const ReviewVoting = ({
                 {totalVotesLabel}
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default ReviewVoting;

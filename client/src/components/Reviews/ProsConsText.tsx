@@ -27,7 +27,7 @@ const ProConstText = ({
         <div className="companyReviewProConstText" >
             {text}
         </div>
-    )
-}
+    );
+};
 
 export default ProConstText;

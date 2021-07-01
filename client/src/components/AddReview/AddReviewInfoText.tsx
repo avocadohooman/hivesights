@@ -44,7 +44,7 @@ const AddReviewInfoText = () => {
                 {infoText.info.outro}
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default AddReviewInfoText;

@@ -24,7 +24,7 @@ const AddReviewHeader = ({
     const header = `Write a Review for ${companyName}`;
     return (
         <div className="addReviewHeader">{header}</div>
-    )
-}
+    );
+};
 
 export default AddReviewHeader;

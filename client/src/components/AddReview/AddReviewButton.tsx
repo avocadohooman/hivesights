@@ -87,7 +87,7 @@ const AddReviewButton = ({
                 </Button>
             }
         </div>
-    )
-}
+    );
+};
 
 export default AddReviewButton;

@@ -15,8 +15,8 @@ app.use(cors());
 app.use(express.json({limit: '10kb'}));
 
 
-// when client is ready, activate this line
-if (process.env.NODE_ENV !== 'server') {
+// when client is in production, activate this line
+if (process.env.NODE_ENV === 'production') {
     app.use(express.static('./build'));
 }
 

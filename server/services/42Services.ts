@@ -33,7 +33,7 @@ const getUserToken = (req: any, res: any) => {
     userToken[req.params.key] = null;
     console.log("Got token", token);
     return res.status(200).json({token});
-}
+};
 
 const getAuthorizationToken = async (code: any, state: any) => {
     console.log('STATE', state, code);
@@ -61,7 +61,7 @@ const getUser = async (token: any) => {
             },
         });
         const internship = data.projects_users.filter((project: { id: number; status: string, project: {id: number}}) => project.project.id === 826);
-        let internshipValidated: boolean = false;
+        let internshipValidated = false;
         if (internship[0].status === 'finished') {
             internshipValidated = true;
         }

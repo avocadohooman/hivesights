@@ -46,7 +46,7 @@ const CompanySearch = ({
                 />
             </FormControl>
         </div>
-    )
-}
+    );
+};
 
 export default CompanySearch;

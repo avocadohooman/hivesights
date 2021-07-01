@@ -3,4 +3,4 @@ export type KPI = {
     averageDuration: number,
     averageScore: number,
     reviews: number
-}
+};

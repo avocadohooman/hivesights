@@ -1,5 +1,5 @@
 // React Libraris
-import React from 'react'
+import React from 'react';
 
 // Components
 
@@ -39,23 +39,20 @@ const KeyIndicator = ({keyIndicator, label, average}: {keyIndicator: number, lab
     return (
         
         <div className="keyIndicatorWrapper">
-            {!keyIndicator && <div className="oneCompanyScore">n/A</div>
+            {(keyIndicator === -1 || !keyIndicator) && <div className="oneCompanyScore">n/A</div>
             }
-            {keyIndicator === undefined && 
-                <CircularProgress /> 
-            }
-            {label === 'Total Score' && keyIndicator && 
+            {label === 'Total Score' && keyIndicator && keyIndicator !== -1 &&
                 <div className="keyIndicatorScore">
                     <StarIcon className="star"/>
                     <div className="keyIndicator">{keyIndicatorValue}<span className="labelSmall">/5</span></div>
                 </div>
             }
-            {label !== 'Total Score' && 
+            {label !== 'Total Score' && keyIndicator !== -1 &&
                 <div className="keyIndicator">{keyIndicatorValue} </div>
             }
-            <div className="label">{keyIndicatorLabel}</div>
+            {keyIndicator !== -1 && <div className="label">{keyIndicatorLabel}</div>}
         </div>
-    )
-}
+    );
+};
 
 export default KeyIndicator;

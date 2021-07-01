@@ -1,6 +1,7 @@
 node_modules
 db
-client/*
+./client/*
+./*
 .eslintrc.cjs
 server/tests/*
 server/cypress/*

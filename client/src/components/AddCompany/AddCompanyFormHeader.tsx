@@ -31,8 +31,8 @@ const AddCompanyFormHeader = ({
     };
     return (
         <div className="companyAddCompanyFormHeader" style={headerColor}>{header}</div>
-    )
-}
+    );
+};
 
 
 export default AddCompanyFormHeader;

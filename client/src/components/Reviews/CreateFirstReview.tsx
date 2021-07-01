@@ -14,7 +14,7 @@ import companyApi from '../../services/companyApi';
 import reviewApi from '../../services/reviewApi';
 
 // CSS styles
-import '../../styles/companyDetailView.css'
+import '../../styles/companyDetailView.css';
 
 // UI Libraries
 import EmojiNatureIcon from '@material-ui/icons/EmojiNature';
@@ -45,7 +45,7 @@ const CreateFirstReview = ({
             <CreateReviewButton currentUser={currentUser} companyId={companyId} />
             {!currentUser.internshipValidated && <Alert severity="info">{reviewDisabledLabel}</Alert>}
         </div>
-    )
-}
+    );
+};
 
 export default CreateFirstReview;

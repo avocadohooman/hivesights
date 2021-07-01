@@ -37,14 +37,14 @@ const Navbar = ({
     const handleLogout = () => {
         localStorage.removeItem('token');
         setUser(undefined);
-    }   
+    };   
 
     const handleGoHome = () => {
         history.push('/');
         // Hotfix: when returning to main page, filtered selection is still rendered 
         // which requires to manually reload page in order to get all companies again
         window.location.reload();
-    }
+    };
 
     return (
         <div className="navbar">
@@ -58,7 +58,7 @@ const Navbar = ({
                 </Tooltip>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Navbar;

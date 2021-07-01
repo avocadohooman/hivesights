@@ -23,7 +23,7 @@ const UserName = ({
     
     return (
         <div className="headerUserName">{userName}</div>
-    )
-}
+    );
+};
 
 export default UserName;

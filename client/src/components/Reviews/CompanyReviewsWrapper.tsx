@@ -34,8 +34,8 @@ const CompanyReviewsWrapper = ({
                 <CompanyReview key={review.id} currentUser={currentUser} handleVoting={handleVoting} review={review}/>
             )}
         </div>
-    )
-}
+    );
+};
 
 
 export default CompanyReviewsWrapper;

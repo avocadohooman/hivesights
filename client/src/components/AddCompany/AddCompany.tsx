@@ -48,7 +48,7 @@ const AddCompany = () => {
             companyLocation: companyLocation,
             companyURL: companyWebsite,
             logoURL: companyLogo
-        }
+        };
         setNewCompany(company);
         try {
             await companyApi.createCompany(company);
@@ -60,32 +60,32 @@ const AddCompany = () => {
             console.log('Error: ', error.response.data.error);
         }
         setBtnDsiable(false);
-    }
+    };
 
     const handleCompanyName = (event: OnChangeEvent) => {
         event.preventDefault();
         setCompanyName(event.target.value);
-    }
+    };
 
     const handleCompanyDescription = (event: OnChangeEvent) => {
         event.preventDefault();
         setCompanyDescription(event.target.value);
-    }
+    };
     
     const handleCompanyLogo = (event: OnChangeEvent) => {
         event.preventDefault();
         setCompanyLogo(event.target.value);
-    }
+    };
 
     const handleCompanyWebsite = (event: OnChangeEvent) => {
         event.preventDefault();
         setCompanyWebsite(event.target.value);
-    }
+    };
 
     const handleCompanyLocation = (event: OnChangeEvent) => {
         event.preventDefault();
         setCompanyLocation(event.target.value);
-    }
+    };
 
     return (
         <div className="addCompanyWrapper">
@@ -113,8 +113,8 @@ const AddCompany = () => {
             </div>
 
         </div>
-    )
-}
+    );
+};
 
 
 export default AddCompany;

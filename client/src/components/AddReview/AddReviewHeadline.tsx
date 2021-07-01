@@ -46,7 +46,7 @@ const AddReaviewHeadline = ({
                 }}
             />
         </div>
-    )
-}
+    );
+};
 
 export default AddReaviewHeadline;

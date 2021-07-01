@@ -58,7 +58,7 @@ const AddReviewDuration = ({
                 <MenuItem value={12}>12 Months</MenuItem>
             </Select>
       </FormControl>
-    )
-}
+    );
+};
 
 export default AddReviewDuration;

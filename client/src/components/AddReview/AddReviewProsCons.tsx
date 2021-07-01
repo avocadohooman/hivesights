@@ -46,7 +46,7 @@ return (
             }}
         />
     </div>
-)
-}
+);
+};
 
 export default AddReviewProsCons;

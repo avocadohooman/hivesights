@@ -16,7 +16,7 @@ import '../../styles/landingPage.css';
 // Assets
 
 
-const LandingPage = () => {
+const LandingPage = (): JSX.Element => {
 
 	const login42 = async () => {
 		try {
@@ -26,7 +26,7 @@ const LandingPage = () => {
 		} catch (error: any) {
 			console.log(error.message);
 		}
-	}
+	};
 
 	return (
 		<div className="landingPageContainer">
@@ -34,6 +34,6 @@ const LandingPage = () => {
 			<button id="signIn" className="login" onClick={login42}>Sign In</button>
 		</div>
 	);
-}
+};
 
 export default LandingPage;

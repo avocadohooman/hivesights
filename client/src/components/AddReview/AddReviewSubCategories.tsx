@@ -123,7 +123,7 @@ const AddReviewSubCategories = ({
                 </Typography>
             </HtmlTooltip>
         </div>
-    )
-}
+    );
+};
 
 export default AddReviewSubCategories;

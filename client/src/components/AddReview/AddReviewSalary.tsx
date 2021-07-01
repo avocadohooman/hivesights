@@ -48,7 +48,7 @@ const AddReviewSalary = ({
                 }}
             />
         </div>
-    )
-}
+    );
+};
 
 export default AddReviewSalary;

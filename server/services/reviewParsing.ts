@@ -134,7 +134,7 @@ const parseVoting = (vote: unknown) : number => {
         throw new Error('Vote cannot be lower than 0:  ' + vote);
     }
     return vote;
-}
+};
 
 const parseVotingUsers = (users: unknown[]) : string[] => {
     let _users: string[] = [];
@@ -145,7 +145,7 @@ const parseVotingUsers = (users: unknown[]) : string[] => {
         return user;
     });
     return _users;
-}
+};
 
 export default {
     parsingReview,

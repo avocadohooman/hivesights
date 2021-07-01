@@ -37,7 +37,7 @@ const App = () => {
 				setUser(undefined);
 			}
 		}
-	}
+	};
 	const checkToken = async () => {
 		let token = localStorage.getItem('token');
 		if (!token && location.search.startsWith('?auth=')) {
@@ -52,8 +52,8 @@ const App = () => {
 			try {
 				const decoded = jwt_decode<UserToken>(token);
 				authApi.setAuthToken(token);
-				window.localStorage.setItem('token', token as string);
-				setUser({id: decoded.id, userName: decoded.userName, imageUrl: decoded.imageUrl, intraUrl: decoded.intraUrl, internshipValidated: decoded.internshipValidated})
+				window.localStorage.setItem('token', token );
+				setUser({id: decoded.id, userName: decoded.userName, imageUrl: decoded.imageUrl, intraUrl: decoded.intraUrl, internshipValidated: decoded.internshipValidated});
 				history.push('/');
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			} catch (error: any) {

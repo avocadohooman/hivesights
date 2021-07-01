@@ -5,7 +5,6 @@ import { KPI } from '../types/kpis';
 const kpiRouter = express.Router();
 
 // Setting tables depending on NODE_ENV
-const companyTable = process.env.NODE_ENV === 'production' ? 'companny' : 'company_test';
 const reviewTable = process.env.NODE_ENV === 'production' ? 'review' : 'review_test';
 
 // Get all key kpis
@@ -17,12 +16,16 @@ kpiRouter.get('/', async (req, res) => {
         AVG (duration)::NUMERIC(10,2) as averageduration,
         COUNT (*) as reviews
         FROM ${reviewTable}`);
+        if (keyKpi.rows[0].reviews === '0') {
+            console.log('Reviews', keyKpi.rows[0].reviews);
+            keyKpi.rows[0].reviews = null;
+        }
         const returnKPI: KPI = {
             averageDuration: keyKpi.rows[0].averageduration,
             averageSalary: keyKpi.rows[0].averagesalary,
             averageScore: keyKpi.rows[0].averagescore,
             reviews: keyKpi.rows[0].reviews
-        }
+        };
         return res.status(200).json(returnKPI);
     } catch (error: any) {
         console.log(error.message);

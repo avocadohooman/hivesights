@@ -48,8 +48,8 @@ const AddReviewOverallScore = ({
                         onChange={(event, newValue) => handleOverallScore(event, newValue)}/>
             </HtmlTooltip>
         </div>
-    )
-}
+    );
+};
 
 
 export default AddReviewOverallScore;

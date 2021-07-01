@@ -31,8 +31,8 @@ const ReviewHeaders = ({
     };
     return (
         <div className="companyReviewHeader" style={headerColor}>{header}</div>
-    )
-}
+    );
+};
 
 
 export default ReviewHeaders;

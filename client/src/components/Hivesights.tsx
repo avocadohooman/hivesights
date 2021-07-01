@@ -136,7 +136,7 @@ const Hivesights = ({
         <div>
             <Switch>
                 <Route exact path="/">
-                    <KeyIndicatorsWrapper kpi={kpi}/>
+                    <KeyIndicatorsWrapper kpi={kpi} setKpi={setKpi}/>
                     <CompanyFilterWrapper handleCompanySearch={handleCompanySearch} handleCompanySelection={handleCompanySelection}/>
                     <CompaniesWrapper user={user} companies={filteredCompanies}/>
                 </Route>

@@ -43,6 +43,6 @@ const CompanySelect = ({
             renderInput={(params) => <TextField {...params} label={label} variant="outlined" />}
         />
     );
-}
+};
 
 export default CompanySelect;

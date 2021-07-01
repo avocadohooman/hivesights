@@ -3,7 +3,7 @@ export type KPI = {
     averageDuration: number,
     averageScore: number,
     reviews: number
-}
+};
 
 export interface StateKpi {
     averageSalary: number,
@@ -11,3 +11,5 @@ export interface StateKpi {
     averageScore: number,
     reviews: number
 }
+
+export type SetKPI = React.Dispatch<React.SetStateAction<StateKpi | undefined>>;

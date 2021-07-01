@@ -10,7 +10,7 @@ import { Company } from '../../models/companyModel';
 
 // CSS styles
 import '../../styles/company.css';
-import '../../styles/companyDetailView.css'
+import '../../styles/companyDetailView.css';
 
 // UI Libraries
 import Accordion from '@material-ui/core/Accordion';
@@ -107,7 +107,7 @@ const CompanySubRatings = ({
                 </AccordionDetails>
             </Accordion>
         </div>
-    )
-}
+    );
+};
 
 export default CompanySubRatings;

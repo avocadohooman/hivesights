@@ -47,7 +47,7 @@ const CompanyReview = ({
 
     const handleExpand = () => {
         setExpand(prevCheck => !prevCheck);
-    }
+    };
 
     return (
         <div className={expand === false ? 'companyReview' : 'companyReviewExpand'}>
@@ -86,7 +86,7 @@ const CompanyReview = ({
                 <ReadFullReview  handleExpand={handleExpand}/>
             </div>}
         </div>
-    )
-}
+    );
+};
 
 export default CompanyReview;

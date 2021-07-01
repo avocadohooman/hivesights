@@ -20,7 +20,7 @@ import reviewApi from '../../services/reviewApi';
 
 // CSS styles
 import '../../styles/company.css';
-import '../../styles/companyDetailView.css'
+import '../../styles/companyDetailView.css';
 
 // UI Libraries
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -40,7 +40,7 @@ const CompanyDetailView = ({
     }): JSX.Element => {
 
     const [company, setCompany] = useState<Company[]>();
-    const [reviews, setReviews] = useState<Review[]>()
+    const [reviews, setReviews] = useState<Review[]>();
 
     const durationLabel = 'Duration';
     const salaryLabel = 'Salary';
@@ -57,18 +57,18 @@ const CompanyDetailView = ({
             } catch (error: any) {
                 console.log(error);
             }
-        }
+        };
         const getCompanyReviews = async () => {
             try {
                 const reviews: Review[] = await reviewApi.getCompanyReviews(id);
                 reviews.sort(function(a: Review, b: Review) {
-                    return  new Date(a.publishedDate).getTime() - new Date(b.publishedDate).getTime()
+                    return  new Date(a.publishedDate).getTime() - new Date(b.publishedDate).getTime();
                 });
                 setReviews(reviews);
             } catch (error) {
                 console.log(error);
             }
-        }
+        };
         getOneCompany();
         getCompanyReviews();
     }, []);
@@ -88,7 +88,7 @@ const CompanyDetailView = ({
         } catch (error) {
             console.log(error);
         }
-    }
+    };
 
     const handleDelete = async () =>{
         try {
@@ -98,7 +98,7 @@ const CompanyDetailView = ({
         } catch (error: any) {
             console.log("Error", error.response.data.message);
         }
-    }
+    };
     const reviewDisabledLabel = "You need to have 'Company Mid Evaluation' validated in order to write a review";
 
     return (
@@ -161,7 +161,7 @@ const CompanyDetailView = ({
                 </div>
             }
         </div>
-    )
-}
+    );
+};
 
 export default CompanyDetailView;

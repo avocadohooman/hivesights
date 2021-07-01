@@ -39,7 +39,7 @@ const CancelCompany = (): JSX.Element => {
 
     const cancelCompanyCreation = () => {
         history.push(`/`);
-    }
+    };
 
     const classes = useStyles();
 
@@ -51,7 +51,7 @@ const CancelCompany = (): JSX.Element => {
         onClick={cancelCompanyCreation}>
             Cancel
         </Button>
-    )
-}
+    );
+};
 
 export default CancelCompany;

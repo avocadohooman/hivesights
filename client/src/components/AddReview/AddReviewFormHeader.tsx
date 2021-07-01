@@ -32,8 +32,8 @@ const AddReviewFormHeader = ({
     };
     return (
         <div className="companyAddReviewFormHeader" style={headerColor}>{header}</div>
-    )
-}
+    );
+};
 
 
 export default AddReviewFormHeader;

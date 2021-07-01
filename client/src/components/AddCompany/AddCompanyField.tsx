@@ -38,7 +38,7 @@ const AddCompanyField = ({
                 }}
             />
         </div>
-    )
-}
+    );
+};
 
 export default AddCompanyField;

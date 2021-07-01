@@ -58,7 +58,7 @@ const CreateReviewButton = ({
 
     const goToReviewCreation = () => {
         history.push(`/review/${companyId}`);
-    }
+    };
     const classes = useStyles();
 
     return (
@@ -86,7 +86,7 @@ const CreateReviewButton = ({
         }
         </div>
 
-    )
-}
+    );
+};
 
 export default CreateReviewButton;

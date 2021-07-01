@@ -35,14 +35,14 @@ const DeleteReview = ({
         } catch (error: any) {
             console.log("Error", error.response.data.message);
         }
-    }
+    };
     return (
             <div>
                 <IconButton onClick={handleDelete} aria-label="delete">
                     <DeleteIcon />
                 </IconButton>
             </div>
-    )
-}
+    );
+};
 
 export default DeleteReview;

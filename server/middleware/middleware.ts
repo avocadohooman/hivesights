@@ -56,7 +56,7 @@ const userExtractorCompanyRights = async (req: any, res: any, next: any) => {
     }
   }
   next();
-}
+};
 
 const userExtractorReviewRights = async (req: any, res: any, next: any) => {
   const reviewId: string = req.params.id;
@@ -69,7 +69,7 @@ const userExtractorReviewRights = async (req: any, res: any, next: any) => {
     }
   }
   next();
-}
+};
 
 
 export default {

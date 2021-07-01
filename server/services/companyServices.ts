@@ -54,7 +54,7 @@ const addCompany = async (newCompany: NewCompany, companyTable: string) => {
       newCompany.companyURL,
       newCompany.companyLocation
   ]);
-}
+};
 
 export default {
     checkDuplicate,
