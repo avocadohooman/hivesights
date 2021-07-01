@@ -43,7 +43,7 @@ const Navbar = ({
         history.push('/');
         // Hotfix: when returning to main page, filtered selection is still rendered 
         // which requires to manually reload page in order to get all companies again
-        window.location.reload();
+        // window.location.reload();
     };
 
     return (

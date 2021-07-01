@@ -25,7 +25,7 @@ jobs:
   integration_test:
     needs: [modules]
     name: Backend Integration Testing
-    if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#client') }}
+    if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
