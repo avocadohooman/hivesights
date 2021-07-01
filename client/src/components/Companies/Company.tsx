@@ -45,12 +45,11 @@ const OneCompany = ({
                     {company.companyName}
                 </div>
   
-                <div className="oneCompanyScoreWrapper">
+                <div className={`oneCompanyScoreWrapper${company.averageTotalScore ? "" : "Empty"}`}>
                     {company.averageTotalScore && 
                     <div className="oneCompanyScore">
                     <StarIcon className="star"/> 
-                    {company.averageTotalScore}
-                    
+                        {company.averageTotalScore}
                     </div>}   
                     {company.averageTotalScore === null && <div className="oneCompanyScoreEmpty">n/A</div>}   
                 </div>

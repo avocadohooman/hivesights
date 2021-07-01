@@ -61,7 +61,19 @@
     width: 75px;
     height: 75px;
     border-radius: 50%;
-    /* background: #ADD2DD; */
+    background: #ADD2DD;
+    display: flex; /* or inline-flex */
+    align-items: center; 
+    justify-content: center;
+}
+
+.oneCompanyScoreWrapperEmpty {
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
     border: 1px solid #BAB7BD;
     display: flex; /* or inline-flex */
     align-items: center; 
