@@ -93,8 +93,8 @@ const CompanyDetailView = ({
     const handleDelete = async () =>{
         try {
             await companyApi.deleteCompany(id);
-            history.push(`/company/${id}`);
-            // window.location.reload();
+            history.push('/');
+            window.location.reload();
         } catch (error: any) {
             console.log("Error", error.response.data.message);
         }
@@ -154,7 +154,7 @@ const CompanyDetailView = ({
             {company && reviews && reviews.length > 0 && <CreateReviewButton currentUser={currentUser} companyId={company[0].id} />}
             {!currentUser.internshipValidated && <Alert severity="info">{reviewDisabledLabel}</Alert>}
             {company && reviews && reviews.length === 0 && <CreateFirstReview currentUser={currentUser} companyId={company[0].id} />}
-            {reviews && reviews.length > 0  && <CompanyReviewsWrapper currentUser={currentUser} handleVoting={handleVoting} reviews={reviews}/>}
+            {reviews && reviews.length > 0  && <CompanyReviewsWrapper companyId={id} currentUser={currentUser} handleVoting={handleVoting} reviews={reviews}/>}
             {!reviews && 
                 <div className="skeletonReview">
                     <Skeleton variant="rect" width={1280} height={400}/> 

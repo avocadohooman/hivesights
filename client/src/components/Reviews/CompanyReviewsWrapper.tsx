@@ -19,10 +19,12 @@ import '../../styles/companyReview.css';
 // Assets
 
 const CompanyReviewsWrapper = ({ 
+        companyId,
         reviews,
         currentUser,
         handleVoting
     } : { 
+        companyId: string,
         reviews: Review[],
         currentUser: User
         handleVoting: HandleVotingFunction
@@ -31,7 +33,7 @@ const CompanyReviewsWrapper = ({
     return (
         <div className="companyReviewsWrapper"> 
             {reviews.map(review => 
-                <CompanyReview key={review.id} currentUser={currentUser} handleVoting={handleVoting} review={review}/>
+                <CompanyReview key={review.id} companyId={companyId} currentUser={currentUser} handleVoting={handleVoting} review={review}/>
             )}
         </div>
     );

@@ -21,8 +21,10 @@ import { IconButton } from '@material-ui/core';
 // Assets
 
 const DeleteReview = ({ 
+        companyId,
         review,
     } : {  
+        companyId: string,
         review: Review,
     }): JSX.Element => {
 
@@ -31,7 +33,8 @@ const DeleteReview = ({
     const handleDelete = async () =>{
         try {
             await reviewApi.deleteReview(review.id);
-            window.location.reload();
+            history.push(`/company/${companyId}`);
+            // window.location.reload();
         } catch (error: any) {
             console.log("Error", error.response.data.message);
         }

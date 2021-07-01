@@ -29,11 +29,13 @@ import '../../styles/companyReview.css';
 
 // Assets
 
-const CompanyReview = ({ 
+const CompanyReview = ({
+        companyId, 
         review,
         currentUser,
         handleVoting
     } : { 
+        companyId: string,
         review: Review,
         currentUser: User,
         handleVoting: HandleVotingFunction
@@ -56,7 +58,7 @@ const CompanyReview = ({
                 <UserName userName={review?.userName}/>
                 <ReviewOverall overall={review?.overall} />
                 <ReviewDate date={review?.publishedDate}/>
-                {currentUser.userName === review.userName && <DeleteReview review={review}/>}
+                {currentUser.userName === review.userName && <DeleteReview companyId={companyId} review={review}/>}
             </div>
 
             <div className="companyReviewKeyIndicators">
