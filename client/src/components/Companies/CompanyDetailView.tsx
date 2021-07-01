@@ -93,8 +93,8 @@ const CompanyDetailView = ({
     const handleDelete = async () =>{
         try {
             await companyApi.deleteCompany(id);
-            history.push('/');
-            window.location.reload();
+            history.push(`/company/${id}`);
+            // window.location.reload();
         } catch (error: any) {
             console.log("Error", error.response.data.message);
         }
