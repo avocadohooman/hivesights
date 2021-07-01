@@ -53,7 +53,7 @@ const CompanyDetailView = ({
             try {
                 const company: Company[] = await companyApi.getOneCompany(id);
                 setCompany(company);
-                console.log("Company", company[0]);
+                // console.log("Company", company[0]);
             } catch (error: any) {
                 console.log(error);
             }
