@@ -61,7 +61,6 @@ const userExtractorReviewRights = async (req: any, res: any, next: any) => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const reviewId: string = req.params.id;
   if (process.env.NODE_ENV !== "test") {
-    console.log('ID', reviewId, 'Table', reviewTable);
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const userNameDb = await pool.query(`SELECT username FROM ${reviewTable} WHERE id = ($1)`, [reviewId])
       .catch((e:any) => {
@@ -70,7 +69,6 @@ const userExtractorReviewRights = async (req: any, res: any, next: any) => {
           throw new Error("ERROR: " + e.message);
         }
       });
-    console.log('Got user', userNameDb);
     const decodedToken: any = jwt.verify(req.token, process.env.SECRET as string);
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const userName = userNameDb.rows[0].username;    
