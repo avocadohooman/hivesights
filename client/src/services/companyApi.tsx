@@ -21,6 +21,7 @@ const createCompany = async (newCompany: NewCompany) => {
 
 const deleteCompany = async (companyId: string) => {
     const res: any = await axios.delete(`${baseURL}/${companyId}`);
+    console.log('Returning DELETE data', res.data);
     return res.data;
 };
 
