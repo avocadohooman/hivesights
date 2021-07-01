@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 // React Libraris
-import React from 'react';
+import React, { useState } from 'react';
 
 // Components
 import AddReviewFormHeader from './AddReviewFormHeader';
@@ -24,13 +24,21 @@ const HtmlTooltip = withStyles((theme: Theme) => ({
     tooltip: {
       backgroundColor: '#f5f5f9',
       color: 'rgba(0, 0, 0, 0.87)',
-      maxWidth: 220,
+      maxWidth: 330,
       fontSize: theme.typography.pxToRem(15),
       border: '1px solid #dadde9',
       cursor: 'pointer',
     },
   }))(Tooltip);
-  
+
+//   const labels: { [index: string]: string } = {
+//     1: 'Bad',
+//     2: 'Could be better',
+//     3: 'Ok',
+//     4: 'Good',
+//     5: 'Excellent',
+//   };
+
 const AddReviewSubCategories = ({ 
         recruitment,
         onboarding,

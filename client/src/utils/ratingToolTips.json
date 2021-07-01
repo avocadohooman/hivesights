@@ -1,23 +1,23 @@
 {
     "overall": {
         "info": "This score tells about the overall internship experience",
-        "reviewGuideline": "What score would you give your overall internship experience? 1: Very poor, 5: Great!"
+        "reviewGuideline": "What score would you give your overall internship experience? 1: Bad, 5: Excellent!"
     },
     "recruitment": {
         "info": "This score measures how well the whole recruitment process was designed and executed, from an applicants perspective",
-        "reviewGuideline": "How was the recruitment process? Did you receive feedback and were the stages clearly communicated? 1: Very poorly, 5: Great"
+        "reviewGuideline": "How was the recruitment process? Did you receive feedback and were the stages clearly communicated? 1: Bad, 5: Excellent"
     },
     "onboarding": {
         "info": "This scores measures how well the intern was onboarded and integrated into the company",
-        "reviewGuideline": "How was the onboarding? Did you receive clear guidance and a soft landing? 1: Very poorly, 5: Great"
+        "reviewGuideline": "How was the onboarding? Did you receive clear guidance and a soft landing? 1: Bad, 5: Excellent"
     },
     "mentoring": {
         "info": "This score measures the mentorship quality of the internship",
-        "reviewGuideline": "How was the mentoring during your internship? Did you have a dedicated mentor? Did you get enough feedback? 1: Very poorly, 5: Great"
+        "reviewGuideline": "How was the mentoring during your internship? Did you have a dedicated mentor? Did you get enough feedback? 1: Bad, 5: Excellent"
     },
     "learning": {
         "info": "Learning measures how well the intern was supported in achieving her/his professional goals",
-        "reviewGuideline": "How were you personal/professional goal supported? Did the company make sure you learn? 1: Very poorly, 5: Great"
+        "reviewGuideline": "How were you personal/professional goal supported? Did the company make sure you learn? 1: Bad, 5: Excellent"
     },
     "perks": {
         "info": "Perks are non-wage offerings given to employees that extend beyond salaries and benefits ",
