@@ -20,14 +20,13 @@ const checkDuplicate = async (newReview: NewReview, reviewTable: string) => {
 
 const checkIfExists = async (id: any, reviewTable: string) => {
     console.log("checkIfExists");
-    const review = 
-      await pool.query(`SELECT id FROM ${reviewTable} WHERE id = ($1)`, [id])
-      .catch((e:any) => {
-        if (e) {
-          console.log("ERROR");
-          return 0;
-        }
-      });
+    const review = await pool.query(`SELECT id FROM ${reviewTable} WHERE id = ($1)`, [id])
+        .catch((e:any) => {
+            if (e) {
+            console.log("ERROR");
+            return 0;
+            }
+        });
     if (review.rowCount === 0) {
       return 0;
     }

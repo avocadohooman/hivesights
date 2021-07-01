@@ -59,10 +59,13 @@ const userExtractorCompanyRights = async (req: any, res: any, next: any) => {
 };
 
 const userExtractorReviewRights = async (req: any, res: any, next: any) => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const reviewId: string = req.params.id;
   if (process.env.NODE_ENV !== "test") {
     const userNameDb = await pool.query(`SELECT username FROM ${reviewTable} WHERE id = ($1)`, [reviewId]);
+    console.log('Got user', userNameDb.rows[0].username);
     const decodedToken: any = jwt.verify(req.token, process.env.SECRET as string);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const userName = userNameDb.rows[0].username;    
     if (userName !== decodedToken.userName || !decodedToken) {
       return res.status(400).json({error: 'Invalid rights'});
