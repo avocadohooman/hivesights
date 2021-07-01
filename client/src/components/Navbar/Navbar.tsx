@@ -50,7 +50,7 @@ const Navbar = ({
         <div className="navbar">
             <button className="logoTitle" onClick={handleGoHome}>{logoTitle}</button>
             <div className="userSection">
-                {user.userName === 'gmolin' && <RouteAddCompanyButton />}
+                {user.userName === 'ss' && <RouteAddCompanyButton />}
                 <Avatar size='s' avatarImageUrl={avatarImageUrl}/>
                 <UserName userName={userName}/>
                 <Tooltip title="Sign Out">

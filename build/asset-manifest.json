@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.4aefc331.chunk.css",
-    "main.js": "/static/js/main.650b3854.chunk.js",
-    "main.js.map": "/static/js/main.650b3854.chunk.js.map",
+    "main.css": "/static/css/main.7ac994fe.chunk.css",
+    "main.js": "/static/js/main.a53ff505.chunk.js",
+    "main.js.map": "/static/js/main.a53ff505.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.7545a8a1.js",
     "runtime-main.js.map": "/static/js/runtime-main.7545a8a1.js.map",
     "static/js/2.8eb3b90c.chunk.js": "/static/js/2.8eb3b90c.chunk.js",
     "static/js/2.8eb3b90c.chunk.js.map": "/static/js/2.8eb3b90c.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.4aefc331.chunk.css.map": "/static/css/main.4aefc331.chunk.css.map",
+    "static/css/main.7ac994fe.chunk.css.map": "/static/css/main.7ac994fe.chunk.css.map",
     "static/js/2.8eb3b90c.chunk.js.LICENSE.txt": "/static/js/2.8eb3b90c.chunk.js.LICENSE.txt",
     "static/media/index.css": "/static/media/SimplonNorm-RegularItalic-WebTrial.9331f021.woff",
     "static/media/signOut.c656af69.svg": "/static/media/signOut.c656af69.svg",
@@ -18,7 +18,7 @@
   "entrypoints": [
     "static/js/runtime-main.7545a8a1.js",
     "static/js/2.8eb3b90c.chunk.js",
-    "static/css/main.4aefc331.chunk.css",
-    "static/js/main.650b3854.chunk.js"
+    "static/css/main.7ac994fe.chunk.css",
+    "static/js/main.a53ff505.chunk.js"
   ]
 }

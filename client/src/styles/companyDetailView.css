@@ -102,8 +102,10 @@ a {
 @media (max-width: 800px) {
     .companyDetailViewKeyInfoWrapper {
         flex-direction: column;
+        align-items: inherit;
     }
     .keyIndicatorWrapper {
         margin-top: 20px;
     }
+    
 }

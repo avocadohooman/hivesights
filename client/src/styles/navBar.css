@@ -4,7 +4,8 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
-    height: 71px;
+    min-height: 71px;
+    height: auto;
     background: #ADD2DD;
     color: #343C44;
     align-items: center;

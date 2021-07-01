@@ -10,3 +10,17 @@
 .companySearch {
     max-width: 224px;
 }
+
+@media (max-width: 500px) {
+    .companyFilterWrapper {
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .companySearch {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 10px;
+    }
+}
