@@ -2,3 +2,9 @@
     margin-top: 50px;
     cursor: pointer;
 }
+
+@media (max-width: 500px) {
+    .createReviewWrapper {
+        margin-bottom: 50px;
+    }
+}

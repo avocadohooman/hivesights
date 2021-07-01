@@ -50,4 +50,12 @@
     .keyIndicatorsWrapper {
         margin-top: 20px;
     }
+
+    .keyIndicatorWrapper {
+        min-width: 170px;
+    }
+    
+    .keyIndicator {
+        font-size: 34px;
+    }
 }

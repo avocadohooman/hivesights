@@ -27,6 +27,7 @@ const CompanySelect = ({
         id: any,
         onChange: any
     }): JSX.Element => {
+    
     return (
         <Autocomplete
             className="companySearch"

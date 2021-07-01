@@ -17,7 +17,6 @@ import Button from '@material-ui/core/Button';
 import { CircularProgress } from '@material-ui/core';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import { green } from '@material-ui/core/colors';
-
 // Assets
 
 const useStyles = makeStyles((theme) => ({

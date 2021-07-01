@@ -15,6 +15,7 @@ import '../../styles/addCompany.css';
 // UI Libraries
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
 
 // Assets
 
@@ -49,7 +50,7 @@ const RouteAddCompanyButton = () => {
         color="primary"
         className={classes.button} 
         onClick={goToAddCompanyRoute}>
-            Add A Company
+            <AddIcon/>
         </Button>
     );
 };

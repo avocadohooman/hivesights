@@ -68,3 +68,14 @@
 .signOutWrapper:hover {
     background: #F9DE4B;
 }
+
+
+@media (max-width: 500px) {
+    .signOutWrapper {
+        margin-right: 10px;
+    }
+
+    .logoTitle {
+        margin-left: 10px;
+    }
+}
