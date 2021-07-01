@@ -62,7 +62,7 @@ const userExtractorReviewRights = async (req: any, res: any, next: any) => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const reviewId: string = req.params.id;
   if (process.env.NODE_ENV !== "test") {
-    console.log('ID', reviewId);
+    console.log('ID', reviewId, 'Table', reviewTable);
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const userNameDb = await pool.query(`SELECT username FROM ${reviewTable} WHERE id = ($1)`, [reviewId])
       .catch((e:any) => {
