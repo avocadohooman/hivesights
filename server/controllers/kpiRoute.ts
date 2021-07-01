@@ -6,6 +6,7 @@ const kpiRouter = express.Router();
 
 // Setting tables depending on NODE_ENV
 const reviewTable = process.env.NODE_ENV === 'production' ? 'review' : 'review_test';
+console.log(`Using table for kpiRoute: ${reviewTable}`);
 
 // Get all key kpis
 kpiRouter.get('/', async (req, res) => {

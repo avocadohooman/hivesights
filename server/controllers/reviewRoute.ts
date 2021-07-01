@@ -15,7 +15,7 @@ const reviewRouter = express.Router();
 // Setting up table depending on NODE_ENV
 const reviewTable = process.env.NODE_ENV === 'production' ? 'review' : 'review_test';
 const companyTable = process.env.NODE_ENV === 'production' ? 'company' : 'company_test';
-console.log(`Using table: ${reviewTable}`);
+console.log(`Using table for reviewRoute: ${reviewTable} and ${companyTable}`);
 
 const reviewColumns = reviewQueries.reviewColumns;
 

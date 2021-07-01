@@ -2,7 +2,7 @@ import logger from '../utils/logger';
 import jwt from 'jsonwebtoken';
 import pool from '../db';
 
-const companyTable = process.env.NODE_END === 'production' ? 'company' : 'company_test';
+const reviewTable = process.env.NODE_ENV === 'production' ? 'review' : 'review_test';
 
 const requestLogger = (request: any, response: any, next: any) => {
     logger.info('Method:', request.method);
@@ -60,7 +60,6 @@ const userExtractorCompanyRights = async (req: any, res: any, next: any) => {
 const userExtractorReviewRights = async (req: any, res: any, next: any) => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const reviewId: string = req.params.id;
-  const reviewTable = process.env.NODE_END === 'production' ? 'review' : 'review_test';
   if (process.env.NODE_ENV !== "test") {
     console.log('ID', reviewId, 'Table', reviewTable);
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment

@@ -11,7 +11,7 @@ const companyRouter = express.Router();
 
 // Setting table depending on NODE_ENV environment
 const companyTable = process.env.NODE_ENV === 'production' ? 'company' : 'company_test';
-console.log(`Using table: ${companyTable}`);
+console.log(`Using table for companyRoute: ${companyTable}`);
 
 // Get all companies in DB
 companyRouter.get('/', async (_req, res) => {
