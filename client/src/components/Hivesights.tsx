@@ -60,7 +60,7 @@ const Hivesights = ({
             try {
                 const getCompanies: Company[] = await companyApi.getAllCompanies();
                 getCompanies.sort((function(a: Company, b: Company) {
-                    return a.companyName > b.companyName ? 1 : -1; 
+                    return a.averageTotalScore < b.averageTotalScore ? 1 : -1; 
                 }));
                 setCompanies(getCompanies);
                 setCompanyFilter(getCompanies);
