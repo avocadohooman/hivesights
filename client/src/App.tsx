@@ -26,6 +26,7 @@ interface UserToken {
 const App = () => {
   const [user, setUser] = useState<StateUser | undefined>(undefined);
   const history = useHistory();
+  const location = useLocation();
 
   useEffect(() => {
 	const checkTokenExpiration = () => {
@@ -56,8 +57,12 @@ const App = () => {
 				authApi.setAuthToken(token);
 				window.localStorage.setItem('token', token );
 				setUser({id: decoded.id, userName: decoded.userName, imageUrl: decoded.imageUrl, intraUrl: decoded.intraUrl, internshipValidated: decoded.internshipValidated});
-				if (location.search.startsWith('?auth=')) {
+				console.log("Pathname", location.pathname);
+				if (location.search.startsWith('?auth=') || location.pathname === '/') {
 					history.push('/');
+				} else {
+					console.log("ELSE", location.pathname);
+					history.push(location.pathname);
 				}
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			} catch (error: any) {
