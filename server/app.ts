@@ -52,7 +52,7 @@ app.get('/health', (req, res) => {
 });
 
 app.get('*', (req,res) =>{
-    res.sendFile('/build/index.html');
+    res.sendFile('../build/index.html');
 });
 
 // this needs to be after the routes are defined
