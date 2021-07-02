@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 // React Libraris
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 // Components

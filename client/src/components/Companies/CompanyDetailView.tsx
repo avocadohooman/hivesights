@@ -60,22 +60,14 @@ const CompanyDetailView = ({
 
     useEffect(() => {
         const getOneCompany = async () => {
-            // let cachedCompany = localStorage.getItem('company');
-            // if (!cachedCompany) {
             try {
                 const company: Company[] = await companyApi.getOneCompany(id);
-                console.log('Getting company', company);
                 setCompany(company);
                 localStorage.setItem('company', JSON.stringify(company));
                 // console.log("Company", company[0]);
             } catch (error: any) {
                 console.log(error);
             }
-            // else {
-            //     const cachedCompany = JSON.parse(localStorage.getItem('company') as string);
-            //     console.log('Cached Company', cachedCompany);
-            //     setCompany(cachedCompany);
-            // }
         };
         const getCompanyReviews = async () => {
             try {
