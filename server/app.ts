@@ -5,6 +5,7 @@ import authRouter from './controllers/authRoute';
 import companyRouter from './controllers/companyRoute';
 import reviewRouter from './controllers/reviewRoute';
 import kpiRouter from './controllers/kpiRoute';
+import path from 'path';
 
 const app = express();
 
@@ -48,6 +49,10 @@ app.use('/api/kpi', kpiRouter);
 
 app.get('/health', (req, res) => {
     res.send('ok');
+});
+
+app.get('*', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/build/index.html'));
 });
 
 // this needs to be after the routes are defined
