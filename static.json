@@ -1,6 +1,6 @@
 {
-    "root": "dist/",
+    "root": "build/",
     "routes": {
-        "/**": "index.html"
+      "/**": "index.html"
     }
-}
+  }
