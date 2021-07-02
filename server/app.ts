@@ -54,7 +54,7 @@ app.get('/health', (req, res) => {
 app.get('*', (req,res) =>{
     const dirPath = path.join(__dirname, '/build');
     console.log('Dirname', __dirname, dirPath);
-    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+    res.sendFile(path.join(__dirname+'/build/index.html'));
 });
 
 // this needs to be after the routes are defined
