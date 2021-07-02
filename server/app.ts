@@ -38,6 +38,8 @@ if (process.env.NODE_ENV !== "test") {
 
 // API Router for companies
 app.use('/api/company', companyRouter);
+app.use('/company', companyRouter);
+
 
 // API Router for reviews
 app.use('/api/reviews', reviewRouter);

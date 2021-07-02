@@ -13,6 +13,7 @@ import Navbar from './components/Navbar/Navbar';
 import authApi from './services/authApi';
 import jwt_decode from 'jwt-decode';
 import { StateUser } from './models/userModel';
+import CompanyDetailView from './components/Companies/CompanyDetailView';
 
 interface UserToken {
 	id: string,
@@ -34,6 +35,7 @@ const App = () => {
 			const expirationTime = (exp * 1000) - 60000;
 			if (Date.now() >= expirationTime) {
 				localStorage.removeItem('token');
+				localStorage.removeItem('company')
 				setUser(undefined);
 			}
 		}
@@ -70,12 +72,12 @@ const App = () => {
 
 
   return (
-    <Router>
+	<div>
 		{user && <Navbar setUser={setUser} user={user}/>}
 		<Container maxWidth="lg">
 			{!user ? (<LandingPage/>) : (<Hivesights user={user}/>)}
 		</Container>
-    </Router>
+	</div>
   );
 };
 

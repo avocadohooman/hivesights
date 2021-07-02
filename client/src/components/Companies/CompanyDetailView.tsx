@@ -48,14 +48,34 @@ const CompanyDetailView = ({
     
     const history = useHistory();
 
+
+//       // Retrieve the last state
+//   this.state = localStorage.getItem("appState") ? JSON.parse(localStorage.getItem("appState")) : InitialState;
+
+// }
+
+// componentWillUnmount() {
+//   // Remember state for the next mount
+//   localStorage.setItem('appState', JSON.stringify(this.state));
+
     useEffect(() => {
         const getOneCompany = async () => {
+            // let cachedCompany = localStorage.getItem('company');
+            // if (!cachedCompany) {
             try {
                 const company: Company[] = await companyApi.getOneCompany(id);
+                console.log('Getting company', company);
                 setCompany(company);
+                localStorage.setItem('company', JSON.stringify(company));
+                // console.log("Company", company[0]);
             } catch (error: any) {
                 console.log(error);
             }
+            // else {
+            //     const cachedCompany = JSON.parse(localStorage.getItem('company') as string);
+            //     console.log('Cached Company', cachedCompany);
+            //     setCompany(cachedCompany);
+            // }
         };
         const getCompanyReviews = async () => {
             try {
@@ -108,7 +128,7 @@ const CompanyDetailView = ({
             console.log("Error", error.response.data.message);
         }
     };
-
+    
     const reviewDisabledLabel = "You need to have 'Company Mid Evaluation' validated in order to write a review";
 
     return (

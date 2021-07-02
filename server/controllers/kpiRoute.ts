@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import express from 'express';
 import pool from '../db';
 import { KPI } from '../types/kpis';

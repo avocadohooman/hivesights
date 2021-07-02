@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 // React Libraris
 import React, { useState, useEffect, Suspense } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 // Components
 import KeyIndicatorsWrapper from './KeyIndicators/KeyIndicatorsWrapper';
@@ -140,14 +140,14 @@ const Hivesights = ({
 
 
     return (
-        <div>
+        <Router>
             <Switch>
                 <Route exact path="/">
                     <KeyIndicatorsWrapper kpi={kpi} setKpi={setKpi}/>
                     <CompanyFilterWrapper handleCompanySearch={handleCompanySearch} handleCompanySelection={handleCompanySelection}/>
                     <CompaniesWrapper noData={noData} user={user} companies={filteredCompanies} />
                 </Route>
-                <Route exact path="/company/:id" render={(props) => (
+                <Route path="/company/:id" render={(props) => (
                     <CompanyDetailView currentUser={currentUser} id={props.match.params.id}/>
                     )}>
                 </Route>
@@ -161,7 +161,7 @@ const Hivesights = ({
                     {user.userName === "gmolin" && <AddCompany />}
                 </Route> 
             </Switch>
-        </div>
+        </Router>
     );
 }
 

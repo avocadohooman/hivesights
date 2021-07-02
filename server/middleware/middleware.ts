@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import logger from '../utils/logger';
 import jwt from 'jsonwebtoken';
 import pool from '../db';
@@ -12,7 +15,7 @@ const requestLogger = (request: any, response: any, next: any) => {
     next();
 };
 
-const unknownEndpoint = (request: any, response: any, next: any) => {
+const unknownEndpoint = (request: any, response: any) => {
     response.status(404).send({ error: 'unknown endpoint' });
 };
 
@@ -58,10 +61,8 @@ const userExtractorCompanyRights = async (req: any, res: any, next: any) => {
 };
 
 const userExtractorReviewRights = async (req: any, res: any, next: any) => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const reviewId: string = req.params.id;
   if (process.env.NODE_ENV !== "test") {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const userNameDb = await pool.query(`SELECT username FROM ${reviewTable} WHERE id = ($1)`, [reviewId])
       .catch((e:any) => {
         if (e) {
@@ -70,17 +71,14 @@ const userExtractorReviewRights = async (req: any, res: any, next: any) => {
         }
       });
     const decodedToken: any = jwt.verify(req.token, process.env.SECRET as string);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     let userName: any;  
     if (userNameDb.rows[0]) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       userName = userNameDb.rows[0].username;
     }
     if (!userName || userName !== decodedToken.userName || !decodedToken) {
       return res.status(400).json({error: 'Invalid rights'});
     }
   }
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   next();
 };
 

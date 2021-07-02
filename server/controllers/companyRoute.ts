@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import express from 'express';
 import { Company, CompanyDB, CompanyRating, NewCompany } from '../types/company';
 import pool from '../db';
@@ -150,7 +152,7 @@ const postApiLimiter = rateLimit({
 });
 
 // Create new company
-companyRouter.post('/', middleware.userExtractorCompanyRights, async (req, res) => {
+companyRouter.post('/', postApiLimiter, middleware.userExtractorCompanyRights, async (req, res) => {
     try {
         const newCompany: NewCompany = companyParsing.parsingCompany(req.body);
         if (!await companyHelper.checkDuplicate(newCompany, companyTable)) {
