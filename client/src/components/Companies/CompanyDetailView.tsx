@@ -53,7 +53,6 @@ const CompanyDetailView = ({
             try {
                 const company: Company[] = await companyApi.getOneCompany(id);
                 setCompany(company);
-                // console.log("Company", company[0]);
             } catch (error: any) {
                 console.log(error);
             }
@@ -109,7 +108,7 @@ const CompanyDetailView = ({
             console.log("Error", error.response.data.message);
         }
     };
-    
+
     const reviewDisabledLabel = "You need to have 'Company Mid Evaluation' validated in order to write a review";
 
     return (

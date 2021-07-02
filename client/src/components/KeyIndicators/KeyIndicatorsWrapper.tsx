@@ -36,6 +36,7 @@ const KeyIndicatorsWrapper = ({
             setKpi({reviews: -1, averageScore: -1, averageDuration: -1, averageSalary: -1});
         }
     }, 5000);
+    
     return (
         <div className="keyIndicatorsWrapper ">
             {kpi?.reviews 
