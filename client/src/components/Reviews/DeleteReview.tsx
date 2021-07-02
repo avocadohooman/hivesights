@@ -34,8 +34,8 @@ const DeleteReview = ({
         try {
             await reviewApi.deleteReview(review.id);
             console.log('pushing history');
-            history.push(`/company/${companyId}`);
-            console.log('pushing hirstor', history.push(`/company/${companyId}`));
+            history.push(`/`);
+            console.log('pushing history', history.push(`/company/${companyId}`));
             // window.location.reload();
 
         } catch (error: any) {

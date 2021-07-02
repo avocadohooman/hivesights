@@ -147,7 +147,7 @@ const Hivesights = ({
                     <CompanyFilterWrapper handleCompanySearch={handleCompanySearch} handleCompanySelection={handleCompanySelection}/>
                     <CompaniesWrapper noData={noData} user={user} companies={filteredCompanies} />
                 </Route>
-                <Route path="/company/:id" render={(props) => (
+                <Route exact path="/company/:id" render={(props) => (
                     <CompanyDetailView currentUser={currentUser} id={props.match.params.id}/>
                     )}>
                 </Route>
