@@ -33,7 +33,7 @@ const DeleteReview = ({
     const handleDelete = async () =>{
         try {
             await reviewApi.deleteReview(review.id);
-            console.log('pushing hirstory');
+            console.log('pushing history');
             history.push(`/company/${companyId}`);
             console.log('pushing hirstor', history.push(`/company/${companyId}`));
             // window.location.reload();
