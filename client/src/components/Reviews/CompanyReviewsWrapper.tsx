@@ -7,7 +7,7 @@ import CompanyReview from './CompanyReview';
 // Data models 
 import { Review } from '../../models/reviewModel';
 import { User } from '../../models/userModel';
-import { HandleVotingFunction } from '../../models/miscModels';
+import { HandleReviewDeleteFunction, HandleVotingFunction } from '../../models/miscModels';
 
 // API services
 
@@ -19,21 +19,26 @@ import '../../styles/companyReview.css';
 // Assets
 
 const CompanyReviewsWrapper = ({ 
-        companyId,
         reviews,
         currentUser,
-        handleVoting
+        handleVoting,
+        handleReviewDelete
     } : { 
-        companyId: string,
         reviews: Review[],
         currentUser: User
-        handleVoting: HandleVotingFunction
+        handleVoting: HandleVotingFunction,
+        handleReviewDelete: HandleReviewDeleteFunction
     }): JSX.Element => {
 
     return (
         <div className="companyReviewsWrapper"> 
             {reviews.map(review => 
-                <CompanyReview key={review.id} companyId={companyId} currentUser={currentUser} handleVoting={handleVoting} review={review}/>
+                <CompanyReview 
+                key={review.id} 
+                currentUser={currentUser} 
+                handleVoting={handleVoting} 
+                handleReviewDelete={handleReviewDelete}
+                review={review}/>
             )}
         </div>
     );

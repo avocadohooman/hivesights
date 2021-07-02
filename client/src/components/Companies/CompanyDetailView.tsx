@@ -99,6 +99,17 @@ const CompanyDetailView = ({
             console.log("Error", error.response.data.message);
         }
     };
+
+    const handleReviewDelete = async (reviewId: string) => {
+        try {
+            await reviewApi.deleteReview(reviewId);
+            const updatedReviews = reviews?.filter(review => review.id !== reviewId);
+            setReviews(updatedReviews);
+        } catch (error: any) {
+            console.log("Error", error.response.data.message);
+        }
+    };
+    
     const reviewDisabledLabel = "You need to have 'Company Mid Evaluation' validated in order to write a review";
 
     return (
@@ -154,7 +165,7 @@ const CompanyDetailView = ({
             {company && reviews && reviews.length > 0 && <CreateReviewButton currentUser={currentUser} companyId={company[0].id} />}
             {!currentUser.internshipValidated && <Alert severity="info">{reviewDisabledLabel}</Alert>}
             {company && reviews && reviews.length === 0 && <CreateFirstReview currentUser={currentUser} companyId={company[0].id} />}
-            {reviews && reviews.length > 0  && <CompanyReviewsWrapper companyId={id} currentUser={currentUser} handleVoting={handleVoting} reviews={reviews}/>}
+            {reviews && reviews.length > 0  && <CompanyReviewsWrapper handleReviewDelete={handleReviewDelete} currentUser={currentUser} handleVoting={handleVoting} reviews={reviews}/>}
             {!reviews && 
                 <div className="skeletonReview">
                     <Skeleton variant="rect" width={1280} height={400}/> 

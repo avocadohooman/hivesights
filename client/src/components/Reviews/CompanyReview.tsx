@@ -17,7 +17,7 @@ import DeleteReview from './DeleteReview';
 // Data models 
 import { Review } from '../../models/reviewModel';
 import { User } from '../../models/userModel';
-import { HandleVotingFunction } from '../../models/miscModels';
+import { HandleReviewDeleteFunction, HandleVotingFunction } from '../../models/miscModels';
 
 // API services
 
@@ -30,15 +30,15 @@ import '../../styles/companyReview.css';
 // Assets
 
 const CompanyReview = ({
-        companyId, 
         review,
         currentUser,
-        handleVoting
+        handleVoting,
+        handleReviewDelete
     } : { 
-        companyId: string,
         review: Review,
         currentUser: User,
-        handleVoting: HandleVotingFunction
+        handleVoting: HandleVotingFunction,
+        handleReviewDelete: HandleReviewDeleteFunction
     }): JSX.Element => {
 
     const [expand, setExpand] = useState(false);
@@ -58,7 +58,7 @@ const CompanyReview = ({
                 <UserName userName={review?.userName}/>
                 <ReviewOverall overall={review?.overall} />
                 <ReviewDate date={review?.publishedDate}/>
-                {currentUser.userName === review.userName && <DeleteReview companyId={companyId} review={review}/>}
+                {currentUser.userName === review.userName && <DeleteReview handleReviewDelete={handleReviewDelete} review={review}/>}
             </div>
 
             <div className="companyReviewKeyIndicators">

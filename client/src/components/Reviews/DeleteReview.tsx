@@ -17,30 +17,21 @@ import '../../styles/companyReview.css';
 // UI Libraries
 import DeleteIcon from '@material-ui/icons/Delete';
 import { IconButton } from '@material-ui/core';
+import { HandleReviewDeleteFunction } from '../../models/miscModels';
 
 // Assets
 
 const DeleteReview = ({ 
-        companyId,
         review,
+        handleReviewDelete
     } : {  
-        companyId: string,
         review: Review,
+        handleReviewDelete: HandleReviewDeleteFunction
     }): JSX.Element => {
 
-    const history = useHistory();
-
-    const handleDelete = async () =>{
-        try {
-            await reviewApi.deleteReview(review.id);
-            history.push(`/`);
-        } catch (error: any) {
-            console.log("Error", error.response.data.message);
-        }
-    };
     return (
             <div>
-                <IconButton onClick={handleDelete} aria-label="delete">
+                <IconButton onClick={(event) => handleReviewDelete(review.id)} aria-label="delete">
                     <DeleteIcon />
                 </IconButton>
             </div>
