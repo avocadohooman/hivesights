@@ -10,7 +10,6 @@ const getAllCompanies = async () => {
 };
 
 const getOneCompany = async (id: string) => {
-    console.log('Base url', baseURL);
     const res: any = await axios.get<Company[]>(`${baseURL}/${id}`);
     return res.data;
 };
@@ -22,7 +21,6 @@ const createCompany = async (newCompany: NewCompany) => {
 
 const deleteCompany = async (companyId: string) => {
     const res: any = await axios.delete(`${baseURL}/${companyId}`);
-    console.log('Returning DELETE data', res.data);
     return res.data;
 };
 
