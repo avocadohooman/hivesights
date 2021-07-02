@@ -21,7 +21,7 @@ const NoCompanies = (): JSX.Element => {
 
     return (
         <div className="noCompanies">
-            <div>No companies found :(  </div>
+            <div>No companies found :(</div>
         </div>
     )
 }
