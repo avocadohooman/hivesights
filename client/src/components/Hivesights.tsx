@@ -72,6 +72,14 @@ const Hivesights = ({
         getCompanies();
     }, []);
 
+    const [noData, setNoData] = useState<boolean>(false);
+
+    setTimeout(() => {
+        if (companies.length === 0) {
+            setNoData(true);
+        }
+    }, 5000);
+
     const handleCompanySearch = (event: OnChangeEvent) => {
         event.preventDefault();
         const value: string = event.target.value.toLowerCase();
@@ -137,19 +145,19 @@ const Hivesights = ({
                 <Route exact path="/">
                     <KeyIndicatorsWrapper kpi={kpi} setKpi={setKpi}/>
                     <CompanyFilterWrapper handleCompanySearch={handleCompanySearch} handleCompanySelection={handleCompanySelection}/>
-                    <CompaniesWrapper user={user} companies={filteredCompanies} />
+                    <CompaniesWrapper noData={noData} user={user} companies={filteredCompanies} />
                 </Route>
-                <Route exact path="/company/:id" render={(props) => (
+                <Route path="/company/:id" render={(props) => (
                     <CompanyDetailView currentUser={currentUser} id={props.match.params.id}/>
                     )}>
                 </Route>
-                <Route exact path="/review/:id" render={(props) => (
+                <Route path="/review/:id" render={(props) => (
                     <Container maxWidth="md">
                         <AddReview companies={companies} currentUser={currentUser} id={props.match.params.id} />
                     </Container>
                 )}>
                 </Route>
-                <Route exact path="/newCompany/">
+                <Route path="/newCompany/">
                     {user.userName === "gmolin" && <AddCompany />}
                 </Route> 
             </Switch>

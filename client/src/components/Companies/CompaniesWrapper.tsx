@@ -22,21 +22,16 @@ import { Skeleton } from '@material-ui/lab';
 // Assets
 
 const CompaniesWrapper = ({
+        noData,
         companies,
         user
     }: {
+        noData: boolean,
         companies: Company[],
         user: User
     }): JSX.Element => {
     
     const loadingArray = [{id: 0}, {id: 1}, {id: 2}, {id: 3}, {id: 4}, {id: 5}, {id: 6}, {id: 7}, {id: 8}];
-    const [noData, setNoData] = useState<boolean>(false);
-
-    setTimeout(() => {
-        if (companies.length === 0) {
-            setNoData(true);
-        }
-    }, 5000);
 
     return (
         <div className="allCompanyWrapper">
