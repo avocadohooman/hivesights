@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 // React Libraris
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 // Components
 
@@ -40,7 +40,9 @@ const RouteAddCompanyButton = () => {
     const history = useHistory();
 
     const goToAddCompanyRoute = () => {
-        history.push('/newCompany/');
+        history.push('/newCompany');
+        //hot fix, not sure why reload() is suddenly necessary
+        window.location.reload();
     };
     const classes = useStyles();
 

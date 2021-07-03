@@ -36,7 +36,7 @@ const Navbar = ({
     
     const handleLogout = () => {
         localStorage.removeItem('token');
-        localStorage.removeItem('company')
+        localStorage.removeItem('company');
         setUser(undefined);
     };   
 

@@ -1,9 +1,6 @@
 import { Container } from '@material-ui/core';
 import React, { useState, useEffect } from 'react';
 import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
   useLocation,
   useHistory,
 } from 'react-router-dom';
@@ -13,7 +10,6 @@ import Navbar from './components/Navbar/Navbar';
 import authApi from './services/authApi';
 import jwt_decode from 'jwt-decode';
 import { StateUser } from './models/userModel';
-import CompanyDetailView from './components/Companies/CompanyDetailView';
 
 interface UserToken {
 	id: string,
@@ -36,7 +32,7 @@ const App = () => {
 			const expirationTime = (exp * 1000) - 60000;
 			if (Date.now() >= expirationTime) {
 				localStorage.removeItem('token');
-				localStorage.removeItem('company')
+				localStorage.removeItem('company');
 				setUser(undefined);
 			}
 		}

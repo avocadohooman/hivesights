@@ -23,7 +23,7 @@ const NoCompanies = (): JSX.Element => {
         <div className="noCompanies">
             <div>No companies found :(</div>
         </div>
-    )
-}
+    );
+};
 
 export default NoCompanies;

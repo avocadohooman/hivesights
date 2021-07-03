@@ -10,13 +10,12 @@ import CompanyFilterWrapper from './Filter/companyFilterWrapper';
 import CompanyDetailView from './Companies/CompanyDetailView';
 import AddReview from './AddReview/AddReview';
 import AddCompany from './AddCompany/AddCompany';
-import ReviewHeaders from './Reviews/ReviewHeader';
 
 // Data models 
 import { Company } from '../models/companyModel';
 import { KPI, StateKpi } from '../models/kpiModel';
 import { User } from '../models/userModel';
-import { OnChangeEvent } from '../models/miscModels'
+import { OnChangeEvent } from '../models/miscModels';
 import { SelectionFilter } from '../models/filterModels';
 
 // API services
@@ -45,7 +44,7 @@ const Hivesights = ({
         imageUrl: user.imageUrl,
         intraUrl: user.intraUrl,
         internshipValidated: user.internshipValidated,
-    }
+    };
     
     useEffect(() => {
         const getKpi = async() => {
@@ -55,7 +54,7 @@ const Hivesights = ({
             } catch (error: any) {
                 console.log(error);
             }
-        }
+        };
         const getCompanies = async() => {
             try {
                 const getCompanies: Company[] = await companyApi.getAllCompanies();
@@ -67,7 +66,7 @@ const Hivesights = ({
             } catch (error: any) {
                 console.log(error);
             }
-        }
+        };
         getKpi();
         getCompanies();
     }, []);
@@ -88,7 +87,7 @@ const Hivesights = ({
             return data.companyName.toLowerCase().search(value) != -1;
         });
         setCompanyFilter(result);
-    }
+    };
 
     const handleCompanySelection = (event: OnChangeEvent, value: SelectionFilter, label: string) => {
         event.preventDefault();
@@ -105,7 +104,7 @@ const Hivesights = ({
             result = handleSorting(value);
         }        
         setCompanyFilter(result);
-    }
+    };
 
     const handleSorting = (value: SelectionFilter):Company[] => {
         const result: Company[] = filteredCompanies;
@@ -136,7 +135,7 @@ const Hivesights = ({
                 });
         }
         return result;
-    }
+    };
 
 
     return (
@@ -157,12 +156,12 @@ const Hivesights = ({
                     </Container>
                 )}>
                 </Route>
-                <Route path="/newCompany/">
+                <Route path="/newCompany">
                     {user.userName === "gmolin" && <AddCompany />}
                 </Route> 
             </Switch>
         </Router>
     );
-}
+};
 
 export default Hivesights;

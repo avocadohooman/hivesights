@@ -48,16 +48,6 @@ const CompanyDetailView = ({
     
     const history = useHistory();
 
-
-//       // Retrieve the last state
-//   this.state = localStorage.getItem("appState") ? JSON.parse(localStorage.getItem("appState")) : InitialState;
-
-// }
-
-// componentWillUnmount() {
-//   // Remember state for the next mount
-//   localStorage.setItem('appState', JSON.stringify(this.state));
-
     useEffect(() => {
         const getOneCompany = async () => {
             try {
@@ -86,7 +76,7 @@ const CompanyDetailView = ({
 
     const handleVoting = async (id: string, updatedReview: UpdatedReview) => {
         try {
-            await reviewApi.updateReview(id, updatedReview);
+            const res = await reviewApi.updateReview(id, updatedReview);
             reviews?.find(item => {
                 if (item.id === id) {
                     item.upVoteUsers = updatedReview.upVoteUsers;
