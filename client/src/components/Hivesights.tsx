@@ -118,21 +118,47 @@ const Hivesights = ({
                     return a.companyName < b.companyName ? 1 : -1;
                 });
             case 'review asc':
-                return filteredCompanies.slice().sort(function(a: Company, b: Company) {
+                return filteredCompanies.filter((data) => data.averageTotalScore).sort(function(a: Company, b: Company) {
+                    if (a.averageTotalScore === null) {
+                        return 1;
+                    }
+                    if (b.averageTotalScore === null) {
+                        return -1;
+                    }
                     return a.reviews > b.reviews ? 1 : -1;
                 });
             case 'review desc':
-                return filteredCompanies.slice().sort(function(a: Company, b: Company) {
+                return filteredCompanies.filter((data) => data.averageTotalScore).sort(function(a: Company, b: Company) {
                     return a.reviews < b.reviews ? 1 : -1;
                 });
             case 'rating asc':
-                return filteredCompanies.slice().sort(function(a: Company, b: Company) {
+                return filteredCompanies.filter((data) => data.averageTotalScore).sort(function(a: Company, b: Company) {
+                    if (a.averageTotalScore === null) {
+                        return 1;
+                    }
+                    if (b.averageTotalScore === null) {
+                        return -1;
+                    }
                     return a.averageTotalScore > b.averageTotalScore ? 1 : -1;
                 });
             case 'rating desc':
-                return filteredCompanies.slice().sort(function(a: Company, b: Company) {
+                return filteredCompanies.filter((data) => data.averageTotalScore).sort(function(a: Company, b: Company) {
                     return a.averageTotalScore < b.averageTotalScore ? 1 : -1;
                 });
+            case 'salary asc':
+                return filteredCompanies.filter((data) => data.averageTotalScore).sort(function(a: Company, b: Company) {
+                    if (a.averageTotalScore === null) {
+                        return 1;
+                    }
+                    if (b.averageTotalScore === null) {
+                        return -1;
+                    }
+                    return a.averageSalaries > b.averageSalaries ? 1 : -1;
+                });
+            case 'salary desc':
+                    return filteredCompanies.filter((data) => data.averageTotalScore).sort(function(a: Company, b: Company) {
+                        return a.averageSalaries < b.averageSalaries ? 1 : -1;
+                    });
         }
         return result;
     };

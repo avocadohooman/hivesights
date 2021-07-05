@@ -39,6 +39,14 @@
         "value": "rating asc"
       },
       {
+        "title": "Highest Salary",
+        "value": "salary desc"
+      },
+      {
+        "title": "Lowest Salary",
+        "value": "salary asc"
+      },
+      {
         "title": "Most Reviews",
         "value": "review desc"
       },
