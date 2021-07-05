@@ -25,7 +25,7 @@ jobs:
   integration_test:
     needs: [modules]
     name: Backend Integration Testing
-    if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
+    if: ${{ (github.event_name == 'push' || github.event_name == 'pull_request') && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -43,7 +43,7 @@ jobs:
   deployment:
     needs: [integration_test]
     name: Heroku Deployment
-    if: ${{ github.event_name == 'push' && contains(join(github.event.commits.*.message, ' '), '#deploy') }}
+    if: ${{ (github.event_name == 'push' || github.event_name == 'pull_request') && contains(join(github.event.commits.*.message, ' '), '#deploy') }}
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -65,7 +65,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Bump version and push tag
-        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
+        if: ${{ (github.event_name == 'push' || github.event_name == 'pull_request') && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
         uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
