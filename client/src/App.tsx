@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import {
   useLocation,
   useHistory,
+  BrowserRouter as Router
 } from 'react-router-dom';
 import LandingPage from './components/Landing/LandingPage';
 import Hivesights from './components/Hivesights';
@@ -31,8 +32,7 @@ const App = () => {
 			const { exp }: any = jwt_decode(token);
 			const expirationTime = (exp * 1000) - 60000;
 			if (Date.now() >= expirationTime) {
-				localStorage.removeItem('token');
-				localStorage.removeItem('company');
+				localStorage.clear();
 				setUser(undefined);
 			}
 		}
@@ -75,13 +75,13 @@ const App = () => {
 
 
   return (
-	<div>
+	<Router>
 		{user && <Navbar setUser={setUser} user={user}/>}
-		<Container maxWidth="lg">
-			{!user ? (<LandingPage/>) : (<Hivesights user={user}/>)}
-		</Container>
-	</div>
-  );
+			<Container maxWidth="lg">
+				{!user ? (<LandingPage/>) : (<Hivesights user={user}/>)}
+			</Container>
+	</Router>
+	);
 };
 
 export default App;

@@ -35,16 +35,18 @@ const Navbar = ({
     const history = useHistory();
     
     const handleLogout = () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('company');
+        localStorage.clear();
         setUser(undefined);
     };   
 
     const handleGoHome = () => {
         history.push('/');
+        if (!localStorage.getItem('allCompanies') && !localStorage.getItem('allCompanies')) {
+            window.location.reload();
+        }
         // Hotfix: when returning to main page, filtered selection is still rendered 
         // which requires to manually reload page in order to get all companies again
-        window.location.reload();
+        // window.location.reload();
     };
 
     return (

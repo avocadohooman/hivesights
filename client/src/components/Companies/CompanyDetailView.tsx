@@ -48,31 +48,75 @@ const CompanyDetailView = ({
     
     const history = useHistory();
 
-    useEffect(() => {
-        const getOneCompany = async () => {
+    const getOneCompany = async () => {
+        const cachedCompany = JSON.parse(localStorage.getItem(`company-${id}`) as string);
+        if (!cachedCompany) {
             try {
                 const company: Company[] = await companyApi.getOneCompany(id);
                 setCompany(company);
-                localStorage.setItem('company', JSON.stringify(company));
-                // console.log("Company", company[0]);
+                localStorage.setItem(`company-${id}`, JSON.stringify(company));
             } catch (error: any) {
                 console.log(error);
             }
-        };
-        const getCompanyReviews = async () => {
+        } else {
+            setCompany(cachedCompany);
+        }
+
+    };
+
+    const getCompanyReviews = async () => {
+        const cachedCompanyReview = JSON.parse(localStorage.getItem(`companyReview-${id}`) as string);
+        if (!cachedCompanyReview) {
             try {
                 const reviews: Review[] = await reviewApi.getCompanyReviews(id);
                 reviews.sort(function(a: Review, b: Review) {
                     return  new Date(a.publishedDate).getTime() - new Date(b.publishedDate).getTime();
                 });
                 setReviews(reviews);
+                localStorage.setItem(`companyReview-${id}`, JSON.stringify(reviews));
             } catch (error) {
                 console.log(error);
             }
-        };
+        } else {
+            setReviews(cachedCompanyReview);
+        }
+    };
+
+    useEffect(() => {
         getOneCompany();
         getCompanyReviews();
+        const intervalId = setInterval(() => {
+            updateCacheCompany();
+            updateCacheCompanyReview();
+        }, 90000)
+        return () => clearInterval(intervalId);
     }, []);
+
+
+    const updateCacheCompany = async () => {
+        try {
+            const company: Company[] = await companyApi.getOneCompany(id);
+            setCompany(company);
+            localStorage.removeItem(`company-${id}`);
+            localStorage.setItem(`company-${id}`, JSON.stringify(company));
+        } catch (error: any) {
+            console.log(error);
+        }
+    }
+
+    const updateCacheCompanyReview = async () => {
+        try {
+            const reviews: Review[] = await reviewApi.getCompanyReviews(id);
+            reviews.sort(function(a: Review, b: Review) {
+                return  new Date(a.publishedDate).getTime() - new Date(b.publishedDate).getTime();
+            });
+            setReviews(reviews);
+            localStorage.removeItem(`companyReview-${id}`);
+            localStorage.setItem(`companyReview-${id}`, JSON.stringify(reviews));
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     const handleVoting = async (id: string, updatedReview: UpdatedReview) => {
         try {
@@ -94,6 +138,10 @@ const CompanyDetailView = ({
     const handleDelete = async () =>{
         try {
             await companyApi.deleteCompany(id);
+            localStorage.removeItem(`company-${id}`);
+            localStorage.removeItem(`companyReview-${id}`);
+            localStorage.removeItem('allCompanies');
+            localStorage.removeItem('KPIs');
             history.push('/');
             window.location.reload();
         } catch (error: any) {
@@ -105,7 +153,11 @@ const CompanyDetailView = ({
         try {
             await reviewApi.deleteReview(reviewId);
             const updatedReviews = reviews?.filter(review => review.id !== reviewId);
-            setReviews(updatedReviews);
+            localStorage.removeItem(`company-${id}`);
+            localStorage.removeItem(`companyReview-${id}`);
+            localStorage.removeItem('allCompanies');
+            localStorage.removeItem('KPIs');
+            window.location.reload();
         } catch (error: any) {
             console.log("Error", error.response.data.message);
         }

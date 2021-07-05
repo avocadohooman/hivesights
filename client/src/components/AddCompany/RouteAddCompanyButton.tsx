@@ -41,8 +41,6 @@ const RouteAddCompanyButton = () => {
 
     const goToAddCompanyRoute = () => {
         history.push('/newCompany');
-        //hot fix, not sure why reload() is suddenly necessary
-        window.location.reload();
     };
     const classes = useStyles();
 

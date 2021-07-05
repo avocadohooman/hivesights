@@ -117,8 +117,13 @@ const AddReview = ({
                 setAlertType("success");
                 setAlertMessage('Review successfully added!');
                 setAlertTitle("Success: ");
+                localStorage.removeItem('allCompanies');
+                localStorage.removeItem('KPIs');
+                localStorage.removeItem(`company-${id}`);
+                localStorage.removeItem(`companyReview-${id}`);
                 setTimeout(() => {
                         history.push(`/company/${id}`);
+                        window.location.reload();
                     }, 1000);
             } catch (error: any) {
                 setPostSuccess(false);

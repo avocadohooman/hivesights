@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 // React Libraris
 import React, { useState, useEffect } from 'react';
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Switch, useHistory} from 'react-router-dom';
 
 // Components
 import KeyIndicatorsWrapper from './KeyIndicators/KeyIndicatorsWrapper';
@@ -35,6 +35,8 @@ const Hivesights = ({
         user: User
     }): JSX.Element=> {
 
+    const history = useHistory();
+
     const [kpi, setKpi] = useState<StateKpi>();
     const [companies, setCompanies] = useState<Company[]>([]);
     const [filteredCompanies, setCompanyFilter] = useState<Company[]>(companies);
@@ -45,30 +47,49 @@ const Hivesights = ({
         intraUrl: user.intraUrl,
         internshipValidated: user.internshipValidated,
     };
-    
-    useEffect(() => {
-        const getKpi = async() => {
+
+    const getKpi = async() => {
+        const cachedKPIs = JSON.parse(localStorage.getItem('KPIs') as string);
+        if (!cachedKPIs) {
             try {
                 const res: StateKpi = await kpiApi.getKeyKpi();
                 setKpi(res);
+                localStorage.setItem('KPIs', JSON.stringify(res));
             } catch (error: any) {
                 console.log(error);
             }
-        };
-        const getCompanies = async() => {
+        } else {
+            setKpi(cachedKPIs);
+        }
+    };
+
+    const getCompanies = async() => {
+        const cachedCompanies = JSON.parse(localStorage.getItem('allCompanies') as string);
+        if (!cachedCompanies) {
             try {
                 const getCompanies: Company[] = await companyApi.getAllCompanies();
                 getCompanies.sort((function(a: Company, b: Company) {
                     return a.averageTotalScore < b.averageTotalScore ? 1 : -1; 
                 }));
                 setCompanies(getCompanies);
+                localStorage.setItem('allCompanies', JSON.stringify(getCompanies));
                 setCompanyFilter(getCompanies);
             } catch (error: any) {
                 console.log(error);
             }
-        };
+        } else {
+            setCompanies(cachedCompanies);
+            setCompanyFilter(cachedCompanies);
+        }
+    };
+
+    useEffect(() => {
         getKpi();
         getCompanies();
+        setInterval(() => {
+            updateCacheCompanies();
+            updateCacheKpis();
+        }, 90000)
     }, []);
 
     const [noData, setNoData] = useState<boolean>(false);
@@ -78,6 +99,32 @@ const Hivesights = ({
             setNoData(true);
         }
     }, 5000);
+
+    const updateCacheCompanies = async () => {
+        try {
+            const getCompanies: Company[] = await companyApi.getAllCompanies();
+            getCompanies.sort((function(a: Company, b: Company) {
+                return a.averageTotalScore < b.averageTotalScore ? 1 : -1; 
+            }));
+            localStorage.removeItem('allCompanies');
+            localStorage.setItem('allCompanies', JSON.stringify(getCompanies));
+            setCompanies(getCompanies);
+            setCompanyFilter(getCompanies);
+        } catch (error: any) {
+            console.log(error);
+        }
+    }
+
+    const updateCacheKpis = async () => {
+        try {
+            const res: StateKpi = await kpiApi.getKeyKpi();
+            setKpi(res);
+            localStorage.removeItem('KPIs');
+            localStorage.setItem('KPIs', JSON.stringify(res));
+        } catch (error: any) {
+            console.log(error);
+        }
+    }
 
     const handleCompanySearch = (event: OnChangeEvent) => {
         event.preventDefault();
@@ -165,7 +212,6 @@ const Hivesights = ({
 
 
     return (
-        <Router>
             <Switch>
                 <Route exact path="/">
                     <KeyIndicatorsWrapper kpi={kpi} setKpi={setKpi}/>
@@ -186,7 +232,6 @@ const Hivesights = ({
                     {user.userName === "gmolin" && <AddCompany />}
                 </Route> 
             </Switch>
-        </Router>
     );
 };
 
