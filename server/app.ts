@@ -5,6 +5,7 @@ import authRouter from './controllers/authRoute';
 import companyRouter from './controllers/companyRoute';
 import reviewRouter from './controllers/reviewRoute';
 import kpiRouter from './controllers/kpiRoute';
+import publicDataRouter from './controllers/publicDataRoute';
 import path from 'path';
 
 const app = express();
@@ -28,6 +29,9 @@ app.use(middleware.requestLogger);
 app.get('/health', (_req, res) => {
     res.send('ok');
 });
+
+// Public data router
+app.use('/api/public', publicDataRouter);
 
 // API Router for 42 Authentication
 app.use('/api/auth', authRouter);

@@ -86,10 +86,11 @@ const Hivesights = ({
     useEffect(() => {
         getKpi();
         getCompanies();
-        setInterval(() => {
+        const interval = setInterval(() => {
             updateCacheCompanies();
             updateCacheKpis();
-        }, 90000)
+        }, 90000);
+        return () => clearInterval(interval);
     }, []);
 
     const [noData, setNoData] = useState<boolean>(false);

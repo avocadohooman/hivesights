@@ -21,6 +21,7 @@ export type Company = {
 
 export type NewCompany = Omit<Company, 'id' | 'averageSalaries' | 'averageduration' | 'interviews'>;
 export type CompanyRating = Pick<Company, 'averageTotalScore'>;
+export type TopCompany = Pick<Company, 'averageTotalScore' | 'reviews' | 'companyName' | 'companyURL' | 'logoURL'>;
 
 export type CompanyDB = {
     id: string,
@@ -42,3 +43,6 @@ export type CompanyDB = {
     interviews?: number,
     reviews?: number,
 };
+
+export type TopCompanyDB = Pick<CompanyDB, 'averagetotalscore' | 'reviews' | 'companyname' | 'companyurl' | 'logourl'>;
+

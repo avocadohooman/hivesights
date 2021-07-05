@@ -21,5 +21,6 @@ export interface Company {
 
 export type NewCompany = Pick<Company, 'companyName' | 'companyDescription' | 'logoURL' | 'companyURL' | 'companyLocation'>;
 export type CompanyRating = Pick<Company, 'averageTotalScore'>;
+export type TopCompany = Pick<Company, 'averageTotalScore' | 'reviews' | 'companyName' | 'companyURL' | 'logoURL'>;
 
 export type SetCompany = React.Dispatch<React.SetStateAction<Company[] | undefined>>;

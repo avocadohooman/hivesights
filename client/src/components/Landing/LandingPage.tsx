@@ -1,5 +1,6 @@
 // React Libraris
 import React from 'react';
+import { TopCompany } from '../../models/companyModel';
 
 // Components
 
@@ -16,7 +17,7 @@ import '../../styles/landingPage.css';
 // Assets
 
 
-const LandingPage = (): JSX.Element => {
+const LandingPage = ({topCompanies} : {topCompanies: TopCompany[]}): JSX.Element => {
 
 	const login42 = async () => {
 		try {
