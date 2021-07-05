@@ -53,8 +53,11 @@ const AddCompany = () => {
         try {
             await companyApi.createCompany(company);
             setPostSuccess(true);
+            localStorage.removeItem('allCompanies');
+            localStorage.removeItem('KPIs');
             setTimeout(() => {
                 history.push(`/`);
+                window.location.reload();
             }, 1000);
         } catch (error) {
             console.log('Error: ', error.response.data.error);
