@@ -17,11 +17,17 @@
     font-size: 50px;
     font-family: 'SimpleNorm-Regular';
     border: none;
-    border-bottom: 1px solid #F9DE4B;
+    border-bottom: 2px solid black;
     cursor: pointer;
     background: none;
     width: fit-content;
     margin-top: 30px;
+    transition: 0.3;
+    transform: none;
+}
+
+.login:hover {
+    border-bottom: 2px solid #F9DE4B;
 }
 
 @media (max-width: 700px) {

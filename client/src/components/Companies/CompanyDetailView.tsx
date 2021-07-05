@@ -129,6 +129,8 @@ const CompanyDetailView = ({
                     item.downVoteUsers = updatedReview.downVoteUsers;
                 }
             });
+            localStorage.removeItem(`companyReview-${id}`);
+            await updateCacheCompanyReview();
             setReviews(reviews);
         } catch (error) {
             console.log(error);

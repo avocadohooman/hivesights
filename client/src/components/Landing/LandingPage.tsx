@@ -30,7 +30,14 @@ const LandingPage = (): JSX.Element => {
 
 	return (
 		<div className="landingPageContainer">
-			<div className="title">Hivesights</div>
+			<div className="title">Hive
+				<span style={{ color: '#DE7E2F' }}>s</span>
+				<span style={{ color: '#B979A6' }}>i</span>
+				<span style={{ color: '#ADD2DD' }}>g</span>
+				<span style={{ color: '#CEAA7F' }}>h</span>
+				<span style={{ color: '#F9DE4B' }}>t</span>
+				<span style={{ color: '#D23E41' }}>s</span>
+			</div>
 			<button id="signIn" className="login" onClick={login42}>Sign In</button>
 		</div>
 	);
