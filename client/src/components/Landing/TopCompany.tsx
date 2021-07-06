@@ -20,7 +20,6 @@ import StarIcon from '@material-ui/icons/Star';
 const TopCompanyItem = ({topCompany, rank} : {topCompany: TopCompany, rank: number}): JSX.Element => {
 
     const url = topCompany.companyURL;
-    console.log('URL', topCompany);
     return (
         <a className="topCompanyLink" href={`${topCompany.companyURL}`} target="_blank">
             <div className="topCompanyWrapper">
@@ -36,6 +35,7 @@ const TopCompanyItem = ({topCompany, rank} : {topCompany: TopCompany, rank: numb
                 </div>
                 <div className="topCompaniesKpisWrapper">
                     <div style={{marginRight: "15px"}}>{topCompany.reviews} Review(s)</div>
+                    <div style={{marginRight: "15px"}}>-</div>
                     <div>{topCompany.averageSalaries}€ Avg. Salary</div>
                 </div>
             </div>

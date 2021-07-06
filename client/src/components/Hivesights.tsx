@@ -10,6 +10,7 @@ import CompanyFilterWrapper from './Filter/companyFilterWrapper';
 import CompanyDetailView from './Companies/CompanyDetailView';
 import AddReview from './AddReview/AddReview';
 import AddCompany from './AddCompany/AddCompany';
+import Feedback from './Feedback/Feedback';
 
 // Data models 
 import { Company } from '../models/companyModel';
@@ -137,6 +138,10 @@ const Hivesights = ({
         setCompanyFilter(result);
     };
 
+    const resetFilter = () => {
+        setCompanyFilter(companies);
+    }
+
     const handleCompanySelection = (event: OnChangeEvent, value: SelectionFilter, label: string) => {
         event.preventDefault();
         if (!value) {
@@ -217,7 +222,8 @@ const Hivesights = ({
                 <Route exact path="/">
                     <KeyIndicatorsWrapper kpi={kpi} setKpi={setKpi}/>
                     <CompanyFilterWrapper handleCompanySearch={handleCompanySearch} handleCompanySelection={handleCompanySelection}/>
-                    <CompaniesWrapper noData={noData} user={user} companies={filteredCompanies} />
+                    <CompaniesWrapper resetFilter={resetFilter} noData={noData} user={user} companies={filteredCompanies} />
+                    <Feedback />
                 </Route>
                 <Route path="/company/:id" render={(props) => (
                     <CompanyDetailView currentUser={currentUser} id={props.match.params.id}/>

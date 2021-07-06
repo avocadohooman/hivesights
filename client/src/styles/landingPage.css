@@ -22,12 +22,14 @@
     background: none;
     width: fit-content;
     margin-top: 30px;
-    transition: 0.3;
-    transform: none;
+    transition: 0.3s;
 }
 
 .login:hover {
     border-bottom: 2px solid #F9DE4B;
+    background-color: #ADD2DD;
+    color: white;
+    border-radius: 3px;
 }
 
 @media (max-width: 700px) {

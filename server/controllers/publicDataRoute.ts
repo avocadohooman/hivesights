@@ -33,7 +33,6 @@ publicDataRouter.get('/', async (_req, res) => {
                 averageSalaries: company.averagesalaries,
                 reviews: company.reviews,
             }));
-        console.log(topCompanies);
         return res.status(200).json(topCompanies);
     } catch (error) {
         console.log(error.message);

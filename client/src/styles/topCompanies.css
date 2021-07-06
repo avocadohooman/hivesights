@@ -18,6 +18,7 @@
     box-shadow: rgb(196 199 204) 0px 0px 2px;
     padding: 30px;
     margin-bottom: 10px;
+    position: relative;
 }
 
 .topCompanyWrapper:hover {
@@ -58,7 +59,8 @@
     text-align: left;
     font-family: 'SimpleMono-Regular';
     font-size: 15px;
-    margin-top: 55px;
+    /* margin-top: 55px; */
+    top: 70px;
     text-align: center;
 }
 

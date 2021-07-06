@@ -26,3 +26,5 @@ export type HandleNewScores = (event: ChangeEvent<{}>, newValue: number | null) 
 export type HandleNewDuration= ( value: unknown, name?: string | undefined ) => void;
 
 export type HandleNewFields = (event: OnChangeEvent) => void;
+
+export type HandleFilterReset = () => void;

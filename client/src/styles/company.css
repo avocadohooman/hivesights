@@ -10,11 +10,11 @@
 .oneCompanyWrapper {
     min-width: 250px;
     height: 172px;
-    border: 1px solid #ADD2DD;
+    /* border: 1px solid #ADD2DD; */
     flex-basis: 30%;
     cursor: pointer;
-    box-shadow: none;
-    transition: 0.3;
+    box-shadow: rgb(196 199 204) 0px 0px 2px;
+    transition: 0.3s;
     margin-bottom: 34px;
 }
 
@@ -29,7 +29,7 @@
 }
 
 .oneCompanyWrapper:hover {
-    box-shadow: 0 4px 12px rgba(149,157,165,.2);
+    box-shadow: rgb(196 199 204) 0px 0px 8px;
 }
 
 .oneCompanyName {

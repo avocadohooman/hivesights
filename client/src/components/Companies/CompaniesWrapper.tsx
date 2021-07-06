@@ -10,6 +10,7 @@ import NoCompanies from './NoCompanies';
 // Data models 
 import { Company, SetCompany } from '../../models/companyModel';
 import { User } from '../../models/userModel';
+import { HandleFilterReset } from '../../models/miscModels';
 
 // API services
 
@@ -22,10 +23,12 @@ import { Skeleton } from '@material-ui/lab';
 // Assets
 
 const CompaniesWrapper = ({
+        resetFilter,
         noData,
         companies,
         user
     }: {
+        resetFilter: HandleFilterReset,
         noData: boolean,
         companies: Company[],
         user: User
@@ -35,9 +38,13 @@ const CompaniesWrapper = ({
 
     return (
         <div className="allCompanyWrapper">
-            {!noData && companies.length === 0 && loadingArray.map(item =><div key={item.id} className="oneCompanyWrapperSkeleton"><Skeleton  variant="rect" width={370} height={170} /></div>)}
+            {!noData && companies.length === 0 && loadingArray.map(item =>
+                <div key={item.id} className="oneCompanyWrapperSkeleton">
+                    <Skeleton  variant="rect" width={370} height={170} />
+                </div>
+            )}
             {companies.map(company =>
-                <Link className="oneCompanyWrapper oneCompanyLink" key={company.id} to={`/company/${company.id}`}>
+                <Link onClick={resetFilter} className="oneCompanyWrapper oneCompanyLink" key={company.id} to={`/company/${company.id}`}>
                     <OneCompany user={user} key={company.id} company={company}/>
                 </Link>
             )}
