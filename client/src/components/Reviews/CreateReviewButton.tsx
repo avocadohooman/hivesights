@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
       marginTop: '100px',
       color: 'white',
       '&:hover': {
-          color: 'black',
+          color: '#343C44',
           borderColor: '#B979A6'
       }
     },
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
         marginTop: '100px',
         color: 'white',
         '&:hover': {
-            color: 'black',
+            color: '#343C44',
             borderColor: 'grey'
         }
       },

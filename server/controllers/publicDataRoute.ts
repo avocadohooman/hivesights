@@ -20,16 +20,20 @@ publicDataRouter.get('/', async (_req, res) => {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             .sort((function(a: any, b: any) {
                 if (a.averagetotalscore && b.averagetotalscore) {
+                    if (a.averagetotalscore === b.averagetotalscore) {
+                        return a.reviews < b.reviews ? 1 : -1;
+                    }
                     return a.averagetotalscore < b.averagetotalscore ? 1 : -1;
                 }
             }))
             .map((company: TopCompanyDB) => ({
                 averageTotalScore: company.averagetotalscore,
                 companyName: company.companyname,
-                logoUrl: company.logourl,
-                companyUrl: company.companyurl,
+                companyURL: company.companyurl,
+                averageSalaries: company.averagesalaries,
                 reviews: company.reviews,
             }));
+        console.log(topCompanies);
         return res.status(200).json(topCompanies);
     } catch (error) {
         console.log(error.message);

@@ -22,11 +22,11 @@ import AddIcon from '@material-ui/icons/Add';
 const useStyles = makeStyles((theme) => ({
     button: {
       margin: theme.spacing(3, 0, 0),
-      borderColor: 'black',
+      bordercolor: '#343C44',
       background: 'transparent',
       marginTop: '0px',
       marginRight: '20px',
-      color: 'black',
+      color: '#343C44',
       '&:hover': {
           color: 'white',
           borderColor: '#B979A6',

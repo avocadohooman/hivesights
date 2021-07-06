@@ -1,0 +1,72 @@
+.topCompaniesWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 50px;
+    position: relative;
+    animation: fadeInAnimation ease 3s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+.topCompanyWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: rgb(196 199 204) 0px 0px 2px;
+    padding: 30px;
+    margin-bottom: 10px;
+}
+
+.topCompanyWrapper:hover {
+    background-color: rgb(173, 210, 221);
+}
+.topCompanyRank {
+    font-family: 'Druk Bold Regular';
+    font-size: 32px;
+}
+
+.topCompanyLabelSmall {
+    font-family: 'Druk Bold Regular';
+    font-size: 15px;
+}
+
+.topCompanyKeyIndicator {
+    font-family: 'Druk Bold Regular';
+    font-size: 32px;
+}
+
+.topCompanyLink {
+    text-decoration: none;
+    color: black;
+}
+
+.topCompaniesHeader {
+    font-family: 'Druk Bold Regular';
+    font-size: 36px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.topCompaniesKpisWrapper {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    justify-content: space-between;
+    text-align: left;
+    font-family: 'SimpleMono-Regular';
+    font-size: 15px;
+    margin-top: 55px;
+    text-align: center;
+}
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+     }
+}

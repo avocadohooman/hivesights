@@ -3,7 +3,7 @@ import React from 'react';
 import { TopCompany } from '../../models/companyModel';
 
 // Components
-
+import TopCompanies from './TopCompaniesWrapper';
 // Data models 
 
 // API services
@@ -40,6 +40,7 @@ const LandingPage = ({topCompanies} : {topCompanies: TopCompany[]}): JSX.Element
 				<span style={{ color: '#D23E41' }}>s</span>
 			</div>
 			<button id="signIn" className="login" onClick={login42}>Sign In</button>
+			{topCompanies.length > 0 && <TopCompanies topCompanies={topCompanies}/>}
 		</div>
 	);
 };
