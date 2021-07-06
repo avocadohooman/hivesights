@@ -35,7 +35,7 @@ const TopCompanyItem = ({topCompany, rank} : {topCompany: TopCompany, rank: numb
                         </div>
                 </div>
                 <div className="topCompaniesKpisWrapper">
-                    <div style={{marginRight: "15px"}}>{topCompany.reviews} Reviews</div>
+                    <div style={{marginRight: "15px"}}>{topCompany.reviews} Review(s)</div>
                     <div>{topCompany.averageSalaries}€ Avg. Salary</div>
                 </div>
             </div>

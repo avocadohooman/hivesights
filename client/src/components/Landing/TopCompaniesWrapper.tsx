@@ -18,10 +18,8 @@ import '../../styles/topCompanies.css';
 // Assets
 
 const TopCompanies = ({topCompanies} : {topCompanies: TopCompany[]}): JSX.Element => {
-
-    console.log("Top Companies", topCompanies);
     let rank = 1;
-    const topCompaniesHeader = 'Hiver\'s Top Rated Companies';
+    const topCompaniesHeader = 'Hiver\'s Top Rated Internship Companies';
     return (
         <div className="topCompaniesWrapper">
             <div className="topCompaniesHeader">

@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin-top: 50px;
+    margin-top: 80px;
     position: relative;
     animation: fadeInAnimation ease 3s;
     animation-iteration-count: 1;
