@@ -22,6 +22,7 @@ The overall vision of Hivesights is to tackle the 'valley of death' between comp
 - Hivers can read reviews 
 - Hiver can read company profiles
 - Hivers can write reviews
+- Hivers can delete their own review
 - Hivers can up-or downvote reviews
 
 ## Future Development Ideas
