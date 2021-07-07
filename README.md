@@ -5,9 +5,11 @@ The goal is to collectively create 'Hivesights' in order to help future Hivers t
 
 It also should help to provide more transparency and allow companies to learn as well. However, the reviews are only accesible by Hivers. Companies can request an anonymous report.
 
-Hivers can rate their experience based on certain rating criteria, can share their salary and can share the duration of the internship. Hivesights will calculate the averages of all submitted reviews, so Hivers can see with one glance the average total score, salary and durations of internships.
+Hivers can rate their experience based on certain rating criteria, can share their salary and can share the duration of the internship. 
 
-Hivers can also become contributors and learn through this open-source projcet modern web development skills, to prepare themselves for job applications.
+Hivesights will calculate the averages of all submitted reviews, so Hivers can see at one glance the average total score, salary and durations of all internships.
+
+Hivers can also become contributors and learn through this open-source projcet modern web development skills, to prepare themselves for job applications as web developer.
 
 The overall vision of Hivesights is to tackle the 'valley of death' between completing Hive's inner circle and landing the first internship, by preparing Hivers for the job market. 
 
