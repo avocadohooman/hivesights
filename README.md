@@ -42,6 +42,7 @@ The overall vision of Hivesights is to tackle the 'valley of death' between comp
 ## CI/CD Pipeline
 - **Testing:** Jest Backend Integration Testing
 - **Deployment:** Heroku Deployment
+- **Version Tagging:** github-tag-action
 
 ## App Preview (fake data)
 ![landing](./README_assets/hivesights_landing.gif?raw=true)
