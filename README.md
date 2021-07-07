@@ -36,7 +36,7 @@ The overall vision of Hivesights is to tackle the 'valley of death' between comp
 ## Tech Stack
 - **Language:** Typescript
 - **Database:** PostgreSQL
-- **[Micro]Frameworks:** NodeJs - Express - React
+- **Frameworks:** NodeJs - Express - React
 - **Libraries:** Material UI
 - **Internal API:** REST
 - **oAuth:** 42
