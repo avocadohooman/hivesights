@@ -47,10 +47,15 @@ The overall vision of Hivesights is to tackle the 'valley of death' between comp
 - **Version Tagging:** github-tag-action
 
 ## App Preview (fake data)
+### Landing Page With A Sneak Peek (Top Rated Companies)
 ![landing](./README_assets/hivesights_landing.gif?raw=true)
+### Main Page
 ![main](./README_assets/hivesights_main.gif?raw=true)
+### Company Detail View
 ![detail](./README_assets/hivesights_detail.gif?raw=true)
+### Adding A Review
 ![addReview](./README_assets/hivesights_add_review.gif?raw=true)
+### Embedded Feedback Collection
 ![feedback](./README_assets/hivesights_feedback.gif?raw=true)
 
 
