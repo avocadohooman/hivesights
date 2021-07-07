@@ -1,9 +1,10 @@
 # Hivesights
 
-# Features
-
 ## Version 1.0
 
-## Version 2.0
+## Future Developments
 
-## Version 3.0
+## Tech Stack
+
+## App Preview (fake data)
+
