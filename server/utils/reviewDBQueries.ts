@@ -1,3 +1,6 @@
+// Here I created variables for DB queries related to reviews
+// Easier to maintain
+
 const reviewColumns = `(
     companyid, 
     username, 

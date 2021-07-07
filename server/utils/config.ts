@@ -7,5 +7,4 @@ const DATABASE = process.env.DATABASE_URL;
 export default {
     PORT,
     DATABASE,
-
 };

@@ -1,14 +1,18 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import pool from '../db';
 import { NewReview } from '../types/review';
 import reviewDBQueries from '../utils/reviewDBQueries';
 
+// Getting review columns from reviewDBQueries helper file
 const reviewColumns = reviewDBQueries.reviewColumns;
+// Getting updateScore columens from reviewDBQueries helper file
 const updateScoreColumns = reviewDBQueries.updateScoreColumns;
 
+// Checking for a review duplicate
 const checkDuplicate = async (newReview: NewReview, reviewTable: string) => {
     console.log('Check for duplicates');
     const userName = newReview.userName;
-    // const companyId = newReview.companyId;
     const duplicate = await pool.query(`SELECT username FROM ${reviewTable} WHERE username = ($1)`, [userName]);
     if (duplicate.rowCount > 0) {
         console.log("Duplicate found: ", duplicate.rowCount > 0);
@@ -18,6 +22,7 @@ const checkDuplicate = async (newReview: NewReview, reviewTable: string) => {
     return 1;
 };
 
+// Checking if review exists for PUT and GET:id calls
 const checkIfExists = async (id: any, reviewTable: string) => {
     console.log("checkIfExists");
     const review = await pool.query(`SELECT id FROM ${reviewTable} WHERE id = ($1)`, [id])
@@ -33,6 +38,7 @@ const checkIfExists = async (id: any, reviewTable: string) => {
     return 1;
 };
 
+// addReview function adds a new review to DB and updates average salary, total score, amount of review and average duration
 const addReview = async (newReview: NewReview, reviewTable: string, companyTable: string) => {
     // newReview.totalRating = calculateTotalScore(newReview);
     await pool.query(`INSERT INTO ${reviewTable} 
@@ -70,19 +76,7 @@ const addReview = async (newReview: NewReview, reviewTable: string, companyTable
     await updateAverageDuration(newReview.companyId, reviewTable, companyTable);
 };
 
-// const updateTotalScore = async (companyId: string, reviewTable: string, companyTable: string) => {
-//     const newTotalScore = await pool.query(`SELECT AVG (totalrating)::NUMERIC(10,2) FROM ${reviewTable} WHERE companyid = ($1)`, [companyId]);
-//     const updatedRating = await pool.query(`UPDATE ${companyTable} 
-//     SET
-//     averageTotalScore = ($1) 
-//     WHERE
-//     id = ($2)`,
-//     [
-//         newTotalScore.rows[0].avg,
-//         companyId
-//     ]);
-// };
-
+// updateScore calculates and updates average values for total score and subcategory scores of a company
 const updateScores = async (companyId: string, reviewTable: string, companyTable: string) => {
     const newTotalQuery = 'AVG (totalrating)::NUMERIC(10,2)';
     const averageInterviewQuery = 'AVG (ratingCriteriaInterview)::NUMERIC(10,2)';
@@ -130,9 +124,10 @@ const updateScores = async (companyId: string, reviewTable: string, companyTable
 
 };
 
+// updateAverageSalary calculates and updates average salary for a company based on new review
 const updateAverageSalary = async (companyId: string, reviewTable: string, companyTable: string) => {
     const newAverageSalary = await pool.query(`SELECT AVG (salary)::NUMERIC(10,2) FROM ${reviewTable} WHERE companyid = ($1)`, [companyId]);
-    const updatedSalary = await pool.query(`UPDATE ${companyTable} 
+    await pool.query(`UPDATE ${companyTable} 
     SET
     averagesalaries = ($1) 
     WHERE
@@ -148,9 +143,10 @@ const updateAverageSalary = async (companyId: string, reviewTable: string, compa
     });
 };
 
+// updateAmountOfReviews calculates and updates amount of reviews for a company based on new review
 const updateAmountOfReviews = async (companyId: string, reviewTable: string, companyTable: string) => {
     const newAmount = await pool.query(`SELECT * FROM ${reviewTable} WHERE companyid = ($1)`, [companyId]);
-    const updatedAmount = await pool.query(`UPDATE ${companyTable} 
+    await pool.query(`UPDATE ${companyTable} 
     SET
     reviews = ($1) 
     WHERE
@@ -166,9 +162,10 @@ const updateAmountOfReviews = async (companyId: string, reviewTable: string, com
     });
 };
 
+// updateAverageDuration calculates and updates average internship duration for a company based on new review
 const updateAverageDuration = async (companyId: string, reviewTable: string, companyTable: string) => {
     const newDuration = await pool.query(`SELECT AVG (duration)::NUMERIC(10,2) FROM ${reviewTable} WHERE companyid = ($1)`, [companyId]);
-    const updatedDuration = await pool.query(`UPDATE ${companyTable} 
+    await pool.query(`UPDATE ${companyTable} 
     SET
     averageduration = ($1) 
     WHERE
@@ -183,19 +180,6 @@ const updateAverageDuration = async (companyId: string, reviewTable: string, com
         }
     });
 };
-
-// const calculateTotalScore = (newReview: NewReview) : number => {
-//     const interview : number = newReview.ratingCriteriaInterview * 1;
-//     const onboarding : number = newReview.ratingCriteriaOnboarding * 1.2;
-//     const supervision : number = newReview.ratingCriteriaSupervision * 1.2;
-//     const learning : number = newReview.ratingCriteriaLearning * 1;
-//     const codingPractices : number = newReview.ratingCriteriaCodingPractices * 1;
-//     const perks : number = newReview.ratingCriteriaPerks * 0.8;
-//     const culture : number = newReview.ratingCriteriaPerks * 1;
-
-//     const totalScore = (interview + onboarding + supervision + learning + codingPractices + perks + culture) / 7;
-//     return totalScore;
-// };
 
 export default {
     updateScores,

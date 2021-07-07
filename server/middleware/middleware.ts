@@ -7,6 +7,8 @@ import pool from '../db';
 
 const reviewTable = process.env.NODE_ENV === 'production' ? 'review' : 'review_test';
 
+
+// logging requests in CLI
 const requestLogger = (request: any, response: any, next: any) => {
     logger.info('Method:', request.method);
     logger.info('Path:  ', request.path);
@@ -15,10 +17,12 @@ const requestLogger = (request: any, response: any, next: any) => {
     next();
 };
 
+// unknow endpoint return
 const unknownEndpoint = (request: any, response: any) => {
     response.status(404).send({ error: 'unknown endpoint' });
 };
 
+// handling errors depending on type
 const errorHandler = (error: any, request: any, response: any, next: any) => {
     logger.error(error.message);
   
@@ -40,6 +44,7 @@ const errorHandler = (error: any, request: any, response: any, next: any) => {
     next(error);
 };
 
+// extracting tokens for certain routes
 const tokenExtractor = (req: any, res: any, next: any) => {
   const authorization: string = req.get('authorization');
   if (authorization && authorization.toLocaleLowerCase().startsWith('bearer')) {
@@ -50,7 +55,9 @@ const tokenExtractor = (req: any, res: any, next: any) => {
   next();
 };
  
-const userExtractorCompanyRights = async (req: any, res: any, next: any) => {
+// extracting user for creating a company in companyRoute, currently only user 'gmolin
+// can create a company
+const userExtractorCompanyRights = (req: any, res: any, next: any) => {
   if (process.env.NODE_ENV !== "test") {
     const decodedToken: any = jwt.verify(req.token, process.env.SECRET as string);
     if (!decodedToken || decodedToken.userName !== "gmolin") {
@@ -60,6 +67,8 @@ const userExtractorCompanyRights = async (req: any, res: any, next: any) => {
   next();
 };
 
+// extracting user for creating a new review
+// checking if user has created the review as only the user who is the author can delete a review
 const userExtractorReviewRights = async (req: any, res: any, next: any) => {
   const reviewId: string = req.params.id;
   if (process.env.NODE_ENV !== "test") {
@@ -81,7 +90,6 @@ const userExtractorReviewRights = async (req: any, res: any, next: any) => {
   }
   next();
 };
-
 
 export default {
     requestLogger,

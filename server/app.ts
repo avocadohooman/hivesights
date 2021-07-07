@@ -55,6 +55,7 @@ app.get('/health', (req, res) => {
     res.send('ok');
 });
 
+// Rerouting unknowng endpoints to index.html of client
 app.get('*', (req,res) =>{
     res.sendFile(path.join('/app/build/index.html'));
 });

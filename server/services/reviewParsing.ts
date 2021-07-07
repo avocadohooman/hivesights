@@ -1,6 +1,7 @@
 import { NewReview } from '../types/review';
 import parsingHelper from './parsingHelpers';
 
+// parsing incoming reviews through PUT/POST requests
 const parsingReview = (object: any, companyId: string) : NewReview => {
     const newReview: NewReview = {
         companyId: parseCompanyId(companyId),
@@ -29,6 +30,7 @@ const parsingReview = (object: any, companyId: string) : NewReview => {
     return newReview;
 };
 
+// checking if company ID exists and is of type string
 const parseCompanyId = (companyId: unknown) : string => {
     if (!companyId || !parsingHelper.isString(companyId)) {
         throw new Error('Incorrect or missing companyId ' + companyId);
@@ -36,6 +38,7 @@ const parseCompanyId = (companyId: unknown) : string => {
     return companyId;
 };
 
+// checking if userNAme exists and is of type string
 const parseUserName = (userName: unknown) : string => {
     if (!userName || !parsingHelper.isString(userName)) {
         throw new Error('Incorrect or missing userName ' + userName);
@@ -43,6 +46,7 @@ const parseUserName = (userName: unknown) : string => {
     return userName;
 };
 
+// checking if userPicture URL exists and is of type string
 const parseUserPictureUrl = (userPictureUrl: unknown) : string => {
     if (!userPictureUrl || !parsingHelper.isString(userPictureUrl)) {
         throw new Error('Incorrect or missing userPictureUrl ' + userPictureUrl);
@@ -50,6 +54,8 @@ const parseUserPictureUrl = (userPictureUrl: unknown) : string => {
     return userPictureUrl;
 };
 
+// checking if Pros/CONS exist, are of type string and have a minimumum
+// length of 5
 const parseProsCons = (prosCons: unknown) : string => {
     if (!prosCons || !parsingHelper.isString(prosCons)) {
         throw new Error('Incorrect or missing Pros/Cons ' + prosCons);
@@ -61,6 +67,8 @@ const parseProsCons = (prosCons: unknown) : string => {
     return prosCons;
 };
 
+// checking if overall headline exist, are of type string and has a 
+// maximum length of 120 characters
 const parseOverall = (overall: unknown) : string => {
     if (!overall || !parsingHelper.isString(overall)) {
         throw new Error('Incorrect or missing overall ' + overall);
@@ -72,6 +80,8 @@ const parseOverall = (overall: unknown) : string => {
     return overall;
 };
 
+// checking if totalRating exists, is of type number and that 
+// value is between 0 - 5
 const parseTotalRating = (totalRating: unknown) : number => {
     if (totalRating === undefined || !parsingHelper.isNumber(totalRating)) {
         throw new Error('Incorrect or missing totalRating ' + totalRating);
@@ -82,6 +92,8 @@ const parseTotalRating = (totalRating: unknown) : number => {
     return totalRating;
 };
 
+// checking if subcategory rating exists, is of type number and that 
+// value is between 0 - 5
 const parseCriteriaRating = (criteriaRating: unknown) : number => {
     if (criteriaRating === undefined || !parsingHelper.isNumber(criteriaRating)) {
         throw new Error('Incorrect or missing criteriaRating ' + criteriaRating);
@@ -92,6 +104,8 @@ const parseCriteriaRating = (criteriaRating: unknown) : number => {
     return criteriaRating;
 };
 
+// checking if salary exists, is of type number and that 
+// value is not below 0
 const parseSalary = (salary: unknown) : number => {
     if (salary === undefined || !parsingHelper.isNumber(salary)) {
         throw new Error('Incorrect or missing salary ' + salary);
@@ -102,6 +116,8 @@ const parseSalary = (salary: unknown) : number => {
     return salary;
 };
 
+// checking if duration exists, is of type number and that 
+// value is not below 0
 const parseDuration = (duration: unknown) : number => {
     if (duration === undefined || !parsingHelper.isNumber(duration)) {
         throw new Error('Incorrect or missing duration ' + duration);
@@ -112,6 +128,7 @@ const parseDuration = (duration: unknown) : number => {
     return duration;
 };
 
+// checking if cover letter exists, is of type string
 const parseCoverLetter = (coverLetter: unknown) : string => {
     if (!parsingHelper.isString(coverLetter)) {
          throw new Error('Incorrect or missing coverLetter ' + coverLetter);
@@ -119,6 +136,7 @@ const parseCoverLetter = (coverLetter: unknown) : string => {
     return coverLetter;
 };
 
+// checking if resume exists, is of type string
 const parseResume = (resume: unknown) : string => {
     if (!parsingHelper.isString(resume)) {
          throw new Error('Incorrect or missing resume ' + resume);
@@ -126,6 +144,7 @@ const parseResume = (resume: unknown) : string => {
     return resume;
 };
 
+// checking if vote exists, is of type number and value is not below 0
 const parseVoting = (vote: unknown) : number => {
     if (vote === undefined || !parsingHelper.isNumber(vote)) {
         throw new Error('Incorrect or missing vote ' + vote);
@@ -136,6 +155,7 @@ const parseVoting = (vote: unknown) : number => {
     return vote;
 };
 
+// checking if user exists and is of type string
 const parseVotingUsers = (users: unknown[]) : string[] => {
     let _users: string[] = [];
     _users = users.map(user => {
