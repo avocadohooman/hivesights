@@ -15,6 +15,9 @@ import '../../styles/addCompany.css';
 
 // Assets
 
+
+// AddCompanyFormHeader takes in header: string, color: string and size: string to 
+// create differently formatted headers
 const AddCompanyFormHeader = ({ 
         header,
         color,

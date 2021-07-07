@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 // Components
-import AddReviewHeader from './AddReviewHeader';
 import AddCompanyFormHeader from './AddCompanyFormHeader';
 import AddCompanyField from './AddCompanyField';
 import AddCompanyButton from './AddCompanyButton';
@@ -18,12 +17,14 @@ import { OnChangeEvent } from '../../models/miscModels';
 // CSS styles
 import '../../styles/addCompany.css';
 import companyApi from '../../services/companyApi';
+import AddCompanyHeader from './AddReviewHeader';
 
 // UI Libraries
 
 
 // Assets
 
+// AddCompany component as parent component for creating a new company. Contains all the business logic
 const AddCompany = () => {
 
     const history = useHistory();
@@ -40,7 +41,9 @@ const AddCompany = () => {
     const [postSuccess, setPostSuccess] = useState<boolean>(false);
 
 
+    // handleNewCompany is triggered when pressing 'Add Company', and accesses all state variables of the form fields
     const handleNewCompany = async () => {
+        // deactivates Add Company button to prevent multiple POST requests
         setBtnDsiable(true);
         const company: NewCompany = {
             companyName: companyName,
@@ -52,9 +55,12 @@ const AddCompany = () => {
         setNewCompany(company);
         try {
             await companyApi.createCompany(company);
+            // setting post success triggers success alert message
             setPostSuccess(true);
+            // removing allCompines and KPIs cache, so we pull latest data
             localStorage.removeItem('allCompanies');
             localStorage.removeItem('KPIs');
+            // short delay before pushing to '/' and reloading page
             setTimeout(() => {
                 history.push(`/`);
                 window.location.reload();
@@ -93,7 +99,7 @@ const AddCompany = () => {
     return (
         <div className="addCompanyWrapper">
             <div className="addCompanyInnerWrapperForm">
-                <AddReviewHeader />
+                <AddCompanyHeader />
                 <AddCompanyFormHeader header='Company Name' color='#343C44' size='14px'/>
                 <AddCompanyField handleCompanyfield={handleCompanyName} />
 

@@ -14,6 +14,7 @@ import jwt_decode from 'jwt-decode';
 import { StateUser } from './models/userModel';
 import { TopCompany } from './models/companyModel';
 
+// creating an interface for incoming UserToken from backend
 interface UserToken {
 	id: string,
 	userName: string,
@@ -22,6 +23,8 @@ interface UserToken {
 	internshipValidated: boolean,
 }
 
+// App component where token is being requested and where token expiration 
+// is being checked.
 const App = () => {
 	const [user, setUser] = useState<StateUser | undefined>(undefined);
 	const [topCompanies, setTopCompanies] = useState<TopCompany[]>([]);
@@ -29,6 +32,7 @@ const App = () => {
 	const history = useHistory();
 	const location = useLocation();
 
+	//check token expiration, if expired, erase user and force log-out
 	const checkTokenExpiration = () => {
 		const token = localStorage.getItem('token');
 		if (token) {
@@ -41,6 +45,7 @@ const App = () => {
 		}
 	};
 
+	//check if token exists, if not, get roken from backend, decode it and set user
 	const checkToken = async () => {
 		let token = localStorage.getItem('token');
 		if (!token && location.search.startsWith('?auth=')) {
@@ -70,6 +75,7 @@ const App = () => {
 		}
 	};
 
+	//getPublicData gets sneak peek data for landing page: top rated companies by Hivers
 	const getPublicData = async () => {
 		try {
 			const topCompanies = await publicDataApi.getTopCompanies();
@@ -89,6 +95,7 @@ const App = () => {
 	}, []);
 
 	return (
+		//if user doesn't exist, show landing page, otherwise show Hivesights component
 		<Router>
 			{user && <Navbar setUser={setUser} user={user}/>}
 				<Container maxWidth="lg">

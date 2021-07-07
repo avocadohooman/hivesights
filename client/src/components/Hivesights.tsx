@@ -30,6 +30,9 @@ import { Container } from '@material-ui/core';
 
 // Assets
 
+
+// Hivesights component as main component for getting all companies, KPIs and servings 
+// as parent for company detail component, reviews and adding company
 const Hivesights = ({
         user
     }: {
@@ -49,12 +52,14 @@ const Hivesights = ({
         internshipValidated: user.internshipValidated,
     };
 
+    // getKpi gets KPIs and check if KPI cache exists, if not then pull from backend
     const getKpi = async() => {
         const cachedKPIs = JSON.parse(localStorage.getItem('KPIs') as string);
         if (!cachedKPIs) {
             try {
                 const res: StateKpi = await kpiApi.getKeyKpi();
                 setKpi(res);
+                // sets localStorate (cache)
                 localStorage.setItem('KPIs', JSON.stringify(res));
             } catch (error: any) {
                 console.log(error);
@@ -64,15 +69,19 @@ const Hivesights = ({
         }
     };
 
+    // getCompanies gets all companies and check if all companies cache exists, if not then pull from backend
+    // it pulates companies and filteredCompanies, which is needed for handling sorting and searching
     const getCompanies = async() => {
         const cachedCompanies = JSON.parse(localStorage.getItem('allCompanies') as string);
         if (!cachedCompanies) {
             try {
                 const getCompanies: Company[] = await companyApi.getAllCompanies();
+                // sorts companies by averageTotalScore (desc)
                 getCompanies.sort((function(a: Company, b: Company) {
                     return a.averageTotalScore < b.averageTotalScore ? 1 : -1; 
                 }));
                 setCompanies(getCompanies);
+                // sets localStorate (cache)
                 localStorage.setItem('allCompanies', JSON.stringify(getCompanies));
                 setCompanyFilter(getCompanies);
             } catch (error: any) {
@@ -87,24 +96,29 @@ const Hivesights = ({
     useEffect(() => {
         getKpi();
         getCompanies();
+        // cache polling, ever 90 seconds we update cache
         const interval = setInterval(() => {
             updateCacheCompanies();
             updateCacheKpis();
         }, 90000);
+        //clearing interval/preventing memory leak when component is unmounted
         return () => clearInterval(interval);
     }, []);
 
     const [noData, setNoData] = useState<boolean>(false);
 
+    // checks if after 5 seconds no companies exist, then we show noData message to user
     setTimeout(() => {
         if (companies.length === 0) {
             setNoData(true);
         }
     }, 5000);
 
+    // updated all companies cache
     const updateCacheCompanies = async () => {
         try {
             const getCompanies: Company[] = await companyApi.getAllCompanies();
+            // sorts companies by averageTotalScore (desc)
             getCompanies.sort((function(a: Company, b: Company) {
                 return a.averageTotalScore < b.averageTotalScore ? 1 : -1; 
             }));
@@ -117,6 +131,7 @@ const Hivesights = ({
         }
     }
 
+    // updated all companies cache
     const updateCacheKpis = async () => {
         try {
             const res: StateKpi = await kpiApi.getKeyKpi();
@@ -128,6 +143,7 @@ const Hivesights = ({
         }
     }
 
+    // handleCompanySearch handles company search requests and updated setCompanyFilter with result
     const handleCompanySearch = (event: OnChangeEvent) => {
         event.preventDefault();
         const value: string = event.target.value.toLowerCase();
@@ -138,10 +154,14 @@ const Hivesights = ({
         setCompanyFilter(result);
     };
 
+    // resetting filter when selecting a company
+    // This is a hotfix until better solution has been found. Without this reset, filter is being saved and 
+    // user would need to refresh whole page to get allCompanies again
     const resetFilter = () => {
         setCompanyFilter(companies);
     }
 
+    // handleCompanySelection handles all three sorting option (by rating, salary and various sorting options)
     const handleCompanySelection = (event: OnChangeEvent, value: SelectionFilter, label: string) => {
         event.preventDefault();
         if (!value) {
@@ -159,6 +179,7 @@ const Hivesights = ({
         setCompanyFilter(result);
     };
 
+    // handleSorting handles all sorting options
     const handleSorting = (value: SelectionFilter):Company[] => {
         const result: Company[] = filteredCompanies;
         switch (value.value) {
@@ -172,9 +193,11 @@ const Hivesights = ({
                 });
             case 'review asc':
                 return filteredCompanies.filter((data) => data.averageTotalScore).sort(function(a: Company, b: Company) {
+                    // here we make sure that companies with no date are sorted behind companies with data
                     if (a.averageTotalScore === null) {
                         return 1;
                     }
+                    // here we make sure that companies with no date are sorted behind companies with data
                     if (b.averageTotalScore === null) {
                         return -1;
                     }
@@ -186,9 +209,11 @@ const Hivesights = ({
                 });
             case 'rating asc':
                 return filteredCompanies.filter((data) => data.averageTotalScore).sort(function(a: Company, b: Company) {
+                    // here we make sure that companies with no date are sorted behind companies with data
                     if (a.averageTotalScore === null) {
                         return 1;
                     }
+                    // here we make sure that companies with no date are sorted behind companies with data
                     if (b.averageTotalScore === null) {
                         return -1;
                     }
@@ -200,9 +225,11 @@ const Hivesights = ({
                 });
             case 'salary asc':
                 return filteredCompanies.filter((data) => data.averageTotalScore).sort(function(a: Company, b: Company) {
+                    // here we make sure that companies with no date are sorted behind companies with data
                     if (a.averageTotalScore === null) {
                         return 1;
                     }
+                    // here we make sure that companies with no date are sorted behind companies with data
                     if (b.averageTotalScore === null) {
                         return -1;
                     }
@@ -236,6 +263,7 @@ const Hivesights = ({
                 )}>
                 </Route>
                 <Route path="/newCompany">
+                    {/* Currently only user 'gmolin' can add company. in future every user will be able to add a company */}
                     {user.userName === "gmolin" && <AddCompany />}
                 </Route> 
             </Switch>

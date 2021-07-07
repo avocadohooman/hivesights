@@ -15,7 +15,7 @@ import '../../styles/feedback.css';
 // Assets
 
 
-
+// Feedback component is a button that links directly to a Typeform feedback form
 const Feedback = (): JSX.Element => {
   
     return (

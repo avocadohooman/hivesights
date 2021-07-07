@@ -30,7 +30,7 @@ import { Alert, Skeleton } from '@material-ui/lab';
 // Assets
 
 
-
+// CompanyDetailView is the parent component for the detail view of a company, it takes in the company id and the current user
 const CompanyDetailView = ({
         id,
         currentUser
@@ -48,7 +48,10 @@ const CompanyDetailView = ({
     
     const history = useHistory();
 
+    // here we get the data for the selected company
+    // we check if there is a cache, if not we pull from the backend
     const getOneCompany = async () => {
+        // assigning cache with company id
         const cachedCompany = JSON.parse(localStorage.getItem(`company-${id}`) as string);
         if (!cachedCompany) {
             try {
@@ -64,11 +67,15 @@ const CompanyDetailView = ({
 
     };
 
+    // here we get the review for the selected company
+    // we check if there is a cache, if not we pull from the backend
     const getCompanyReviews = async () => {
+        // assigning cache with company id
         const cachedCompanyReview = JSON.parse(localStorage.getItem(`companyReview-${id}`) as string);
         if (!cachedCompanyReview) {
             try {
                 const reviews: Review[] = await reviewApi.getCompanyReviews(id);
+                // here we sort reviews by newst - oldest
                 reviews.sort(function(a: Review, b: Review) {
                     return  new Date(a.publishedDate).getTime() - new Date(b.publishedDate).getTime();
                 });
@@ -85,14 +92,16 @@ const CompanyDetailView = ({
     useEffect(() => {
         getOneCompany();
         getCompanyReviews();
+        // polling caching ever 90 seconds
         const intervalId = setInterval(() => {
             updateCacheCompany();
             updateCacheCompanyReview();
         }, 90000)
+        // clearing interval to avoid memory leak when component unmounted
         return () => clearInterval(intervalId);
     }, []);
 
-
+    // updating company cache and setting new cache variable
     const updateCacheCompany = async () => {
         try {
             const company: Company[] = await companyApi.getOneCompany(id);
@@ -104,6 +113,7 @@ const CompanyDetailView = ({
         }
     }
 
+    // updating company review cache and setting new cache variable
     const updateCacheCompanyReview = async () => {
         try {
             const reviews: Review[] = await reviewApi.getCompanyReviews(id);
@@ -118,9 +128,12 @@ const CompanyDetailView = ({
         }
     }
 
+    // here we handle up and downvotes
     const handleVoting = async (id: string, updatedReview: UpdatedReview) => {
         try {
             const res = await reviewApi.updateReview(id, updatedReview);
+            // after successful PUT request, we update local review
+            // to render update in the fron-end
             reviews?.find(item => {
                 if (item.id === id) {
                     item.upVoteUsers = updatedReview.upVoteUsers;
@@ -129,6 +142,8 @@ const CompanyDetailView = ({
                     item.downVoteUsers = updatedReview.downVoteUsers;
                 }
             });
+            // then we remove old cache, and force pullting latest 
+            // data from the backend
             localStorage.removeItem(`companyReview-${id}`);
             await updateCacheCompanyReview();
             setReviews(reviews);
@@ -137,6 +152,7 @@ const CompanyDetailView = ({
         }
     };
 
+    // here we handle company delete, currently only possible for user 'gmolin'
     const handleDelete = async () =>{
         try {
             await companyApi.deleteCompany(id);
@@ -151,6 +167,9 @@ const CompanyDetailView = ({
         }
     };
 
+    // here we handle deleting a review by a user
+    // after succesful DELETE request, we remove local review as well
+    // and all cache variables, and force page reload to get latest data
     const handleReviewDelete = async (reviewId: string) => {
         try {
             await reviewApi.deleteReview(reviewId);

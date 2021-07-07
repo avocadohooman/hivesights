@@ -22,6 +22,7 @@ import { Skeleton } from '@material-ui/lab';
 
 // Assets
 
+// CompaniesWrapper is the parent component for listening all companies 
 const CompaniesWrapper = ({
         resetFilter,
         noData,
@@ -34,6 +35,7 @@ const CompaniesWrapper = ({
         user: User
     }): JSX.Element => {
     
+    // loadingArray is a mock-up for the Sekelton loading screens
     const loadingArray = [{id: 0}, {id: 1}, {id: 2}, {id: 3}, {id: 4}, {id: 5}, {id: 6}, {id: 7}, {id: 8}];
 
     return (
@@ -44,6 +46,7 @@ const CompaniesWrapper = ({
                 </div>
             )}
             {companies.map(company =>
+                // creating a Link for each company to the route company/:id
                 <Link onClick={resetFilter} className="oneCompanyWrapper oneCompanyLink" key={company.id} to={`/company/${company.id}`}>
                     <OneCompany user={user} key={company.id} company={company}/>
                 </Link>

@@ -35,7 +35,7 @@ import '../../styles/addReview.css';
 
 // Assets
 
-
+// AddReview component as parent component for creating a new review. Contains all the business logic
 const AddReview = ({
         companies,
         currentUser,
@@ -48,6 +48,7 @@ const AddReview = ({
 
     const history = useHistory();
 
+    // all necessary useState variable for creating a new review
     const [newReview, setNewReview] = useState<NewReview | null>();
     const [overallScore, setOverallScore] = useState<number>(1);
     const [recruitment, setRecruitment] = useState<number>(1);
@@ -76,16 +77,21 @@ const AddReview = ({
     const [errorSalary, setSalaryError] = useState<boolean>(false);
     const [errorSalarysMessage, setSalaryErrorMessage] = useState<string>("");
 
+    // states for adding a review. btnDisable deactivates add review button and postSuccess/postError trigger Alert messages
     const [btnDisable, setBtnDsiable] = useState<boolean>(false);
     const [postSuccess, setPostSuccess] = useState<boolean>(false);
     const [postError, setPostError] = useState<boolean>(false);
     
+    // alert variables such as title and type
     const [alert, setAlertMessage] = useState<string>("");
     const [alertType, setAlertType] = useState<string>("");
     const [alertTitle, setAlertTitle] = useState<string>("");
 
     const company = companies.find(company => company.id === id);
 
+    // handleNewReview creates a newReview accessing the various state variable for a Review
+    // before a new review is created, we validate the input data also in the front end to 
+    // provide feedback for the user if e.g. the header is too long or cons/pros too short.
     const handleNewReview = async () => {
         setBtnDsiable(true);
         if (validateData()) {
@@ -117,6 +123,8 @@ const AddReview = ({
                 setAlertType("success");
                 setAlertMessage('Review successfully added!');
                 setAlertTitle("Success: ");
+                // removing local storage variables, so latest data is being pulled 
+                // from the backend
                 localStorage.removeItem('allCompanies');
                 localStorage.removeItem('KPIs');
                 localStorage.removeItem(`company-${id}`);
@@ -136,14 +144,18 @@ const AddReview = ({
         setBtnDsiable(false);
     };
 
+    // validateData does a front-end parsing check before sending it to the backed
+    // this allows better feedback for the user
     const validateData = () : number => {
         const amountOfWordsPros = pros.split(' ');
         const amountOfWordsCons = cons.split(' ');
+        // checking if header is too long or empty
         if (overallHeadline.length > 120 || overallHeadline.length === 0) {
             setHeadlineError(true);
             setHeadlineErrorMessage('The headline cannot be longer than 120 character, or be empty');
             return 0;
         }
+        // checking if Cons/Pros are both too short
         if (amountOfWordsCons.length < 5 && amountOfWordsPros.length < 5) {
             setConsError(true);
             setConsErrorMessage(`Cons need to have at least 5 words`);
@@ -151,11 +163,19 @@ const AddReview = ({
             setProsErrorMessage(`Pros need to have at least 5 words`);
             return 0;
         } 
+        // checking if pros is too short
         if (amountOfWordsPros.length < 5) {
             setProsError(true);
             setProsErrorMessage(`Pros need to have at least 5 words`);
             return 0;
         }
+        // checking if cons is too short
+        if (amountOfWordsCons.length < 5) {
+            setConsError(true);
+            setConsErrorMessage(`Cons need to have at least 5 words`);
+            return 0;
+        }
+        // checking if salary is negative or too big
         if (salary < 0 || salary > 10000) {
             setSalaryError(true);
             setSalaryErrorMessage('Invalid amount for salary: can\'t be negative or too high');

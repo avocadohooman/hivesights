@@ -21,7 +21,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 // Assets
 import { ReactComponent as SignOut } from '../../assets/signOut.svg';
 
-
+// Navbar handles top navivation logic and layout, is visible one user exists
 const Navbar = ({
         user, setUser
     }: {
@@ -34,24 +34,27 @@ const Navbar = ({
     const userName = user?.userName;
     const history = useHistory();
     
+    // handleLogout clears the cache and sets user to undefined, which renders LandingPage component
+    // and hides Hivesights component
     const handleLogout = () => {
         localStorage.clear();
         setUser(undefined);
     };   
 
+    // handleGoHome handles navigation to main Hivesights page, and reloads page if allCompanies & KPIs cache is empty
+    // to trigger pulling latest data from backend
     const handleGoHome = () => {
         history.push('/');
-        if (!localStorage.getItem('allCompanies') && !localStorage.getItem('allCompanies')) {
+        if (!localStorage.getItem('allCompanies') && !localStorage.getItem('KPIs')) {
             window.location.reload();
         }
-        // Hotfix: when returning to main page, filtered selection is still rendered 
-        // which requires to manually reload page in order to get all companies again
     };
 
     return (
         <div className="navbar">
             <button className="logoTitle" onClick={handleGoHome}>{logoTitle}</button>
             <div className="userSection">
+                {/* add company button only visibl to user gmolin, will be moved later on to be visible for every user */}
                 {user.userName === 'gmolin' && <RouteAddCompanyButton />}
                 <Avatar size='s' avatarImageUrl={avatarImageUrl}/>
                 <UserName userName={userName}/>

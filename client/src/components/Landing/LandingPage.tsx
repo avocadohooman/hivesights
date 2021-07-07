@@ -16,7 +16,8 @@ import '../../styles/landingPage.css';
 
 // Assets
 
-
+// LandingPage is being displayed if user is empty/undefined
+// it shows logo, sign-in button and Hivers top rated companies
 const LandingPage = ({topCompanies} : {topCompanies: TopCompany[]}): JSX.Element => {
 
 	const login42 = async () => {
