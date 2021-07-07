@@ -1,5 +1,5 @@
 # Hivesights
-Hivesight is an open-source platform where Hivers can rate their internship experience, and share it with fellow Hivers.
+Hivesights is an open-source platform where Hivers can rate their internship experience, and share it with fellow Hivers.
 
 The goal is to collectively create 'Hivesights' in order to help future Hivers to land their dream internship position, and learn from fellow Hivers. 
 
