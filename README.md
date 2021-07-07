@@ -3,7 +3,7 @@ Hivesights is an open-source platform where Hivers can rate their internship exp
 
 The goal is to collectively create 'Hivesights' in order to help future Hivers to land their dream internship position, and learn from fellow Hivers. 
 
-It also should help to provide more transparency and allow companies to learn as well. However, the reviews are only accesible by Hivers. Companies can request an anonymous report.
+It also should help to create more transparency and allow companies to learn as well. However, the reviews are only accesible by Hivers. Companies can request an anonymous report.
 
 Hivers can rate their experience based on certain rating criteria, can share their salary and can share the duration of the internship. 
 
