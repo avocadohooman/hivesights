@@ -16,9 +16,9 @@ The overall vision of Hivesights is to tackle the 'valley of death' between comp
 ## Version 1.0 (release August 2021)
 
 - Key Performance Indicators: 
-- - Average Total Score 
-- - Average Salary
-- - Average Duration
+  - Average Total Score 
+  - Average Salary
+  - Average Duration
 - Hivers can read reviews 
 - Hiver can read company profiles
 - Hivers can write reviews
