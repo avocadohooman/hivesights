@@ -46,7 +46,7 @@ The overall vision of Hivesights is to tackle the 'valley of death' between comp
 ## App Preview (fake data)
 ![landing](./README_assets/hivesights_landing.gif?raw=true)
 ![main](./README_assets/hivesights_main.gif?raw=true)
-![detail](./README_assets/hivesights_detail_view.gif?raw=true)
+![detail](./README_assets/hivesights_detail.gif?raw=true)
 ![addReview](./README_assets/hivesights_add_review.gif?raw=true)
 ![feedback](./README_assets/hivesights_feedback.gif?raw=true)
 
