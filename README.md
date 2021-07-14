@@ -47,7 +47,8 @@ The overall vision of Hivesights is to tackle the 'valley of death' between comp
 - **Deployment:** Heroku Deployment
 - **Version Tagging:** github-tag-action
 
-## App Preview (fake data)
+## App Preview (using fake data)
+> IMPORTANT: The images below are using fake data used for the development environment and DO NOT represent real reviews/scores.
 ### Landing Page With A Sneak Peek (Top Rated Companies)
 ![landing](./README_assets/hivesights_landing.gif?raw=true)
 ### Main Page
