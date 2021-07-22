@@ -21,6 +21,9 @@ publicDataRouter.get('/', async (_req, res) => {
             .sort((function(a: any, b: any) {
                 if (a.averagetotalscore && b.averagetotalscore) {
                     if (a.averagetotalscore === b.averagetotalscore) {
+                        if (a.reviews === b.reviews) {
+                            return a.averagesalaries < b.averagesalaries ? 1 : -1;
+                        }
                         return a.reviews < b.reviews ? 1 : -1;
                     }
                     return a.averagetotalscore < b.averagetotalscore ? 1 : -1;

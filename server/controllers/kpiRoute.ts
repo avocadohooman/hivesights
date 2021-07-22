@@ -20,7 +20,6 @@ kpiRouter.get('/', async (req, res) => {
         COUNT (*) as reviews
         FROM ${reviewTable}`);
         if (keyKpi.rows[0].reviews === '0') {
-            console.log('Reviews', keyKpi.rows[0].reviews);
             keyKpi.rows[0].reviews = null;
         }
         const returnKPI: KPI = {
