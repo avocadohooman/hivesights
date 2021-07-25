@@ -13,7 +13,8 @@ console.log(`Using table for companyRoute: ${companyTable}`);
 // Get Top 5 companies in DB
 publicDataRouter.get('/', async (_req, res) => {
     try {
-        const topCompaniesDB = await pool.query(`SELECT DISTINCT * FROM ${companyTable} ORDER BY averagetotalscore FETCH FIRST 5 ROWS only`);
+        const topCompaniesDB = await pool.query(`SELECT DISTINCT * FROM ${companyTable} WHERE averagetotalscore > 1 ORDER BY averagetotalscore DESC FETCH FIRST 5 ROWS only`);
+        console.log('topCompanies', topCompaniesDB.rows);
         let topCompanies: TopCompany[] = [];
         topCompanies = topCompaniesDB.rows
             .filter((row: { averagetotalscore: number; }) => row.averagetotalscore)
