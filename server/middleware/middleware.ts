@@ -60,7 +60,10 @@ const tokenExtractor = (req: any, res: any, next: any) => {
 const userExtractorCompanyRights = (req: any, res: any, next: any) => {
   if (process.env.NODE_ENV !== "test") {
     const decodedToken: any = jwt.verify(req.token, process.env.SECRET as string);
-    if (!decodedToken || decodedToken.userName !== "gmolin") {
+    // if (!decodedToken || decodedToken.userName !== "gmolin") {
+    //     return res.status(400).json({error: "Invalid rights"});
+    // }
+	if (!decodedToken) {
         return res.status(400).json({error: "Invalid rights"});
     }
   }
